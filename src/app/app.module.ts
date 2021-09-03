@@ -5,7 +5,7 @@ import {HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { CreatePasswordComponent } from './auth/create-password/create-password.component';
 import { LoginComponent } from './auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ServicesComponent } from './services/services.component';
@@ -28,9 +28,9 @@ import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule, 
   ],
-  providers: [ 
+  providers: [  
     {provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
