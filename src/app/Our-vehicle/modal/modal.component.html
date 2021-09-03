@@ -1,0 +1,39 @@
+<div>
+    <div class="modal-header">
+
+        <h4 class="modal-title" id="modal-basic-title">Client Details</h4>
+
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+
+            <span aria-hidden="true">×</span>
+
+        </button>
+
+    </div>
+
+    <div class="modal-body">
+
+        <form>
+            <div class="form-group">
+                <label for="chasisNo">Chasis No</label>
+                <input type="text" class="form-control" id="chasisNo" aria-describedby="nameHelp"
+                    formControlName="chasisNo">
+            </div>
+            <div class="form-group">
+                <label for="model">Model</label>
+                <input type="text" class="form-control" id="model" aria-describedby="nameHelp"
+                    formControlName="model">
+            </div>
+            <div class="form-group">
+                <label for="clientName">Client Name</label>
+                <input  type="text" class="form-control" id="clientName" aria-describedby="nameHelp"
+                    formControlName="clientName">
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button id="cancel" type="submit"  (click)="closeModal()" class="btn btn-sm btn-outline-dark">Close</button>
+        <button  (click)="postVehicleDetails()" type="submit" class="btn btn-sm add-btn">Add</button>
+    </div>
+</div>

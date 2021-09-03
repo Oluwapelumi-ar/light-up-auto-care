@@ -1,0 +1,49 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 2,
+      "name": "chidera",
+      "email": "alakwechidera97@gmail.com",
+      "phone": "07066557186"
+    },
+    {
+      "id": 3,
+      "name": "chidera",
+      "email": "alakwechidera97@gmail.com",
+      "phone": "07066557186"
+    },
+    {
+      "id": 4,
+      "name": "Evan",
+      "email": "derah2020@gmail.com",
+      "phone": "09187654329"
+    },
+    {
+      "id": 5,
+      "name": "Type of service",
+      "email": "we@w.com",
+      "phone": "+99999900"
+    },
+    {
+      "id": 6,
+      "chasisNo": "",
+      "model": "",
+      "clientName": ""
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

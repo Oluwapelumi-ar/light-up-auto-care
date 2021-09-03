@@ -1,0 +1,63 @@
+<div class="dashboard-main-wrapper">
+
+    <!-- ============================================================== -->
+    <!-- navbar -->
+    <!-- ============================================================== -->
+    <app-header></app-header>
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- left sidebar -->
+    <!-- ============================================================== -->
+    <app-side-menu></app-side-menu>
+    <!-- ============================================================== -->
+    <!-- end left sidebar -->
+    <!-- ============================================================== -->
+
+    <div class="dashboard-wrapper">
+        <div class="dashboard-finance">
+            <div class="container-fluid dashboard-content">
+            <div class="header  d-flex">
+                <div class="box">
+                    <h1 class="title">Vehicle Information</h1>
+                </div>
+                <div class="box">
+                    <button type="button" (click)="open()" class="btn add-btn">Add Info</button>
+                </div>
+            </div>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">S/N</th>
+                        <th scope="col">Chasis No</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Client Name</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>F453986</td>
+                        <td>Volvo</td>
+                        <td>King Ojo</td>
+                        <td>
+                            <button class="btn edit-btn">Edit</button>
+                            <button class="btn btn-danger mx-3">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+  
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Token for api -->
+<!-- eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoic3VwZXIgYWRtaW4iLCJpYXQiOjE2MzA1NjkwODgsImV4cCI6MTYzMDY1NTQ4OH0.V2QYblw-pYswU5046Liunm8dC9LOWz8xTulFPw1BQe0 -->

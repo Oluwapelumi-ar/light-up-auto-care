@@ -1,0 +1,28 @@
+<div>
+    <div class="modal-header">
+
+        <h4 class="modal-title" id="modal-basic-title">Client Details</h4>
+
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+
+            <span aria-hidden="true">×</span>
+
+        </button>
+
+    </div>
+
+    <div class="modal-body">
+
+        <form [formGroup]="formValue" validate>
+            <div class="form-group">
+                <label for="service">Type of Service</label>
+                <input type="text" class="form-control" id="service" aria-describedby="nameHelp" formControlName="service" >
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button id="cancel" (click)="closeModal()" type="submit" class="btn btn-sm btn-outline-dark">Close</button>
+        <button  type="submit" class="btn btn-sm add-btn">Add</button>
+    </div>
+</div>
