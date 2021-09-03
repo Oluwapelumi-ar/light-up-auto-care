@@ -12,6 +12,10 @@ import { ServicesComponent } from './services/services.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { SideMenuComponent } from './layout/side-menu/side-menu.component';
 import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
+import { QuoteComponent } from './quote/quote.component';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { StaffComponent } from './staff/staff.component';
+
 
 
 
@@ -22,6 +26,10 @@ import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
     ServicesComponent,
     HeaderComponent,
     SideMenuComponent,
+    QuoteComponent,
+    InvoiceComponent,
+    StaffComponent,
+
   ],
   imports: [
     BrowserModule,
