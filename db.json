@@ -1,0 +1,19 @@
+{
+  "posts": [
+    {
+      "quoteId": "101",
+      "clientId": "1001",
+      "vehicleId": "10001",
+      "vehicleChasisNumber": "12345678987654321",
+      "itemDescription": "Widescreen",
+      "unit": 2,
+      "rate": 30000,
+      "amount": 60000,
+      "id": 1
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}
