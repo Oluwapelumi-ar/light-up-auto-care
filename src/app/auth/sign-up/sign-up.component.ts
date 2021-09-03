@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MatchPassword } from '../validators/match-password';
 
 
@@ -9,61 +10,69 @@ import { MatchPassword } from '../validators/match-password';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+  regex = new RegExp('/^[A-Za-z]+$/');
 
   signUpForm!: FormGroup
 
-  constructor( ) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+
+    const rege = /^[A-Za-z]+$/;
+
     this.signUpForm = new FormGroup({
       email: new FormControl('', [
         Validators.required,
-        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+        Validators.email
       ]),
       firstName: new FormControl('', [
         Validators.required,
-        Validators.pattern(/^[A-Za-z]+$/)
+        // Validators.pattern(/^[A-Za-z]+$/)
       ]),
       lastName: new FormControl('', Validators.required),
-      password: new FormControl('', 
+      userName: new FormControl('',Validators.required),
+      password: new FormControl('',
         [
           Validators.required,
           Validators.minLength(6),
           Validators.maxLength(20),
           Validators.pattern(/^[a-z0-9]+$/)
-      ]),
-      confirmPassword:new FormControl('', 
-      [   Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(20),
-          Validators.pattern(/^[a-z0-9]+$/)
-    ]),
-      acceptTerms:new FormControl(false, Validators.requiredTrue), 
+        ]),
+      confirmPassword: new FormControl('',
+        [Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(20),
+        Validators.pattern(/^[a-z0-9]+$/)
+        ]),
+      acceptTerms: new FormControl(false),
     }
-  );
+    );
+
   }
+  // firstNameValid = this.signUpForm.controls.firstName.value;
 
 
-  validatorMsgFirst(){
-    const firstName = this.signUpForm.controls.firstName.value;
-    const regex = /^[A-Za-z]+$/;
-    let errMsg;
-    if(firstName){
-      if(!regex.test(firstName)) {
-        errMsg = 'Enter Letters';
-      }
-    } else {
-      errMsg = 'Enter Your Firstname'
-    }
-    return errMsg;
-  }
 
-  validatorMsgLast(){
+  // validatorMsgFirst(){
+  //   const firstName = this.signUpForm.controls.firstName.value;
+
+  //   let errMsg;
+  //   if(firstName){
+  //     if(!regex.test(firstName)) {
+  //       errMsg = 'Enter Letters';
+  //     }
+  //   } else {
+  //     errMsg = 'Enter Your Firstname'
+  //   }
+  //   return errMsg;
+  // }
+
+  validatorMsgLast() {
     const lastName = this.signUpForm.controls.lastName.value;
     const regex = /^[A-Za-z]+$/;
     let errMsg;
-    if(lastName){
-      if(!regex.test(lastName)) {
+    if (lastName) {
+      if (!regex.test(lastName)) {
         errMsg = 'Enter Letters';
       }
     } else {
@@ -71,4 +80,10 @@ export class SignUpComponent implements OnInit {
     }
     return errMsg;
   }
+
+  handleSubmit(): void {
+
+    this.router.navigate(['/login']);
+  }
+
 }
