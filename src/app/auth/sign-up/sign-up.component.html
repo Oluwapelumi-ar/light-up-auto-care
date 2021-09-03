@@ -23,8 +23,8 @@
                     <input class="form-control form-control-lg"  type="text" placeholder="First Name"
                         formControlName="firstName" required
                         [class.is-invalid]="!signUpForm.get('firstName')?.valid && signUpForm.get('firstName')?.touched">
-                    <span class="text-danger" *ngIf="validatorMsgFirst()">
-                        {{validatorMsgFirst()}}
+                    <span class="text-danger" *ngIf="">
+                        Please enter only alphabets
                     </span>
                 </div>
 
@@ -37,6 +37,17 @@
                         {{validatorMsgLast()}}
                     </span>
                 </div>
+
+                <div class="form-group">
+                    <label for="">Username</label>
+                    <input class="form-control form-control-lg"  type="text" placeholder="Username"
+                        formControlName="userName" required
+                        [class.is-invalid]="!signUpForm.get('userName')?.valid && signUpForm.get('userName')?.touched">
+                    <span class="text-danger" *ngIf="">
+                        Please enter only alphabets
+                    </span>
+                </div>
+                
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input class="form-control form-control-lg" id="password" type="password" placeholder="password"
@@ -55,15 +66,13 @@
                     <span
                         *ngIf="!signUpForm.get('confirmPassword')?.valid && signUpForm.get('confirmPassword')?.touched">
                         Confirm Password is required
-                    </span>
-                    <span
-                        *ngIf="signUpForm.get('confirmPassword')?.errors?.notEqual && signUpForm.get('confirmPassword')?.touched">
-                        Passwords Dont Match
-                    </span>
+                    </span>     
                 </div>
-                <a href="#" routerLink="/home">
-                    <button class="btn btn-primary btn-lg btn-block" >Sign Up</button></a>
+                    <button class="btn btn-primary btn-lg btn-block"
+                    (click)="handleSubmit()"
+                     [disabled]="signUpForm.invalid">Sign Up</button>
             </form>
+            
         </div>
         <div class="card-footer bg-white p-0 d-flex ">
             <div class="card-footer-item card-footer-item-bordered">
