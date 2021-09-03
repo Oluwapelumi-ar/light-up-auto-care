@@ -1,0 +1,19 @@
+.navbar-nav {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-content: center;
+}
+.nav-item {
+    display: flex;
+    align-items: center;
+    /* background-color: cadetblue; */
+    width:50%;
+    justify-content: space-between;
+    text-align: right;
+}
+
+a.nav-link {
+    margin: 0;
+    padding: 0;
+}
