@@ -1,7 +1,42 @@
 {
   "posts": [
     {
-      "quoteId": "101",
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 2,
+      "name": "chidera",
+      "email": "alakwechidera97@gmail.com",
+      "phone": "07066557186"
+    },
+    {
+      "id": 3,
+      "name": "chidera",
+      "email": "alakwechidera97@gmail.com",
+      "phone": "07066557186"
+    },
+    {
+      "id": 4,
+      "name": "Evan",
+      "email": "derah2020@gmail.com",
+      "phone": "09187654329"
+    },
+    {
+      "id": 5,
+      "name": "Type of service",
+      "email": "we@w.com",
+      "phone": "+99999900"
+    },
+    {
+      "id": 6,
+      "chasisNo": "",
+      "model": "",
+      "clientName": ""
+    },
+     {
+     "quoteId": "101",
       "clientId": "1001",
       "vehicleId": "10001",
       "vehicleChasisNumber": "12345678998765432",
@@ -10,6 +45,7 @@
       "rate": 50000,
       "amount": 200000,
       "id": 1
+<<<<<<< HEAD
     },
     {
       "quoteId": "123",
@@ -26,5 +62,23 @@
   "comments": [],
   "profile": {
     "name": "typicode"
+=======
+>>>>>>> 3d17640cd688c9ef21782e36f8c2b9c781149ee6
   }
+  ],
+
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ]
 }
+
+ 
+  
+
+  
+
+ 
