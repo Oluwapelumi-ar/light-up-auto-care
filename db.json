@@ -34,16 +34,9 @@
       "chasisNo": "",
       "model": "",
       "clientName": ""
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-      "quoteId": "101",
+    },
+     {
+     "quoteId": "101",
       "clientId": "1001",
       "vehicleId": "10001",
       "vehicleChasisNumber": "12345678987654321",
@@ -52,10 +45,21 @@
       "rate": 30000,
       "amount": 60000,
       "id": 1
-    }
-  ],
-  "comments": [],
-  "profile": {
-    "name": "typicode"
   }
+  ],
+
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ]
 }
+
+ 
+  
+
+  
+
+ 

@@ -15,7 +15,7 @@ export class VehicleComponent implements OnInit {
   open() {
     this.modalService.open(ModalComponent, {
       centered: true,
-      size: 'sm',
+      size: 'md',
     });
 
     //clientModal.componentInstance.testMe ='';
