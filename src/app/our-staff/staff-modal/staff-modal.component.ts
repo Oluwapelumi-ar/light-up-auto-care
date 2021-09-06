@@ -54,12 +54,7 @@ export class StaffModalComponent implements OnInit {
       }
     );
   }
-
-  // onSubmit() {
-  //   this.apiService.createUser(this.addForm.value).subscribe((data) => {
-  //     this.router.navigate(['list-user']);
-  //   });
-  //
+  
   getAllClient() {
     this.api.getClient().subscribe((res: any) => {
       this.clientData = res;
