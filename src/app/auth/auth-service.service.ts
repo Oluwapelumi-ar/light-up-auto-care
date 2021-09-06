@@ -26,6 +26,8 @@ export class AuthServiceService {
   }
 
   createPassword(data: createPasswordData):Observable<any>{
-    return this.http.post<createPasswordData>('https://rocky-spire-51361.herokuapp.com/staff/login',data);
+    return this.http.post<createPasswordData>('https://rocky-spire-51361.herokuapp.com/staff/createPassword?email=staff22@example.com',data);
   }
+
+
 }

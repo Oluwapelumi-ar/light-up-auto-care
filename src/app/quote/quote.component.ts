@@ -56,14 +56,14 @@ export class QuoteComponent implements OnInit {
   }
   getAllQuote(){
     this.api.getQuote()
-    .subscribe(res=>{
+    .subscribe((res: any)=>{
       this.quoteData = res;
     })
   }
 
   deleteQuote(row : any){
     this.api.deleteQuote(row.id)
-    .subscribe(res=>{
+    .subscribe((res: any)=>{
       alert("Quote Deleted");
       this.getAllQuote();
     })
@@ -95,7 +95,7 @@ export class QuoteComponent implements OnInit {
     this.quoteModelObj.amount = amount; 
 
     this.api.updateQuote(this.quoteModelObj,this.quoteModelObj.id)
-    .subscribe(res=>{
+    .subscribe((res: any)=>{
       alert("Updated Successful")
       let ref = document.getElementById('cancel')
       ref?.click();
@@ -106,13 +106,13 @@ export class QuoteComponent implements OnInit {
   clickSub(){
     console.log(this.reform.value);
     this.api.postQuote(this.reform.value)
-    .subscribe(res=>{
+    .subscribe((res: any)=>{
       console.log("Quote Added Successfully", res);
       const data = this.getAllQuote();
       window.location.reload()
       this.reform.reset();
     },
-    err=>{
+      (    err: any)=>{
       alert("Something went wrong.")
     }) 
   }

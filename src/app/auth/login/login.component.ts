@@ -29,11 +29,10 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    this.authService.login(this.loginForm.value).subscribe(response => {
-      console.log(response)
+    this.authService.login(this.loginForm.value).subscribe((response) => {
       localStorage.setItem("userDetails", JSON.stringify(response.payload));
       this.router.navigate(['/home']);
-    }, err => {
+    },( err) => {
       if (!err.status) {
         this.loginForm.setErrors({ noConnection: false });
       } else {
