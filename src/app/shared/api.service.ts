@@ -19,9 +19,19 @@ export class ApiService {
       );
   }
 
-  getClient() {
+  getAllClients() {
     return this.http
-      .get<any>('https://rocky-spire-51361.herokuapp.com/client/2')
+      .get<any>('https://rocky-spire-51361.herokuapp.com/client')
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  getClientByID(ID: number) {
+    return this.http
+      .get<any>(`https://rocky-spire-51361.herokuapp.com/client/${ID}`)
       .pipe(
         map((res: any) => {
           return res;
@@ -41,7 +51,7 @@ export class ApiService {
 
   deleteClient(id: number) {
     return this.http
-      .delete<any>('https://rocky-spire-51361.herokuapp.com/client' + id)
+      .delete<any>('https://rocky-spire-51361.herokuapp.com/client/' + id)
       .pipe(
         map((res: any) => {
           return res;
