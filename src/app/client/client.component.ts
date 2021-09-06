@@ -10,24 +10,24 @@ import { ClientModalComponent } from './client-modal/client-modal.component';
   styleUrls: ['./client.component.css'],
 })
 export class ClientComponent implements OnInit {
-  clientData!: Array<any>;
+  clientData: any = [];
 
   constructor(private modalService: NgbModal, private api: ApiService) {}
   ngOnInit(): void {
-    this.api.getClient().subscribe(
-      (res) => {
-        this.clientData = res;
-      },
-      (err: any) => {
-        alert('Something Went Wrong');
-      }
-    );
+    this.getAllClient();
   }
 
   open() {
     this.modalService.open(ClientModalComponent, {
       centered: true,
       size: 'md',
+    });
+  }
+
+  getAllClient() {
+    this.api.getClient().subscribe((res) => {
+      this.clientData = [res.payload];
+      // console.log(this.clientData, 're');
     });
   }
 }

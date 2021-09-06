@@ -34,33 +34,40 @@ export class ClientModalComponent implements OnInit {
       email: ['', [Validators.required]],
       phone: ['', [Validators.required]],
     });
-
-    this.getAllClientDetails();
+    this.getAllClient();
   }
 
   // for posting data (ApiServe)
   postClientDetails() {
     this.ClientModelObj.name = this.formValue.value.name;
     this.ClientModelObj.email = this.formValue.value.email;
-    this.ClientModelObj.phone = this.formValue.value.phone;
-
+    this.ClientModelObj.telephone = this.formValue.value.phone;
+    console.log(this.ClientModelObj);
     this.api.postClient(this.ClientModelObj).subscribe(
-      (res) => {
+      (res: any) => {
         console.log(res);
         alert('Client Added Successfully');
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
+        this.getAllClient();
       },
       (err: any) => {
+        console.log(err);
         alert('Something Went Wrong');
       }
     );
   }
 
-  getAllClientDetails() {
+  // onSubmit() {
+  //   this.apiService.createUser(this.addForm.value).subscribe((data) => {
+  //     this.router.navigate(['list-user']);
+  //   });
+  //
+  getAllClient() {
     this.api.getClient().subscribe((res) => {
       this.clientData = res;
+      console.log(res);
     });
   }
 

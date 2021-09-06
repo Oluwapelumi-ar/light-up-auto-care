@@ -14,10 +14,18 @@
     <div class="modal-body">
 
         <form>
+            <div class="form-group" (ngSubmit)="onSubmit()">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" aria-describedby="nameHelp"
+                    formControlName="name">
+            </div>
             <div class="form-group">
-                <label for="chasisNo">Chasis No</label>
-                <input type="text" class="form-control" id="chasisNo" aria-describedby="nameHelp"
-                    formControlName="chasisNo">
+                <label for="vehicleName">Vehicle Name</label>
+                <input type="text" class="form-control" id="vehicleName" aria-describedby="nameHelp" formControlName="vehicleName">
+            </div>
+            <div class="form-group">
+                <label for="chasis">Chasis No</label>
+                <input type="text" class="form-control" id="chasis" aria-describedby="nameHelp" formControlName="chasis">
             </div>
             <div class="form-group">
                 <label for="model">Model</label>
@@ -25,15 +33,15 @@
                     formControlName="model">
             </div>
             <div class="form-group">
-                <label for="clientName">Client Name</label>
-                <input  type="text" class="form-control" id="clientName" aria-describedby="nameHelp"
-                    formControlName="clientName">
+                <label for="clientId">Client Id</label>
+                <input  type="text" class="form-control" id="clientId" aria-describedby="nameHelp"
+                    formControlName="clientId">
             </div>
 
         </form>
     </div>
     <div class="modal-footer">
-        <button id="cancel" type="submit"  (click)="closeModal()" class="btn btn-sm btn-outline-dark">Close</button>
+        <button id="cancel" type="submit"  (click)="closeModal()" class="btn btn-sm btn-outline-danger">Close</button>
         <button  (click)="postVehicleDetails()" type="submit" class="btn btn-sm add-btn">Add</button>
     </div>
 </div>

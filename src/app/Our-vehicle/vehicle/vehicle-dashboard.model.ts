@@ -1,6 +1,7 @@
 export class VehicleModel {
-  id: number = 0;
+  name: string = '';
+  vehicleName: string = '';
   chasisNo: string = '';
   model: string = '';
-  clientName: string = '';
+  clientId: string = '';
 }
