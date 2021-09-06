@@ -6,7 +6,7 @@ import { VehicleComponent } from './Our-vehicle/vehicle/vehicle.component';
 import { ServicesComponent } from './our-services/services/services.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { QuoteComponent } from './quote/quote.component';
-import { StaffComponent } from './staff/staff.component';
+import { StaffComponent } from './our-staff/staff/staff.component';
 import { Quote } from '@angular/compiler';
 
 const routes: Routes = [

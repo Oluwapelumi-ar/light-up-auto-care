@@ -40,10 +40,11 @@ export class CreatePasswordComponent implements OnInit {
     if (this.createPasswordForm.invalid) {
       return;
     }
-    this.authService.createPassword(this.createPasswordForm.value).subscribe(response => {
-      this.router.navigate(['/login']);
+    this.authService.createPassword(this.createPasswordForm.value).subscribe(
+      (response) => {
+      this.router.navigate(['/']);
       console.log(response)
-    }, err => {
+    },(err) => {
       if (!err.status) {
         this.createPasswordForm.setErrors({ noConnection: false });
       } else {
@@ -53,3 +54,5 @@ export class CreatePasswordComponent implements OnInit {
   };
 
 }
+
+

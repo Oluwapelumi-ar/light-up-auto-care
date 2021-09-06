@@ -3,3 +3,4 @@ export class ClientModel {
   email: string = '';
   telephone: string = '';
 }
+  

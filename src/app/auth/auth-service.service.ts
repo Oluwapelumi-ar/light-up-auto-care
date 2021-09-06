@@ -29,7 +29,7 @@ export class AuthServiceService {
   }
 
   createPassword(data: createPasswordData):Observable<any>{
-    return this.http.post<createPasswordData>('https://rocky-spire-51361.herokuapp.com/staff/createPassword?email=staff22@example.com',data);
+    return this.http.put<createPasswordData>('https://rocky-spire-51361.herokuapp.com/staff/password/create?email=newclerk@gmail .com',data);
   }
 
 

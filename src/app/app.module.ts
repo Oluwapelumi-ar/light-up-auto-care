@@ -20,12 +20,13 @@ import { VehicleComponent } from './Our-vehicle/vehicle/vehicle.component';
 import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
 import { QuoteComponent } from './quote/quote.component';
 import { InvoiceComponent } from './invoice/invoice.component';
-import { StaffComponent } from './staff/staff.component';
+import { StaffComponent } from './our-staff/staff/staff.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ClientModalComponent } from './client/client-modal/client-modal.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { ModalComponent } from './our-services/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     QuoteComponent,
     InvoiceComponent,
     StaffComponent,
+    StaffModalComponent,
   ],
 
   imports: [
