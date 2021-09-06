@@ -44,8 +44,8 @@
                             <td>{{row.email}}</td>
                             <td>{{row.telephone}}</td>
                             <td>
-                                <button class="btn edit-btn">Edit</button>
-                                <button class="btn btn-danger mx-3">Delete</button>
+                                <button (click)="onEdit(row)" (click)="open()" class="btn edit-btn">Edit</button>
+                                <button (click)="deleteClient(row)"  class="btn btn-danger mx-3">Delete</button>
                             </td>
                         </tr>
                     </tbody>

@@ -32,16 +32,16 @@ export class ClientModalComponent implements OnInit {
     this.formValue = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.required]],
-      phone: ['', [Validators.required]],
+      telephone: ['', [Validators.required]],
     });
-    this.getAllClient();
+    // this.getAllClient();
   }
 
   // for posting data (ApiServe)
   postClientDetails() {
     this.ClientModelObj.name = this.formValue.value.name;
     this.ClientModelObj.email = this.formValue.value.email;
-    this.ClientModelObj.telephone = this.formValue.value.phone;
+    this.ClientModelObj.telephone = this.formValue.value.telephone;
     console.log(this.ClientModelObj);
     this.api.postClient(this.ClientModelObj).subscribe(
       (res: any) => {
@@ -50,25 +50,13 @@ export class ClientModalComponent implements OnInit {
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
-        this.getAllClient();
+        // this.getAllClient();
       },
       (err: any) => {
         console.log(err);
         alert('Something Went Wrong');
       }
     );
-  }
-
-  // onSubmit() {
-  //   this.apiService.createUser(this.addForm.value).subscribe((data) => {
-  //     this.router.navigate(['list-user']);
-  //   });
-  //
-  getAllClient() {
-    this.api.getClient().subscribe((res) => {
-      this.clientData = res;
-      console.log(res);
-    });
   }
 
   closeModal() {
