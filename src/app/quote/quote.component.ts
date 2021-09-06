@@ -49,11 +49,14 @@ export class QuoteComponent implements OnInit {
     })
     this.getAllQuote();
   }
+
+
   clickAddQuote(){
     this.formValue.reset();
     this.showAdd = true;
     this.showUpdate = false;
   }
+
   getAllQuote(){
     this.api.getQuote()
     .subscribe(res=>{
@@ -68,13 +71,14 @@ export class QuoteComponent implements OnInit {
       this.getAllQuote();
     })
   }
+  
 
   onEdit(row: any){
     this.showAdd = false;
     this.showUpdate = true;
     this.quoteModelObj.id = row.id;
     this.formValue.controls['quoteId'].setValue(row.quoteId);
-    this.formValue.controls['clientId'].setValue(row.quoteId);
+    this.formValue.controls['clientId'].setValue(row.clientId);
     this.formValue.controls['vehicleId'].setValue(row.vehicleId);
     this.formValue.controls['vehicleChasisNumber'].setValue(row.vehicleChasisNumber);
     this.formValue.controls['itemDescription'].setValue(row.itemDescription);
@@ -103,6 +107,7 @@ export class QuoteComponent implements OnInit {
       this.getAllQuote();
     })
   }
+  
   clickSub(){
     console.log(this.reform.value);
     this.api.postQuote(this.reform.value)

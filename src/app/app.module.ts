@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import {HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http'
+import {HTTP_INTERCEPTORS} from '@angular/common/http'
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { LoginComponent } from './auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
