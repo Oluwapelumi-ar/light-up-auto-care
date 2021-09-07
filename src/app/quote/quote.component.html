@@ -22,7 +22,7 @@
                 <nav class="navbar navbar-light bg-light">
                     <div class="container">
                         <h1>QUOTE PAGE</h1>
-                        <button (click)="clickAddQuote()" type="button" data-toggle="modal" data-target="#exampleModalLong" class="btn btn-success">Add Quote</button>
+                        <button (click)="clickAddQuote()" type="button" data-toggle="modal" data-target="#exampleModalLong" class="btn add-btn">Add Quote</button>
                     </div>
                 </nav>
 
@@ -41,7 +41,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let row of quoteData">
+          
+                        <tr *ngFor="let row of quoteData; index as i">
                             <td>{{ row.id }}</td>
                             <!-- <td>{{ row.quoteId }}</td> -->
                             <td>{{ row.clientId }}</td>
@@ -50,13 +51,15 @@
                               <p *ngFor="let data of row.items">
                                 {{data.item}}
                               </p>
-                              <!-- {{ row.items }} -->
+
                             </td>
                             <td>{{ row.unit }}</td>
                             <td>{{ row.rate }}</td>
                             <td>{{ row.amount }}</td>
                             <td>
-                            <button (click)="onEdit(row)" type="button" data-toggle="modal" data-target="#exampleModalLong" class="btn btn-info ">Edit</button>
+                              
+                            <button (click)="enableEditMethod(row)" *ngIf="!enableEdit" 
+                            type="button" data-toggle="modal" data-target="#exampleModalLong" class="btn edit-btn ">Edit</button>
                             <button (click)="deleteQuote(row)" class="btn btn-danger mx-3">Delete</button>
                             
                             </td>
@@ -66,8 +69,6 @@
 
 
                 </table>
-
-
                 <!-- Button trigger modal -->
 
   
@@ -82,47 +83,47 @@
           </button>
         </div>
         <div class="modal-body">
-            <form  [formGroup]="formValue" [formGroup]="reform">
+            <form  [formGroup]="quoteForm">
                 <!-- <div class="mb-3 ">
                   <label for="">Quote Id</label>
-                  <input type="text" formControlName="quoteId" class="form-control" id="" aria-describedby="" placeholder="" [class.is-invalid]="reform.get('quoteId')?.invalid && reform.get('quoteId')?.touched">
-                  <span *ngIf="reform.get('quoteId')?.invalid && reform.get('quoteId')?.touched" > Id Required (minimum length of 3 characters & maximum length of 7 characters)</span>
+                  <input type="text" formControlName="quoteId" class="form-control" id="" aria-describedby="" placeholder="" [class.is-invalid]="quoteForm.get('quoteId')?.invalid && quoteForm.get('quoteId')?.touched">
+                  <span *ngIf="quoteForm.get('quoteId')?.invalid && quoteForm.get('quoteId')?.touched" > Id Required (minimum length of 3 characters & maximum length of 7 characters)</span>
                 </div> -->
                 <div class="mb-3">
                   <label for="">Client Id</label>
-                  <input type="text" formControlName="clientId" value="clientId" class="form-control" id="" placeholder="" [class.is-invalid]="reform.get('clientId')?.invalid && reform.get('clientId')?.touched">
-                  <span *ngIf="reform.get('clientId')?.invalid && reform.get('clientId')?.touched" >Id Required (minimum length of 4 characters & maximum length of 8 characters)</span>
+                  <input type="text" formControlName="clientId" value="clientId" class="form-control" id="" placeholder="" [class.is-invalid]="quoteForm.get('clientId')?.invalid && quoteForm.get('clientId')?.touched">
+                  <span *ngIf="quoteForm.get('clientId')?.invalid && quoteForm.get('clientId')?.touched" >Id Required (minimum length of 4 characters & maximum length of 8 characters)</span>
                 </div>
                 <div class="mb-3">
                     <label for="">Vehicle Id</label>
-                    <input type="text" formControlName="vehicleId" class="form-control" id="" placeholder="" [class.is-invalid]="reform.get('vehicleId')?.invalid && reform.get('vehicleId')?.touched">
-                    <span *ngIf="reform.get('vehicleId')?.invalid && reform.get('vehicleId')?.touched" > Id Required (minimum length of 5 characters & maximum length of 10 characters)</span>
+                    <input type="text" formControlName="vehicleId" class="form-control" id="" placeholder="" [class.is-invalid]="quoteForm.get('vehicleId')?.invalid && quoteForm.get('vehicleId')?.touched">
+                    <span *ngIf="quoteForm.get('vehicleId')?.invalid && quoteForm.get('vehicleId')?.touched" > Id Required (minimum length of 5 characters & maximum length of 10 characters)</span>
                   </div>
                   <div class="mb-3">
                     <label for="">Items</label>
-                    <input type="text" formControlName="items" class="form-control" id="" placeholder="" [class.is-invalid]="reform.get('items')?.invalid && reform.get('items')?.touched">
-                    <span *ngIf="reform.get('items')?.invalid && reform.get('items')?.touched" >Items Required (minimum length of 10 characters & maximum length of 100 characters)</span>
+                    <input type="text" formControlName="items" class="form-control" id="" placeholder="" [class.is-invalid]="quoteForm.get('items')?.invalid && quoteForm.get('items')?.touched">
+                    <span *ngIf="quoteForm.get('items')?.invalid && quoteForm.get('items')?.touched" >Items Required (minimum length of 10 characters & maximum length of 100 characters)</span>
                   </div>
                   <div class="mb-3">
                     <label for="">Unit</label>
-                    <input type="number" formControlName="unit" class="form-control" id="" placeholder="" [class.is-invalid]="reform.get('unit')?.invalid && reform.get('unit')?.touched">
-                    <span *ngIf="reform.get('unit')?.invalid && reform.get('unit')?.touched" >Invalid Entry (Insert Number Between 1-9) </span>
+                    <input type="number" formControlName="unit" class="form-control" id="" placeholder="" [class.is-invalid]="quoteForm.get('unit')?.invalid && quoteForm.get('unit')?.touched">
+                    <span *ngIf="quoteForm.get('unit')?.invalid && quoteForm.get('unit')?.touched" >Invalid Entry (Insert Number Between 1-9) </span>
                   </div>
                   <div class="mb-3">
                     <label for="">Rate(Naira)</label>
-                    <input type="number" formControlName="rate" class="form-control" id="" placeholder="" [class.is-invalid]="reform.get('rate')?.invalid && reform.get('rate')?.touched">
-                    <span *ngIf="reform.get('rate')?.invalid && reform.get('rate')?.touched" >Invalid Entry (Insert Number Between 1-9) </span>
+                    <input type="number" formControlName="rate" class="form-control" id="" placeholder="" [class.is-invalid]="quoteForm.get('rate')?.invalid && quoteForm.get('rate')?.touched">
+                    <span *ngIf="quoteForm.get('rate')?.invalid && quoteForm.get('rate')?.touched" >Invalid Entry (Insert Number Between 1-9) </span>
                   </div>
                   <div class="mb-3">
                     <label for="">Amount(Naira)</label>
-                    <input type="number" formControlName="amount" class="form-control" id="" placeholder="" [class.is-invalid]="reform.get('amount')?.invalid && reform.get('amount')?.touched">
-                    <span *ngIf="reform.get('amount')?.invalid && reform.get('amount')?.touched" > Invalid Details (minimum length of 3 characters & maximum length of 20 characters)</span>
+                    <input type="number" formControlName="amount" class="form-control" id="" placeholder="" [class.is-invalid]="quoteForm.get('amount')?.invalid && quoteForm.get('amount')?.touched">
+                    <span *ngIf="quoteForm.get('amount')?.invalid && quoteForm.get('amount')?.touched" > Invalid Details (minimum length of 3 characters & maximum length of 20 characters)</span>
                   </div>
               </form>
         </div>
         <div class="modal-footer">
           <button type="button" id="cancel" class="btn btn-danger" data-dismiss="modal">Close</button>
-          <button type="button"  (click)="clickSub()" *ngIf="showAdd" class="btn btn-primary">Add</button>
+          <button type="button"  (click)="clickSub()" *ngIf="showAdd" class="btn add-btn">Add</button>
           <button type="button" *ngIf="showUpdate"  (click)="updatePostQuoteDetails()" class="btn btn-primary">Update</button>
         </div>
       </div>
@@ -131,3 +132,6 @@
       </div>
     </div>
 </div>
+
+
+

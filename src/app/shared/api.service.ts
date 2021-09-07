@@ -1,17 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/Operators';
+import { QuoteModel } from '../quote/quote.model';
 
-interface quoteDetails {
-  clientId:number;
-  vehicleId:number;
-  items:[
-    {item:string},
-    {unit:number},
-    {rate:number},
-    {amount:number}
-  ]
-}
 @Injectable({
   providedIn: 'root',
 })
@@ -165,9 +156,9 @@ export class ApiService {
 
   //Quote
 
-  postQuote(data: quoteDetails) {
-    return this.http.post<quoteDetails>('https://rocky-spire-51361.herokuapp.com/quote', data).pipe(
-      map((res: quoteDetails) => {
+  postQuote(data: QuoteModel) {
+    return this.http.post<QuoteModel>('https://rocky-spire-51361.herokuapp.com/quote', data).pipe(
+      map((res: QuoteModel) => {
         return res;
       })
     );
@@ -186,6 +177,8 @@ export class ApiService {
       })
     );
   }
+
+
   deleteQuote(id: number) {
     return this.http.delete<any>('https://rocky-spire-51361.herokuapp.com/quote' + id).pipe(
       map((res: any) => {

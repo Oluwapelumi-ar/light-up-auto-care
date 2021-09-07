@@ -1,9 +1,11 @@
-export class QuoteModel{
-    id : number = 0;
-    clientId : string = '';
-    vehicleId : string = '';
-    items : string = '';
-    unit: string = '';
-    rate : string = '';
-    amount : string = '';
-}
+  export interface QuoteModel {
+        id?: number;
+        clientId:number;
+        vehicleId:number;
+        items : {
+            item: string,
+            unit: number,
+            rate: number,
+            amount: number
+        }[]
+      }
