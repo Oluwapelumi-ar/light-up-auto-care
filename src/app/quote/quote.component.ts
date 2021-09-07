@@ -14,10 +14,40 @@ import { QuoteModel } from './quote.model';
   styleUrls: ['./quote.component.css'],
 })
 export class QuoteComponent implements OnInit {
-  reform!: FormGroup;
+  
 
-  formValue!: FormGroup;
-  quoteModelObj: QuoteModel = new QuoteModel();
+  QuoteModel = [];
+  enableEdit = false;
+  enableEditIndex = null;
+
+  quoteForm =  new FormGroup({
+    clientId: new FormControl( '', [
+      Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(8),
+    ]),
+    vehicleId: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(10),
+    ]),
+
+    items: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(100),
+    ]),
+    unit: new FormControl( [
+      Validators.required,
+      [Validators.minLength(3), Validators.maxLength(20)]
+    ]),
+    rate: new FormControl([Validators.minLength(1), Validators.maxLength(100)]),
+    amount: new FormControl([
+      '',
+      [Validators.minLength(3), Validators.maxLength(20)],
+    ]),
+  });;
+  quoteModelObj = {} as QuoteModel;
   quoteData!: any;
   showAdd!: boolean;
   showUpdate!: boolean;
@@ -25,131 +55,96 @@ export class QuoteComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private api: ApiService) {}
 
   ngOnInit(): void {
-    this.reform = new FormGroup({
-      quoteId: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(7),
-      ]),
-      clientId: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(8),
-      ]),
-      vehicleId: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(10),
-      ]),
-      vehicleChasisNumber: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(17),
-        Validators.maxLength(17),
-      ]),
-      itemDescription: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(100),
-      ]),
-      unit: new FormControl('null', [
-        Validators.required,
-        Validators.pattern('^[1-9.,]+$'),
-      ]),
-      rate: new FormControl(['null', [Validators.pattern('^[1-9.,]+$')]]),
-      amount: new FormControl([
-        '',
-        [Validators.minLength(3), Validators.maxLength(20)],
-      ]),
-    });
-
-    this.formValue = this.formBuilder.group({
-      quoteId: [''],
-      clientId: [''],
-      vehicleId: [''],
-      vehicleChasisNumber: [''],
-      itemDescription: [''],
-      unit: [''],
-      rate: [''],
-      amount: [''],
-    });
     this.getAllQuote();
   }
+
   clickAddQuote() {
-    this.formValue.reset();
+    this.quoteForm.reset();
     this.showAdd = true;
     this.showUpdate = false;
   }
+
   getAllQuote() {
     this.api.getQuote().subscribe((res) => {
-      this.quoteData = res;
+      console.log('...', res);
+      this.quoteData = res.payload;
+    });
+  }
+  
+  deleteQuote(id : any ) {
+    this.api.deleteQuote(id)
+    .subscribe((res: any) => {
+      alert('Client deleted successfully');
     });
   }
 
-  deleteQuote(row: any) {
-    this.api.deleteQuote(row.id).subscribe((res) => {
-      alert('Quote Deleted');
-      this.getAllQuote();
-    });
-  }
 
-  onEdit(row: any) {
+
+  // get q
+
+  enableEditMethod(data: any){
+    this.enableEdit = false;
+    this.enableEditIndex = null;
     this.showAdd = false;
     this.showUpdate = true;
-    this.quoteModelObj.id = row.id;
-    this.formValue.controls['quoteId'].setValue(row.quoteId);
-    this.formValue.controls['clientId'].setValue(row.quoteId);
-    this.formValue.controls['vehicleId'].setValue(row.vehicleId);
-    this.formValue.controls['vehicleChasisNumber'].setValue(
-      row.vehicleChasisNumber
-    );
-    this.formValue.controls['itemDescription'].setValue(row.itemDescription);
-    this.formValue.controls['unit'].setValue(row.unit);
-    this.formValue.controls['rate'].setValue(row.rate);
-    this.formValue.controls['amount'].setValue(row.amount);
+    
+    this.quoteForm.patchValue({
+      clientId: data.clientId,
+      vehicleId: data.vehicleId,
+      items: data.items[0].item,
+      unit: data.items[0].unit,
+      rate: data.items[0].rate,
+      amount: data.items[0].amount
+
+    })
   }
 
   updatePostQuoteDetails() {
-    const {
-      quoteId,
-      clientId,
-      vehicleId,
-      vehicleChasisNumber,
-      itemDescription,
-      unit,
-      rate,
-      amount,
-    } = this.formValue.value;
-    this.quoteModelObj.quoteId = quoteId;
+    const { clientId, vehicleId, items, unit, rate, amount } =
+      this.quoteForm.value;
     this.quoteModelObj.clientId = clientId;
     this.quoteModelObj.vehicleId = vehicleId;
-    this.quoteModelObj.vehicleChasisNumber = vehicleChasisNumber;
-    this.quoteModelObj.itemDescription = itemDescription;
-    this.quoteModelObj.unit = unit;
-    this.quoteModelObj.rate = rate;
-    this.quoteModelObj.amount = amount;
+    this.quoteModelObj.items = items;
+    this.quoteModelObj.items[0] = unit;
+    this.quoteModelObj.items[1]= rate;
+    this.quoteModelObj.items[2] = amount;
+ 
 
     this.api
-      .updateQuote(this.quoteModelObj, this.quoteModelObj.id)
+      .updateQuote(this.quoteModelObj, this.quoteModelObj.id!)
       .subscribe((res) => {
         alert('Updated Successful');
         let ref = document.getElementById('cancel');
         ref?.click();
-        this.formValue.reset();
         this.getAllQuote();
       });
   }
+
+
   clickSub() {
-    console.log(this.reform.value);
-    this.api.postQuote(this.reform.value).subscribe(
+    const { amount, clientId, items, rate, unit, vehicleId } =
+      this.quoteForm.value;
+      const payload = {
+      clientId,
+      vehicleId,
+      items: [{
+          item: items,
+          unit: Number(unit),
+          rate: Number(rate),
+          amount: Number(amount)
+      }],
+    };
+    this.api.postQuote(payload).subscribe(
       (res) => {
-        console.log('Quote Added Successfully', res);
-        const data = this.getAllQuote();
+        console.log('...', res);
+        const data = this.postQuote();
         window.location.reload();
-        this.reform.reset();
+        this.postQuote();
       },
-      (err) => {
-        alert('Something went wrong.');
-      }
     );
   }
+  postQuote() {
+    throw new Error('Method not implemented.');
+  }
 }
+
