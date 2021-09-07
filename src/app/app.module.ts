@@ -26,6 +26,7 @@ import { ClientModalComponent } from './client/client-modal/client-modal.compone
 import { FooterComponent } from './layout/footer/footer.component';
 import { ModalComponent } from './our-services/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgSelectModule,
   ],
 
   providers: [

@@ -41,7 +41,7 @@ export class ApiService {
 
   updateClient(data: any, id: number) {
     return this.http
-      .put<any>('https://rocky-spire-51361.herokuapp.com/client/2' + id, data)
+      .put<any>('https://rocky-spire-51361.herokuapp.com/client/' + id, data)
       .pipe(
         map((res: any) => {
           return res;
@@ -94,7 +94,7 @@ export class ApiService {
 
   deleteVehicle(id: number) {
     return this.http
-      .delete<any>('https://rocky-spire-51361.herokuapp.com/vehicle/2' + id)
+      .delete<any>('https://rocky-spire-51361.herokuapp.com/vehicle' + id)
       .pipe(
         map((res: any) => {
           return res;
@@ -117,9 +117,9 @@ export class ApiService {
       );
   }
 
-  getService() {
+  getAllService() {
     return this.http
-      .get<any>('https://rocky-spire-51361.herokuapp.com/personalisedService/1')
+      .get<any>('https://rocky-spire-51361.herokuapp.com/personalisedService')
       .pipe(
         map((res: any) => {
           return res;
@@ -127,10 +127,10 @@ export class ApiService {
       );
   }
 
-  updateServices(data: any, id: number) {
+  updateService(data: any, id: number) {
     return this.http
       .put<any>(
-        'https://rocky-spire-51361.herokuapp.com/personalisedService/3' + id,
+        'https://rocky-spire-51361.herokuapp.com/personalisedService/' + id,
         data
       )
       .pipe(
@@ -140,10 +140,10 @@ export class ApiService {
       );
   }
 
-  deleteServices(id: number) {
+  deleteService(id: number) {
     return this.http
       .delete<any>(
-        'https://rocky-spire-51361.herokuapp.com/personalisedService/4' + id
+        'https://rocky-spire-51361.herokuapp.com/personalisedService/' + id
       )
       .pipe(
         map((res: any) => {

@@ -12,7 +12,7 @@ import { VehicleModel } from '../vehicle/vehicle-dashboard.model';
 })
 export class ModalComponent implements OnInit {
   formValue!: FormGroup;
-
+  clientData: any = [];
   VehicleModelObj: VehicleModel = new VehicleModel();
   apiService: any;
 
@@ -28,7 +28,7 @@ export class ModalComponent implements OnInit {
       vehicleName: ['', [Validators.required]],
       chasisNo: ['', [Validators.required, Validators.minLength(7)]],
       model: ['', [Validators.required]],
-      clientId: ['', [Validators.required]],
+      // clientId: ['', [Validators.required]],
     });
   }
 
@@ -37,12 +37,12 @@ export class ModalComponent implements OnInit {
     this.VehicleModelObj.vehicleName = this.formValue.value.vehicleName;
     this.VehicleModelObj.chasisNo = this.formValue.value.chasisNo;
     this.VehicleModelObj.model = this.formValue.value.model;
-    this.VehicleModelObj.clientId = this.formValue.value.clientId;
+    // this.VehicleModelObj.clientId = this.formValue.value.clientId;
 
     this.api.postVehicle(this.VehicleModelObj).subscribe(
       (res: any) => {
         console.log(res);
-        alert('Client Added Successfully');
+        alert('Vehicle Added Successfully');
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
@@ -53,11 +53,11 @@ export class ModalComponent implements OnInit {
     );
   }
 
-  onSubmit() {
-    this.apiService
-      .createUser(this.formValue.value)
-      .subscribe((data: any) => {});
-  }
+  // onSubmit() {
+  //   this.apiService
+  //     .createUser(this.formValue.value)
+  //     .subscribe((data: any) => {});
+  // }
 
   closeModal() {
     this.modalService.dismissAll(ModalComponent);
