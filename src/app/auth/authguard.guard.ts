@@ -12,7 +12,9 @@ export class AuthguardGuard implements CanActivate {
   constructor(
     private authService: AuthServiceService,
     private router: Router
-  ){  }
+  ){
+    console.log((this.userDetails), 'lgjg');
+  }
 
   
 
