@@ -20,12 +20,8 @@
                     formControlName="email" (keyup)="handleErrMsg('email', formValue.controls.email.value)">
                     <span class="text-danger" *ngIf="errMsg.email">{{errMsg.email}}</span>
              </div>
-            <div class="form-group">
-                <label for="phone">Telephone</label>
-                <input type="text" class="form-control" id="phone" formControlName="phone"  (keyup)="handleErrMsg('phone', formValue.controls.phone.value)">
-                <span class="text-danger" *ngIf="errMsg.phone">{{errMsg.phone}}</span>
-            </div>
-            <div class="dropdown">
+
+            <!-- <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                   Select Staff Role
                 </button>
@@ -34,12 +30,22 @@
                   <li class="dropdown-item">Approver</li>
                   <li class="dropdown-item">Clerk</li>
                 </ul>
+            </div> -->
+            <div class="form-group">
+                <label for="Password">Password</label>
+                <input type="text" class="form-control" id="Password" formControlName="password">
+                <span class="text-danger" *ngIf="">password is required</span>
+            </div>
+            <div class="form-group">
+                <label for="Password">Role</label>
+                <input type="text" class="form-control" id="Password" formControlName="role">
+                <span class="text-danger" *ngIf="">password is required</span>
             </div>
         </form>    
     </div>
     <div class="modal-footer">
         <button id="cancel" type="submit" (click)="closeModal()" class="btn btn-sm btn-outline-danger">Close</button>
-        <button (click)="postClientDetails()" [disabled]="formValue.invalid"  type="submit" class="btn add-btn">Add</button>
+        <button (click)="postStaff()"  type="submit" class="btn add-btn">Add</button>
     </div>
 </div>
 

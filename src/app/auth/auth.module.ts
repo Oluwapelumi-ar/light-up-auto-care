@@ -6,6 +6,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { CreatePasswordComponent } from './create-password/create-password.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 
@@ -15,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     CreatePasswordComponent,
     MatchPassword,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,

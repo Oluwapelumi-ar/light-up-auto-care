@@ -7,16 +7,17 @@ import { ServicesComponent } from './our-services/services/services.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { QuoteComponent } from './quote/quote.component';
 import { StaffComponent } from './our-staff/staff/staff.component';
-import { Quote } from '@angular/compiler';
+import { AuthguardGuard } from './auth/authguard.guard';
+
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'client', component: ClientComponent },
-  { path: 'vehicle', component: VehicleComponent },
-  { path: 'services', component: ServicesComponent },
-  { path: 'quote', component: QuoteComponent },
-  { path: 'invoice', component: InvoiceComponent },
-  { path: 'staff', component: StaffComponent },
+  { path: 'home', component: HomeComponent,canActivate: [AuthguardGuard] },
+  { path: 'client', component: ClientComponent,canActivate: [AuthguardGuard] },
+  { path: 'vehicle', component: VehicleComponent,canActivate: [AuthguardGuard] },
+  { path: 'services', component: ServicesComponent,canActivate: [AuthguardGuard] },
+  { path: 'quote', component: QuoteComponent,canActivate: [AuthguardGuard] },
+  { path: 'invoice', component: InvoiceComponent,canActivate: [AuthguardGuard] },
+  { path: 'staff', component: StaffComponent,canActivate: [AuthguardGuard] },
   {
     path: '',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
@@ -26,5 +27,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
+  providers: [AuthguardGuard]
 })
 export class AppRoutingModule {}

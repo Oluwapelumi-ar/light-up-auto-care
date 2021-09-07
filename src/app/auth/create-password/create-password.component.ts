@@ -42,7 +42,7 @@ export class CreatePasswordComponent implements OnInit {
     }
     this.authService.createPassword(this.createPasswordForm.value).subscribe(
       (response) => {
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
       console.log(response)
     },(err) => {
       if (!err.status) {

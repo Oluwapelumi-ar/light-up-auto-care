@@ -2,12 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/Operators';
 
+
+interface staffDetails {
+  name: string;
+  email:string;
+  role:string;
+  password: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   [x: string]: any;
   constructor(private http: HttpClient) {}
+
+  // Client
 
   postClient(data: any) {
     console.log(data);
@@ -53,6 +63,58 @@ export class ApiService {
   deleteClient(id: number) {
     return this.http
       .delete<any>('https://rocky-spire-51361.herokuapp.com/client/' + id)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  // Staff
+  postStaff(data: staffDetails) {
+    console.log(data);
+    return this.http
+      .post<staffDetails>('https://rocky-spire-51361.herokuapp.com/staff/signup', data)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  getAllStaffs() {
+    return this.http
+      .get<any>('https://rocky-spire-51361.herokuapp.com/staff/')
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  // getStaffByID(ID: number) {
+  //   return this.http
+  //     .get<any>(`https://rocky-spire-51361.herokuapp.com/client/${ID}`)
+  //     .pipe(
+  //       map((res: any) => {
+  //         return res;
+  //       })
+  //     );
+  // }
+
+  // updateStaff(data: any, id: number) {
+  //   return this.http
+  //     .put<any>('https://rocky-spire-51361.herokuapp.com/staff/3' + id, data)
+  //     .pipe(
+  //       map((res: any) => {
+  //         return res;
+  //       })
+  //     );
+  // }
+
+  deleteStaff(id: number) {
+    return this.http
+      .delete<staffDetails>('https://rocky-spire-51361.herokuapp.com/client/' + id)
       .pipe(
         map((res: any) => {
           return res;

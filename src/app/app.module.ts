@@ -6,6 +6,7 @@ import {
   HTTP_INTERCEPTORS,
   JsonpInterceptor,
 } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -55,6 +56,8 @@ import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.compone
     NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
 
   providers: [

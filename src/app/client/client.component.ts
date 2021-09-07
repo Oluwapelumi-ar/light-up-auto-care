@@ -26,7 +26,7 @@ export class ClientComponent implements OnInit {
   }
 
   getAllClient() {
-    this.api.getAllClients().subscribe((res) => {
+    this.api.getAllClients().subscribe((res: { payload: any; }) => {
       this.clientData = res.payload;
     });
   }

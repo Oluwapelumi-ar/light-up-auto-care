@@ -14,6 +14,6 @@ export class SideMenuComponent implements OnInit {
   handleLogout() {
     localStorage.clear();
     alert('Logged Out');
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 }

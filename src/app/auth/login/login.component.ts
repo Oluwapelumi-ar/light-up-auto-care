@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
   }
 
   handleSubmit() {
-    console.log(this.loginForm.invalid);
     if (this.loginForm.invalid) {
       return;
     }

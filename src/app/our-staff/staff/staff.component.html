@@ -32,22 +32,20 @@
                         <th scope="col">S/N</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Telephone</th>
                         <th scope="col">Role</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     
-                    <tr *ngFor="let row of clientData">
+                    <tr *ngFor="let row of staffData">
                         <td>{{row.id}}</td>
                         <td>{{row.name}}</td>
                         <td>{{row.email}}</td>
-                        <td>{{row.telephone}}</td>
                         <td>{{row.role}}</td>
                         <td>
                             <button class="btn add-btn edit-btn">Edit</button>
-                            <button class="btn btn-danger mx-3">Delete</button>
+                            <button class="btn btn-danger mx-3" (click)="deleteStaff">Delete</button>
                         </td>
                     </tr>
                 </tbody>
