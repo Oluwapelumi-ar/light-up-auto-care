@@ -15,12 +15,18 @@ export class ClientModalComponent implements OnInit {
   ClientModelObj: ClientModel = new ClientModel();
   clientData!: any;
 
-  formValue!: FormGroup;
+  formValue: FormGroup = this.formBuilder.group({
+    id: [''],
+    name: ['', [Validators.required, Validators.minLength(4)]],
+    email: ['', [Validators.required]],
+    telephone: ['', [Validators.required]],
+  });
   errMsg = {
     name: '',
     email: '',
     phone: '',
   };
+  getAllClient: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,14 +34,7 @@ export class ClientModalComponent implements OnInit {
     private api: ApiService
   ) {}
 
-  ngOnInit(): void {
-    this.formValue = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(4)]],
-      email: ['', [Validators.required]],
-      telephone: ['', [Validators.required]],
-    });
-    // this.getAllClient();
-  }
+  ngOnInit(): void {}
 
   // for posting data (ApiServe)
   postClientDetails() {
@@ -57,6 +56,24 @@ export class ClientModalComponent implements OnInit {
         alert('Something Went Wrong');
       }
     );
+  }
+
+  updateClient() {
+    this.ClientModelObj.name = this.formValue.value.name;
+    this.ClientModelObj.email = this.formValue.value.email;
+    this.ClientModelObj.telephone = this.formValue.value.telephone;
+    this.ClientModelObj.id = this.formValue.value.id;
+
+    console.log(this.ClientModelObj);
+    this.api
+      .updateClient(this.ClientModelObj, this.ClientModelObj.id)
+      .subscribe((res) => {
+        alert('updated Successfully');
+        let ref = document.getElementById('cancel');
+        ref?.click();
+        this.formValue.reset();
+        this.getAllClient();
+      });
   }
 
   closeModal() {

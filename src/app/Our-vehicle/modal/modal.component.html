@@ -1,7 +1,7 @@
-<div>
+
     <div class="modal-header">
 
-        <h4 class="modal-title" id="modal-basic-title">Client Details</h4>
+        <h4 class="modal-title" id="modal-basic-title">Vehicle Details</h4>
 
         <button type="button" class="close" aria-label="Close" (click)="closeModal()">
 
@@ -14,11 +14,6 @@
     <div class="modal-body">
 
         <form>
-            <div class="form-group" (ngSubmit)="onSubmit()">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" aria-describedby="nameHelp"
-                    formControlName="name">
-            </div>
             <div class="form-group">
                 <label for="vehicleName">Vehicle Name</label>
                 <input type="text" class="form-control" id="vehicleName" aria-describedby="nameHelp" formControlName="vehicleName">
@@ -33,15 +28,14 @@
                     formControlName="model">
             </div>
             <div class="form-group">
-                <label for="clientId">Client Id</label>
-                <input  type="text" class="form-control" id="clientId" aria-describedby="nameHelp"
-                    formControlName="clientId">
+                <label for="name">Name</label>
+                <select  id="name" aria-describedby="nameHelp" formControlName="name">
+                    <option value="" disabled selected>Select Client</option>
+                    <option *ngFor="let client of [{id: 4, name: 'chidera', mobile: '3589598235'}, {id: 5, name: 'chidera', mobile: '3589598235'}]" value="{{client.id}}">{{client.name}}</option>
+                </select>
             </div>
-
         </form>
-    </div>
     <div class="modal-footer">
         <button id="cancel" type="submit"  (click)="closeModal()" class="btn btn-sm btn-outline-danger">Close</button>
         <button  (click)="postVehicleDetails()" type="submit" class="btn btn-sm add-btn">Add</button>
     </div>
-</div>

@@ -22,26 +22,27 @@ export class ModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
-      service: ['', [Validators.required, Validators.minLength(4)]],
+      name: ['', [Validators.required, Validators.minLength(4)]],
     });
   }
 
-  // postServiceDetails() {
-  //   this.ServiceModelObj.service = this.formValue.value.service;
-
-  //   this.api.postService(this.ServiceModelObj).subscribe(
-  //     (res: any) => {
-  //       console.log(res);
-  //       alert('Client Added Successfully');
-  //       let ref = document.getElementById('cancel');
-  //       ref?.click();
-  //       this.formValue.reset();
-  //     },
-  //     (err: any) => {
-  //       alert('Something Went Wrong');
-  //     }
-  //   );
-  // }
+  postServiceDetails() {
+    this.ServiceModelObj.name = this.formValue.value.name;
+    console.log(this.ServiceModelObj);
+    this.api.postService(this.ServiceModelObj).subscribe(
+      (res: any) => {
+        console.log(res);
+        alert('Service Added Successfully');
+        let ref = document.getElementById('cancel');
+        ref?.click();
+        this.formValue.reset();
+      },
+      (err: any) => {
+        console.log(err);
+        alert('Something Went Wrong');
+      }
+    );
+  }
 
   closeModal() {
     this.modalService.dismissAll(ModalComponent);

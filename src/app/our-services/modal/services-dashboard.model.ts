@@ -1,3 +1,3 @@
 export class ServiceModel {
-  service: string = '';
+  name: string = '';
 }

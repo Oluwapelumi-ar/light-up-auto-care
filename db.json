@@ -39,12 +39,31 @@
      "quoteId": "101",
       "clientId": "1001",
       "vehicleId": "10001",
-      "vehicleChasisNumber": "12345678987654321",
-      "itemDescription": "Widescreen",
-      "unit": 2,
-      "rate": 30000,
-      "amount": 60000,
+      "vehicleChasisNumber": "12345678998765432",
+      "itemDescription": "Bonnet and Boot",
+      "unit": 4,
+      "rate": 50000,
+      "amount": 200000,
       "id": 1
+<<<<<<< HEAD
+    },
+    {
+      "quoteId": "123",
+      "clientId": "1001",
+      "vehicleId": "10001",
+      "vehicleChasisNumber": "12345678987654321",
+      "itemDescription": "nozzzles",
+      "unit": 8,
+      "rate": 2000,
+      "amount": 16000,
+      "id": 2
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+=======
+>>>>>>> 3d17640cd688c9ef21782e36f8c2b9c781149ee6
   }
   ],
 

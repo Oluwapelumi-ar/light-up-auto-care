@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../modal/modal.component';
+import { ApiService } from 'src/app/shared/api.service';
 
 @Component({
   selector: 'app-services',
@@ -8,9 +9,12 @@ import { ModalComponent } from '../modal/modal.component';
   styleUrls: ['./services.component.css'],
 })
 export class ServicesComponent implements OnInit {
-  constructor(private modalService: NgbModal) {}
+  serviceData: any;
+  constructor(private modalService: NgbModal, private api: ApiService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getAllService();
+  }
 
   open() {
     this.modalService.open(ModalComponent, {
@@ -19,5 +23,31 @@ export class ServicesComponent implements OnInit {
     });
 
     //clientModal.componentInstance.testMe ='';
+  }
+
+  getAllService() {
+    this.api.getAllService().subscribe((res) => {
+      this.serviceData = res.payload;
+    });
+  }
+
+  onEdit(data: any): void {
+    console.log('Data Name: ' + data.name);
+    const modalValues = this.modalService.open(ModalComponent, {
+      centered: true,
+      size: 'md',
+    });
+    console.log('Data Name: ' + data.id);
+    modalValues.componentInstance.formValue.patchValue({
+      id: data.id,
+      name: data.name,
+    });
+  }
+
+  deleteService(row: any) {
+    this.api.deleteService(row.id).subscribe((res) => {
+      alert('Service deleted successfully ');
+      this.getAllService();
+    });
   }
 }

@@ -37,12 +37,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Oil Change</td>
+                    <tr *ngFor="let row of serviceData" >
+                        <td>{{row.id}}</td>
+                        <td>{{row.name}}</td>
+                       
                         <td>
-                            <button class="btn edit-btn">Edit</button>
-                            <button class="btn btn-danger mx-3">Delete</button>
+                            <button (click)="onEdit(row)" class="btn edit-btn">Edit</button>
+                            <button (click)="deleteService(row)" class="btn btn-danger mx-3">Delete</button>
                         </td>
                     </tr>
                 </tbody>

@@ -31,16 +31,24 @@ export class ClientComponent implements OnInit {
     });
   }
 
+  onEdit(data: any): void {
+    const clientModal = this.modalService.open(ClientModalComponent, {
+      centered: true,
+      size: 'md',
+    });
+
+    clientModal.componentInstance.formValue.patchValue({
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      telephone: data.telephone,
+    });
+  }
+
   deleteClient(row: any) {
     this.api.deleteClient(row.id).subscribe((res) => {
       alert('Client deleted successfully ');
       this.getAllClient();
     });
-  }
-
-  onEdit(row: any) {
-    this.formValue.controls['name'].setValue(row.name);
-    this.formValue.controls['email'].setValue(row.email);
-    this.formValue.controls['phone'].setValue(row.phone);
   }
 }
