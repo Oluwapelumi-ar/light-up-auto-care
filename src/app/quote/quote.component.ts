@@ -26,12 +26,7 @@ export class QuoteComponent implements OnInit {
 
   ngOnInit(): void {
     this.reform = new FormGroup({
-      quoteId: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(7),
-      ]),
-      clientId: new FormControl(null, [
+        clientId: new FormControl(null, [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(8),
@@ -41,21 +36,17 @@ export class QuoteComponent implements OnInit {
         Validators.minLength(5),
         Validators.maxLength(10),
       ]),
-      vehicleChasisNumber: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(17),
-        Validators.maxLength(17),
-      ]),
-      itemDescription: new FormControl(null, [
+      
+      items: new FormControl(null, [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(100),
       ]),
       unit: new FormControl('null', [
         Validators.required,
-        Validators.pattern('^[1-9.,]+$'),
+        Validators.pattern('^[0-9.,]+$'),
       ]),
-      rate: new FormControl(['null', [Validators.pattern('^[1-9.,]+$')]]),
+      rate: new FormControl(['null', [Validators.pattern('^[0-9.,]+$')]]),
       amount: new FormControl([
         '',
         [Validators.minLength(3), Validators.maxLength(20)],
@@ -63,11 +54,10 @@ export class QuoteComponent implements OnInit {
     });
 
     this.formValue = this.formBuilder.group({
-      quoteId: [''],
+      
       clientId: [''],
       vehicleId: [''],
-      vehicleChasisNumber: [''],
-      itemDescription: [''],
+      items: [''],
       unit: [''],
       rate: [''],
       amount: [''],
@@ -81,29 +71,29 @@ export class QuoteComponent implements OnInit {
   }
   getAllQuote() {
     this.api.getQuote().subscribe((res) => {
-      this.quoteData = res;
+      console.log('...', res);
+      
+      this.quoteData = res.payload;
     });
   }
 
-  deleteQuote(row: any) {
+   deleteQuote(row: any) {
     this.api.deleteQuote(row.id).subscribe((res) => {
-      alert('Quote Deleted');
+      alert('Client deleted successfully ');
       this.getAllQuote();
     });
   }
   
 
   onEdit(row: any) {
+    console.log('aaa', row);
+    
     this.showAdd = false;
     this.showUpdate = true;
     this.quoteModelObj.id = row.id;
-    this.formValue.controls['quoteId'].setValue(row.quoteId);
     this.formValue.controls['clientId'].setValue(row.clientId);
     this.formValue.controls['vehicleId'].setValue(row.vehicleId);
-    this.formValue.controls['vehicleChasisNumber'].setValue(
-      row.vehicleChasisNumber
-    );
-    this.formValue.controls['itemDescription'].setValue(row.itemDescription);
+    this.formValue.controls['items'].setValue(row.items);
     this.formValue.controls['unit'].setValue(row.unit);
     this.formValue.controls['rate'].setValue(row.rate);
     this.formValue.controls['amount'].setValue(row.amount);
@@ -111,20 +101,16 @@ export class QuoteComponent implements OnInit {
 
   updatePostQuoteDetails() {
     const {
-      quoteId,
       clientId,
       vehicleId,
-      vehicleChasisNumber,
-      itemDescription,
+      items,
       unit,
       rate,
       amount,
     } = this.formValue.value;
-    this.quoteModelObj.quoteId = quoteId;
     this.quoteModelObj.clientId = clientId;
     this.quoteModelObj.vehicleId = vehicleId;
-    this.quoteModelObj.vehicleChasisNumber = vehicleChasisNumber;
-    this.quoteModelObj.itemDescription = itemDescription;
+    this.quoteModelObj.items = items;
     this.quoteModelObj.unit = unit;
     this.quoteModelObj.rate = rate;
     this.quoteModelObj.amount = amount;
@@ -143,7 +129,7 @@ export class QuoteComponent implements OnInit {
     console.log(this.reform.value);
     this.api.postQuote(this.reform.value).subscribe(
       (res) => {
-        console.log('Quote Added Successfully', res);
+        console.log( res);
         const data = this.getAllQuote();
         window.location.reload();
         this.reform.reset();
