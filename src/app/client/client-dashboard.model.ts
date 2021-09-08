@@ -4,3 +4,4 @@ export class ClientModel {
   telephone: string = '';
   id!: number;
 }
+  

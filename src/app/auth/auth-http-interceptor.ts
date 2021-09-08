@@ -18,14 +18,12 @@ export class AuthHttpInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log(this.userDetails);
     try {
       if (this?.userDetails) {
         this.userDetails = JSON.parse(this.userDetails);
       }
     } catch (error) {}
     const { token } = this?.userDetails || {};
-    console.log(token);
     if (token) {
       request = request.clone({
         setHeaders: {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
 import { MatchPassword } from '../validators/match-password';
@@ -14,7 +14,7 @@ export class CreatePasswordComponent implements OnInit {
 
   createPasswordForm!: FormGroup
 
-  constructor(private router: Router, private authService: AuthServiceService) { }
+  constructor(private router: Router, private authService: AuthServiceService,private matchPassword: MatchPassword) { }
 
   ngOnInit(): void {
     this.createPasswordForm = new FormGroup({
@@ -31,8 +31,8 @@ export class CreatePasswordComponent implements OnInit {
         Validators.maxLength(20),
         Validators.pattern(/^[a-z0-9]+$/)
         ]),
-      acceptTerms: new FormControl(false),
-    }
+      acceptTerms: new FormControl(true),
+    }, { validators: [this.matchPassword.validate]}
     );
   }
 
@@ -40,10 +40,11 @@ export class CreatePasswordComponent implements OnInit {
     if (this.createPasswordForm.invalid) {
       return;
     }
-    this.authService.createPassword(this.createPasswordForm.value).subscribe(response => {
+    this.authService.createPassword(this.createPasswordForm.value).subscribe(
+      (response) => {
       this.router.navigate(['/login']);
       console.log(response)
-    }, err => {
+    },(err) => {
       if (!err.status) {
         this.createPasswordForm.setErrors({ noConnection: false });
       } else {
@@ -53,3 +54,5 @@ export class CreatePasswordComponent implements OnInit {
   };
 
 }
+
+

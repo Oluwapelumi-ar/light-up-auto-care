@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { LoginComponent } from './login/login.component';
 
 interface loginData {
   email: string;
@@ -20,7 +21,9 @@ interface createPasswordData {
   providedIn: 'root',
 })
 export class AuthServiceService {
+  [x: string]: any;
   constructor(private http: HttpClient) {}
+
   login(data: loginData): Observable<any> {
     return this.http.post<loginResponse>(
       'https://rocky-spire-51361.herokuapp.com/staff/login',
@@ -28,10 +31,9 @@ export class AuthServiceService {
     );
   }
 
-  createPassword(data: createPasswordData): Observable<any> {
-    return this.http.post<createPasswordData>(
-      'https://rocky-spire-51361.herokuapp.com/staff/login',
-      data
-    );
+  createPassword(data: createPasswordData):Observable<any>{
+    return this.http.put<createPasswordData>('https://rocky-spire-51361.herokuapp.com/staff/password/create?email=newclerk@gmail .com',data);
   }
+
+
 }

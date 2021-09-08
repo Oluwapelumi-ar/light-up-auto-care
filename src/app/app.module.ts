@@ -20,13 +20,14 @@ import { VehicleComponent } from './Our-vehicle/vehicle/vehicle.component';
 import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
 import { QuoteComponent } from './quote/quote.component';
 import { InvoiceComponent } from './invoice/invoice.component';
-import { StaffComponent } from './staff/staff.component';
+import { StaffComponent } from './our-staff/staff/staff.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ClientModalComponent } from './client/client-modal/client-modal.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { ModalComponent } from './our-services/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.component';
+// import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     QuoteComponent,
     InvoiceComponent,
     StaffComponent,
+    StaffModalComponent,
   ],
 
   imports: [
@@ -53,7 +55,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgSelectModule,
+    BrowserAnimationsModule,
   ],
 
   providers: [
