@@ -14,6 +14,7 @@ export class ClientModalComponent implements OnInit {
   // closeResult: string = '';
   ClientModelObj: ClientModel = new ClientModel();
   clientData!: any;
+  isVisible: any;
 
   formValue: FormGroup = this.formBuilder.group({
     id: [''],

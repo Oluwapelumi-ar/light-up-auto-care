@@ -2,6 +2,7 @@ import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '../shared/api.service';
+import { ClientModel } from './client-dashboard.model';
 import { ClientModalComponent } from './client-modal/client-modal.component';
 
 @Component({
@@ -18,31 +19,67 @@ export class ClientComponent implements OnInit {
     this.getAllClient();
   }
 
-  open() {
-    this.modalService.open(ClientModalComponent, {
-      centered: true,
-      size: 'md',
-    });
-  }
-
-  getAllClient() {
-    this.api.getAllClients().subscribe((res) => {
-      this.clientData = res.payload;
-    });
-  }
-
-  onEdit(data: any): void {
+  open(data?: ClientModel) {
     const clientModal = this.modalService.open(ClientModalComponent, {
       centered: true,
       size: 'md',
     });
 
-    clientModal.componentInstance.formValue.patchValue({
-      id: data.id,
-      name: data.name,
-      email: data.email,
-      telephone: data.telephone,
+    if (data) {
+      clientModal.componentInstance.formValue.patchValue({
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        telephone: data.telephone,
+      });
+    }
+
+    clientModal.result.then(
+      (result) => {
+        console.log(result);
+        // fetch all client again
+        this.getAllClient();
+      },
+      (reason) => {
+        console.log(reason);
+        this.getAllClient();
+      }
+    );
+  }
+
+  getAllClient() {
+    this.api.getAllClients().subscribe({
+      next: (res) => {
+        this.clientData = res.payload;
+      },
+      error: (error) => {
+        console.log(error);
+      },
     });
+  }
+
+  onEdit(data: any): void {
+    // const clientModal = this.modalService.open(ClientModalComponent, {
+    //   centered: true,
+    //   size: 'md',
+    // });
+    // clientModal.componentInstance.formValue.patchValue({
+    //   id: data.id,
+    //   name: data.name,
+    //   email: data.email,
+    //   telephone: data.telephone,
+    // });
+    // clientModal.result.then(
+    //   (result) => {
+    //     console.log(result);
+    //     // fetch all client again
+    //     this.getAllClient();
+    //   },
+    //   (reason) => {
+    //     console.log(reason);
+    //     this.getAllClient();
+    //   }
+    // );
   }
 
   deleteClient(row: any) {
