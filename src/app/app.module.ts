@@ -6,7 +6,6 @@ import {
   HTTP_INTERCEPTORS,
   JsonpInterceptor,
 } from '@angular/common/http';
-import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -58,8 +57,6 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     HttpClientModule,
     BrowserAnimationsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    NgHttpLoaderModule.forRoot(),
   ],
 
   providers: [
