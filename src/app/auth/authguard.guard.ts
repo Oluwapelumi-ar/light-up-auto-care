@@ -8,6 +8,7 @@ import { AuthServiceService } from './auth-service.service';
 })
 export class AuthguardGuard implements CanActivate {
   userDetails = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('userDetails'))));
+  
 
   constructor(
     private authService: AuthServiceService,
@@ -22,9 +23,9 @@ export class AuthguardGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       // return true;
-      if(!this.userDetails?.token) {
+      if(!this.userDetails?.role.admin) {
         window.alert('Access Denied, Login is Required to Access This Page!');
-        this.router.navigate(['/login'])
+        this.router.navigate(['/home'])
         return false;
       }
       return true;

@@ -88,6 +88,7 @@ export class ApiService {
       .get<any>('https://rocky-spire-51361.herokuapp.com/staff/')
       .pipe(
         map((res: any) => {
+          console.log(res)
           return res;
         })
       );
