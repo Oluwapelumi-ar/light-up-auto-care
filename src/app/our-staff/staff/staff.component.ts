@@ -9,7 +9,6 @@ import { StaffModalComponent } from '../staff-modal/staff-modal.component';
   styleUrls: ['./staff.component.css']
 })
 export class StaffComponent implements OnInit {
-  // staffData: any;
   staffData: any = [];
 
   constructor(private modalService: NgbModal, private api: ApiService) {}
@@ -22,13 +21,17 @@ export class StaffComponent implements OnInit {
       centered: true,
       size: 'md',
     });
-  }
+  };
 
   getAllStaff() {
-    this.api.getAllStaffs().subscribe((res: { payload: any; }) => {
-      this.staffData = res.payload;
-      console.log(res.payload)
-    });
+    this.api.getAllStaffs().subscribe({
+      next: (res) => {
+        this.staffData = res.payload;
+      },
+      error: (error) => {
+        console.log(console.error);
+      }
+    })
   }
 
   deleteStaff(row: any) {

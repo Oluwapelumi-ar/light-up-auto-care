@@ -28,6 +28,7 @@ import { ModalComponent } from './our-services/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.component';
 import { NgHttpLoaderModule } from 'ng-http-loader';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -57,6 +58,8 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     HttpClientModule,
     BrowserAnimationsModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    NgHttpLoaderModule.forRoot(),
   ],
 
   providers: [

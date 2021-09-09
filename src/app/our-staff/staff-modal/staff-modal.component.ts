@@ -50,6 +50,24 @@ export class StaffModalComponent implements OnInit {
         alert('Something Went Wrong');
       }
     );
+  };
+
+  updateClient() {
+    // this.ClientModelObj.name = this.formValue.value.name;
+    // this.ClientModelObj.email = this.formValue.value.email;
+    // this.ClientModelObj.telephone = this.formValue.value.telephone;
+    // this.ClientModelObj.id = this.formValue.value.id;
+
+    // console.log(this.ClientModelObj);
+    // this.api
+    //   .updateClient(this.ClientModelObj, this.ClientModelObj.id)
+    //   .subscribe((res) => {
+    //     alert('updated Successfully');
+    //     let ref = document.getElementById('cancel');
+    //     ref?.click();
+    //     this.formValue.reset();
+    //     this.getAllClient();
+    //   });
   }
 
   closeModal() {

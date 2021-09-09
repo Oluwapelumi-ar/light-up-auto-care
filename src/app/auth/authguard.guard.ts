@@ -13,19 +13,16 @@ export class AuthguardGuard implements CanActivate {
   constructor(
     private authService: AuthServiceService,
     private router: Router
-  ){
-    console.log((this.userDetails), 'lgjg');
-  }
+  ){}
 
-  
+  // Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree 
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      // return true;
-      if(!this.userDetails?.role.admin) {
+    state: RouterStateSnapshot):boolean{
+      if(!this.userDetails) {
         window.alert('Access Denied, Login is Required to Access This Page!');
-        this.router.navigate(['/home'])
+        this.router.navigate(['/login'])
         return false;
       }
       return true;
