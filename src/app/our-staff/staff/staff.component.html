@@ -45,14 +45,30 @@
                         <td>{{row.role}}</td>
                         <td>
                             <button class="btn add-btn edit-btn">Edit</button>
-                            <button class="btn btn-danger mx-3" (click)="deleteStaff">Delete</button>
+                            <button class="btn btn-danger mx-3" (click)="deleteStaff(row)">Delete</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
             </div>
         </div>
+        <footer>
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            Copyright © 2018 Concept. All rights reserved.
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="text-md-right footer-links d-none d-sm-block">
+                                <a href="javascript: void(0);">About</a>
+                                <a href="javascript: void(0);">Support</a>
+                                <a href="javascript: void(0);">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
-
-
 </div>

@@ -5,6 +5,7 @@ import { QuoteModel } from '../quote/quote.model';
 
 
 interface staffDetails {
+  id:number;
   name: string;
   email:string;
   role:string;
@@ -94,33 +95,34 @@ export class ApiService {
       );
   }
 
-  // getStaffByID(ID: number) {
-  //   return this.http
-  //     .get<any>(`https://rocky-spire-51361.herokuapp.com/client/${ID}`)
-  //     .pipe(
-  //       map((res: any) => {
-  //         return res;
-  //       })
-  //     );
-  // }
-
-  // updateStaff(data: any, id: number) {
-  //   return this.http
-  //     .put<any>('https://rocky-spire-51361.herokuapp.com/staff/3' + id, data)
-  //     .pipe(
-  //       map((res: any) => {
-  //         return res;
-  //       })
-  //     );
-  // }
-
-  deleteStaff(id: number) {
+  getStaffByID(ID: number) {
     return this.http
-      .delete<staffDetails>('https://rocky-spire-51361.herokuapp.com/client/' + id)
+      .get<any>(`https://rocky-spire-51361.herokuapp.com/staff/${ID}`)
       .pipe(
         map((res: any) => {
           return res;
         })
+      );
+  }
+
+  updateStaff(data: any, id: number) {
+    return this.http
+      .put<any>('https://rocky-spire-51361.herokuapp.com/staff' + id, data)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  deleteStaff(id: number) {
+    return this.http
+      .delete<staffDetails>('https://rocky-spire-51361.herokuapp.com/staff/' + id)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+        
       );
   }
 

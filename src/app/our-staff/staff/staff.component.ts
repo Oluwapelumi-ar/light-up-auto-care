@@ -10,6 +10,7 @@ import { StaffModalComponent } from '../staff-modal/staff-modal.component';
 })
 export class StaffComponent implements OnInit {
   staffData: any = [];
+  formValue: any;
 
   constructor(private modalService: NgbModal, private api: ApiService) {}
   ngOnInit(): void {
@@ -29,16 +30,19 @@ export class StaffComponent implements OnInit {
         this.staffData = res.payload;
       },
       error: (error) => {
-        console.log(console.error);
+        alert('An error occured')
       }
     })
   }
 
-  deleteStaff(row: any) {
-    this.api.deleteStaff(row.id).subscribe((res) => {
-      alert('Client deleted successfully ');
-      this.getAllStaff();
-    });
+  deleteStaff(row:any) {
+    this.api.deleteStaff(row.id).subscribe({
+      next: (res) => {
+        alert('Client deleted successfully ')
+        this.getAllStaff();
+        console.log(this.staffData)
+      }
+    })
   }
 };
 

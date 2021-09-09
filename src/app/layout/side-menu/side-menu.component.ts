@@ -7,9 +7,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./side-menu.component.css'],
 })
 export class SideMenuComponent implements OnInit {
+  userDetails = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('userDetails'))))
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  hideStaffList(){
+    if(this.userDetails.role == 'admin'){
+      console.log('you be admin')
+      return true;
+    }else {
+      return false;
+    }
+    
+
+  }
 
   handleLogout() {
     localStorage.clear();

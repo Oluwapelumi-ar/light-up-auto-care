@@ -12,12 +12,14 @@ export class RoleGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(!this.userDetails.role.admin ) {
-        console.log(this.userDetails.role(route.paramMap.get('role')))
-        window.alert('Only admims can access this page');
-        this.router.navigate(['/home'])
-        return false;
-      }
+      // if(this.userDetails.role == 'admin') {
+        
+      //   return true;
+      // }else {
+      //   window.alert('Only admims can access this page');
+      //   this.router.navigate(['/home'])
+      //   return false;
+      // }
       return true;
   }
   
