@@ -28,6 +28,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { ModalComponent } from './our-services/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.component';
+import { QuotePageComponent } from './quote-page/quote-page.component';
 
 
 @NgModule({
@@ -46,6 +47,9 @@ import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.compone
     InvoiceComponent,
     StaffComponent,
     StaffModalComponent,
+    QuotePageComponent,
+    QuotePageComponent
+    
   ],
 
   imports: [
@@ -57,7 +61,8 @@ import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.compone
     HttpClientModule,
     BrowserAnimationsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+  
   ],
 
   providers: [
