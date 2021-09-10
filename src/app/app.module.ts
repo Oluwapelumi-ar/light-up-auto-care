@@ -30,6 +30,9 @@ import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.compone
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { ToastrModule } from 'ngx-toastr';
 
+import { QuotePageComponent } from './quote-page/quote-page.component';
+
+// import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,9 @@ import { ToastrModule } from 'ngx-toastr';
     InvoiceComponent,
     StaffComponent,
     StaffModalComponent,
+    QuotePageComponent,
+    QuotePageComponent
+    
   ],
 
   imports: [
