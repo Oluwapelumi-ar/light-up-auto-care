@@ -1,5 +1,15 @@
 td {
   color: rgb(9, 9, 49);
   font-size: 1rem;
-  padding: 1em;
+  padding: 1em 2.5em;
+  margin: 1em;
+}
+
+th {
+  padding: 1em 2.5em;
+  margin: 1em;
+}
+
+#gfg {
+  margin: 40px;
 }

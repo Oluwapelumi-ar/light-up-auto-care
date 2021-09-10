@@ -28,36 +28,37 @@ export class ModalComponent implements OnInit {
       vehicleName: ['', [Validators.required]],
       chasisNo: ['', [Validators.required, Validators.minLength(7)]],
       model: ['', [Validators.required]],
-      // clientId: ['', [Validators.required]],
+    });
+
+    this.getAllClients();
+  }
+
+  // postVehicleDetails() {
+  //   this.VehicleModelObj.name = this.formValue.value.name;
+  //   this.VehicleModelObj.vehicleName = this.formValue.value.vehicleName;
+  //   this.VehicleModelObj.chasisNo = this.formValue.value.chasisNo;
+  //   this.VehicleModelObj.model = this.formValue.value.model;
+
+  //   this.api.postVehicle(this.VehicleModelObj).subscribe(
+  //     (res: any) => {
+  //       console.log(res);
+  //       alert('Vehicle Added Successfully');
+  //       let ref = document.getElementById('cancel');
+  //       ref?.click();
+  //       this.formValue.reset();
+  //     },
+  //     (err: any) => {
+  //       alert('Something Went Wrong');
+  //     }
+  //   );
+  // }
+
+  getAllClients() {
+    this.api.getAllClients().subscribe((res: any) => {
+      this.clientData = res;
+      console.log(this.clientData);
     });
   }
-
-  postVehicleDetails() {
-    this.VehicleModelObj.name = this.formValue.value.name;
-    this.VehicleModelObj.vehicleName = this.formValue.value.vehicleName;
-    this.VehicleModelObj.chasisNo = this.formValue.value.chasisNo;
-    this.VehicleModelObj.model = this.formValue.value.model;
-    // this.VehicleModelObj.clientId = this.formValue.value.clientId;
-
-    this.api.postVehicle(this.VehicleModelObj).subscribe(
-      (res: any) => {
-        console.log(res);
-        alert('Vehicle Added Successfully');
-        let ref = document.getElementById('cancel');
-        ref?.click();
-        this.formValue.reset();
-      },
-      (err: any) => {
-        alert('Something Went Wrong');
-      }
-    );
-  }
-
-  // onSubmit() {
-  //   this.apiService
-  //     .createUser(this.formValue.value)
-  //     .subscribe((data: any) => {});
-  // }
 
   closeModal() {
     this.modalService.dismissAll(ModalComponent);

@@ -3,11 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/Operators';
 import { QuoteModel } from '../quote/quote.model';
 
-
 interface staffDetails {
   name: string;
-  email:string;
-  role:string;
+  email: string;
+  role: string;
   password: string;
 }
 
@@ -75,7 +74,10 @@ export class ApiService {
   postStaff(data: staffDetails) {
     console.log(data);
     return this.http
-      .post<staffDetails>('https://rocky-spire-51361.herokuapp.com/staff/signup', data)
+      .post<staffDetails>(
+        'https://rocky-spire-51361.herokuapp.com/staff/signup',
+        data
+      )
       .pipe(
         map((res: any) => {
           return res;
@@ -115,7 +117,9 @@ export class ApiService {
 
   deleteStaff(id: number) {
     return this.http
-      .delete<staffDetails>('https://rocky-spire-51361.herokuapp.com/client/' + id)
+      .delete<staffDetails>(
+        'https://rocky-spire-51361.herokuapp.com/client/' + id
+      )
       .pipe(
         map((res: any) => {
           return res;
@@ -126,14 +130,10 @@ export class ApiService {
   //Vehicle
 
   postVehicle(data: any) {
-    console.log(data);
-    return this.http
-      .post<any>('https://rocky-spire-51361.herokuapp.com/vehicle', data)
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this.http.post<any>(
+      'https://rocky-spire-51361.herokuapp.com/vehicle',
+      data
+    );
   }
 
   getVehicle() {
@@ -158,7 +158,7 @@ export class ApiService {
 
   deleteVehicle(id: number) {
     return this.http
-      .delete<any>('https://rocky-spire-51361.herokuapp.com/vehicle' + id)
+      .delete<any>('https://rocky-spire-51361.herokuapp.com/vehicle/' + id)
       .pipe(
         map((res: any) => {
           return res;
@@ -190,7 +190,6 @@ export class ApiService {
         })
       );
   }
-  
 
   updateService(data: any, id: number) {
     return this.http
@@ -220,33 +219,40 @@ export class ApiService {
   //Quote
 
   postQuote(data: QuoteModel) {
-    return this.http.post<QuoteModel>('https://rocky-spire-51361.herokuapp.com/quote', data).pipe(
-      map((res: QuoteModel) => {
-        return res;
-      })
-    );
+    return this.http
+      .post<QuoteModel>('https://rocky-spire-51361.herokuapp.com/quote', data)
+      .pipe(
+        map((res: QuoteModel) => {
+          return res;
+        })
+      );
   }
   getQuote() {
-    return this.http.get<any>('https://rocky-spire-51361.herokuapp.com/quote').pipe(
-      map((res: any) => {
-        return res;
-      })
-    );
+    return this.http
+      .get<any>('https://rocky-spire-51361.herokuapp.com/quote')
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
   updateQuote(data: any, id: number) {
-    return this.http.put<any>('https://rocky-spire-51361.herokuapp.com/quote' + id, data).pipe(
-      map((res: any) => {
-        return res;
-      })
-    );
+    return this.http
+      .put<any>('https://rocky-spire-51361.herokuapp.com/quote' + id, data)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 
-
   deleteQuote(id: number) {
-    return this.http.delete<any>('https://rocky-spire-51361.herokuapp.com/quote' + id).pipe(
-      map((res: any) => {
-        return res;
-      })
-    );
+    return this.http
+      .delete<any>('https://rocky-spire-51361.herokuapp.com/quote' + id)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 }

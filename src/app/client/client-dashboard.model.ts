@@ -3,5 +3,5 @@ export class ClientModel {
   email: string = '';
   telephone: string = '';
   id!: number;
+  static componentInstance: any;
 }
-  

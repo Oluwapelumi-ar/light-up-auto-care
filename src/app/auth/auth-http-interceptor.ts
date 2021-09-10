@@ -24,6 +24,7 @@ export class AuthHttpInterceptor implements HttpInterceptor {
       }
     } catch (error) {}
     const { token } = this?.userDetails || {};
+
     if (token) {
       request = request.clone({
         setHeaders: {

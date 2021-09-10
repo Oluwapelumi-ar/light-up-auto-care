@@ -1,14 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 @import "bootstrap/dist/css/bootstrap.css";
- * {
-     box-sizing: border-box;
-     padding: 0;
-     margin: auto;
- }
 
- body {
-     background-color: rgb(239, 239, 246);
-     margin-top: 20px;
- }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: auto;
+}
+
+body {
+  background-color: rgb(239, 239, 246);
+  margin-top: 20px;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import {
   HttpClientModule,
@@ -27,6 +28,8 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { ModalComponent } from './our-services/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.component';
+import { CapitalizePipe } from './capitalize.pipe';
+
 // import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -45,22 +48,22 @@ import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.compone
     InvoiceComponent,
     StaffComponent,
     StaffModalComponent,
+    CapitalizePipe,
   ],
-
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    BrowserAnimationsModule,
   ],
-
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
   ],
+  entryComponents: [ModalComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

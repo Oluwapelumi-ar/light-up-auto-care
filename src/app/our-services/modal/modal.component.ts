@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'src/app/shared/api.service';
 import { ServiceModel } from './services-dashboard.model';
+import { ServicesComponent } from '../services/services.component';
 
 @Component({
   selector: 'app-modal',
@@ -11,8 +12,18 @@ import { ServiceModel } from './services-dashboard.model';
   styleUrls: ['./modal.component.css'],
 })
 export class ModalComponent implements OnInit {
+  serviceData: any;
   formValue!: FormGroup;
   ServiceModelObj: ServiceModel = new ServiceModel();
+  // ServiceComponent: ServicesComponent = new ServicesComponent(
+  //   NgbModal,
+  //   ApiService
+  // );
+  static result: any;
+  alertInstance: string = '';
+  static componentInstance: any;
+  formStatus: string = '';
+  getAllService: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,6 +35,8 @@ export class ModalComponent implements OnInit {
     this.formValue = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
     });
+
+    this.getAllService();
   }
 
   postServiceDetails() {
@@ -31,15 +44,18 @@ export class ModalComponent implements OnInit {
     console.log(this.ServiceModelObj);
     this.api.postService(this.ServiceModelObj).subscribe(
       (res: any) => {
-        console.log(res);
-        alert('Service Added Successfully');
+        console.log('post', res);
+        this.getAllService();
+        this.formStatus = 'Successful';
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
       },
       (err: any) => {
-        console.log(err);
-        alert('Something Went Wrong');
+        this.formStatus = 'Error, Try Again';
+        let ref = document.getElementById('cancel');
+        ref?.click();
+        this.formValue.reset();
       }
     );
   }

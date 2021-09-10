@@ -49,7 +49,7 @@
                             <td>{{ row.vehicleId }}</td>
                             <td>
                               <p *ngFor="let data of row.items">
-                                {{data.item}}
+                                {{data.item | capitalize}}
                               </p>
 
                             </td>
