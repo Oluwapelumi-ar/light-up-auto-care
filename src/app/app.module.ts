@@ -6,7 +6,6 @@ import {
   HTTP_INTERCEPTORS,
   JsonpInterceptor,
 } from '@angular/common/http';
-import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -30,6 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.component';
 import { QuotePageComponent } from './quote-page/quote-page.component';
 
+// import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -61,8 +61,6 @@ import { QuotePageComponent } from './quote-page/quote-page.component';
     HttpClientModule,
     BrowserAnimationsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-  
   ],
 
   providers: [

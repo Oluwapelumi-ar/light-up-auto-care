@@ -6,10 +6,10 @@ import { StaffComponent } from '../staff/staff.component';
 @Component({
   selector: 'app-staff-modal',
   templateUrl: './staff-modal.component.html',
-  styleUrls: ['./staff-modal.component.css']
+  styleUrls: ['./staff-modal.component.css'],
 })
 export class StaffModalComponent implements OnInit {
-  [x: string]: any; 
+  [x: string]: any;
 
   formValue!: FormGroup;
   errMsg = {
@@ -21,18 +21,20 @@ export class StaffModalComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
-    private api: ApiService,
+    private api: ApiService
   ) {}
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.required]],
-      password: ['',[Validators.required]],
-      role:['',[Validators.required]]
+      password: ['', [Validators.required]],
+      role: ['', [Validators.required]],
     });
-    {this.getStaff()}
-  };
+    {
+      this.getStaff();
+    }
+  }
 
   postStaff() {
     this.api.postStaff(this.formValue.value).subscribe(
@@ -48,7 +50,7 @@ export class StaffModalComponent implements OnInit {
         alert('Something Went Wrong');
       }
     );
-  };
+  }
 
   closeModal() {
     this.modalService.dismissAll(StaffModalComponent);
@@ -79,5 +81,4 @@ export class StaffModalComponent implements OnInit {
         break;
     }
   }
-
 }
