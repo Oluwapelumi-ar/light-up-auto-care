@@ -5,9 +5,10 @@ import { ClientComponent } from './client/client.component';
 import { VehicleComponent } from './Our-vehicle/vehicle/vehicle.component';
 import { ServicesComponent } from './our-services/services/services.component';
 import { InvoiceComponent } from './invoice/invoice.component';
-import { QuoteComponent } from './quote/quote.component';
+import { QuotePageComponent } from './quote-page/quote-page.component';
 import { StaffComponent } from './our-staff/staff/staff.component';
 import { AuthguardGuard } from './auth/authguard.guard';
+import { RoleGuard } from './auth/role.guard';
 
 
 const routes: Routes = [
@@ -15,7 +16,7 @@ const routes: Routes = [
   { path: 'client', component: ClientComponent,canActivate: [AuthguardGuard] },
   { path: 'vehicle', component: VehicleComponent,canActivate: [AuthguardGuard] },
   { path: 'services', component: ServicesComponent,canActivate: [AuthguardGuard] },
-  { path: 'quote', component: QuoteComponent,canActivate: [AuthguardGuard] },
+  { path: 'quote', component: QuotePageComponent,canActivate: [AuthguardGuard] },
   { path: 'invoice', component: InvoiceComponent,canActivate: [AuthguardGuard] },
   { path: 'staff', component: StaffComponent,canActivate: [AuthguardGuard] },
   {

@@ -1,0 +1,64 @@
+<div class="dashboard-main-wrapper">
+
+    <!-- ============================================================== -->
+    <!-- navbar -->
+    <!-- ============================================================== -->
+    <app-header></app-header>
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- left sidebar -->
+    <!-- ============================================================== -->
+    <app-side-menu></app-side-menu>
+    <!-- ============================================================== -->
+    <!-- end left sidebar -->
+    <!-- ============================================================== -->
+
+    <div class="dashboard-wrapper">
+        <div class="dashboard-finance">
+            <div class="container-fluid dashboard-content">
+                <nav class="navbar navbar-light bg-light">
+                    <div class="container d-flex">
+                        <h2>Quote Page</h2> 
+                    </div>
+                </nav>    
+                <form [formGroup]="addQuoteTypeForm">
+
+                    <div class="form-group">
+                        <label>
+                        Client ID
+                        </label>
+                        <input type="text" formControlName="clientId" (keyup)="trackClientId()">
+                        <div class="text-danger" *ngIf="addQuoteTypeForm.get('clientId')?.hasError('required') && addQuoteTypeForm.get('clientId')?.touched">Client Id is required</div>
+                        <div class="text-danger" *ngIf="addQuoteTypeForm.get('clientId')?.hasError('minlength') && addQuoteTypeForm.get('clientId')?.touched">Client Id should be a minimum length of 10 characters</div>
+                        <div class="text-danger" *ngIf="addQuoteTypeForm.get('clientId')?.hasError('maxlength') && addQuoteTypeForm.get('clientId')?.touched">Client Id should have a maximum length of 20 characters</div>
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                        Vehicle ID
+                        </label>
+                        <input type="text" formControlName="vehicleId">
+                        <div class="text-danger" *ngIf="addQuoteTypeForm.get('vehicleId')?.hasError('required') && addQuoteTypeForm.get('vehicleId')?.touched">Vehicle Id is required</div>
+                        <div class="text-danger" *ngIf="addQuoteTypeForm.get('vehicleId')?.hasError('maxlength') && addQuoteTypeForm.get('vehicleId')?.touched">Vehicle Id should be a maximum length of 10 characters</div>
+                        <div class="text-danger" *ngIf="addQuoteTypeForm.get('vehicleId')?.hasError('minlength') && addQuoteTypeForm.get('vehicleId')?.touched">Vehicle Id should be a minimum length of 5characters</div>
+
+
+
+                    </div>
+                    
+                    <button (click)="addQuoteType()" [disabled]="!addQuoteTypeForm.valid">Add Quote</button>
+                    <button (click)="resetForm()">Reset Form</button>
+                </form>  
+                
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+

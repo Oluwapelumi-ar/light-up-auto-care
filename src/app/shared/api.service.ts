@@ -4,6 +4,7 @@ import { map } from 'rxjs/Operators';
 import { QuoteModel } from '../quote/quote.model';
 
 interface staffDetails {
+  id?:string;
   name: string;
   email: string;
   role: string;
@@ -95,35 +96,43 @@ export class ApiService {
       );
   }
 
-  // getStaffByID(ID: number) {
-  //   return this.http
-  //     .get<any>(`https://rocky-spire-51361.herokuapp.com/client/${ID}`)
-  //     .pipe(
-  //       map((res: any) => {
-  //         return res;
-  //       })
-  //     );
-  // }
+  getStaffByID(ID: number) {
+    return this.http
+      .get<any>(`https://rocky-spire-51361.herokuapp.com/staff/${ID}`)
+      .pipe(
+        map((res: any) => {
+          console.log(res)
+          return res;
+          
+        })
+      );
+  }
 
-  // updateStaff(data: any, id: number) {
-  //   return this.http
-  //     .put<any>('https://rocky-spire-51361.herokuapp.com/staff/3' + id, data)
-  //     .pipe(
-  //       map((res: any) => {
-  //         return res;
-  //       })
-  //     );
-  // }
+  updateStaff(data: any, id: number | undefined) {
+    return this.http
+      .put<any>('https://rocky-spire-51361.herokuapp.com/staff/' + id, data)
+      .pipe(
+        map((res: any) => {
+          console.log("LOG: "+res);
+          return res;
+        })
+      );
+  }
 
   deleteStaff(id: number) {
     return this.http
+<<<<<<< HEAD
       .delete<staffDetails>(
         'https://rocky-spire-51361.herokuapp.com/client/' + id
       )
+=======
+      .delete<staffDetails>('https://rocky-spire-51361.herokuapp.com/staff/' + id)
+>>>>>>> 5a9fd4a0c5104f1689152de31da361baafa15317
       .pipe(
         map((res: any) => {
           return res;
         })
+        
       );
   }
 
@@ -216,8 +225,9 @@ export class ApiService {
       );
   }
 
-  //Quote
+//   Quote
 
+<<<<<<< HEAD
   postQuote(data: QuoteModel) {
     return this.http
       .post<QuoteModel>('https://rocky-spire-51361.herokuapp.com/quote', data)
@@ -255,4 +265,36 @@ export class ApiService {
         })
       );
   }
+=======
+//   postQuote(data: QuoteModel) {
+//     return this.http.post<QuoteModel>('https://rocky-spire-51361.herokuapp.com/quote', data).pipe(
+//       map((res: QuoteModel) => {
+//         return res;
+//       })
+//     );
+//   }
+//   getQuote() {
+//     return this.http.get<any>('https://rocky-spire-51361.herokuapp.com/quote').pipe(
+//       map((res: any) => {
+//         return res;
+//       })
+//     );
+//   }
+//   updateQuote(data: any, id: number) {
+//     return this.http.put<any>('https://rocky-spire-51361.herokuapp.com/quote' + id, data).pipe(
+//       map((res: any) => {
+//         return res;
+//       })
+//     );
+//   }
+
+
+//   deleteQuote(id: number) {
+//     return this.http.delete<any>('https://rocky-spire-51361.herokuapp.com/quote' + id).pipe(
+//       map((res: any) => {
+//         return res;
+//       })
+//     );
+//   }
+>>>>>>> 5a9fd4a0c5104f1689152de31da361baafa15317
 }
