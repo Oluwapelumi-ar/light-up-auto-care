@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '../../shared/api.service';
 import { StaffModalComponent } from '../staff-modal/staff-modal.component';
+import { staffModel } from '../staff-model';
+
 
 @Component({
   selector: 'app-staff',
@@ -17,12 +19,31 @@ export class StaffComponent implements OnInit {
     this.getAllStaff();
   }
 
-  open() {
-    this.modalService.open(StaffModalComponent, {
+  open(data?: staffModel) {
+    const staffModal = this.modalService.open(StaffModalComponent, {
       centered: true,
       size: 'md',
     });
-  };
+    
+    // To populate the modal
+    if (data) {
+      staffModal.componentInstance.formValue.patchValue({
+        name: data.name,
+        email: data.email,
+        role:data.role,
+        password:data.password
+      });
+      staffModal.componentInstance.editID = data.id;
+    }
+    // to stop page from reloading after making changes 
+    staffModal.result.then(
+      (result) => {
+        this.getAllStaff();
+      },
+      (reason) => {
+        this.getAllStaff();
+      }
+    )};
 
   getAllStaff() {
     this.api.getAllStaffs().subscribe({

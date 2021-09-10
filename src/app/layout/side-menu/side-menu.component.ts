@@ -14,13 +14,10 @@ export class SideMenuComponent implements OnInit {
 
   hideStaffList(){
     if(this.userDetails.role == 'admin'){
-      console.log('you be admin')
       return true;
     }else {
       return false;
     }
-    
-
   }
 
   handleLogout() {

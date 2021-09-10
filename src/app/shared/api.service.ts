@@ -5,7 +5,7 @@ import { QuoteModel } from '../quote/quote.model';
 
 
 interface staffDetails {
-  id:number;
+  id?:string;
   name: string;
   email:string;
   role:string;
@@ -89,7 +89,6 @@ export class ApiService {
       .get<any>('https://rocky-spire-51361.herokuapp.com/staff/')
       .pipe(
         map((res: any) => {
-          console.log(res)
           return res;
         })
       );
@@ -100,16 +99,19 @@ export class ApiService {
       .get<any>(`https://rocky-spire-51361.herokuapp.com/staff/${ID}`)
       .pipe(
         map((res: any) => {
+          console.log(res)
           return res;
+          
         })
       );
   }
 
-  updateStaff(data: any, id: number) {
+  updateStaff(data: any, id: number | undefined) {
     return this.http
-      .put<any>('https://rocky-spire-51361.herokuapp.com/staff' + id, data)
+      .put<any>('https://rocky-spire-51361.herokuapp.com/staff/' + id, data)
       .pipe(
         map((res: any) => {
+          console.log("LOG: "+res);
           return res;
         })
       );

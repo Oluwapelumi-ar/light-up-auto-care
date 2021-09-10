@@ -2,7 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'src/app/shared/api.service';
-import { StaffComponent } from '../staff/staff.component';
+
+interface staffDetails {
+  data:{
+    id?:number;
+  name: string;
+  email:string;
+  role:string;
+  password: string;
+  }
+}
+
 @Component({
   selector: 'app-staff-modal',
   templateUrl: './staff-modal.component.html',
@@ -10,31 +20,30 @@ import { StaffComponent } from '../staff/staff.component';
 })
 export class StaffModalComponent implements OnInit {
   [x: string]: any;
+  editID:any;
 
-  formValue!: FormGroup;
+  
+
+  formValue: FormGroup = this.formBuilder.group({
+    name: ['', [Validators.required, Validators.minLength(4)]],
+    email: ['', [Validators.required]],
+    password: ['', [Validators.required]],
+    role: ['', [Validators.required]],
+  });
   errMsg = {
     name: '',
     email: '',
     password: '',
   };
+ 
 
   constructor(
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
     private api: ApiService
-  ) {}
+  ) {  }
 
-  ngOnInit(): void {
-    this.formValue = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(4)]],
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      role: ['', [Validators.required]],
-    });
-    {
-      this.getStaff();
-    }
-  }
+  ngOnInit(): void { }
 
   postStaff() {
     this.api.postStaff(this.formValue.value).subscribe(
@@ -52,22 +61,21 @@ export class StaffModalComponent implements OnInit {
     );
   };
 
-  updateClient() {
-    // this.ClientModelObj.name = this.formValue.value.name;
-    // this.ClientModelObj.email = this.formValue.value.email;
-    // this.ClientModelObj.telephone = this.formValue.value.telephone;
-    // this.ClientModelObj.id = this.formValue.value.id;
-
-    // console.log(this.ClientModelObj);
-    // this.api
-    //   .updateClient(this.ClientModelObj, this.ClientModelObj.id)
-    //   .subscribe((res) => {
-    //     alert('updated Successfully');
-    //     let ref = document.getElementById('cancel');
-    //     ref?.click();
-    //     this.formValue.reset();
-    //     this.getAllClient();
-    //   });
+  updatedStaff() {
+    const StaffModelObj: staffDetails = {
+      ...this.formValue.value,
+    };
+    console.log("staff model object sent: ",  this.editID);
+    this.api
+      .updateStaff(StaffModelObj, this.editID)
+      .subscribe((res) => {
+        console.log("response: "+res)
+        alert('updated Successfully');
+        let ref = document.getElementById('cancel');
+        ref?.click();
+        this.formValue.reset();
+        // getAllStaff();
+      });
   }
 
   closeModal() {
@@ -100,3 +108,5 @@ export class StaffModalComponent implements OnInit {
     }
   }
 }
+
+

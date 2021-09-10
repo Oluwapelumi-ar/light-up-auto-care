@@ -53,7 +53,7 @@ export class ClientModalComponent implements OnInit {
         // this.getAllClient();
       },
       (err: any) => {
-        console.log(err);
+        console.log(err); 
         alert('Something Went Wrong');
       }
     );
@@ -73,7 +73,7 @@ export class ClientModalComponent implements OnInit {
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
-        this.getAllClient();
+        // this.getAllClient();
       });
   }
 
