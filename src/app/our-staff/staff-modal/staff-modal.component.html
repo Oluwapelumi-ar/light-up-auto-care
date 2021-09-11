@@ -10,7 +10,7 @@
         <form [formGroup]="formValue">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" aria-describedby="nameHelp" formControlName="name"
+                <input type="text" autocapitalize class="form-control" id="name" aria-describedby="nameHelp" formControlName="name"
                 (keyup)="handleErrMsg('name', formValue.controls.name.value)">
                 <span class="text-danger" *ngIf="errMsg.name">{{errMsg.name}}</span>
             </div>
@@ -21,16 +21,6 @@
                     <span class="text-danger" *ngIf="errMsg.email">{{errMsg.email}}</span>
              </div>
 
-            <!-- <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  Select Staff Role
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li class="dropdown-item">Admin</li>
-                  <li class="dropdown-item">Approver</li>
-                  <li class="dropdown-item">Clerk</li>
-                </ul>
-            </div> -->
             <div class="form-group">
                 <label for="Password">Password</label>
                 <input type="text" class="form-control" id="Password" formControlName="password">
@@ -38,7 +28,7 @@
             </div>
             <div class="form-group">
                 <label for="Password">Role</label>
-                <input type="text" class="form-control" id="Password" formControlName="role">
+                <input type="text" autocapitalize class="form-control" id="Password" formControlName="role">
                 <span class="text-danger" *ngIf="">password is required</span>
             </div>
         </form>    
@@ -46,6 +36,7 @@
     <div class="modal-footer">
         <button id="cancel" type="submit" (click)="closeModal()" class="btn btn-sm btn-outline-danger">Close</button>
         <button (click)="postStaff()"  type="submit" class="btn add-btn">Add</button>
+        <button (click)="updatedStaff()"  type="submit" class="btn btn-sm add-btn">Update</button>
     </div>
 </div>
 

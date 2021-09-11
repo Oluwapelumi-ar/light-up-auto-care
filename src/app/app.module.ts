@@ -29,6 +29,10 @@ import { ModalComponent } from './our-services/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.component';
 import { CapitalizePipe } from './capitalize.pipe';
+import { NgHttpLoaderModule } from 'ng-http-loader';
+import { ToastrModule } from 'ngx-toastr';
+
+import { QuotePageComponent } from './quote-page/quote-page.component';
 
 // import { ReactiveFormsModule } from '@angular/forms';
 
@@ -49,6 +53,9 @@ import { CapitalizePipe } from './capitalize.pipe';
     StaffComponent,
     StaffModalComponent,
     CapitalizePipe,
+    QuotePageComponent,
+    QuotePageComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -59,6 +66,9 @@ import { CapitalizePipe } from './capitalize.pipe';
     NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    NgHttpLoaderModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
