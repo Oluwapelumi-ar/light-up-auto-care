@@ -4,13 +4,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'src/app/shared/api.service';
 
 interface staffDetails {
-  data:{
-    id?:number;
-  name: string;
-  email:string;
-  role:string;
-  password: string;
-  }
+  data: {
+    id?: number;
+    name: string;
+    email: string;
+    role: string;
+    password: string;
+  };
 }
 
 @Component({
@@ -20,9 +20,7 @@ interface staffDetails {
 })
 export class StaffModalComponent implements OnInit {
   [x: string]: any;
-  editID:any;
-
-  
+  editID: any;
 
   formValue: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(4)]],
@@ -35,15 +33,14 @@ export class StaffModalComponent implements OnInit {
     email: '',
     password: '',
   };
- 
 
   constructor(
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
     private api: ApiService
-  ) {  }
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   postStaff() {
     this.api.postStaff(this.formValue.value).subscribe(
@@ -59,23 +56,21 @@ export class StaffModalComponent implements OnInit {
         alert('Something Went Wrong');
       }
     );
-  };
+  }
 
   updatedStaff() {
     const StaffModelObj: staffDetails = {
       ...this.formValue.value,
     };
-    console.log("staff model object sent: ",  this.editID);
-    this.api
-      .updateStaff(StaffModelObj, this.editID)
-      .subscribe((res) => {
-        console.log("response: "+res)
-        alert('updated Successfully');
-        let ref = document.getElementById('cancel');
-        ref?.click();
-        this.formValue.reset();
-        // getAllStaff();
-      });
+    console.log('staff model object sent: ', this.editID);
+    this.api.updateStaff(StaffModelObj, this.editID).subscribe((res) => {
+      console.log('response: ' + res);
+      alert('updated Successfully');
+      let ref = document.getElementById('cancel');
+      ref?.click();
+      this.formValue.reset();
+      // getAllStaff();
+    });
   }
 
   closeModal() {
@@ -108,5 +103,3 @@ export class StaffModalComponent implements OnInit {
     }
   }
 }
-
-

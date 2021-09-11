@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'src/app/shared/api.service';
 import { ClientModel } from '../client-dashboard.model';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-clients-modal',
@@ -54,15 +55,10 @@ export class ClientModalComponent implements OnInit {
         // this.getAllClient();
       },
       (err: any) => {
-<<<<<<< HEAD
         this.formStatus = 'Error, Try Again';
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
-=======
-        console.log(err); 
-        alert('Something Went Wrong');
->>>>>>> 5a9fd4a0c5104f1689152de31da361baafa15317
       }
     );
   }
@@ -76,7 +72,6 @@ export class ClientModalComponent implements OnInit {
     console.log(this.ClientModelObj);
     this.api
       .updateClient(this.ClientModelObj, this.ClientModelObj.id)
-<<<<<<< HEAD
       .subscribe(
         (res) => {
           this.formStatus = 'Successful';
@@ -92,15 +87,6 @@ export class ClientModalComponent implements OnInit {
           this.formValue.reset();
         }
       );
-=======
-      .subscribe((res) => {
-        alert('updated Successfully');
-        let ref = document.getElementById('cancel');
-        ref?.click();
-        this.formValue.reset();
-        // this.getAllClient();
-      });
->>>>>>> 5a9fd4a0c5104f1689152de31da361baafa15317
   }
 
   // open() {
