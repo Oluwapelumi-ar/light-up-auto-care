@@ -21,6 +21,7 @@ interface staffDetails {
 export class StaffModalComponent implements OnInit {
   [x: string]: any;
   editID:any;
+  formStatus: string = '';
 
   
 
