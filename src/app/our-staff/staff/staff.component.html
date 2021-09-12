@@ -1,0 +1,136 @@
+<!-- <div class="dashboard-main-wrapper"> -->
+<!-- ============================================================== -->
+<!-- navbar -->
+<!-- ============================================================== -->
+<!-- <app-header></app-header> -->
+<!-- ============================================================== -->
+<!-- end navbar -->
+<!-- ============================================================== -->
+
+<!-- ============================================================== -->
+<!-- left sidebar -->
+<!-- ============================================================== -->
+<!-- <app-side-menu></app-side-menu> -->
+<!-- ============================================================== -->
+<!-- end left sidebar -->
+<!-- ============================================================== -->
+<!-- 
+    <div class="dashboard-wrapper">
+        <div class="dashboard-finance">
+            <div class="container-fluid dashboard-content">
+                <div class="header  d-flex">
+                    <div class="box"><h1 class="title">Staff Information</h1></div>
+                    <div class="box">
+                        <button type="button" (click)="open()"  class="btn add-btn">Add Staff</button>
+                    </div>
+                </div>
+            
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">S/N</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr *ngFor="let row of staffData">
+                        <td>{{row.id}}</td>
+                        <td>{{row.name}}</td>
+                        <td>{{row.email}}</td>
+                        <td>{{row.role}}</td>
+                        <td>
+                            <button class="btn add-btn edit-btn">Edit</button>
+                            <button class="btn btn-danger mx-3" (click)="deleteStaff">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div> -->
+<!-- </div> -->
+
+<div class="dashboard-main-wrapper">
+  <!-- ============================================================== -->
+  <!-- navbar -->
+  <!-- ============================================================== -->
+  <app-header></app-header>
+  <!-- ============================================================== -->
+  <!-- end navbar -->
+  <!-- ============================================================== -->
+
+  <!-- ============================================================== -->
+  <!-- left sidebar -->
+  <!-- ============================================================== -->
+  <app-side-menu></app-side-menu>
+  <!-- ============================================================== -->
+  <!-- end left sidebar -->
+  <!-- ============================================================== -->
+
+  <div class="dashboard-wrapper">
+    <div class="dashboard-finance">
+      <div class="container-fluid dashboard-content">
+        <div class="header d-flex">
+          <div class="box"><h1 class="title">Staff Information</h1></div>
+          <div class="box">
+            <button type="button" (click)="open()" class="btn add-btn">
+              Add Staff
+            </button>
+          </div>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">S/N</th>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Role</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of staffData; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ row.id }}</td>
+              <td>{{ row.name }}</td>
+              <td>{{ row.email }}</td>
+              <td>{{ row.role }}</td>
+              <td>
+                <button (click)="open(row)" class="btn add-btn edit-btn">
+                  Edit
+                </button>
+                <button class="btn btn-danger mx-3" (click)="deleteStaff(row)">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <footer>
+      <div class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              Copyright © 2018 Concept. All rights reserved.
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="text-md-right footer-links d-none d-sm-block">
+                <a href="javascript: void(0);">About</a>
+                <a href="javascript: void(0);">Support</a>
+                <a href="javascript: void(0);">Contact Us</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>

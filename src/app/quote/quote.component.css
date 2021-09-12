@@ -1,0 +1,12 @@
+.form-control.ng-touched.ng-invalid{
+    border: 1px solid red;
+}
+.form-control.ng-touched.ng-valid{
+    border: 1px solid green;
+}
+
+.add-btn,
+.edit-btn {
+  background-color: rgb(14, 8, 90);
+  color: #fff;
+}

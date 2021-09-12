@@ -1,0 +1,127 @@
+<!-- <div class="splash-container">
+  <div class="card">
+    <div class="card-body">
+      <div class="card-header">
+        <h2>Login Form</h2>
+      </div>
+      <form [formGroup]="loginForm">
+        <div class="form-group">
+          <input
+            class="form-control form-control-lg"
+            id="email"
+            type="email"
+            placeholder="Email Address"
+            autocomplete="on"
+            formControlName="email"
+            [class.is-invalid]="
+              !loginForm.get('email')?.valid && loginForm.get('email')?.touched
+            "
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              !loginForm.get('email')?.valid && loginForm.get('email')?.touched
+            "
+          >
+            Valid Email is Required
+          </span>
+        </div>
+        <div class="form-group">
+          <input
+            class="form-control form-control-lg"
+            id="password"
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+            [class.is-invalid]="
+              !loginForm.get('password')?.valid &&
+              loginForm.get('password')?.touched
+            "
+          />
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary btn-lg btn-block"
+          (click)="handleSubmit()"
+          [disabled]="loginForm.invalid"
+        >
+          Login
+        </button> -->
+<!-- <span *ngIf="loginForm.invalid && loginForm.get('password')?.touched && loginForm.get('password')?.touched " class="text-danger">Provide Valid Email and Password to Login</span> -->
+<!-- <p class="text-danger" *ngIf="loginForm.errors?.noConnection">
+          No network Connection detected,failed to login -->
+<!-- </p>
+        <p class="text-danger" *ngIf="loginForm.errors?.unKnownError">
+          Failed to Login
+        </p>
+      </form>
+    </div>
+    <div class="card-footer bg-white p-0">
+      <div class="card-footer-item card-footer-item-bordered"></div>
+    </div>
+  </div>
+</div> -->
+
+<div class="splash-container">
+  <div class="card">
+    <div class="card-body">
+      <div class="card-header">
+        <h2>Login Form</h2>
+      </div>
+      <form [formGroup]="loginForm">
+        <div class="form-group">
+          <input
+            class="form-control form-control-lg"
+            id="email"
+            type="email"
+            placeholder="Email Address"
+            autocomplete="on"
+            formControlName="email"
+            [class.is-invalid]="
+              !loginForm.get('email')?.valid && loginForm.get('email')?.touched
+            "
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              !loginForm.get('email')?.valid && loginForm.get('email')?.touched
+            "
+          >
+            Valid Email is Required
+          </span>
+        </div>
+        <div class="form-group">
+          <input
+            class="form-control form-control-lg"
+            id="password"
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+            [class.is-invalid]="
+              !loginForm.get('password')?.valid &&
+              loginForm.get('password')?.touched
+            "
+          />
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary btn-lg btn-block"
+          (click)="handleSubmit()"
+          [disabled]="loginForm.invalid"
+        >
+          Login
+        </button>
+        <!-- <span *ngIf="loginForm.invalid && loginForm.get('password')?.touched && loginForm.get('password')?.touched " class="text-danger">Provide Valid Email and Password to Login</span> -->
+        <p class="text-danger" *ngIf="loginForm.errors?.noConnection">
+          No network Connection detected,failed to login
+        </p>
+        <p class="text-danger" *ngIf="loginForm.errors?.unKnownError">
+          Failed to Login
+        </p>
+      </form>
+    </div>
+    <div class="card-footer bg-white p-0">
+      <div class="card-footer-item card-footer-item-bordered"></div>
+    </div>
+  </div>
+</div>
