@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/Operators';
-import { QuoteModel } from '../quote/quote.model';
-
 
 interface staffDetails {
+  id?:string;
   name: string;
-  email:string;
-  role:string;
+  email: string;
+  role: string;
   password: string;
 }
 
@@ -75,7 +74,10 @@ export class ApiService {
   postStaff(data: staffDetails) {
     console.log(data);
     return this.http
-      .post<staffDetails>('https://rocky-spire-51361.herokuapp.com/staff/signup', data)
+      .post<staffDetails>(
+        'https://rocky-spire-51361.herokuapp.com/staff/signup',
+        data
+      )
       .pipe(
         map((res: any) => {
           return res;
@@ -93,47 +95,47 @@ export class ApiService {
       );
   }
 
-  // getStaffByID(ID: number) {
-  //   return this.http
-  //     .get<any>(`https://rocky-spire-51361.herokuapp.com/client/${ID}`)
-  //     .pipe(
-  //       map((res: any) => {
-  //         return res;
-  //       })
-  //     );
-  // }
+  getStaffByID(ID: number) {
+    return this.http
+      .get<any>(`https://rocky-spire-51361.herokuapp.com/staff/${ID}`)
+      .pipe(
+        map((res: any) => {
+          console.log(res)
+          return res;
+          
+        })
+      );
+  }
 
-  // updateStaff(data: any, id: number) {
-  //   return this.http
-  //     .put<any>('https://rocky-spire-51361.herokuapp.com/staff/3' + id, data)
-  //     .pipe(
-  //       map((res: any) => {
-  //         return res;
-  //       })
-  //     );
-  // }
+  updateStaff(data: any, id: number | undefined) {
+    return this.http
+      .put<any>('https://rocky-spire-51361.herokuapp.com/staff/' + id, data)
+      .pipe(
+        map((res: any) => {
+          console.log("LOG: "+res);
+          return res;
+        })
+      );
+  }
 
   deleteStaff(id: number) {
     return this.http
-      .delete<staffDetails>('https://rocky-spire-51361.herokuapp.com/client/' + id)
+      .delete<staffDetails>('https://rocky-spire-51361.herokuapp.com/staff/' + id)
       .pipe(
         map((res: any) => {
           return res;
         })
+        
       );
   }
 
   //Vehicle
 
   postVehicle(data: any) {
-    console.log(data);
-    return this.http
-      .post<any>('https://rocky-spire-51361.herokuapp.com/vehicle', data)
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this.http.post<any>(
+      'https://rocky-spire-51361.herokuapp.com/vehicle',
+      data
+    );
   }
 
   getVehicle() {
@@ -158,7 +160,7 @@ export class ApiService {
 
   deleteVehicle(id: number) {
     return this.http
-      .delete<any>('https://rocky-spire-51361.herokuapp.com/vehicle' + id)
+      .delete<any>('https://rocky-spire-51361.herokuapp.com/vehicle/' + id)
       .pipe(
         map((res: any) => {
           return res;
@@ -190,7 +192,6 @@ export class ApiService {
         })
       );
   }
-  
 
   updateService(data: any, id: number) {
     return this.http

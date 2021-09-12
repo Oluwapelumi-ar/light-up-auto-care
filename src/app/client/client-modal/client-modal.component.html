@@ -1,15 +1,37 @@
 <div>
-    <div class="modal-header">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Client Details</h4>
 
-        <h4 class="modal-title" id="modal-basic-title">Client Details</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="closeModal()"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
 
-        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+  <div class="modal-body">
+    <form [formGroup]="formValue">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          aria-describedby="nameHelp"
+          formControlName="name"
+          (keyup)="handleErrMsg('name', formValue.controls.name.value)"
+        />
+        <span class="text-danger" *ngIf="errMsg.name">{{ errMsg.name }}</span>
+      </div>
 
             <span aria-hidden="true">×</span>
 
-        </button>
+        
 
-    </div>
+    
 
     <div class="modal-body">
 
@@ -34,10 +56,38 @@
             </div>
         </form>
     </div>
-    < class="modal-footer">
+    <div class="modal-footer">
         <button id="cancel" type="submit" (click)="closeModal()" class="btn btn-sm btn-outline-danger">Close</button>
       <button (click)="postClientDetails()" type="submit" class="btn btn-sm add-btn">Add</button>
         <button (click)="updateClient()" [disabled]="formValue.invalid"  type="submit" class="btn btn-sm add-btn">Update</button>
     </div>
 
+  <div class="modal-footer">
+    <button
+      id="cancel"
+      type="submit"
+      (click)="closeModal()"
+      class="btn btn-sm btn-outline-danger"
+    >
+      Close
+    </button>
+    <button
+      (click)="postClientDetails()"
+      type="submit"
+      class="btn btn-sm add-btn"
+    >
+      Add
+    </button>
 
+    <button
+      id="edit"
+      (click)="updateClient()"
+      *ngIf="isButtonVisible"
+      type="submit"
+      class="btn btn-sm add-btn"
+    >
+      Update
+    </button>
+  </div>
+
+-->

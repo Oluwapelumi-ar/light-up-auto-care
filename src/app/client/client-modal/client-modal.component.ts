@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,15 +12,18 @@ import { ClientModel } from '../client-dashboard.model';
 })
 export class ClientModalComponent implements OnInit {
   // closeResult: string = '';
+  formStatus: string = '';
   ClientModelObj: ClientModel = new ClientModel();
   clientData!: any;
-  isVisible: any;
+  showUpdate!: boolean;
+  showAdd!: boolean;
+  isButtonVisible!: false;
 
   formValue: FormGroup = this.formBuilder.group({
     id: [''],
     name: ['', [Validators.required, Validators.minLength(4)]],
     email: ['', [Validators.required]],
-    telephone: ['', [Validators.required]],
+    telephone: ['', [Validators.required, Validators.minLength(11)]],
   });
   errMsg = {
     name: '',
@@ -42,18 +45,20 @@ export class ClientModalComponent implements OnInit {
     this.ClientModelObj.name = this.formValue.value.name;
     this.ClientModelObj.email = this.formValue.value.email;
     this.ClientModelObj.telephone = this.formValue.value.telephone;
-    console.log(this.ClientModelObj);
     this.api.postClient(this.ClientModelObj).subscribe(
       (res: any) => {
-        console.log(res);
-        alert('Client Added Successfully');
+        this.formStatus = 'Successful';
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
         // this.getAllClient();
       },
       (err: any) => {
-        console.log(err);
+        this.formStatus = 'Error, Try Again';
+        let ref = document.getElementById('cancel');
+        ref?.click();
+        this.formValue.reset();
+        console.log(err); 
         alert('Something Went Wrong');
       }
     );
@@ -73,9 +78,14 @@ export class ClientModalComponent implements OnInit {
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
-        this.getAllClient();
+        // this.getAllClient();
       });
   }
+
+  // open() {
+  //   this.showAdd = true;
+
+  // }
 
   closeModal() {
     this.modalService.dismissAll(ClientModalComponent);

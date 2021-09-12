@@ -8,6 +8,7 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { QuotePageComponent } from './quote-page/quote-page.component';
 import { StaffComponent } from './our-staff/staff/staff.component';
 import { AuthguardGuard } from './auth/authguard.guard';
+import { RoleGuard } from './auth/role.guard';
 
 
 const routes: Routes = [

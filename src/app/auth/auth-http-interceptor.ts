@@ -12,7 +12,10 @@ import { AuthServiceService } from './auth-service.service';
 export class AuthHttpInterceptor implements HttpInterceptor {
   [x: string]: any;
   userDetails = JSON.parse(JSON.stringify(localStorage.getItem('userDetails')));
-  constructor(private auth: AuthServiceService) {}
+  constructor(private auth: AuthServiceService) {
+    console.log(this.userDetails) 
+  }
+  
 
   intercept(
     request: HttpRequest<any>,
@@ -24,6 +27,7 @@ export class AuthHttpInterceptor implements HttpInterceptor {
       }
     } catch (error) {}
     const { token } = this?.userDetails || {};
+
     if (token) {
       request = request.clone({
         setHeaders: {

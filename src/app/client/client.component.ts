@@ -13,6 +13,7 @@ import { ClientModalComponent } from './client-modal/client-modal.component';
 export class ClientComponent implements OnInit {
   clientData: any = [];
   formValue: any;
+  alertInstance: string = '';
 
   constructor(private modalService: NgbModal, private api: ApiService) {}
   ngOnInit(): void {
@@ -20,11 +21,12 @@ export class ClientComponent implements OnInit {
   }
 
   open(data?: ClientModel) {
+    this.alertInstance = '';
     const clientModal = this.modalService.open(ClientModalComponent, {
       centered: true,
       size: 'md',
     });
-
+    clientModal.componentInstance.edit;
     if (data) {
       clientModal.componentInstance.formValue.patchValue({
         id: data.id,
@@ -36,12 +38,12 @@ export class ClientComponent implements OnInit {
 
     clientModal.result.then(
       (result) => {
-        console.log(result);
+        this.alertInstance = clientModal.componentInstance.formStatus;
         // fetch all client again
         this.getAllClient();
       },
       (reason) => {
-        console.log(reason);
+        this.alertInstance = clientModal.componentInstance.formStatus;
         this.getAllClient();
       }
     );
@@ -58,34 +60,42 @@ export class ClientComponent implements OnInit {
     });
   }
 
-  onEdit(data: any): void {
-    // const clientModal = this.modalService.open(ClientModalComponent, {
-    //   centered: true,
-    //   size: 'md',
-    // });
-    // clientModal.componentInstance.formValue.patchValue({
-    //   id: data.id,
-    //   name: data.name,
-    //   email: data.email,
-    //   telephone: data.telephone,
-    // });
-    // clientModal.result.then(
-    //   (result) => {
-    //     console.log(result);
-    //     // fetch all client again
-    //     this.getAllClient();
-    //   },
-    //   (reason) => {
-    //     console.log(reason);
-    //     this.getAllClient();
-    //   }
-    // );
-  }
+  // onEdit(data: any): void {
+  //   const clientModal = this.modalService.open(ClientModalComponent, {
+  //     centered: true,
+  //     size: 'md',
+  //   });
+  //   clientModal.componentInstance.formValue.patchValue({
+  //     id: data.id,
+  //     name: data.name,
+  //     email: data.email,
+  //     telephone: data.telephone,
+  //   });
+
+  //   clientModal.result.then(
+  //     (result) => {
+  //       this.alertInstance = clientModal.componentInstance.formStatus;
+  //       // fetch all client again
+  //       this.getAllClient();
+  //     },
+  //     (reason) => {
+  //       this.alertInstance = clientModal.componentInstance.formStatus;
+  //       this.getAllClient();
+  //     }
+  //   );
+  // }
 
   deleteClient(row: any) {
-    this.api.deleteClient(row.id).subscribe((res) => {
-      alert('Client deleted successfully ');
-      this.getAllClient();
-    });
+    this.api.deleteClient(row.id).subscribe(
+      (res) => {
+        alert('Client deleted successfully ');
+        this.getAllClient();
+      },
+      (reason) => {
+        this.getAllClient();
+      }
+    );
   }
+
+  closeAlert() {}
 }
