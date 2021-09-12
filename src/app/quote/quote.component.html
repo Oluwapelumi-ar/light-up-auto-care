@@ -1,0 +1,169 @@
+<div class="dashboard-main-wrapper">
+
+    <!-- ============================================================== -->
+    <!-- navbar -->
+    <!-- ============================================================== -->
+    <!-- <app-header></app-header> -->
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- left sidebar -->
+    <!-- ============================================================== -->
+    <!-- <app-side-menu></app-side-menu> -->
+    <!-- ============================================================== -->
+    <!-- end left sidebar -->
+    <!-- ============================================================== -->
+
+    <!-- <div class="dashboard-wrapper">
+        <div class="dashboard-finance">
+            <div class="container-fluid dashboard-content">
+                <nav class="navbar navbar-light bg-light">
+                    <div class="container d-flex">
+                        <h1>QUOTE PAGE</h1> 
+                        <button (click)="toggle()" class="btn btn-success">
+                          {{ buttonName }}<i class="fas fa-plus mx-2"></i>
+                        </button>
+                    </div>
+                </nav>
+
+                <div *ngIf="show" class="container mt-5">
+
+                  <form  [formGroup]="quoteForm">
+
+                    <div class="d-flex bd-highlight">
+
+                      <div class="form-group">
+                        <label for="name">Client Id</label>
+                        <input type="text" class="form-control" formControlName="clientId" 
+                        [class.is-invalid]="!quoteForm.get('clientId')?.valid && quoteForm.get('clientId')?.touched"/>
+                        <div class="invalid-feedback">ClientId is required</div>
+                        </div>
+                      
+                      <div class="form-group">
+                        <label>
+                          Vehicle Id
+                        </label>
+                        <input type="text" class="form-control" formControlName="vehicleId" 
+                        [class.is-invalid]="!quoteForm.get('vehicleId')?.valid && quoteForm.get('vehicleId')?.touched" />
+                        <div class="invalid-feedback">VehicleId is required</div>
+                        
+                      </div>
+                      
+                      <div class="form-group">
+                        <label>
+                          Vehicle Chasis Number</label>
+                          <input type="text" class="form-control" formControlName="vehicleChasisNumber" 
+                          [class.is-invalid]="!quoteForm.get('vehicleChasisNumber')?.valid && 
+                          quoteForm.get('vehicleChasisNumber')?.touched" />
+                          <div class="invalid-feedback">Vehicle Chasis Number is required</div>
+                      </div>
+    
+                    </div>
+                    
+                    
+                    <h5 class="mx-1.5" [formGroup]="items">Items:</h5>
+
+                    <div class="d-flex bd-highlight">
+
+                      <div class="form-group">
+                        <label>
+                          Item </label>
+                          <div class="inputWithIcon inputIconBg">
+                            <input type="text" class="form-control" formControlName="item" placeholder="Available Items" 
+                            [class.is-invalid]="!items.get('Item')?.valid && items.get('Item')?.touched"
+                            />
+                            <i class="fas fa-chevron-down"></i>
+                            <div class="invalid-feedback">Select an Item</div>
+                          </div>
+                          
+                      </div>
+                      
+                      <div class="form-group mt-2">
+                        <label>
+                          Unit</label>{{unit}}
+                          <input type="number" class="form-control" formControlName="unit" 
+                          [class.is-invalid]="items.get('unit')?.valid && 
+                          items.get('unit')?.touched" />
+                        <div class="invalid-feedback">Unit Required</div>
+                      </div>
+                      
+                      <div class="form-group mt-2">
+                        <label>
+                          Rate</label>{{rate}}
+                          <input type="number" class="form-control" formControlName="rate" 
+                          [class.is-invalid]="items.get('rate')?.valid && 
+                          items.get('rate')?.touched" />
+                        <div class="invalid-feedback"> Rate Required</div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label>
+                          Amount</label>{{amount}}
+                          <input type="text" class="form-control" formControlName="amount" 
+                          [class.is-invalid]="items.get('amount')?.valid && 
+                          items.get('amount')?.touched" />  
+                          <div class="invalid-feedback">ClientId is required</div>
+                        </div>
+                      
+                    </div>
+                    
+
+                    <button type="submit" class="btn btn-success mt-3" (click)="getAmount()">Create Quote</button>
+                  </form>
+    
+                </div>
+                <form [formGroup]="quoteForm" (ngSubmit)="onSubmit()"></form>
+
+                
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                            <th scope="col">Quote Id</th>
+                            <th scope="col">Client Id</th>
+                            <th scope="col">Vehicle Id</th>
+                            <th scope="col">Items</th>
+                            <th scope="col">Unit</th>
+                            <th scope="col">Rate(Naira)</th>
+                            <th scope="col">Amount(Naira)</th>
+                            <th scope="col">Actions</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let row of quoteData; index as i">
+                        <td>{{ row.id }}</td>
+                       
+                        <td>{{ row.clientId }}</td>
+                        <td>{{ row.vehicleId }}</td>
+                        <td>
+                          <p *ngFor="let data of row.items">
+                            {{data.item}}
+                          </p>
+
+                        </td>
+                        <td>{{ row.unit }}</td>
+                        <td>{{ row.rate }}</td>
+                        <td>{{ row.amount }}</td>
+                        <td>
+                          
+                        <button (click)="enableEditMethod(row)" *ngIf="!enableEdit" 
+                        type="button" data-toggle="modal" data-target="#exampleModalLong" class="btn edit-btn ">Edit</button>
+                        <button (click)="deleteQuote(row)" class="btn btn-danger mx-3">Delete</button>
+                        
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+                
+  </div>
+      </div>
+    </div> -->
+</div>
+
+
+

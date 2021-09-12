@@ -1,0 +1,45 @@
+
+form{
+  height: 400px;
+  width: 80%;
+}
+label{
+  font-size: 0.9rem;
+}
+input{
+  height: 35px;
+  width: 190px;
+  outline: none;
+  border-radius: 5px;
+}
+
+.inputWithIcon {
+  position: relative;
+}
+ 
+.inputWithIcon i {
+  position: absolute;
+  right: 30px;
+  top: 2px;
+  padding: 9px 8px;
+  color: #aaa;
+  transition: 0.3s;
+}
+.inputWithIcon input[type="text"] {
+  padding-left: 15px;
+}
+input[type="text"] {
+  width: 100%;
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  margin: 8px 0;
+  outline: none;
+  padding: 8px;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+
+.inputWithIcon.inputIconBg input[type="text"]:focus + i {
+  color: #fff;
+  background-color: dodgerBlue;
+}

@@ -33,6 +33,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { QuotePageComponent } from './quote-page/quote-page.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,8 +51,6 @@ import { QuotePageComponent } from './quote-page/quote-page.component';
     StaffModalComponent,
     CapitalizePipe,
     QuotePageComponent,
-
-
     
   ],
   imports: [
