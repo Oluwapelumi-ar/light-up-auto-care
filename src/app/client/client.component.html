@@ -47,7 +47,7 @@
                         
                         <tr *ngFor="let row of clientData">
                             <td>{{row.id}}</td>
-                            <td>{{row.name}}</td>
+                            <td>{{row.name | capitalize}}</td>
                             <td>{{row.email}}</td>
                             <td>{{row.telephone}}</td>
                             <td>

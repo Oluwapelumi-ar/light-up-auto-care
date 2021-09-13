@@ -31,6 +31,7 @@ import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.compone
 import { CapitalizePipe } from './capitalize.pipe';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { ToastrModule } from 'ngx-toastr';
+import { AvatarModule } from 'ngx-avatar';
 
 import { QuotePageComponent } from './quote-page/quote-page.component';
 
@@ -69,6 +70,7 @@ import { QuotePageComponent } from './quote-page/quote-page.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgHttpLoaderModule.forRoot(),
+    AvatarModule
 
   ],
   providers: [
