@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'src/app/shared/api.service';
+import Swal from 'sweetalert2';
+import { staffModel } from '../staff-model';
 
 interface staffDetails {
 
-    id?:number;
+  id?:number;
   name: string;
   email:string;
   role:string;
@@ -19,9 +21,10 @@ interface staffDetails {
   styleUrls: ['./staff-modal.component.css'],
 })
 export class StaffModalComponent implements OnInit {
-  [x: string]: any;
+  // [x: string]: any;
   editID:any;
   formStatus: string = '';
+  
 
   
 
@@ -51,6 +54,7 @@ export class StaffModalComponent implements OnInit {
       (res) => {
         console.log(res);
         alert('Staff Added Successfully');
+        Swal.fire('Thank you...', 'Staff Created Succesfully!', 'success')
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
@@ -64,8 +68,11 @@ export class StaffModalComponent implements OnInit {
 
   updatedStaff() {
     const StaffModelObj: staffDetails = {
-      ...this.formValue.value,
+       ...this.formValue.value,
+      
     };
+
+
     console.log("staff model object sent: ",  this.editID);
     this.api
       .updateStaff(StaffModelObj, this.editID)

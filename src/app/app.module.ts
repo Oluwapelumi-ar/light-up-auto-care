@@ -69,6 +69,7 @@ import { QuotePageComponent } from './quote-page/quote-page.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgHttpLoaderModule.forRoot(),
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },

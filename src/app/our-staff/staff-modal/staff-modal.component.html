@@ -26,11 +26,17 @@
                 <input type="text" class="form-control" id="Password" formControlName="password">
                 <span class="text-danger" *ngIf="">password is required</span>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="Password">Role</label>
                 <input type="text" autocapitalize class="form-control" id="Password" formControlName="role">
-                <span class="text-danger" *ngIf="">password is required</span>
-            </div>
+            </div> -->
+            <label>Choose a role from this list:
+                <input list="roles"  class="form-control" formControlName="role" /></label>
+                <datalist id="roles">
+                  <option value="clerk">
+                  <option value="approver">
+                  <option value="admin">
+                </datalist>
         </form>    
     </div>
     <div class="modal-footer">

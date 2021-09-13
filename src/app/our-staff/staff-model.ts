@@ -1,9 +1,9 @@
-export interface staffModel {
+export class staffModel {
     id?:number;
-    name: string;
-    email:string;
-    role:string;
-    password: string;
+    name: string = '';
+    email:string = '';
+    role:string = '';
+    password: string = '';
 
 
 }

@@ -10,15 +10,18 @@ export class HeaderComponent implements OnInit {
   userDetails = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('userDetails'))));
   username:string ='';
 
-  constructor(private router :Router) { }
+  constructor(private router :Router) {
+    this.username = this.userDetails.name
+   }
 
   ngOnInit(): void {
   }
+  
 
-  handleName() {
-    this.username = this.userDetails.name
-    console.log(this.username);
-  }
+  // handleName() {
+    
+  //   console.log(this.username);
+  // }
 
   handleLogout() {
     localStorage.clear();

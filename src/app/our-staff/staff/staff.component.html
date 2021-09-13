@@ -31,7 +31,6 @@
                 <thead>
                     <tr>
                         <th scope="col">S/N</th>
-                        <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Role</th>
@@ -42,8 +41,7 @@
                     
                     <tr *ngFor="let row of staffData; let i = index">
                         <td>{{i + 1}}</td>
-                        <td>{{row.id}}</td>
-                        <td>{{row.name}}</td>
+                        <td>{{row.name  | capitalize }}</td>
                         <td>{{row .email}}</td>
                         <td>{{row.role}}</td>
                         <td>

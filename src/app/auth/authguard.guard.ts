@@ -26,7 +26,7 @@ export class AuthguardGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot):boolean{
-      if(!this.userDetails) {
+      if(!this.userDetails?.token) {
         window.alert('Access Denied, Login is Required to Access This Page!');
         this.router.navigate(['/login'])
         return false;
