@@ -13,6 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { CreatePasswordComponent } from './auth/create-password/create-password.component';
 import { LoginComponent } from './auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 import { ServicesComponent } from './our-services/services/services.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { SideMenuComponent } from './layout/side-menu/side-menu.component';
@@ -59,6 +61,7 @@ import { QuotePageComponent } from './quote-page/quote-page.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    NgSelectModule,
     NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
