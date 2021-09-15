@@ -59,7 +59,7 @@ export class StaffModalComponent implements OnInit {
         this.formValue.reset();
       },
       (err: any) => {
-        // alert('Something Went Wrong');
+        //alert('Something Went Wrong');
         
       }
     );
