@@ -27,6 +27,7 @@
           </div>
         </div>
 
+<<<<<<< HEAD
         <table class="table">
           <thead>
             <tr>
@@ -78,3 +79,89 @@
     </footer>
   </div>
 </div>
+=======
+    <div class="dashboard-wrapper">
+
+        <div class="dashboard-finance">
+            <div class="container-fluid dashboard-content">
+                <div class="header  d-flex">
+                    <div class="box"><h1 class="title">Staff Information</h1></div>
+                    <div class="box">
+                        <button type="button" (click)="open()"  class="btn add-btn">Add Staff</button>
+                    </div>
+                </div>
+            
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">S/N</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>  
+                    <tr *ngFor="let row of staffData| paginate : {
+                      itemsPerPage: tableSize,
+                      currentPage: page,
+                      totalItems: count
+                    }; let i = index " >
+                        <td>{{((page-1)*tableSize)+(i+1) }}</td>
+                        <td>{{row.name  | capitalize }}</td>
+                        <td>{{row .email}}</td>
+                        <td>{{row.role}}</td>
+                        <td>
+                            <button  (click)="open(row)" class="btn add-btn edit-btn">Edit</button>
+                            <button class="btn btn-danger mx-3" (click)="deleteStaff(row)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="d-flex justify-content-center">
+              <pagination-controls previousLabel="Prev" nextLabel="Next"
+              (pageChange)="tabSize($event)">
+              </pagination-controls>
+            </div>
+            </div>
+
+        </div>
+        <ng-container>
+            <div
+              *ngIf="alertInstance === 'Successful'"
+              class="alert alert-success alert-dismissible fade show"
+              role="alert"
+            >
+            <strong>Hurray!</strong> Client added successfully
+            <button
+              (click)="closeAlert()"
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <footer>
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            Copyright © 2018 Concept. All rights reserved.
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="text-md-right footer-links d-none d-sm-block">
+                                <a href="javascript: void(0);">About</a>
+                                <a href="javascript: void(0);">Support</a>
+                                <a href="javascript: void(0);">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+>>>>>>> 4e50d5abb288e6cc1a6233b3a6915831cd9f0d2c

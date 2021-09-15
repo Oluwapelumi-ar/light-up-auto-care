@@ -1,13 +1,31 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/Operators';
+import { catchError, map } from 'rxjs/Operators';
+// import { QuoteModel } from '../quote/quote.model';
+import { Observable, throwError } from 'rxjs';
+
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+
+import { NgForm } from '@angular/forms';
 
 interface staffDetails {
-  id?: string;
+  id?:string;
   name: string;
   email: string;
   role: string;
   password: string;
+}
+
+interface quote{
+  id?: number;
+  clientId: number;
+  vehicleId: number;
+  vehicleChasisNumber: string;
+  items: {
+    item: string;
+    unit: number;
+    rate: number;
+    amount: number;
+}[];
 }
 
 @Injectable({
@@ -16,6 +34,21 @@ interface staffDetails {
 export class ApiService {
   [x: string]: any;
   constructor(private http: HttpClient) {}
+
+
+  handleError(error: { error: { message: any; }; status: any; message: any; }) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${'This email is already in use'}`;
+    }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
+  }
+
 
   // Client
 
@@ -81,7 +114,8 @@ export class ApiService {
       .pipe(
         map((res: any) => {
           return res;
-        })
+        }),
+        catchError(this.handleError)
       );
   }
 
@@ -100,8 +134,9 @@ export class ApiService {
       .get<any>(`https://rocky-spire-51361.herokuapp.com/staff/${ID}`)
       .pipe(
         map((res: any) => {
-          console.log(res);
+          console.log(res)
           return res;
+          
         })
       );
   }
@@ -111,7 +146,7 @@ export class ApiService {
       .put<any>('https://rocky-spire-51361.herokuapp.com/staff/' + id, data)
       .pipe(
         map((res: any) => {
-          console.log('LOG: ' + res);
+          console.log("LOG: "+res);
           return res;
         })
       );
@@ -119,13 +154,12 @@ export class ApiService {
 
   deleteStaff(id: number) {
     return this.http
-      .delete<staffDetails>(
-        'https://rocky-spire-51361.herokuapp.com/staff/' + id
-      )
+      .delete<staffDetails>('https://rocky-spire-51361.herokuapp.com/staff/' + id)
       .pipe(
         map((res: any) => {
           return res;
         })
+        
       );
   }
 
@@ -218,35 +252,60 @@ export class ApiService {
       );
   }
 
-  //   Quote
 
-  //   postQuote(data: QuoteModel) {
-  //     return this.http.post<QuoteModel>('https://rocky-spire-51361.herokuapp.com/quote', data).pipe(
-  //       map((res: QuoteModel) => {
-  //         return res;
-  //       })
-  //     );
-  //   }
-  //   getQuote() {
-  //     return this.http.get<any>('https://rocky-spire-51361.herokuapp.com/quote').pipe(
-  //       map((res: any) => {
-  //         return res;
-  //       })
-  //     );
-  //   }
-  //   updateQuote(data: any, id: number) {
-  //     return this.http.put<any>('https://rocky-spire-51361.herokuapp.com/quote' + id, data).pipe(
-  //       map((res: any) => {
-  //         return res;
-  //       })
-  //     );
-  //   }
+ //Quote-Pages Services
 
-  //   deleteQuote(id: number) {
-  //     return this.http.delete<any>('https://rocky-spire-51361.herokuapp.com/quote' + id).pipe(
-  //       map((res: any) => {
-  //         return res;
-  //       })
-  //     );
-  //   }
+  getQuotes():Observable<quote>{
+    const headers = new HttpHeaders({
+      'content-type': 'application/json',
+      'authenticationToken': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoic3VwZXIgYWRtaW4iLCJpYXQiOjE2MzA5MzgzNjMsImV4cCI6MTYzMTAyNDc2M30.cS8eVVLPIKMlzoHVfKftBHkvKp1cU-8_XnWBPbrf5ls',
+    });
+    const params = new HttpParams()
+    .set('pageSize', '10')
+    .set('pageOptions', '100');
+
+    return this.http.get<quote>('https://rocky-spire-51361.herokuapp.com/quote', { headers:headers, params : params });
+    
+  }
+
+
+  //post Quote request
+  postQuote(body: any){
+    const customHeaders = new HttpHeaders({
+      'autheticationKey': 'testing2323'
+    });
+   return this.http.post('https://rocky-spire-51361.herokuapp.com/quote', body, { headers:customHeaders})
+
+  }
+
+
+updateQuote(): Observable<quote>{
+  const putHeaders = new HttpHeaders({
+    'content-type': 'application/json',
+    'authenticationToken': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoic3VwZXIgYWRtaW4iLCJpYXQiOjE2MzA5MzgzNjMsImV4cCI6MTYzMTAyNDc2M30.cS8eVVLPIKMlzoHVfKftBHkvKp1cU-8_XnWBPbrf5ls',
+  });
+
+  const putParams = new HttpParams()
+  .set('source', 'googleAnalytics');
+
+  return this.http.put<quote>('https://rocky-spire-51361.herokuapp.com/quote', { headers:Headers, params : putParams });
+
+}
+
+
+deleteQuote(id: number): Observable<quote>{
+
+  const deleteHeaders = new HttpHeaders({
+    'expiryToken': '15',
+    'authenticationToken': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoic3VwZXIgYWRtaW4iLCJpYXQiOjE2MzA5MzgzNjMsImV4cCI6MTYzMTAyNDc2M30.cS8eVVLPIKMlzoHVfKftBHkvKp1cU-8_XnWBPbrf5ls',
+  });
+
+  const deleteParams = new HttpParams()
+  .set('userRole', 'admin');
+
+  return this.http.delete<quote>('https://rocky-spire-51361.herokuapp.com/quote' + id, { headers:deleteHeaders, params : deleteParams });
+
+
+}
+ 
 }

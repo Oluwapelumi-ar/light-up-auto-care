@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,7 +12,6 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./client-modal.component.css'],
 })
 export class ClientModalComponent implements OnInit {
-  // closeResult: string = '';
   formStatus: string = '';
   ClientModelObj: ClientModel = new ClientModel();
   clientData!: any;
@@ -52,13 +51,14 @@ export class ClientModalComponent implements OnInit {
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
-        // this.getAllClient();
       },
       (err: any) => {
         this.formStatus = 'Error, Try Again';
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
+        console.log(err); 
+        alert('Something Went Wrong');
       }
     );
   }
@@ -72,27 +72,13 @@ export class ClientModalComponent implements OnInit {
     console.log(this.ClientModelObj);
     this.api
       .updateClient(this.ClientModelObj, this.ClientModelObj.id)
-      .subscribe(
-        (res) => {
-          this.formStatus = 'Successful';
-          let ref = document.getElementById('cancel');
-          ref?.click();
-          this.formValue.reset();
-          // this.getAllClient();
-        },
-        (err: any) => {
-          this.formStatus = 'Error, Try Again';
-          let ref = document.getElementById('cancel');
-          ref?.click();
-          this.formValue.reset();
-        }
-      );
+      .subscribe((res) => {
+        alert('updated Successfully');
+        let ref = document.getElementById('cancel');
+        ref?.click();
+        this.formValue.reset();
+      });
   }
-
-  // open() {
-  //   this.showAdd = true;
-
-  // }
 
   closeModal() {
     this.modalService.dismissAll(ClientModalComponent);

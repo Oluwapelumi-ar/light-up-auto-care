@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'src/app/shared/api.service';
+<<<<<<< HEAD
 
 interface staffDetails {
   data: {
@@ -11,6 +12,18 @@ interface staffDetails {
     role: string;
     password: string;
   };
+=======
+import Swal from 'sweetalert2';
+import { staffModel } from '../staff-model';
+
+
+interface staffDetails {
+  id?:number;
+  name: string;
+  email:string;
+  role:string;
+  password: string; 
+>>>>>>> 4e50d5abb288e6cc1a6233b3a6915831cd9f0d2c
 }
 
 @Component({
@@ -19,9 +32,19 @@ interface staffDetails {
   styleUrls: ['./staff-modal.component.css'],
 })
 export class StaffModalComponent implements OnInit {
+<<<<<<< HEAD
   [x: string]: any;
   editID: any;
 
+=======
+  editID:any;
+  formStatus: string = '';
+  action:any;
+  edit:any;
+  add:any;
+
+
+>>>>>>> 4e50d5abb288e6cc1a6233b3a6915831cd9f0d2c
   formValue: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(4)]],
     email: ['', [Validators.required]],
@@ -33,29 +56,52 @@ export class StaffModalComponent implements OnInit {
     email: '',
     password: '',
   };
-
+ 
   constructor(
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
     private api: ApiService
-  ) {}
+  ) {  }
 
+<<<<<<< HEAD
   ngOnInit(): void {}
+=======
+  ngOnInit(): void { }
+>>>>>>> 4e50d5abb288e6cc1a6233b3a6915831cd9f0d2c
 
   postStaff() {
     this.api.postStaff(this.formValue.value).subscribe(
       (res) => {
-        console.log(res);
         alert('Staff Added Successfully');
+        Swal.fire('Thank you...', 'Staff Created Succesfully!', 'success')
         let ref = document.getElementById('cancel');
-        ref?.click();
+        let action = ref;
+        let add = action;
+        action?.click();
         this.formValue.reset();
       },
       (err: any) => {
-        console.log(err);
-        alert('Something Went Wrong');
+        //alert('Something Went Wrong');
+        
       }
     );
+  };
+
+ 
+  updatedStaff() {
+    const StaffModelObj: staffDetails = {
+       ...this.formValue.value, 
+    };
+    this.api
+      .updateStaff(StaffModelObj, this.editID)
+      .subscribe((res) => {
+        alert('updated Successfully');
+        let ref = document.getElementById('cancel');
+        let action = ref;
+        let edit = action;
+        action?.click();
+        this.formValue.reset();
+      });
   }
 
   updatedStaff() {
@@ -103,3 +149,5 @@ export class StaffModalComponent implements OnInit {
     }
   }
 }
+
+
