@@ -4,15 +4,19 @@ import { ApiService } from '../../shared/api.service';
 import { StaffModalComponent } from '../staff-modal/staff-modal.component';
 import { staffModel } from '../staff-model';
 
-
 @Component({
   selector: 'app-staff',
   templateUrl: './staff.component.html',
   styleUrls: ['./staff.component.css']
 })
 export class StaffComponent implements OnInit {
+  totalRecords:String = '';
+  page:number = 1;
   staffData: any = [];
   formValue: any;
+  count = 0;
+  tableSize = 10;
+  alertInstance: string = '';
 
   constructor(private modalService: NgbModal, private api: ApiService) {}
   ngOnInit(): void {
@@ -23,8 +27,9 @@ export class StaffComponent implements OnInit {
     const staffModal = this.modalService.open(StaffModalComponent, {
       centered: true,
       size: 'md',
-    });
-    
+    }
+    );
+    staffModal.componentInstance.edit;
     // To populate the modal
     if (data) {
       staffModal.componentInstance.formValue.patchValue({
@@ -38,9 +43,11 @@ export class StaffComponent implements OnInit {
     // to stop page from reloading after making changes 
     staffModal.result.then(
       (result) => {
+        this.alertInstance = staffModal.componentInstance.formStatus;
         this.getAllStaff();
       },
       (reason) => {
+        this.alertInstance = staffModal.componentInstance.formStatus;
         this.getAllStaff();
       }
     )};
@@ -63,7 +70,15 @@ export class StaffComponent implements OnInit {
         this.getAllStaff();
         console.log(this.staffData)
       }
-    })
+    }) 
   }
+
+  closeAlert() {}
+
+  tabSize(index: number){
+    this.page = index ;
+    this.getAllStaff();
+  }  
+
 };
 

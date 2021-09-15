@@ -59,32 +59,7 @@ export class ClientComponent implements OnInit {
       },
     });
   }
-
-  // onEdit(data: any): void {
-  //   const clientModal = this.modalService.open(ClientModalComponent, {
-  //     centered: true,
-  //     size: 'md',
-  //   });
-  //   clientModal.componentInstance.formValue.patchValue({
-  //     id: data.id,
-  //     name: data.name,
-  //     email: data.email,
-  //     telephone: data.telephone,
-  //   });
-
-  //   clientModal.result.then(
-  //     (result) => {
-  //       this.alertInstance = clientModal.componentInstance.formStatus;
-  //       // fetch all client again
-  //       this.getAllClient();
-  //     },
-  //     (reason) => {
-  //       this.alertInstance = clientModal.componentInstance.formStatus;
-  //       this.getAllClient();
-  //     }
-  //   );
-  // }
-
+  
   deleteClient(row: any) {
     this.api.deleteClient(row.id).subscribe(
       (res) => {

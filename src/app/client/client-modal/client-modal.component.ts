@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -11,7 +11,6 @@ import { ClientModel } from '../client-dashboard.model';
   styleUrls: ['./client-modal.component.css'],
 })
 export class ClientModalComponent implements OnInit {
-  // closeResult: string = '';
   formStatus: string = '';
   ClientModelObj: ClientModel = new ClientModel();
   clientData!: any;
@@ -51,7 +50,6 @@ export class ClientModalComponent implements OnInit {
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
-        // this.getAllClient();
       },
       (err: any) => {
         this.formStatus = 'Error, Try Again';
@@ -78,14 +76,8 @@ export class ClientModalComponent implements OnInit {
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
-        // this.getAllClient();
       });
   }
-
-  // open() {
-  //   this.showAdd = true;
-
-  // }
 
   closeModal() {
     this.modalService.dismissAll(ClientModalComponent);

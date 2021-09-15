@@ -6,13 +6,11 @@ import Swal from 'sweetalert2';
 import { staffModel } from '../staff-model';
 
 interface staffDetails {
-
   id?:number;
   name: string;
   email:string;
   role:string;
-  password: string;
-  
+  password: string; 
 }
 
 @Component({
@@ -21,12 +19,12 @@ interface staffDetails {
   styleUrls: ['./staff-modal.component.css'],
 })
 export class StaffModalComponent implements OnInit {
-  // [x: string]: any;
   editID:any;
   formStatus: string = '';
-  
+  action:any;
+  edit:any;
+  add:any;
 
-  
 
   formValue: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(4)]],
@@ -40,7 +38,6 @@ export class StaffModalComponent implements OnInit {
     password: '',
   };
  
-
   constructor(
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
@@ -52,15 +49,15 @@ export class StaffModalComponent implements OnInit {
   postStaff() {
     this.api.postStaff(this.formValue.value).subscribe(
       (res) => {
-        console.log(res);
         alert('Staff Added Successfully');
         Swal.fire('Thank you...', 'Staff Created Succesfully!', 'success')
         let ref = document.getElementById('cancel');
-        ref?.click();
+        let action = ref;
+        let add = action;
+        action?.click();
         this.formValue.reset();
       },
       (err: any) => {
-        console.log(err);
         alert('Something Went Wrong');
       }
     );
@@ -68,21 +65,17 @@ export class StaffModalComponent implements OnInit {
 
   updatedStaff() {
     const StaffModelObj: staffDetails = {
-       ...this.formValue.value,
-      
+       ...this.formValue.value, 
     };
-
-
-    console.log("staff model object sent: ",  this.editID);
     this.api
       .updateStaff(StaffModelObj, this.editID)
       .subscribe((res) => {
-        console.log("response: "+res)
         alert('updated Successfully');
         let ref = document.getElementById('cancel');
-        ref?.click();
+        let action = ref;
+        let edit = action;
+        action?.click();
         this.formValue.reset();
-        // getAllStaff();
       });
   }
 

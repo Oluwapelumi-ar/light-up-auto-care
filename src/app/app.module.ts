@@ -32,6 +32,7 @@ import { CapitalizePipe } from './capitalize.pipe';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { ToastrModule } from 'ngx-toastr';
 import { AvatarModule } from 'ngx-avatar';
+import {NgxPaginationModule} from 'ngx-pagination'; //
 
 import { QuotePageComponent } from './quote-page/quote-page.component';
 
@@ -70,7 +71,8 @@ import { QuotePageComponent } from './quote-page/quote-page.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgHttpLoaderModule.forRoot(),
-    AvatarModule
+    AvatarModule,
+    NgxPaginationModule
 
   ],
   providers: [
