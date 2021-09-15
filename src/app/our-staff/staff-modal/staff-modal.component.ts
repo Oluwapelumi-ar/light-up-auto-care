@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/shared/api.service';
 import Swal from 'sweetalert2';
 import { staffModel } from '../staff-model';
 
+
 interface staffDetails {
   id?:number;
   name: string;
@@ -58,11 +59,13 @@ export class StaffModalComponent implements OnInit {
         this.formValue.reset();
       },
       (err: any) => {
-        alert('Something Went Wrong');
+        // alert('Something Went Wrong');
+        
       }
     );
   };
 
+ 
   updatedStaff() {
     const StaffModelObj: staffDetails = {
        ...this.formValue.value, 

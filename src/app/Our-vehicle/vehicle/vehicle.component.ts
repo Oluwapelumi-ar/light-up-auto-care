@@ -87,7 +87,7 @@ export class VehicleComponent implements OnInit {
   deleteVehicle(row: any) {
     this.api.deleteVehicle(row.id).subscribe(
       (res) => {
-        alert('Vehicle deleted successfully ');
+        alert('Vehi cle deleted successfully ');
         this.getVehicle();
       },
       (reason) => {
