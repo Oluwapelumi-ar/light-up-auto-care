@@ -15,86 +15,82 @@
   <!-- end left sidebar -->
   <!-- ============================================================== -->
 
-    <!-- ============================================================== -->
-    <!-- left sidebar -->
-    <!-- ============================================================== -->
-    <app-side-menu></app-side-menu>
-    <!-- ============================================================== -->
-    <!-- end left sidebar -->
-    <!-- ============================================================== -->
-
-    <div class="dashboard-wrapper">
-        <div class="dashboard-finance">
-            <div class="container-fluid dashboard-content">
-                    <div class="header  d-flex">
-                        <div class="box"><h1 class="title">Client Information</h1></div>
-                        <div class="box">
-                            <button type="button" (click)="open()"  class="btn add-btn">Add Client</button>
-                        </div>
-                    </div>
-                
-                    <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">S/N</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Telephone</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                        <tr *ngFor="let row of clientData">
-                            <td>{{row.id}}</td>
-                            <td>{{row.name | capitalize}}</td>
-                            <td>{{row.email}}</td>
-                            <td>{{row.telephone}}</td>
-                            <td>
-                                <button (click)="open(row)" class="btn edit-btn">Edit</button>
-                                <button (click)="deleteClient(row)"  class="btn btn-danger mx-3">Delete</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+  <div class="dashboard-wrapper">
+    <div class="dashboard-finance">
+      <div class="container-fluid dashboard-content">
+        <div class="header d-flex">
+          <div class="box">
+            <h1 class="title">Client Details</h1>
+          </div>
+          <div class="box">
+            <button type="button" (click)="open()" class="btn add-btn">
+              Add Clients
+            </button>
+          </div>
         </div>
+
         <!-- {{alertInstance}} -->
         <ng-container>
-          <div
-            *ngIf="alertInstance === 'Successful'"
-            class="alert alert-success alert-dismissible fade show"
-            role="alert"
+        <div
+          *ngIf="alertInstance === 'Successful'"
+          class="alert alert-success alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>Hurray!</strong> Client added successfully
+          <button
+            (click)="closeAlert()"
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
           >
-            <strong>Hurray!</strong> Client added successfully
-            <button
-              (click)="closeAlert()"
-              type="button"
-              class="close"
-              data-dismiss="alert"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
-          <div
-            *ngIf="alertInstance === 'Error, Try Again'"
-            class="alert alert-02 alert-warning alert-dismissible fade show"
-            role="alert"
+        <div
+          *ngIf="alertInstance === 'Error, Try Again'"
+          class="alert alert-02 alert-warning alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>Ooops!</strong> Something went wrong.
+          <button
+            (click)="closeAlert()"
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
           >
-            <strong>Ooops!</strong> Something went wrong.
-            <button
-              (click)="closeAlert()"
-              type="button"
-              class="close"
-              data-dismiss="alert"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </ng-container>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </ng-container> 
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">S/N</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Telephone</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of clientData">
+              <td>{{ row.id }}</td>
+              <td>{{ row.name }}</td>
+              <td>{{ row.email }}</td>
+              <td>{{ row.telephone }}</td>
+              <td>
+                <button (click)="open(row)" class="btn edit-btn">Edit</button>
+                <button (click)="deleteClient(row)" class="btn btn-danger mx-3">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table> 
       </div>
     </div>
   

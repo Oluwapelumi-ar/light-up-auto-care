@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
   //   console.log(this.username);
   // }
 
+ 
   handleLogout() {
     localStorage.clear();
     alert('Logged Out');

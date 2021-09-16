@@ -6,6 +6,7 @@ import { ApiService } from 'src/app/shared/api.service';
 import { staffModel } from '../staff-model';
 
 
+
 interface staffDetails {
   id?:number;
   name: string;
@@ -22,10 +23,11 @@ interface staffDetails {
   styleUrls: ['./staff.component.css']
 })
 export class StaffComponent implements OnInit {
+
   staffModelo : staffModel= new staffModel()
+  staffData: any = [];
   totalRecords:String = '';
   page:number = 1;
-  staffData: any = [];
   // formValue: any;
   count = 0;
   tableSize = 10;
@@ -47,43 +49,14 @@ export class StaffComponent implements OnInit {
     password: '',
   };
   
-
   constructor(private modalService: NgbModal, private api: ApiService,private formBuilder: FormBuilder,) {}
   ngOnInit(): void {
     this.getAllStaff();
   }
 
-  // open(data?: staffModel) {
-  //   this.alertInstance = '';
-  //   const staffModal = this.modalService.open(this.modalService, {
-  //     centered: true,
-  //     size: 'md',
-  //   }
-  //   );
-  //   staffModal.componentInstance.edit;
-  //   // To populate the modal
-  //   if (data) {
-  //     staffModal.componentInstance.formValue.patchValue({
-  //       name: data.name,
-  //       email: data.email,
-  //       role:data.role,
-  //       password:data.password
-  //     });
-  //     staffModal.componentInstance.editID = data.id;
-  //   }
-  //   // to stop page from reloading after making changes 
-  //   staffModal.result.then(
-  //     (result) => {
-  //       this.alertInstance = staffModal.componentInstance.formStatus;
-  //       console.log(staffModal.componentInstance.formStatus)
-  //       this.getAllStaff();
-  //     },
-  //     (reason) => {
-  //       this.alertInstance = staffModal.componentInstance.formStatus;
-        
-  //       this.getAllStaff();
-  //     }
-  //   )};
+  
+    
+  
     
 
   getAllStaff() {
@@ -173,7 +146,7 @@ export class StaffComponent implements OnInit {
         this.getAllStaff();
         console.log(this.staffData)
       }
-    }) 
+    })
   }
 
   onEdit(row:any){

@@ -1,78 +1,96 @@
 <div class="dashboard-main-wrapper">
+  <!-- ============================================================== -->
+  <!-- navbar -->
+  <!-- ============================================================== -->
+  <app-header></app-header>
+  <!-- ============================================================== -->
+  <!-- end navbar -->
+  <!-- ============================================================== -->
 
-    <!-- ============================================================== -->
-    <!-- navbar -->
-    <!-- ============================================================== -->
-    <app-header></app-header>
-    <!-- ============================================================== -->
-    <!-- end navbar -->
-    <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- left sidebar -->
+  <!-- ============================================================== -->
+  <app-side-menu></app-side-menu>
+  <!-- ============================================================== -->
+  <!-- end left sidebar -->
+  <!-- ============================================================== -->
 
-    <!-- ============================================================== -->
-    <!-- left sidebar -->
-    <!-- ============================================================== -->
-    <app-side-menu></app-side-menu>
-    <!-- ============================================================== -->
-    <!-- end left sidebar -->
-    <!-- ============================================================== -->
-
-    <div class="dashboard-wrapper">
-        <div class="dashboard-finance">
-            <div class="container-fluid dashboard-content">
-            <div class="header  d-flex">
-                <div class="box">
-                    <h1 class="title">Services</h1>
-                </div>
-                <div class="box">
-                    <button type="button" (click)="open()" class="btn add-btn">Add Service</button>
-                </div>
-            </div>
-
-            <ng-container>
-                <div *ngIf="alertInstance === 'Successful'" class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Hurray!</strong> Client added successfully
-                    <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            
-                <div *ngIf="alertInstance === 'Error, Try Again'" class="alert alert-02 alert-warning alert-dismissible fade show"
-                    role="alert">
-                    <strong>Ooops!</strong> Something went wrong.
-                    <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </ng-container>
-            
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">S/N</th>
-                        <th scope="col">Type of Service</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let row of serviceData" >
-                        <td>{{row.id}}</td>
-                        <td>{{row.name}}</td>
-                       
-                        <td>
-                            <button (click)="onEdit(row)" class="btn edit-btn">Edit</button>
-                            <button (click)="deleteService(row)" class="btn btn-danger mx-3">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
-               
-                </div>
-            </div>
+  <div class="dashboard-wrapper">
+    <div class="dashboard-finance">
+      <div class="container-fluid dashboard-content">
+        <div class="header d-flex">
+          <div class="box">
+            <h1 class="title">Services</h1>
+          </div>
+          <div class="box">
+            <button type="button" (click)="open()" class="btn add-btn">
+              Add Service
+            </button>
+          </div>
         </div>
-    
-   
 
+        <ng-container>
+          <div
+            *ngIf="alertInstance === 'Successful'"
+            class="alert alert-success alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>Hurray!</strong> Client added successfully
+            <button
+              (click)="closeAlert()"
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
 
+          <div
+            *ngIf="alertInstance === 'Error, Try Again'"
+            class="alert alert-02 alert-warning alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>Ooops!</strong> Something went wrong.
+            <button
+              (click)="closeAlert()"
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </ng-container>
 
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">S/N</th>
+              <th scope="col">Type of Service</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of serviceData">
+              <td>{{ row.id }}</td>
+              <td>{{ row.name }}</td>
 
+              <td>
+                <button (click)="onEdit(row)" class="btn edit-btn">Edit</button>
+                <button
+                  (click)="deleteService(row)"
+                  class="btn btn-danger mx-3"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

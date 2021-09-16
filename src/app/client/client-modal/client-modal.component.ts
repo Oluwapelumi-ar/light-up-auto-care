@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'src/app/shared/api.service';
 import { ClientModel } from '../client-dashboard.model';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-clients-modal',
