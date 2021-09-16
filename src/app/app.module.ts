@@ -27,7 +27,7 @@ import { ClientModalComponent } from './client/client-modal/client-modal.compone
 import { FooterComponent } from './layout/footer/footer.component';
 import { ModalComponent } from './our-services/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.component';
+// import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.component';
 import { CapitalizePipe } from './capitalize.pipe';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { ToastrModule } from 'ngx-toastr';
@@ -53,7 +53,7 @@ import { QuotePageComponent } from './quote-page/quote-page.component';
     QuoteComponent,
     InvoiceComponent,
     StaffComponent,
-    StaffModalComponent,
+    // StaffModalComponent,
     CapitalizePipe,
     QuotePageComponent,
     QuotePageComponent
