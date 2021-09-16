@@ -14,81 +14,79 @@
 
   <div class="modal-body">
     <form>
-      <!-- [formGroup]="formValue" -->
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input
-          type="text"
-          class="form-control"
-          id="name"
-          aria-describedby="nameHelp"
-          formControlName="name"
-          (keyup)="handleErrMsg('name', formValue.controls.name.value)"
-        />
-        <span class="text-danger" *ngIf="errMsg.name">{{ errMsg.name }}</span>
-      </div>
-
-            <span aria-hidden="true">×</span>
-
-        
-
-    
-
-    <div class="modal-body">
-
+      <div class="modal-body">
         <form [formGroup]="formValue">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" aria-describedby="nameHelp" formControlName="name"
-                (keyup)="handleErrMsg('name', formValue.controls.name.value)">
-                <span class="text-danger" *ngIf="errMsg.name">{{errMsg.name}}</span>
-            </div>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              aria-describedby="nameHelp"
+              formControlName="name"
+              (keyup)="handleErrMsg('name', formValue.controls.name.value)"
+            />
+            <span class="text-danger" *ngIf="errMsg.name">{{
+              errMsg.name
+            }}</span>
+          </div>
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
-                    formControlName="email" (keyup)="handleErrMsg('email', formValue.controls.email.value)">
-                    <span class="text-danger" *ngIf="errMsg.email">{{errMsg.email}}</span>
-             </div>
-            <div class="form-group">
-                <label for="phone">Telephone</label>
-                <input type="text" class="form-control" id="telephone" formControlName="telephone"  (keyup)="handleErrMsg('telephone', formValue.controls.phone.value)">
-                <span class="text-danger" *ngIf="errMsg.phone">{{errMsg.phone}}</span>
-            </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              aria-describedby="emailHelp"
+              formControlName="email"
+              (keyup)="handleErrMsg('email', formValue.controls.email.value)"
+            />
+            <span class="text-danger" *ngIf="errMsg.email">{{
+              errMsg.email
+            }}</span>
+          </div>
+          <div class="form-group">
+            <label for="phone">Telephone</label>
+            <input
+              type="text"
+              class="form-control"
+              id="telephone"
+              formControlName="telephone"
+              (keyup)="
+                handleErrMsg('telephone', formValue.controls.phone.value)
+              "
+            />
+            <span class="text-danger" *ngIf="errMsg.phone">{{
+              errMsg.phone
+            }}</span>
+          </div>
         </form>
-    </div>
-    <div class="modal-footer">
-        <button id="cancel" type="submit" (click)="closeModal()" class="btn btn-sm btn-outline-danger">Close</button>
-      <button (click)="postClientDetails()" type="submit" class="btn btn-sm add-btn">Add</button>
-        <button (click)="updateClient()" [disabled]="formValue.invalid"  type="submit" class="btn btn-sm add-btn">Update</button>
-    </div>
-
-  <div class="modal-footer">
-    <button
-      id="cancel"
-      type="submit"
-      (click)="closeModal()"
-      class="btn btn-sm btn-outline-danger"
-    >
-      Close
-    </button>
-    <button
-      (click)="postClientDetails()"
-      type="submit"
-      class="btn btn-sm add-btn"
-    >
-      Add
-    </button>
-
-    <button
-      id="edit"
-      (click)="updateClient()"
-      *ngIf="isButtonVisible"
-      type="submit"
-      class="btn btn-sm add-btn"
-    >
-      Update
-    </button>
+      </div>
+      <div class="modal-footer">
+        <button
+          id="cancel"
+          type="submit"
+          (click)="closeModal()"
+          class="btn btn-sm btn-outline-danger"
+        >
+          Close
+        </button>
+        <button
+          (click)="postClientDetails()"
+          type="submit"
+          class="btn btn-sm add-btn"
+        >
+          Add
+        </button>
+        <button
+          (click)="updateClient()"
+          [disabled]="formValue.invalid"
+          type="submit"
+          class="btn btn-sm add-btn"
+        >
+          Update
+        </button>
+      </div>
+    </form>
   </div>
-
--->
+</div>
