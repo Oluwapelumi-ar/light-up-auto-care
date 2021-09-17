@@ -21,7 +21,7 @@ import { StaffComponent } from './our-staff/staff/staff.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './layout/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.component';
+// import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.component';
 import { CapitalizePipe } from './capitalize.pipe';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { ToastrModule } from 'ngx-toastr';
@@ -41,7 +41,7 @@ import { ClientComponent } from './Client-Dashboard/client/client.component';
     ClientComponent,
     InvoiceComponent,
     StaffComponent,
-    StaffModalComponent,
+    // StaffModalComponent,
     CapitalizePipe,
     VehicleDashboardComponent,
     ServiceDashboardComponent,

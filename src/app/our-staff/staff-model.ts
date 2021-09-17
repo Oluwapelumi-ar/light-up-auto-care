@@ -1,5 +1,5 @@
 export class staffModel {
-    id?:number;
+    id?:any;
     name: string = '';
     email:string = '';
     role:string = '';

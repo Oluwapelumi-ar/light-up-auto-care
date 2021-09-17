@@ -1,8 +1,8 @@
 <div class="dashboard-main-wrapper">
   <!-- ============================================================== -->
   <!-- navbar -->
-  ==============================================================
-  <!-- <app-header></app-header> -->
+  
+  <app-header></app-header>
   <!-- ============================================================== -->
   <!-- end navbar -->
   <!-- ============================================================== -->
@@ -10,23 +10,15 @@
   <!-- ============================================================== -->
   <!-- left sidebar -->
   <!-- ============================================================== -->
-  <!-- <app-side-menu></app-side-menu> -->
+  <app-side-menu></app-side-menu>
   <!-- ============================================================== -->
   <!-- end left sidebar -->
   <!-- ============================================================== -->
 
-  <div class="dashboard-wrapper">
-    <div class="dashboard-finance">
-      <div class="container-fluid dashboard-content">
-        <div class="header d-flex">
-          <div class="box"><h1 class="title">Staff Information</h1></div>
-          <div class="box">
-            <button type="button" (click)="open()" class="btn add-btn">
-              Add Staff
-            </button>
-          </div>
-        </div>
+  
+            
 
+<<<<<<< HEAD
         <div class="dashboard-wrapper">
           <div class="dashboard-finance">
             <div class="container-fluid dashboard-content">
@@ -40,6 +32,38 @@
               </div>
 
               <table class="table">
+=======
+    <div class="dashboard-wrapper">
+
+        <div class="dashboard-finance">
+            <div class="container-fluid dashboard-content">
+                <div class="header  d-flex">
+                    <div class="box"><h1 class="title">Staff Information</h1></div>
+                    <div class="box">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"type="button"   class="btn add-btn">Add Staff</button>
+                    </div>
+                </div>
+                <ng-container>
+                    <div
+                      *ngIf="alert"
+                      class="alert alert-success alert-dismissible fade show"
+                      role="alert"
+                    >
+                    <strong>Hurray!</strong> Staff Deleted successfully
+                    <button
+                      (click)="closeAlert()"
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    
+                </ng-container>
+                <table class="table">
+>>>>>>> 34dcd092bd8015b4df9dd83808a620df84e332aa
                 <thead>
                   <tr>
                     <th scope="col">S/N</th>
@@ -49,6 +73,7 @@
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
+<<<<<<< HEAD
                 <tbody>
                   <tr
                     *ngFor="
@@ -78,6 +103,23 @@
                       </button>
                     </td>
                   </tr>
+=======
+                <tbody>  
+                    <tr *ngFor="let row of staffData| paginate : {
+                      itemsPerPage: tableSize,
+                      currentPage: page,
+                      totalItems: count
+                    }; let i = index " >
+                        <td>{{((page-1)*tableSize)+(i+1) }}</td>
+                        <td>{{row.name  | capitalize }}</td>
+                        <td>{{row .email}}</td>
+                        <td>{{row.role}}</td>
+                        <td>
+                            <button  data-toggle="modal" data-target="#exampleModal"type="button"  (click)="onEdit(row)"class="btn add-btn edit-btn">Edit</button>
+                            <button class="btn btn-danger mx-3" (click)="deleteStaff(row)">Delete</button>
+                        </td>
+                    </tr>
+>>>>>>> 34dcd092bd8015b4df9dd83808a620df84e332aa
                 </tbody>
               </table>
 
@@ -90,6 +132,7 @@
                 </pagination-controls>
               </div>
             </div>
+<<<<<<< HEAD
           </div>
           <ng-container>
             <div
@@ -127,8 +170,62 @@
               </div>
             </footer>
           </ng-container>
+=======
+
+        </div> 
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Staff Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formValue">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" autocapitalize class="form-control" id="name" aria-describedby="nameHelp" formControlName="name"
+                    (keyup)="handleErrMsg('name', formValue.controls.name.value)">
+                    <span class="text-danger" *ngIf="errMsg.name">{{errMsg.name}}</span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                        formControlName="email" (keyup)="handleErrMsg('email', formValue.controls.email.value)">
+                        <span class="text-danger" *ngIf="errMsg.email">{{errMsg.email}}</span>
+                 </div>
+    
+                <div class="form-group">
+                    <label for="Password">Password</label>
+                    <input type="text" class="form-control" id="Password" formControlName="password">
+                    <span class="text-danger" *ngIf="">password is required</span>
+                </div>
+                <label>Choose a role from this list:
+                    <input list="roles"  class="form-control" formControlName="role" /></label>
+                    <datalist id="roles">
+                      <option value="clerk">
+                      <option value="approver">
+                      <option value="admin">
+                    </datalist>
+            </form>    
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn  btn-outline-danger" id="cancel"  data-dismiss="modal" >Close</button>
+          <button (click)="postStaff()" data-dismiss="modal" *ngIf="!editID" type="button" class="btn add-btn">Add</button>
+          <button (click)="updatedStaff()" data-dismiss="modal" *ngIf="editID" type="button" class="btn add-btn">Update</button>
+>>>>>>> 34dcd092bd8015b4df9dd83808a620df84e332aa
         </div>
       </div>
     </div>
   </div>
+<<<<<<< HEAD
 </div>
+=======
+        
+        
+
+>>>>>>> 34dcd092bd8015b4df9dd83808a620df84e332aa
