@@ -38,7 +38,7 @@ export class ServiceDashboardComponent implements OnInit {
       (res: any) => {
         console.log(res);
         this.alertInstance = 'Successful';
-        // alert('Service Added Successfully');
+        this.getAllServices();
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();

@@ -54,6 +54,7 @@ export class VehicleDashboardComponent implements OnInit {
     this.api.postVehicle(this.vehicleModelObj).subscribe(
       (res: any) => {
         this.alertInstance = 'Successful';
+        this.getVehicles();
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();

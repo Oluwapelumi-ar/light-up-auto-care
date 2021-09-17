@@ -50,12 +50,13 @@ export class ClientComponent implements OnInit {
     this.api.postClient(this.clientModelObj).subscribe(
       (res) => {
         this.alertInstance = 'Successful';
+        this.getAllClient();
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
       },
       (err: any) => {
-        this.alertInstance = 'Error, try again';
+        this.alertInstance = 'Error, Try Again';
       }
     );
   }
