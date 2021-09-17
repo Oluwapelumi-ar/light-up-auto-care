@@ -12,18 +12,15 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { ServicesComponent } from './our-services/services/services.component';
+
 import { HeaderComponent } from './layout/header/header.component';
 import { SideMenuComponent } from './layout/side-menu/side-menu.component';
-import { ClientComponent } from './client/client.component';
-import { VehicleComponent } from './Our-vehicle/vehicle/vehicle.component';
+// import { ClientComponent } from './client/client.component';
 import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { StaffComponent } from './our-staff/staff/staff.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ClientModalComponent } from './client/client-modal/client-modal.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { ModalComponent } from './our-services/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.component';
 import { CapitalizePipe } from './capitalize.pipe';
@@ -39,14 +36,13 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
   declarations: [
     AppComponent,
     HomeComponent,
-    ServicesComponent,
+    // ServicesComponent,
     HeaderComponent,
     SideMenuComponent,
-    ClientComponent,
-    VehicleComponent,
-    ClientModalComponent,
+    // ClientComponent,
+    // VehicleComponent,
+ 
     FooterComponent,
-    ModalComponent,
     InvoiceComponent,
     StaffComponent,
     StaffModalComponent,
@@ -73,7 +69,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
   ],
-  entryComponents: [ModalComponent],
+  // entryComponents: [ModalComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
