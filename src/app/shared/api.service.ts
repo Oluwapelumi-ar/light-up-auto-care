@@ -32,7 +32,7 @@ interface quote{
   providedIn: 'root',
 })
 export class ApiService {
-  [x: string]: any;
+
   constructor(private http: HttpClient) {}
 
 

@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChange } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../shared/api.service';
 
 import {
@@ -6,11 +6,23 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  NgForm,
-  NgModel,
   Validators,
 } from '@angular/forms';
 
+
+interface quoteDetails {
+  clientId:number;
+  vehicleId: number;
+  items: [
+    {
+      item: string,
+      unit: number,
+      rate: number,
+      id:number;
+      amount: number;
+    }
+  ],
+}
 @Component({
   selector: 'app-quote-page',
   templateUrl: './quote-page.component.html',
@@ -28,6 +40,10 @@ export class QuotePageComponent implements OnInit {
   clients: any;
   vehicle: any;
   isQuoteCreated: boolean = false;
+  quoteData :any;
+
+  enableEdit = false;
+  enableEditIndex = null; 
 
   addQuoteTypeForm!: FormGroup;
 
@@ -48,9 +64,12 @@ export class QuotePageComponent implements OnInit {
         }),
       ]),
     });
+   
     this.getAllClients();
     this.getAllVehicles();
     this.getAllServices();
+    this.getQuotes();
+
     this.addQuoteTypeForm.statusChanges.subscribe((data: any) => {
       // console.log('Form Status');
       // console.log(data);
@@ -58,9 +77,12 @@ export class QuotePageComponent implements OnInit {
   }
 
   getQuotes() {
-    this.apiServices.addQuoteType().subscribe(
+    this.apiServices.getQuotes().subscribe(
       (data: any) => {
-        this.quotes = data;
+        console.log({data});
+        
+        this.quotes = data.payload;
+        // console.log(this.quotes)
       },
       (err: any) => {
         // console.log('Unable to get data from URL + err');
@@ -121,12 +143,12 @@ export class QuotePageComponent implements OnInit {
     let arr = this.addQuoteTypeForm.get('items') as FormArray;
     arr.removeAt(i);
   }
-
-  addQuoteType(formValue: any) {
-    console.log('********', formValue.value);
-    this.apiServices.postQuote(formValue.value).subscribe(
+addQuoteType() {
+    this.apiServices.postQuote(this.addQuoteTypeForm.value).subscribe(
       (data) => {
         this.isQuoteCreated = true;
+        console.log(data);
+        this.getQuotes();
       },
       (err) => {
         console.log('Unable to add Quote + err');
@@ -147,7 +169,7 @@ export class QuotePageComponent implements OnInit {
     );
   }
 
-  deleteQuote() {
+  deleteQuote(row:any) {
     this.apiServices.deleteQuote(1).subscribe(
       (data) => {
         // console.log('User deleted successfully' + data);
@@ -157,4 +179,10 @@ export class QuotePageComponent implements OnInit {
       }
     );
   }
+
+  enableEditMethod(data: any){​​​​​​​​
+    this.enableEdit = false;
+    this.enableEditIndex = null;
+    
+   }​​​​​​​​
 }

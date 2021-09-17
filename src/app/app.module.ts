@@ -5,15 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import {
   HttpClientModule,
   HTTP_INTERCEPTORS,
-  JsonpInterceptor,
 } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { CreatePasswordComponent } from './auth/create-password/create-password.component';
-import { LoginComponent } from './auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { NgSelectModule } from '@ng-select/ng-select';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { ServicesComponent } from './our-services/services/services.component';
 import { HeaderComponent } from './layout/header/header.component';
@@ -30,12 +27,11 @@ import { ModalComponent } from './our-services/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.component';
 import { CapitalizePipe } from './capitalize.pipe';
-// import { NgHttpLoaderModule } from 'ng-http-loader';
-import { ToastrModule } from 'ngx-toastr';
-import { AvatarModule } from 'ngx-avatar';
-import {NgxPaginationModule} from 'ngx-pagination'; //
 
 import { QuotePageComponent } from './quote-page/quote-page.component';
+import { AvatarModule } from 'ngx-avatar';
+import { NgxPaginationModule } from 'ngx-pagination';
+// import { ToastrModule } from 'ngx-toastr';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 
 
@@ -68,8 +64,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    // ToastrModule.forRoot(),
     NgHttpLoaderModule.forRoot(),
     AvatarModule,
     NgxPaginationModule
