@@ -9,20 +9,20 @@ import {
   Validators,
 } from '@angular/forms';
 
-
 interface quoteDetails {
-  clientId:number;
+  clientId: number;
   vehicleId: number;
   items: [
     {
-      item: string,
-      unit: number,
-      rate: number,
-      id:number;
+      item: string;
+      unit: number;
+      rate: number;
+      id: number;
       amount: number;
     }
-  ],
+  ];
 }
+
 @Component({
   selector: 'app-quote-page',
   templateUrl: './quote-page.component.html',
@@ -40,10 +40,10 @@ export class QuotePageComponent implements OnInit {
   clients: any;
   vehicle: any;
   isQuoteCreated: boolean = false;
-  quoteData :any;
+  quoteData: any;
 
   enableEdit = false;
-  enableEditIndex = null; 
+  enableEditIndex = null;
 
   addQuoteTypeForm!: FormGroup;
 
@@ -64,14 +64,13 @@ export class QuotePageComponent implements OnInit {
         }),
       ]),
     });
-   
+
     this.getAllClients();
     this.getAllVehicles();
     this.getAllServices();
     this.getQuotes();
 
     this.addQuoteTypeForm.statusChanges.subscribe((data: any) => {
-      // console.log('Form Status');
       // console.log(data);
     });
   }
@@ -79,8 +78,8 @@ export class QuotePageComponent implements OnInit {
   getQuotes() {
     this.apiServices.getQuotes().subscribe(
       (data: any) => {
-        console.log({data});
-        
+        console.log({ data });
+
         this.quotes = data.payload;
         // console.log(this.quotes)
       },
@@ -109,23 +108,23 @@ export class QuotePageComponent implements OnInit {
   getAllClients() {
     this.apiServices.getAllClients().subscribe((res: any) => {
       // console.log({ res });
-      this.clients = res.payload
+      this.clients = res.payload;
     });
   }
 
-  getAllVehicles(){
-    this.apiServices.getVehicle().subscribe((res:any) =>{
-    // console.log({ res });
-    this.vehicle = res.payload
+  getAllVehicles() {
+    this.apiServices.getVehicle().subscribe((res: any) => {
+      // console.log({ res });
+      this.vehicle = res.payload;
     });
   }
 
-  getAllServices(){
-  // console.log("Called Here!!!!")
-  this.apiServices.getAllService().subscribe((res:any)=>{
-  // console.log({ res });
-  this.item = res.payload
-  });
+  getAllServices() {
+    // console.log("Called Here!!!!")
+    this.apiServices.getAllService().subscribe((res: any) => {
+      // console.log({ res });
+      this.item = res.payload;
+    });
   }
 
   addItems() {
@@ -143,7 +142,7 @@ export class QuotePageComponent implements OnInit {
     let arr = this.addQuoteTypeForm.get('items') as FormArray;
     arr.removeAt(i);
   }
-addQuoteType() {
+  addQuoteType() {
     this.apiServices.postQuote(this.addQuoteTypeForm.value).subscribe(
       (data) => {
         this.isQuoteCreated = true;
@@ -169,7 +168,7 @@ addQuoteType() {
     );
   }
 
-  deleteQuote(row:any) {
+  deleteQuote(row: any) {
     this.apiServices.deleteQuote(1).subscribe(
       (data) => {
         // console.log('User deleted successfully' + data);
@@ -180,9 +179,8 @@ addQuoteType() {
     );
   }
 
-  enableEditMethod(data: any){​​​​​​​​
+  enableEditMethod(data: any) {
     this.enableEdit = false;
     this.enableEditIndex = null;
-    
-   }​​​​​​​​
+  }
 }
