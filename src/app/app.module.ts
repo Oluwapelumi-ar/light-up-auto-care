@@ -13,16 +13,12 @@ import { HomeComponent } from './home/home.component';
 import { CreatePasswordComponent } from './auth/create-password/create-password.component';
 import { LoginComponent } from './auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { HeaderComponent } from './layout/header/header.component';
 import { SideMenuComponent } from './layout/side-menu/side-menu.component';
-import { ClientComponent } from './client/client.component';
-
 import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { StaffComponent } from './our-staff/staff/staff.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ClientModalComponent } from './client/client-modal/client-modal.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.component';
@@ -32,7 +28,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { AvatarModule } from 'ngx-avatar';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { VehicleDashboardComponent } from './Vehicle/vehicle-dashboard/vehicle-dashboard.component';
-import { ServiceDashboardComponent } from './Type-of-Services/service-dashboard/service-dashboard.component'; //
+import { ServiceDashboardComponent } from './Type-of-Services/service-dashboard/service-dashboard.component';
+import { ClientComponent } from './Client-Dashboard/client/client.component';
 
 @NgModule({
   declarations: [
@@ -40,10 +37,8 @@ import { ServiceDashboardComponent } from './Type-of-Services/service-dashboard/
     HomeComponent,
     HeaderComponent,
     SideMenuComponent,
-    ClientComponent,
-    ClientModalComponent,
     FooterComponent,
-
+    ClientComponent,
     InvoiceComponent,
     StaffComponent,
     StaffModalComponent,
@@ -51,6 +46,7 @@ import { ServiceDashboardComponent } from './Type-of-Services/service-dashboard/
     VehicleDashboardComponent,
     ServiceDashboardComponent,
   ],
+
   imports: [
     BrowserModule,
     CommonModule,

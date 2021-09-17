@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 
 // import { ClientComponent } from 'src/app/client/client.component';
 
@@ -54,7 +59,7 @@ export class VehicleDashboardComponent implements OnInit {
         this.formValue.reset();
       },
       (err: any) => {
-        this.alertInstance = 'Error, try again';
+        this.alertInstance = 'Error, Try Again';
       }
     );
   }
@@ -73,7 +78,7 @@ export class VehicleDashboardComponent implements OnInit {
     });
   }
 
-  deleteVehicle(row: any) {
+  deleteVehicles(row: any) {
     this.api.deleteVehicle(row.id).subscribe(
       (res) => {
         this.alertInstance = 'Deleted';

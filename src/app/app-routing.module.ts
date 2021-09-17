@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { ClientComponent } from './client/client.component';
 import { VehicleDashboardComponent } from './Vehicle/vehicle-dashboard/vehicle-dashboard.component';
-
+import { ClientComponent } from './Client-Dashboard/client/client.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { StaffComponent } from './our-staff/staff/staff.component';
 import { AuthguardGuard } from './auth/authguard.guard';
