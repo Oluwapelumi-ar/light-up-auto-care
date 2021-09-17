@@ -1,0 +1,253 @@
+<div class="dashboard-main-wrapper">
+  <!-- ============================================================== -->
+  <!-- navbar -->
+  <!-- ============================================================== -->
+  <app-header></app-header>
+  <!-- ============================================================== -->
+  <!-- end navbar -->
+  <!-- ============================================================== -->
+
+  <!-- ============================================================== -->
+  <!-- left sidebar -->
+  <!-- ============================================================== -->
+  <app-side-menu></app-side-menu>
+  <!-- ============================================================== -->
+  <!-- end left sidebar -->
+  <!-- ============================================================== -->
+
+  <div class="dashboard-wrapper">
+    <div class="dashboard-finance">
+      <div class="container-fluid dashboard-content">
+        <div class="header d-flex">
+          <div class="box">
+            <h1 class="title">Vehicle Information</h1>
+          </div>
+          <div class="box">
+            <button
+              (click)="clickAddVehicle()"
+              type="button"
+              class="btn add-btn"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              (click)="this.getAllClient()"
+            >
+              Add Vehicle
+            </button>
+          </div>
+        </div>
+
+        <ng-container>
+          <div
+            *ngIf="alertInstance === 'Successful'"
+            class="alert alert-success alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>Hurray!</strong> Client added successfully
+            <button
+              (click)="closeAlert()"
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div
+            *ngIf="alertInstance === 'Error, Try Again'"
+            class="alert alert-02 alert-warning alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>Ooops!</strong> Something went wrong.
+            <button
+              (click)="closeAlert()"
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div
+            *ngIf="alertInstance === 'Updated'"
+            class="alert alert-info alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>Good!</strong> Data updated successfully.
+            <button
+              (click)="closeAlert()"
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div
+            *ngIf="alertInstance === 'Deleted'"
+            class="alert alert-danger alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>Successful!</strong> Data deleted.
+            <button
+              (click)="closeAlert()"
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </ng-container>
+
+        <table class="table mt-3">
+          <thead>
+            <tr>
+              <th scope="col">S/N</th>
+              <th scope="col">Client Name</th>
+              <th scope="col">Vehicle Name</th>
+              <th scope="col">Chasis No</th>
+              <th scope="col">Model</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of vehicleData; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ row.client[0].name }}</td>
+              <td>{{ row.vehicleName }}</td>
+              <td>{{ row.chassis }}</td>
+              <td>{{ row.model }}</td>
+              <td>
+                <button
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  class="btn edit-btn"
+                  (click)="onEdit(row)"
+                >
+                  Edit
+                </button>
+                <button
+                  (click)="deleteVehicles(row)"
+                  class="btn btn-danger mx-3"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!--------------------- MODAL---------------- -->
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Vehicle Details
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="formValue">
+                  <div class="form-group">
+                    <label for="vehicleName">Vehicle Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="vehicleName"
+                      aria-describedby="nameHelp"
+                      formControlName="vehicleName"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="chasis">Chasis</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="chasis"
+                      aria-describedby="nameHelp"
+                      formControlName="chassis"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="model">Model</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="model"
+                      aria-describedby="nameHelp"
+                      formControlName="model"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Client Name</label>
+                    <select
+                      id="name"
+                      aria-describedby="nameHelp"
+                      formControlName="name"
+                    >
+                      <option value="selected">Select Client</option>
+                      <option
+                        *ngFor="let client of clientData"
+                        [value]="client.id"
+                      >
+                        {{ client.name }}
+                      </option>
+                    </select>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-outline-danger"
+                  data-bs-dismiss="modal"
+                  id="cancel"
+                >
+                  Close
+                </button>
+                <button
+                  (click)="postVehicleDetails()"
+                  type="button"
+                  class="btn add-btn"
+                  *ngIf="showAdd"
+                >
+                  Add
+                </button>
+                <button
+                  (click)="updateVehicleDetails()"
+                  type="button"
+                  class="btn add-btn"
+                  *ngIf="showUpdate"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

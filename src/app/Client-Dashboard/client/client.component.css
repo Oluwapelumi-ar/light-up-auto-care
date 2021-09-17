@@ -1,0 +1,16 @@
+.title {
+  color: rgb(14, 8, 90);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.add-btn,
+.edit-btn {
+  background-color: rgb(14, 8, 90);
+
+  color: #fff;
+}
+
+/* .billingInput {
+  margin-right: 0.2em;
+} */
