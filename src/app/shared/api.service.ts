@@ -140,7 +140,7 @@ export class ApiService {
       );
   }
 
-  updateStaff(data: any, id: number | undefined) {
+  updateStaff(data: any, id: number ) {
     return this.http
       .put<any>('https://rocky-spire-51361.herokuapp.com/staff/' + id, data)
       .pipe(

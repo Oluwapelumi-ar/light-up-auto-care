@@ -1,9 +1,10 @@
 export class staffModel {
-    id?:any;
+    id: number = 0;
     name: string = '';
     email:string = '';
     role:string = '';
-    password: string = '';
+  
+
 
 
 }

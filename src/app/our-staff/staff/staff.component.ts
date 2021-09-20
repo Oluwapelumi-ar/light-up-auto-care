@@ -1,34 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'src/app/shared/api.service';
 import { staffModel } from '../staff-model';
 
-
-
 interface staffDetails {
-  id?:number;
+  id:number;
   name: string;
   email:string;
   role:string;
-  password: string; 
 }
-
-
 
 @Component({
   selector: 'app-staff',
   templateUrl: './staff.component.html',
   styleUrls: ['./staff.component.css']
 })
-export class StaffComponent implements OnInit {
 
+export class StaffComponent implements OnInit {
   staffModelo : staffModel= new staffModel()
   staffData: any = [];
   totalRecords:String = '';
   page:number = 1;
-  // formValue: any;
   count = 0;
   tableSize = 10;
   alertInstance: string = '';
@@ -40,30 +33,22 @@ export class StaffComponent implements OnInit {
   formValue: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(4)]],
     email: ['', [Validators.required]],
-    password: ['', [Validators.required]],
     role: ['', [Validators.required]],
   });
   errMsg = {
     name: '',
     email: '',
-    password: '',
   };
-  
+
   constructor(private modalService: NgbModal, private api: ApiService,private formBuilder: FormBuilder,) {}
   ngOnInit(): void {
     this.getAllStaff();
   }
 
-  
-    
-  
-    
-
   getAllStaff() {
     this.api.getAllStaffs().subscribe({
       next: (res) => {
-        this.staffData = res.payload;
-        
+        this.staffData = res.payload;  
       },
       error: (error) => {
         alert('An error occured')
@@ -84,21 +69,18 @@ export class StaffComponent implements OnInit {
       (err: any) => {
         let ref = document.getElementById('cancel');
         ref?.click();
-        this.formValue.reset();
-        // console.log(err); 
-        // alert('Something Went Wrong');
-        
+        this.formValue.reset();  
       }
     );
   };
 
- 
   updatedStaff() {
     const StaffModelObj: staffDetails = {
-       ...this.formValue.value, 
+       ...this.formValue.value,  
     };
+    this.staffModelo.id
     this.api
-      .updateStaff(StaffModelObj, this.editID)
+      .updateStaff(StaffModelObj, this.staffModelo.id)
       .subscribe((res) => {
         alert('updated Successfully');
         let ref = document.getElementById('cancel');
@@ -110,7 +92,6 @@ export class StaffComponent implements OnInit {
   closeModal() {
     this.modalService.dismissAll();
   }
-
   
   handleErrMsg(fieldName: string, fieldValue: string): void {
     switch (fieldName) {
@@ -152,12 +133,11 @@ export class StaffComponent implements OnInit {
   onEdit(row:any){
     this.formValue.controls['name'].setValue(row.name)
     this.formValue.controls['email'].setValue(row.email)
-    this.formValue.controls['password'].setValue(row.password)
     this.formValue.controls['role'].setValue(row.role)
+    this.staffModelo.id= row.id
     let ref = document.getElementById('cancel');
         ref?.click();
-
-    this.editID = true;
+    this.editID = true; 
    }
 
   closeAlert() {

@@ -108,12 +108,6 @@
                         formControlName="email" (keyup)="handleErrMsg('email', formValue.controls.email.value)">
                         <span class="text-danger" *ngIf="errMsg.email">{{errMsg.email}}</span>
                  </div>
-    
-                <div class="form-group">
-                    <label for="Password">Password</label>
-                    <input type="text" class="form-control" id="Password" formControlName="password">
-                    <span class="text-danger" *ngIf="">password is required</span>
-                </div>
                 <label>Choose a role from this list:
                     <input list="roles"  class="form-control" formControlName="role" /></label>
                     <datalist id="roles">
