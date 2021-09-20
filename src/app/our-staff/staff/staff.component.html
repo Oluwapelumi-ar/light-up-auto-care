@@ -19,7 +19,6 @@
             
 
     <div class="dashboard-wrapper">
-
         <div class="dashboard-finance">
             <div class="container-fluid dashboard-content">
                 <div class="header  d-flex">
@@ -28,6 +27,7 @@
                         <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"type="button"   class="btn add-btn">Add Staff</button>
                     </div>
                 </div>
+                <!-- Notification Alert -->
                 <ng-container>
                     <div
                       *ngIf="alert"
@@ -44,9 +44,41 @@
                     >
                       <span aria-hidden="true">&times;</span>
                     </button>
-                    </div>
-                    
+                    </div>  
+                    <div
+                      *ngIf="createStaffAlert"
+                      class="alert alert-success alert-dismissible fade show"
+                      role="alert"
+                    >
+                    <strong>Hurray!</strong> Staff Added successfully
+                    <button
+                      (click)="closeAlert()"
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>  
+                    <div
+                      *ngIf="updatedStaffAlert"
+                      class="alert alert-success alert-dismissible fade show"
+                      role="alert"
+                    >
+                    <strong>Hurray!</strong> Staff Updated successfully
+                    <button
+                      (click)="closeAlert()"
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>  
                 </ng-container>
+                <!-- End Notification Alert -->
                 <table class="table">
                 <thead>
                     <tr>

@@ -25,6 +25,8 @@ export class StaffComponent implements OnInit {
   count = 0;
   tableSize = 10;
   alertInstance: string = '';
+  createStaffAlert!: boolean;
+  updatedStaffAlert!:boolean;
   alert!: boolean;
   editID:any;
   formStatus: string = '';
@@ -59,8 +61,7 @@ export class StaffComponent implements OnInit {
   postStaff() {
     this.api.postStaff(this.formValue.value).subscribe(
       (res: staffDetails) => {
-        alert('Staff Added Successfully');
-        this.alert = true;
+        this.createStaffAlert = true;
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
@@ -82,10 +83,11 @@ export class StaffComponent implements OnInit {
     this.api
       .updateStaff(StaffModelObj, this.staffModelo.id)
       .subscribe((res) => {
-        alert('updated Successfully');
+        this.updatedStaffAlert= true;
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
+        this.getAllStaff();
       });
   }
 
