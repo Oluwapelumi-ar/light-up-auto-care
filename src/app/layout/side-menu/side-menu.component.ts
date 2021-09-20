@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./side-menu.component.css'],
 })
 export class SideMenuComponent implements OnInit {
+  alert!: boolean;
+
   userDetails = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('userDetails'))))
   constructor(private router: Router) {}
 
@@ -22,7 +24,11 @@ export class SideMenuComponent implements OnInit {
 
   handleLogout() {
     localStorage.clear();
-    alert('Logged Out');
+    this.alert = true;
     this.router.navigate(['/login']);
+  }
+
+  closeAlert() {
+    this.alert = false;
   }
 }

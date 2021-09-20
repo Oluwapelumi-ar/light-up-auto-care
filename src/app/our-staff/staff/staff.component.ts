@@ -124,7 +124,6 @@ export class StaffComponent implements OnInit {
   deleteStaff(row:any) {
     this.api.deleteStaff(row.id).subscribe({
       next: (res) => {
-        alert('Client deleted successfully ')
         this.alert = true;
         this.getAllStaff();
         console.log(this.staffData)
