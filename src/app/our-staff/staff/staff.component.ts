@@ -14,7 +14,7 @@ interface staffDetails {
 @Component({
   selector: 'app-staff',
   templateUrl: './staff.component.html',
-  styleUrls: ['./staff.component.css']
+  styleUrls: ['./staff.component.css'],
 })
 
 export class StaffComponent implements OnInit {
@@ -28,7 +28,7 @@ export class StaffComponent implements OnInit {
   createStaffAlert!: boolean;
   updatedStaffAlert!:boolean;
   alert!: boolean;
-  editID:any;
+  editID: any;
   formStatus: string = '';
   editId!: boolean;
 
@@ -53,9 +53,9 @@ export class StaffComponent implements OnInit {
         this.staffData = res.payload;  
       },
       error: (error) => {
-        alert('An error occured')
-      }
-    })
+        alert('An error occurred');
+      },
+    });
   }
 
   postStaff() {
@@ -73,7 +73,7 @@ export class StaffComponent implements OnInit {
         this.formValue.reset();  
       }
     );
-  };
+  }
 
   updatedStaff() {
     const StaffModelObj: staffDetails = {
@@ -121,14 +121,14 @@ export class StaffComponent implements OnInit {
     }
   }
 
-  deleteStaff(row:any) {
+  deleteStaff(row: any) {
     this.api.deleteStaff(row.id).subscribe({
       next: (res) => {
         this.alert = true;
         this.getAllStaff();
-        console.log(this.staffData)
-      }
-    })
+        console.log(this.staffData);
+      },
+    });
   }
 
   onEdit(row:any){
@@ -145,10 +145,8 @@ export class StaffComponent implements OnInit {
     this.alert = false;
   }
 
-  tabSize(index: number){
-    this.page = index ;
+  tabSize(index: number) {
+    this.page = index;
     this.getAllStaff();
-  }  
-
-};
-
+  }
+}

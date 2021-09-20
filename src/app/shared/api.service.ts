@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs/Operators';
-// import { QuoteModel } from '../quote/quote.model';
 import { Observable, throwError } from 'rxjs';
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -32,7 +31,7 @@ interface quote{
   providedIn: 'root',
 })
 export class ApiService {
-  [x: string]: any;
+
   constructor(private http: HttpClient) {}
 
 

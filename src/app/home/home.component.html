@@ -15,101 +15,105 @@
   <!-- end left sidebar -->
   <!-- ============================================================== -->
 
-    <!-- ============================================================== -->
-    <!-- left sidebar -->
-    <!-- ============================================================== -->
-    <app-side-menu></app-side-menu>
-    <!-- ============================================================== -->
-    <!-- end left sidebar -->
-    <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- left sidebar -->
+  <!-- ============================================================== -->
+  <app-side-menu></app-side-menu>
+  <!-- ============================================================== -->
+  <!-- end left sidebar -->
+  <!-- ============================================================== -->
 
-    <div class="dashboard-wrapper">
-        <div class="dashboard-finance">
-            <div class="container-fluid dashboard-content">
-            <div class="ecommerce-widget">
-            
-                <div class="row">
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="text-muted">Total Clients</h5>
-                                <div class="metric-value d-inline-block">
-                                    <h1 class="mb-1">{{ noOfClients }}</h1>
-                                </div>
-                            </div>
-                            <div id="sparkline-revenue"></div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="text-muted">Total Vehicles</h5>
-                                <div class="metric-value d-inline-block">
-                                    <h1 class="mb-1">{{ noOfVehicles }}</h1>
-                                </div>
-                            </div>
-                            <div id="sparkline-revenue2"></div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="text-muted">Total Staff</h5>
-                                <div class="metric-value d-inline-block">
-                                    <h1 class="mb-1">{{noOfStaff}}</h1>
-                                </div>
-                            </div>
-                            <div id="sparkline-revenue4"></div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="text-muted">Pending Quotation</h5>
-                                <div class="metric-value d-inline-block">
-                                    <h1 class="mb-1">30</h1>
-                                </div>
-                                <div class="metric-label d-inline-block float-right text-primary font-weight-bold">
-                                    <span>N/A</span>
-                                </div>
-                            </div>
-                            <div id="sparkline-revenue3"></div>
-                        </div>
-                    </div>
-                    
+  <div class="dashboard-wrapper">
+    <div class="dashboard-finance">
+      <div class="container-fluid dashboard-content">
+        <div class="ecommerce-widget">
+          <div class="row">
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="text-muted">Total Clients</h5>
+                  <div class="metric-value d-inline-block">
+                    <h1 class="mb-1">{{ noOfClients }}</h1>
+                  </div>
                 </div>
                 <div id="sparkline-revenue"></div>
               </div>
             </div>
-
-            <!-- table -->
-
-            <div class=" col-lg-12 col-md-6 col-sm-12 col-12">
-                <div class="card">
-                    <h2 class="card-header">Clients</h2>
-                    <table class="table  table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">S/N</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Telephone</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let row of clientData; let i= index">
-                                <td>{{i +1}}</td>
-                                <td>{{row.name | capitalize }}</td>
-                                <td>{{row.email}}</td>
-                                <td>{{row.telephone}}</td>
-                            </tr>
-                        </tbody>
-                    </table> 
-                </div>    
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="text-muted">Total Vehicles</h5>
+                  <div class="metric-value d-inline-block">
+                    <h1 class="mb-1">{{ noOfVehicles }}</h1>
+                  </div>
+                </div>
+                <div id="sparkline-revenue2"></div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="text-muted">Total Staff</h5>
+                  <div class="metric-value d-inline-block">
+                    <h1 class="mb-1">{{ noOfStaff }}</h1>
+                  </div>
+                </div>
+                <div id="sparkline-revenue4"></div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="text-muted">Pending Quotation</h5>
+                  <div class="metric-value d-inline-block">
+                    <h1 class="mb-1">30</h1>
+                  </div>
+                  <div
+                    class="
+                      metric-label
+                      d-inline-block
+                      float-right
+                      text-primary
+                      font-weight-bold
+                    "
+                  >
+                    <span>N/A</span>
+                  </div>
+                </div>
+                <div id="sparkline-revenue3"></div>
+              </div>
             </div>
           </div>
+          <div id="sparkline-revenue"></div>
         </div>
+      </div>
+
+      <!-- table -->
+
+      <div class="col-lg-12 col-md-6 col-sm-12 col-12">
+        <div class="card">
+          <h2 class="card-header">Clients</h2>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">S/N</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Telephone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of clientData; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ row.name | capitalize }}</td>
+                <td>{{ row.email }}</td>
+                <td>{{ row.telephone }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-
-
-        
+    <div id="sparkline-revenue"></div>
+  </div>
+</div>

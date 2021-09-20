@@ -1,6 +1,6 @@
 .all-Forms{
-width: 500px;
-height: 500px;
+width: 300px;
+height: 450px;
 float: left;
 }
 
@@ -13,12 +13,12 @@ input{
 }
 .fa-trash{
    position: relative;
-   left: 510px;
+   left: 310px;
    bottom: 30px;
 }
 .fa-plus{
     position: relative;
-    left: 540px;
+    left: 340px;
     bottom: 54px;
 }
 .marginalized{
