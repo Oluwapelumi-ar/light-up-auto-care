@@ -88,11 +88,8 @@ export class StaffComponent implements OnInit {
         ref?.click();
         this.formValue.reset();
         this.getAllStaff();
+        this.editID = false; 
       });
-  }
-
-  closeModal() {
-    this.modalService.dismissAll();
   }
   
   handleErrMsg(fieldName: string, fieldValue: string): void {
@@ -138,7 +135,7 @@ export class StaffComponent implements OnInit {
     this.staffModelo.id= row.id
     let ref = document.getElementById('cancel');
         ref?.click();
-    this.editID = true; 
+    this.editID = this.staffModelo.id; 
    }
 
   closeAlert() {

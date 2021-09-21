@@ -13,35 +13,16 @@ import { ServiceDashboardComponent } from './Type-of-Services/service-dashboard/
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent,canActivate: [AuthguardGuard] },
-  // { path: 'client', component: ClientComponent,canActivate: [AuthguardGuard] },
-  // { path: 'vehicle', component: VehicleComponent,canActivate: [AuthguardGuard] },
-  // { path: 'services', component: ServicesComponent,canActivate: [AuthguardGuard] },
   { path: 'quote', component: QuotePageComponent,canActivate: [AuthguardGuard] },
   { path: 'invoice', component: InvoiceComponent,canActivate: [AuthguardGuard] },
   { path: 'staff', component: StaffComponent,canActivate: [AuthguardGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthguardGuard] },
   { path: 'client', component: ClientComponent, canActivate: [AuthguardGuard] },
-  {
-    path: 'vehicle-dashboard',
-    component: VehicleDashboardComponent,
-    canActivate: [AuthguardGuard],
-  },
-  {
-    path: 'service-dashboard',
-    component: ServiceDashboardComponent,
-    canActivate: [AuthguardGuard],
-  },
-  // { path: 'quote', component: QuotePageComponent,canActivate: [AuthguardGuard] },
-  {
-    path: 'invoice',
-    component: InvoiceComponent,
-    canActivate: [AuthguardGuard],
-  },
+  { path: 'vehicle-dashboard',component: VehicleDashboardComponent,canActivate: [AuthguardGuard],},
+  { path: 'service-dashboard',component: ServiceDashboardComponent,canActivate: [AuthguardGuard],},
+  { path: 'invoice',component: InvoiceComponent,canActivate: [AuthguardGuard],},
   { path: 'staff', component: StaffComponent, canActivate: [AuthguardGuard] },
-  {
-    path: '',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-  },
+  { path: '',loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),},
 ];
 
 @NgModule({
