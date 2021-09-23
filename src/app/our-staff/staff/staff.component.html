@@ -21,7 +21,7 @@
                 <div class="header  d-flex">
                     <div class="box"><h1 class="title">Staff Information</h1></div>
                     <div class="box">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"type="button"   class="btn add-btn">Add Staff</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"type="button" (click)="add()"  class="btn add-btn">Add Staff</button>
                     </div>
                 </div>
                 <!-- Notification Alert -->
@@ -163,7 +163,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn  btn-outline-danger" id="cancel"  data-dismiss="modal" >Close</button>
-          <button (click)="postStaff()" data-dismiss="modal" *ngIf="!editID" type="button" class="btn add-btn">Add</button>
+          <button (click)="postStaff()" data-dismiss="modal" *ngIf="!editID" [disabled]="formValue.invalid" type="button" class="btn add-btn">Add</button>
           <button (click)="updatedStaff()" data-dismiss="modal" *ngIf="editID" type="button" class="btn add-btn">Update</button>
         </div>
       </div>

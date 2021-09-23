@@ -91,6 +91,11 @@ export class StaffComponent implements OnInit {
         this.editID = false; 
       });
   }
+
+  add(){
+    this.formValue.reset();
+    this.editID=false;
+  }
   
   handleErrMsg(fieldName: string, fieldValue: string): void {
     switch (fieldName) {
