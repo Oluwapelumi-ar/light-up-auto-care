@@ -28,6 +28,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { VehicleDashboardComponent } from './Vehicle/vehicle-dashboard/vehicle-dashboard.component';
 import { ServiceDashboardComponent } from './Type-of-Services/service-dashboard/service-dashboard.component';
 import { ClientComponent } from './Client-Dashboard/client/client.component';
+import { QuotePageComponent } from './quote/quote-page/quote-page.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ClientComponent } from './Client-Dashboard/client/client.component';
     StaffComponent,
     // StaffModalComponent,
     CapitalizePipe,
+    QuotePageComponent ,
     VehicleDashboardComponent,
     ServiceDashboardComponent,
   ],

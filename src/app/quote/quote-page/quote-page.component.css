@@ -1,26 +1,32 @@
 .all-Forms{
-width: 300px;
+width: 400px;
 height: 450px;
 float: left;
+overflow:auto;
+position: relative;
 }
-
-
 input{
     width: 300px;
     height: auto;
     border-radius: 5px;
-    margin-top: 0px;
 }
 .fa-trash{
    position: relative;
-   left: 310px;
-   bottom: 30px;
+   left: 370px;
+   top: 2px;
 }
 .fa-plus{
     position: relative;
-    left: 340px;
-    bottom: 54px;
+    left: 350px; 
+    bottom: 23px;
 }
 .marginalized{
     margin-top: -50px;
+}
+#ViewsModal input{
+    width: 250px;
+    height: 30px;
+    border-radius: 5px;
+    outline: none;
+
 }
