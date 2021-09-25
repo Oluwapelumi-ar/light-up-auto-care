@@ -15,7 +15,6 @@ import { StaffComponent } from './our-staff/staff/staff.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './layout/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { StaffModalComponent } from './our-staff/staff-modal/staff-modal.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CapitalizePipe } from './capitalize.pipe';
 import { NgHttpLoaderModule } from 'ng-http-loader';
@@ -26,7 +25,6 @@ import { VehicleDashboardComponent } from './Vehicle/vehicle-dashboard/vehicle-d
 import { ServiceDashboardComponent } from './Type-of-Services/service-dashboard/service-dashboard.component';
 import { ClientComponent } from './Client-Dashboard/client/client.component';
 import { QuotePageComponent } from './quote/quote-page/quote-page.component';
-// import { NgSelectComponent } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -38,7 +36,6 @@ import { QuotePageComponent } from './quote/quote-page/quote-page.component';
     ClientComponent,
     InvoiceComponent,
     StaffComponent,
-    // StaffModalComponent,
     CapitalizePipe,
     VehicleDashboardComponent,
     ServiceDashboardComponent,
@@ -55,7 +52,6 @@ import { QuotePageComponent } from './quote/quote-page/quote-page.component';
     NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
     NgHttpLoaderModule.forRoot(),
     AvatarModule,
     NgxPaginationModule,
@@ -64,7 +60,6 @@ import { QuotePageComponent } from './quote/quote-page/quote-page.component';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
   ],
-  // entryComponents: [ModalComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

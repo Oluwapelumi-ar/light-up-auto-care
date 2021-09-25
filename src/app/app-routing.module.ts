@@ -13,9 +13,6 @@ import { ServiceDashboardComponent } from './Type-of-Services/service-dashboard/
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthguardGuard] },
-  // { path: 'client', component: ClientComponent,canActivate: [AuthguardGuard] },
-  // { path: 'vehicle', component: VehicleComponent,canActivate: [AuthguardGuard] },
-  // { path: 'services', component: ServicesComponent,canActivate: [AuthguardGuard] },
   {
     path: 'quote',
     component: QuotePageComponent,
@@ -39,7 +36,6 @@ const routes: Routes = [
     component: ServiceDashboardComponent,
     canActivate: [AuthguardGuard],
   },
-  // { path: 'quote', component: QuotePageComponent,canActivate: [AuthguardGuard] },
   {
     path: 'invoice',
     component: InvoiceComponent,

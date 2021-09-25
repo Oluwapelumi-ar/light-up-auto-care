@@ -15,86 +15,96 @@
   <!-- end left sidebar -->
   <!-- ============================================================== -->
 
-  <div class="dashboard-wrapper">
-    <div class="dashboard-finance">
-      <div class="container-fluid dashboard-content">
-        <div class="header d-flex">
-          <div class="box"><h1 class="title">Staff Information</h1></div>
-          <div class="box">
-            <button
-              class="btn btn-primary"
-              data-toggle="modal"
-              data-target="#exampleModal"
-              type="button"
-              class="btn add-btn"
-            >
-              Add Staff
-            </button>
-          </div>
-        </div>
-        <ng-container>
-          <div
-            *ngIf="alert"
-            class="alert alert-success alert-dismissible fade show"
-            role="alert"
-          >
-            <strong>Hurray!</strong> Staff Deleted successfully
-            <button
-              (click)="closeAlert()"
-              type="button"
-              class="close"
-              data-dismiss="alert"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </ng-container>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">S/N</th>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Role</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              *ngFor="
-                let row of staffData
-                  | paginate
-                    : {
-                        itemsPerPage: tableSize,
-                        currentPage: page,
-                        totalItems: count
-                      };
-                let i = index
-              "
-            >
-              <td>{{ (page - 1) * tableSize + (i + 1) }}</td>
-              <td>{{ row.name | capitalize }}</td>
-              <td>{{ row.email }}</td>
-              <td>{{ row.role }}</td>
-              <td>
-                <button
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                  type="button"
-                  (click)="onEdit(row)"
-                  class="btn add-btn edit-btn"
-                >
-                  Edit
-                </button>
-                <button class="btn btn-danger mx-3" (click)="deleteStaff(row)">
-                  Delete
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="dashboard-wrapper">
+        <div class="dashboard-finance">
+            <div class="container-fluid dashboard-content">
+                <div class="header  d-flex">
+                    <div class="box"><h1 class="title">Staff Information</h1></div>
+                    <div class="box">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"type="button" (click)="add()"  class="btn add-btn">Add Staff</button>
+                    </div>
+                </div>
+                <!-- Notification Alert -->
+                <ng-container>
+                    <div
+                      *ngIf="alert"
+                      class="alert alert-success alert-dismissible fade show"
+                      role="alert"
+                    >
+                    <strong>Hurray!</strong> Staff Deleted successfully
+                    <button
+                      (click)="closeAlert()"
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>  
+                    <div
+                      *ngIf="createStaffAlert"
+                      class="alert alert-success alert-dismissible fade show"
+                      role="alert"
+                    >
+                    <strong>Hurray!</strong> Staff Added successfully
+                    <button
+                      (click)="closeAlert()"
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>  
+                    <div
+                      *ngIf="updatedStaffAlert"
+                      class="alert alert-success alert-dismissible fade show"
+                      role="alert"
+                    >
+                    <strong>Hurray!</strong> Staff Updated successfully
+                    <button
+                      (click)="closeAlert()"
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>  
+                </ng-container>
+                <!-- End Notification Alert -->
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">S/N</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>  
+                    <tr *ngFor="let row of staffData| paginate : {
+                      itemsPerPage: tableSize,
+                      currentPage: page,
+                      totalItems: count
+                    }; let i = index " >
+                        <td>{{((page-1)*tableSize)+(i+1) }}</td>
+                        <td>{{row.name  | capitalize }}</td>
+                        <td>{{row .email}}</td>
+                        <td>{{row.role}}</td>
+                        <td>
+                            <button  data-toggle="modal" data-target="#exampleModal"type="button"  (click)="onEdit(row)"class="btn add-btn edit-btn">Edit</button>
+                            <button class="btn btn-danger mx-3" (click)="deleteStaff(row)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
+            <!-- Pagination -->
         <div class="d-flex justify-content-center">
           <pagination-controls
             previousLabel="Prev"
@@ -130,87 +140,31 @@
           </div>
           <div class="modal-body">
             <form [formGroup]="formValue">
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input
-                  type="text"
-                  autocapitalize
-                  class="form-control"
-                  id="name"
-                  aria-describedby="nameHelp"
-                  formControlName="name"
-                  (keyup)="handleErrMsg('name', formValue.controls.name.value)"
-                />
-                <span class="text-danger" *ngIf="errMsg.name">{{
-                  errMsg.name
-                }}</span>
-              </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  aria-describedby="emailHelp"
-                  formControlName="email"
-                  (keyup)="
-                    handleErrMsg('email', formValue.controls.email.value)
-                  "
-                />
-                <span class="text-danger" *ngIf="errMsg.email">{{
-                  errMsg.email
-                }}</span>
-              </div>
-
-              <div class="form-group">
-                <label for="Password">Password</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="Password"
-                  formControlName="password"
-                />
-                <span class="text-danger" *ngIf="">password is required</span>
-              </div>
-              <label
-                >Choose a role from this list:
-                <input list="roles" class="form-control" formControlName="role"
-              /></label>
-              <datalist id="roles">
-                <option value="clerk"></option>
-                <option value="approver"></option>
-                <option value="admin"></option>
-              </datalist>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-outline-danger"
-              id="cancel"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
-            <button
-              (click)="postStaff()"
-              data-dismiss="modal"
-              *ngIf="!editID"
-              type="button"
-              class="btn add-btn"
-            >
-              Add
-            </button>
-            <button
-              (click)="updatedStaff()"
-              data-dismiss="modal"
-              *ngIf="editID"
-              type="button"
-              class="btn add-btn"
-            >
-              Update
-            </button>
-          </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" autocapitalize class="form-control" id="name" aria-describedby="nameHelp" formControlName="name"
+                    (keyup)="handleErrMsg('name', formValue.controls.name.value)">
+                    <span class="text-danger" *ngIf="errMsg.name">{{errMsg.name}}</span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                        formControlName="email" (keyup)="handleErrMsg('email', formValue.controls.email.value)">
+                        <span class="text-danger" *ngIf="errMsg.email">{{errMsg.email}}</span>
+                 </div>
+                <label>Choose a role from this list:
+                    <input list="roles"  class="form-control" formControlName="role" /></label>
+                    <datalist id="roles">
+                      <option value="clerk">
+                      <option value="approver">
+                      <option value="admin">
+                    </datalist>
+            </form>    
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn  btn-outline-danger" id="cancel"  data-dismiss="modal" >Close</button>
+          <button (click)="postStaff()" data-dismiss="modal" *ngIf="!editID" [disabled]="formValue.invalid" type="button" class="btn add-btn">Add</button>
+          <button (click)="updatedStaff()" data-dismiss="modal" *ngIf="editID" type="button" class="btn add-btn">Update</button>
         </div>
       </div>
     </div>

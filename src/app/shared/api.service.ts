@@ -104,7 +104,7 @@ export class ApiService {
     console.log(data);
     return this.http
       .post<staffDetails>(
-        'https://rocky-spire-51361.herokuapp.com/staff/signup',
+        'https://lightup-auto-care.herokuapp.com/staffs/signup',
         data
       )
       .pipe(
@@ -116,7 +116,7 @@ export class ApiService {
 
   getAllStaffs() {
     return this.http
-      .get<any>('https://rocky-spire-51361.herokuapp.com/staff/')
+      .get<any>('https://lightup-auto-care.herokuapp.com/staffs/')
       .pipe(
         map((res: any) => {
           return res;
@@ -126,7 +126,7 @@ export class ApiService {
 
   getStaffByID(ID: number) {
     return this.http
-      .get<any>(`https://rocky-spire-51361.herokuapp.com/staff/${ID}`)
+      .get<any>(`https://lightup-auto-care.herokuapp.com/staffs/${ID}`)
       .pipe(
         map((res: any) => {
           console.log(res);
@@ -135,9 +135,9 @@ export class ApiService {
       );
   }
 
-  updateStaff(data: any, id: number | undefined) {
+  updateStaff(data: any, id: number ) {
     return this.http
-      .put<any>('https://rocky-spire-51361.herokuapp.com/staff/' + id, data)
+      .put<any>('https://lightup-auto-care.herokuapp.com/staffs/' + id, data)
       .pipe(
         map((res: any) => {
           console.log('LOG: ' + res);
@@ -148,9 +148,7 @@ export class ApiService {
 
   deleteStaff(id: number) {
     return this.http
-      .delete<staffDetails>(
-        'https://rocky-spire-51361.herokuapp.com/staff/' + id
-      )
+      .delete<staffDetails>('https://lightup-auto-care.herokuapp.com/staffs/' + id)
       .pipe(
         map((res: any) => {
           return res;
