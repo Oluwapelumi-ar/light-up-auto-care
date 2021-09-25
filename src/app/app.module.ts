@@ -37,6 +37,7 @@ import { QuotePageComponent } from './quote/quote-page/quote-page.component';
     InvoiceComponent,
     StaffComponent,
     CapitalizePipe,
+    QuotePageComponent ,
     VehicleDashboardComponent,
     ServiceDashboardComponent,
     QuotePageComponent,

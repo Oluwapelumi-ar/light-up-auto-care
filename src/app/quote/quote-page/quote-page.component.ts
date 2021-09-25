@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChange,
+} from '@angular/core';
 import { ApiService } from 'src/app/shared/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -10,19 +16,8 @@ import {
   Validators,
 } from '@angular/forms';
 
-interface quoteDetails {
-  clientId: number;
-  vehicleId: number;
-  items: [
-    {
-      item: string;
-      unit: number;
-      rate: number;
-      id: number;
-      amount: number;
-    }
-  ];
-}
+import { QuoteModel } from './quoteModel';
+import { getLocaleTimeFormat } from '@angular/common';
 
 @Component({
   selector: 'app-quote-page',
@@ -30,25 +25,30 @@ interface quoteDetails {
   styleUrls: ['./quote-page.component.css'],
 })
 export class QuotePageComponent implements OnInit {
+  test: any;
   item: any;
   unit: any;
   rate: any;
   amount: any;
-  // itemsItem: any;
   required!: Boolean;
 
-  private quoteData: string = '';
+  // private quoteData: string = '';
 
   quotes: any;
+  viewQte: any;
   clients: any;
   vehicle: any;
+  clientVehicles: any;
   isQuoteCreated: boolean = false;
-  // quoteData: any;
-
-  enableEdit = false;
-  enableEditIndex = null;
-
+  quoteData!: any;
+  row: any;
+  quoteModelObj: QuoteModel = new QuoteModel();
   addQuoteTypeForm!: FormGroup;
+  sum: number = 0;
+  editID: any;
+  api: any;
+  showAdd!: boolean;
+  showUpdate!: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -72,7 +72,6 @@ export class QuotePageComponent implements OnInit {
           item: new FormControl('', Validators.required),
           unit: new FormControl('', Validators.required),
           rate: new FormControl('', Validators.required),
-          amount: new FormControl(''),
         }),
       ]),
     });
@@ -81,6 +80,7 @@ export class QuotePageComponent implements OnInit {
     this.getAllVehicles();
     this.getAllServices();
     this.getQuotes();
+    // this.getAllQuote();
 
     this.addQuoteTypeForm.statusChanges.subscribe((data: any) => {
       // console.log(data);
@@ -93,16 +93,56 @@ export class QuotePageComponent implements OnInit {
     this.router.navigate(['/invoice'], { state: { data: this.quoteData } });
   }
 
+  onUnitChange(event: any) {
+    this.sum = event.target.value;
+    // console.log(event.target.value)
+  }
+
   getQuotes() {
     this.apiServices.getQuotes().subscribe(
       (data: any) => {
-        console.log({ data });
-
-        this.quotes = data.payload;
-        // console.log(this.quotes)
+        let response = data.payload;
+        response = response.sort((a: any, b: any) => b.id - a.id);
+        this.quoteData = response;
+        // this.addQuoteTypeForm.reset();
       },
       (err: any) => {
         // console.log('Unable to get data from URL + err');
+      }
+    );
+  }
+
+  getAllQuote() {
+    this.apiServices.getQuotes().subscribe((res) => {
+      this.quoteData = res;
+    });
+  }
+
+  addQuoteType() {
+    const payload = {
+      ...this.addQuoteTypeForm.value,
+      items: [
+        {
+          ...this.addQuoteTypeForm.value.items[0],
+          amount:
+            this.addQuoteTypeForm.value.items[0].rate *
+            this.addQuoteTypeForm.value.items[0].unit,
+        },
+      ],
+    };
+    this.apiServices.postQuote(payload).subscribe(
+      (data) => {
+        this.getQuotes();
+        this.getAllQuote();
+        let ref = document.getElementById('cancel');
+        ref?.click();
+        this.showAdd = true;
+        this.showUpdate = false;
+
+        this.addQuoteTypeForm.reset();
+      },
+      (err) => {
+        console.log('Unable to add Quote + err');
       }
     );
   }
@@ -117,30 +157,30 @@ export class QuotePageComponent implements OnInit {
   }
 
   //tracking client ID
-  trackClientId(): void {
-    //value change monitor
-    this.addQuoteTypeForm.valueChanges.subscribe((data) => {
-      // console.log(data);
-    });
+  trackClientId(event: any) {
+    this.getAllVehiclesAttachedToClient(event.id);
   }
+
   getAllClients() {
     this.apiServices.getAllClients().subscribe((res: any) => {
-      // console.log({ res });
       this.clients = res.payload;
     });
   }
 
   getAllVehicles() {
     this.apiServices.getVehicle().subscribe((res: any) => {
-      // console.log({ res });
       this.vehicle = res.payload;
     });
   }
 
+  getAllVehiclesAttachedToClient(id: any) {
+    this.apiServices.getClientVehicles(id).subscribe((res: any) => {
+      this.clientVehicles = res.payload;
+    });
+  }
+
   getAllServices() {
-    // console.log("Called Here!!!!")
     this.apiServices.getAllService().subscribe((res: any) => {
-      // console.log({ res });
       this.item = res.payload;
     });
   }
@@ -160,45 +200,67 @@ export class QuotePageComponent implements OnInit {
     let arr = this.addQuoteTypeForm.get('items') as FormArray;
     arr.removeAt(i);
   }
-  addQuoteType() {
-    this.apiServices.postQuote(this.addQuoteTypeForm.value).subscribe(
-      (data) => {
-        this.isQuoteCreated = true;
-        console.log(data);
-        this.getQuotes();
-      },
-      (err) => {
-        console.log('Unable to add Quote + err');
-      }
-    );
-  }
 
   updateQuote() {
-    this.apiServices.updateQuote();
-
-    this.apiServices.updateQuote().subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (err) => {
-        // console.log(err);
-      }
-    );
+    const payload: QuoteModel = {
+      ...this.addQuoteTypeForm.value,
+    };
+    this.apiServices.updateQuote(payload, this.editID).subscribe((res: any) => {
+      alert('Updated Successfully');
+      let ref = document.getElementById('cancel');
+      ref?.click();
+      this.addQuoteTypeForm.reset();
+    });
   }
 
   deleteQuote(row: any) {
-    this.apiServices.deleteQuote(1).subscribe(
-      (data) => {
-        // console.log('User deleted successfully' + data);
+    this.apiServices.deleteQuote(row.id).subscribe(
+      (res: any) => {
+        alert('User deleted successfully');
       },
-      (err) => {
-        // console.log('Unable to delete the Quote' + err);
+      (err: any) => {
+        console.log('Unable to delete the Quote' + err);
+        this.addQuoteTypeForm.reset();
       }
     );
   }
 
-  enableEditMethod(data: any) {
-    this.enableEdit = false;
-    this.enableEditIndex = null;
+  onEdit(row: any) {
+    this.test = row.id;
+    this.quoteModelObj.id = row.id;
+    this.addQuoteTypeForm.controls['clientId'].setValue(row.clientId);
+    this.addQuoteTypeForm.controls['vehicleId'].setValue(row.vehicleId);
+    console.log(this.itemsFormArray, 'controls');
+    this.addQuoteTypeForm.patchValue({
+      clientId: row.clientId,
+      vehicleId: row.vehicleId,
+      items: [...row.items],
+    });
+    let ref = document.getElementById('cancel');
+    ref?.click();
+    this.editID = true;
+    this.showAdd = false;
+    this.showUpdate = true;
   }
+
+  onViewClick(row: any) {
+    console.log({ row });
+    this.viewQte = row;
+
+    let ref = document.getElementById('cancel');
+    ref?.click();
+  }
+
+  // updateQuoteType(){
+  //   const payload = {
+  //     ...this.addQuoteTypeForm.value,
+  //   }
+  //   this.api.updateQuote(this.quoteModelObj, this.editID)
+  //   .subscribe((res: any) =>{
+  //     alert("Updated Successfully");
+  //     let ref = document.getElementById('cancel')
+  //     ref?.click()
+  //     this.addQuoteTypeForm.reset();
+  //   })
+  // }
 }

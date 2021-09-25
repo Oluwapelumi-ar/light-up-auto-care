@@ -31,6 +31,9 @@ interface quote {
   providedIn: 'root',
 })
 export class ApiService {
+  // deleteQuote(id: any) {
+  //   throw new Error('Method not implemented.');
+  // }
   constructor(private http: HttpClient) {}
 
   // handleError(error: { error: { message: any; }; status: any; message: any; }) {
@@ -116,7 +119,7 @@ export class ApiService {
 
   getAllStaffs() {
     return this.http
-      .get<any>('https://lightup-auto-care.herokuapp.com/staffs/')
+      .get<any>('https://lightup-auto-care.herokuapp.com/staffs')
       .pipe(
         map((res: any) => {
           return res;
@@ -135,7 +138,7 @@ export class ApiService {
       );
   }
 
-  updateStaff(data: any, id: number ) {
+  updateStaff(data: any, id: number) {
     return this.http
       .put<any>('https://lightup-auto-care.herokuapp.com/staffs/' + id, data)
       .pipe(
@@ -148,7 +151,9 @@ export class ApiService {
 
   deleteStaff(id: number) {
     return this.http
-      .delete<staffDetails>('https://lightup-auto-care.herokuapp.com/staffs/' + id)
+      .delete<staffDetails>(
+        'https://lightup-auto-care.herokuapp.com/staffs/' + id
+      )
       .pipe(
         map((res: any) => {
           return res;
@@ -175,9 +180,21 @@ export class ApiService {
       );
   }
 
+  getClientVehicles(clientId: any) {
+    return this.http
+      .get<any>(
+        `https://lightup-auto-care.herokuapp.com/vehicles?clientId=${clientId}`
+      )
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
   updateVehicle(data: any, id: number) {
     return this.http
-      .put<any>('https://lightup-auto-care.herokuapp.com/vehicles/' + id, data)
+      .put<any>('https://lightup-auto-care.herokuapp.com/vehicles' + id, data)
       .pipe(
         map((res: any) => {
           return res;
@@ -250,58 +267,56 @@ export class ApiService {
   getQuotes(): Observable<quote> {
     const headers = new HttpHeaders({
       'content-type': 'application/json',
-      authenticationToken:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoic3VwZXIgYWRtaW4iLCJpYXQiOjE2MzA5MzgzNjMsImV4cCI6MTYzMTAyNDc2M30.cS8eVVLPIKMlzoHVfKftBHkvKp1cU-8_XnWBPbrf5ls',
     });
-    const params = new HttpParams()
-      .set('pageSize', '10')
-      .set('pageOptions', '100');
+    const params = new HttpParams();
 
     return this.http.get<quote>(
-      'https://rocky-spire-51361.herokuapp.com/quote',
-      { headers: headers, params: params }
+      'https://lightup-auto-care.herokuapp.com/quotes',
+      { headers: headers }
     );
   }
 
   //post Quote request
-  postQuote(body: any) {
+  postQuote(data: any) {
     const customHeaders = new HttpHeaders({
       autheticationKey: 'testing2323',
     });
     return this.http.post(
-      'https://rocky-spire-51361.herokuapp.com/quote',
-      body,
+      'https://lightup-auto-care.herokuapp.com/quotes',
+      data,
       { headers: customHeaders }
     );
   }
 
-  updateQuote(): Observable<quote> {
+  // updateQuote(): Observable<quote> {
+  //   const putHeaders = new HttpHeaders({
+  //     'content-type': 'application/json',
+  //     authenticationToken:
+  //       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoic3VwZXIgYWRtaW4iLCJpYXQiOjE2MzA5MzgzNjMsImV4cCI6MTYzMTAyNDc2M30.cS8eVVLPIKMlzoHVfKftBHkvKp1cU-8_XnWBPbrf5ls',
+  //   });
+  // }
+  updateQuote(data: any, id: number): Observable<quote> {
     const putHeaders = new HttpHeaders({
       'content-type': 'application/json',
-      authenticationToken:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoic3VwZXIgYWRtaW4iLCJpYXQiOjE2MzA5MzgzNjMsImV4cCI6MTYzMTAyNDc2M30.cS8eVVLPIKMlzoHVfKftBHkvKp1cU-8_XnWBPbrf5ls',
     });
 
-    const putParams = new HttpParams().set('source', 'googleAnalytics');
-
     return this.http.put<quote>(
-      'https://rocky-spire-51361.herokuapp.com/quote',
-      { headers: Headers, params: putParams }
+      'https://lightup-auto-care.herokuapp.com/quotes/' + id,
+      data
     );
   }
 
   deleteQuote(id: number): Observable<quote> {
-    const deleteHeaders = new HttpHeaders({
-      expiryToken: '15',
-      authenticationToken:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoic3VwZXIgYWRtaW4iLCJpYXQiOjE2MzA5MzgzNjMsImV4cCI6MTYzMTAyNDc2M30.cS8eVVLPIKMlzoHVfKftBHkvKp1cU-8_XnWBPbrf5ls',
-    });
-
-    const deleteParams = new HttpParams().set('userRole', 'admin');
-
     return this.http.delete<quote>(
-      'https://rocky-spire-51361.herokuapp.com/quote' + id,
-      { headers: deleteHeaders, params: deleteParams }
+      'https://lightup-auto-care.herokuapp.com/quotes/' + id
+    );
+  }
+
+  //  const deleteParams = new HttpParams().set('userRole', 'admin');
+
+  getClientAndVehicle() {
+    return this.http.get(
+      'https://lightup-auto-care.herokuapp.com/vehicles?clientId=1'
     );
   }
 }
