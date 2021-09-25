@@ -1,61 +1,150 @@
 <div class="nav-left-sidebar sidebar-dark">
-    <div class="menu-list">
-        <div
-                      *ngIf="alert"
-                      class="alert alert-success alert-dismissible fade show"
-                      role="alert"
-                    >
-                     Logged Out
-                    <button
-                      (click)="closeAlert()"
-                      type="button"
-                      class="close"
-                      data-dismiss="alert"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>  
-        
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ">
-                    <li class="nav-item ">
-                        <a class="nav-link"  routerLink="/home" routerLinkActive="active" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fas fa-home"></i>Dashboard</a>
-                    </li><br>
-                    <li class="nav-item ">
-                        <a class="nav-link " routerLink="/client" routerLinkActive="active" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1"
-                            aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Client <span
-                                class="badge badge-success">6</span></a>
-                    </li><br>
-                    <li class="nav-item ">
-                        <a class="nav-link " routerLink="/vehicle-dashboard" routerLinkActive="active" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fas fa-car"></i>Vehicle <span class="badge badge-success">6</span></a>
-                    </li><br>
-                    <li class="nav-item ">
-                        <a class="nav-link " routerLink="/services" routerLinkActive="active" routerLinkActive="active" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fas fa-hands-helping"></i>Services<span class="badge badge-success">6</span></a>
-                    </li><br>
-                    <li class="nav-item ">
-                        <a class="nav-link" routerLink="/quote" routerLinkActive="active" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1"
-                            aria-controls="submenu-1"><i class="fas fa-shopping-cart"></i>Quote<span
-                                class="badge badge-success">6</span></a>
-                    </li><br>
-                    <li class="nav-item ">
-                        <a class="nav-link" routerLink="/invoice"  routerLinkActive="active" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1"
-                            aria-controls="submenu-1"><i class="fas fa-tags"></i>Invoice<span
-                                class="badge badge-success">6</span></a>
-                    </li><br>
-                    <li class="nav-item ">
-                        <a class="nav-link " routerLink="/staff" routerLinkActive="active" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fas fa-users"></i>Staff<span class="badge badge-success">6</span></a>
-                    </li><br>
-                    <li class="nav-item ">
-                        <a class="nav-link " (click)="handleLogout ()"><i class="fas fa-sign-out-alt"></i>Logout </a>
-                    </li>   
-                </ul>
-            </div>
-        </nav>
+  <div class="menu-list">
+    <div
+      *ngIf="alert"
+      class="alert alert-success alert-dismissible fade show"
+      role="alert"
+    >
+      Logged Out
+      <button
+        (click)="closeAlert()"
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/home"
+              routerLinkActive="active"
+              data-toggle="collapse"
+              aria-expanded="false"
+              data-target="#submenu-1"
+              aria-controls="submenu-1"
+              ><i class="fas fa-home"></i>Dashboard</a
+            >
+          </li>
+          <br />
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/client"
+              routerLinkActive="active"
+              data-toggle="collapse"
+              aria-expanded="false"
+              data-target="#submenu-1"
+              aria-controls="submenu-1"
+              ><i class="fa fa-fw fa-user-circle"></i>Client
+              <span class="badge badge-success">6</span></a
+            >
+          </li>
+          <br />
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/vehicle-dashboard"
+              routerLinkActive="active"
+              data-toggle="collapse"
+              aria-expanded="false"
+              data-target="#submenu-1"
+              aria-controls="submenu-1"
+              ><i class="fas fa-car"></i>Vehicle
+              <span class="badge badge-success">6</span></a
+            >
+          </li>
+          <br />
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/service-dashboard"
+              routerLinkActive="active"
+              routerLinkActive="active"
+              data-toggle="collapse"
+              aria-expanded="false"
+              data-target="#submenu-1"
+              aria-controls="submenu-1"
+              ><i class="fas fa-hands-helping"></i>Services<span
+                class="badge badge-success"
+                >6</span
+              ></a
+            >
+          </li>
+          <br />
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/quote"
+              routerLinkActive="active"
+              data-toggle="collapse"
+              aria-expanded="false"
+              data-target="#submenu-1"
+              aria-controls="submenu-1"
+              ><i class="fas fa-shopping-cart"></i>Quote<span
+                class="badge badge-success"
+                >6</span
+              ></a
+            >
+          </li>
+          <br />
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/invoice"
+              routerLinkActive="active"
+              data-toggle="collapse"
+              aria-expanded="false"
+              data-target="#submenu-1"
+              aria-controls="submenu-1"
+              ><i class="fas fa-tags"></i>Invoice<span
+                class="badge badge-success"
+                >6</span
+              ></a
+            >
+          </li>
+          <br />
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/staff"
+              routerLinkActive="active"
+              data-toggle="collapse"
+              aria-expanded="false"
+              data-target="#submenu-1"
+              aria-controls="submenu-1"
+              ><i class="fas fa-users"></i>Staff<span
+                class="badge badge-success"
+                >6</span
+              ></a
+            >
+          </li>
+          <br />
+          <li class="nav-item">
+            <a class="nav-link" (click)="handleLogout()"
+              ><i class="fas fa-sign-out-alt"></i>Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </div>
