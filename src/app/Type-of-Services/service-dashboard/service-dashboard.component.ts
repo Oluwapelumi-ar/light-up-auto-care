@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validator } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ApiService } from 'src/app/shared/api.service';
 import { ServiceModel } from '../service-dashboard-model';
 
@@ -20,7 +25,7 @@ export class ServiceDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.formValue = this.formbuilder.group({
-      name: [''],
+      name: ['', [Validators.required]],
     });
 
     this.getAllServices();

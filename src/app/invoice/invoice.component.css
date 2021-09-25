@@ -1,0 +1,25 @@
+.center {
+  text-align: center;
+}
+
+.style {
+  border: 1px solid gray;
+  padding: 10px;
+  width: 100%;
+  margin: 10% auto;
+}
+
+input {
+  width: 250px;
+}
+
+.add-btn {
+  background-color: rgb(14, 8, 90);
+  color: #fff;
+}
+
+.delete-btn {
+  margin-bottom: 0.2em;
+  padding: 0 0.1em;
+  color: rgb(134, 31, 31);
+}

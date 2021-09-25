@@ -10,6 +10,8 @@ import {
 
 import { ApiService } from 'src/app/shared/api.service';
 import { VehicleModel } from '../vehicle-dashboard-model';
+// import { NgSelectModule } from '@ng-select/ng-select';
+// import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-vehicle-dashboard',
@@ -21,23 +23,43 @@ export class VehicleDashboardComponent implements OnInit {
   vehicleModelObj: VehicleModel = new VehicleModel();
   clientData: any = [];
   vehicleData: any;
-  getAllClients: any;
+  getClients: any;
   showAdd!: boolean;
   showUpdate!: boolean;
   alertInstance = '';
+
+  // getClient() {
+  //   this.api.getAllClients().subscribe((res: any) => {
+  //     console.log({ res });
+  //     this.clientData = res.payload;
+  //   });
+  // }
 
   constructor(private formbuilder: FormBuilder, private api: ApiService) {}
 
   ngOnInit(): void {
     this.formValue = this.formbuilder.group({
-      vehicleName: [''],
-      chassis: [''],
-      model: [''],
-      name: [''],
+      vehicleName: ['', [Validators.pattern('^[a-zA-Z]+$ ')]],
+      chassis: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{8}$'),
+        ],
+      ],
+      model: [
+        '',
+        [Validators.required, Validators.pattern('^[a-zA-Z]{3,20}-[0-9]{4}$')],
+      ],
+      name: [[Validators.required]],
     });
 
     this.getVehicles();
     this.getAllClient();
+  }
+
+  get m() {
+    return this.formValue.controls;
   }
 
   clickAddVehicle() {
@@ -47,6 +69,7 @@ export class VehicleDashboardComponent implements OnInit {
   }
 
   postVehicleDetails() {
+    console.log(this.formValue.value);
     this.vehicleModelObj.clientId = this.formValue.value.name;
     this.vehicleModelObj.vehicleName = this.formValue.value.vehicleName;
     this.vehicleModelObj.chassis = this.formValue.value.chassis;
@@ -73,6 +96,7 @@ export class VehicleDashboardComponent implements OnInit {
   }
 
   getVehicles() {
+    console.log('get v');
     this.api.getVehicle().subscribe((res: any) => {
       this.vehicleData = res.payload;
       console.log(this.vehicleData);
@@ -102,7 +126,7 @@ export class VehicleDashboardComponent implements OnInit {
   }
 
   updateVehicleDetails() {
-    this.vehicleModelObj.clientId = this.formValue.value.name;
+    this.vehicleModelObj.clientId = this.formValue.value.clientId;
     this.vehicleModelObj.vehicleName = this.formValue.value.vehicleName;
     this.vehicleModelObj.chassis = this.formValue.value.chassis;
     this.vehicleModelObj.model = this.formValue.value.model;

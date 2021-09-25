@@ -31,6 +31,7 @@
     "ngx-avatar": "^4.1.0",
     "ngx-pagination": "^5.1.1",
     "ngx-toastr": "^14.1.3",
+    "primeng": "^12.1.1",
     "rxjs": "~6.6.0",
     "sweetalert2": "^11.1.5",
     "tslib": "^2.3.0",

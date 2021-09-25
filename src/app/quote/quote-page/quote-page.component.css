@@ -1,26 +1,40 @@
-.all-Forms{
-width: 300px;
-height: 450px;
-float: left;
+.all-Forms {
+  width: 300px;
+  height: 450px;
+  float: left;
 }
 
+input {
+  width: 300px;
+  height: auto;
+  border-radius: 5px;
+  margin-top: 0px;
+}
+.fa-trash {
+  position: relative;
+  left: 310px;
+  bottom: 30px;
+}
+.fa-plus {
+  position: relative;
+  left: 340px;
+  bottom: 54px;
+}
+.marginalized {
+  margin-top: -50px;
+}
 
-input{
-    width: 300px;
-    height: auto;
-    border-radius: 5px;
-    margin-top: 0px;
+/* .d-flex {
+  justify-content: flex-start;
+} */
+
+.btn-add,
+.btn-edit {
+  background-color: rgb(14, 8, 90);
+  color: #fff;
 }
-.fa-trash{
-   position: relative;
-   left: 310px;
-   bottom: 30px;
-}
-.fa-plus{
-    position: relative;
-    left: 340px;
-    bottom: 54px;
-}
-.marginalized{
-    margin-top: -50px;
+
+.btn-invoice {
+  background-color: rgb(40, 32, 157);
+  color: #fff;
 }

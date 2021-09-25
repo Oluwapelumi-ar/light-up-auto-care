@@ -3,11 +3,11 @@ export class ClientModel {
   name: string = '';
   email: string = '';
   telephone: string = '';
-  // billingAddress: {};
-
-  // contactPerson: '';
-  // address: '';
-  // city: '';
-  // postalCode: number;
-  // state: '';
+  billingAddress: any = {
+    repName: '',
+    address: '',
+    city: '',
+    postalCode: 0,
+    state: '',
+  };
 }

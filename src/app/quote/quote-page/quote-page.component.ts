@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/shared/api.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import {
   FormArray,
@@ -36,18 +37,29 @@ export class QuotePageComponent implements OnInit {
   // itemsItem: any;
   required!: Boolean;
 
+  private quoteData: string = '';
+
   quotes: any;
   clients: any;
   vehicle: any;
   isQuoteCreated: boolean = false;
-  quoteData: any;
+  // quoteData: any;
 
   enableEdit = false;
   enableEditIndex = null;
 
   addQuoteTypeForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private apiServices: ApiService) {}
+  constructor(
+    private fb: FormBuilder,
+    private apiServices: ApiService,
+    private router: Router
+  ) {
+    //    gotoDynamic() {
+    //   //this.router.navigateByUrl('/dynamic', { state: { id:1 , name:'Angular' } });
+    //   this.router.navigateByUrl('/dynamic', { state: this.quote })
+    // }
+  }
 
   ngOnInit(): void {
     this.addQuoteTypeForm = this.fb.group({
@@ -73,6 +85,12 @@ export class QuotePageComponent implements OnInit {
     this.addQuoteTypeForm.statusChanges.subscribe((data: any) => {
       // console.log(data);
     });
+
+    this.quoteData = 'Invoice Info';
+  }
+
+  goToInvoice() {
+    this.router.navigate(['/invoice'], { state: { data: this.quoteData } });
   }
 
   getQuotes() {
