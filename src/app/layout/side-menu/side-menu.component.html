@@ -1,5 +1,22 @@
 <div class="nav-left-sidebar sidebar-dark">
   <div class="menu-list">
+    <div
+      *ngIf="alert"
+      class="alert alert-success alert-dismissible fade show"
+      role="alert"
+    >
+      Logged Out
+      <button
+        (click)="closeAlert()"
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
     <nav class="navbar navbar-expand-lg navbar-light">
       <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
       <button

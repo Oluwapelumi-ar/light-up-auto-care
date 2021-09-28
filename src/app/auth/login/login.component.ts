@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -31,8 +30,13 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value).subscribe(
       (response) => {
         console.log(response);
-        localStorage.setItem('userDetails', JSON.stringify(response.payload));
-        this.router.navigate(['/home']);
+        if (response.payload.token != undefined) {
+          localStorage.setItem('userDetails', JSON.stringify(response.payload));
+          localStorage.setItem('token', response.payload.token);
+          this.router.navigate(['/home']);
+        } else {
+          alert('Token was not generated');
+        }
       },
       (err) => {
         console.log(err);

@@ -10,15 +10,21 @@ import { StaffComponent } from './our-staff/staff/staff.component';
 import { AuthguardGuard } from './auth/authguard.guard';
 import { RoleGuard } from './auth/role.guard';
 import { ServiceDashboardComponent } from './Type-of-Services/service-dashboard/service-dashboard.component';
+import { ViewQuoteComponent } from './view-quote/view-quote.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent,canActivate: [AuthguardGuard] },
-  // { path: 'client', component: ClientComponent,canActivate: [AuthguardGuard] },
-  // { path: 'vehicle', component: VehicleComponent,canActivate: [AuthguardGuard] },
-  // { path: 'services', component: ServicesComponent,canActivate: [AuthguardGuard] },
-  { path: 'quote', component: QuotePageComponent,canActivate: [AuthguardGuard] },
-  { path: 'invoice', component: InvoiceComponent,canActivate: [AuthguardGuard] },
-  { path: 'staff', component: StaffComponent,canActivate: [AuthguardGuard] },
+  { path: 'home', component: HomeComponent, canActivate: [AuthguardGuard] },
+  {
+    path: 'quote',
+    component: QuotePageComponent,
+    canActivate: [AuthguardGuard],
+  },
+  {
+    path: 'invoice',
+    component: InvoiceComponent,
+    canActivate: [AuthguardGuard],
+  },
+  { path: 'staff', component: StaffComponent, canActivate: [AuthguardGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthguardGuard] },
   { path: 'client', component: ClientComponent, canActivate: [AuthguardGuard] },
   {
@@ -31,13 +37,17 @@ const routes: Routes = [
     component: ServiceDashboardComponent,
     canActivate: [AuthguardGuard],
   },
-  // { path: 'quote', component: QuotePageComponent,canActivate: [AuthguardGuard] },
   {
     path: 'invoice',
     component: InvoiceComponent,
     canActivate: [AuthguardGuard],
   },
   { path: 'staff', component: StaffComponent, canActivate: [AuthguardGuard] },
+  {
+    path: 'view-quote',
+    component: ViewQuoteComponent,
+    canActivate: [AuthguardGuard],
+  },
   {
     path: '',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),

@@ -7,14 +7,14 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 
 interface staffDetails {
-  id?:string;
+  id?: string;
   name: string;
   email: string;
   role: string;
   password: string;
 }
 
-interface quote{
+interface quote {
   id?: number;
   clientId: number;
   vehicleId: number;
@@ -24,16 +24,17 @@ interface quote{
     unit: number;
     rate: number;
     amount: number;
-}[];
+  }[];
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-
+  // deleteQuote(id: any) {
+  //   throw new Error('Method not implemented.');
+  // }
   constructor(private http: HttpClient) {}
-
 
   // handleError(error: { error: { message: any; }; status: any; message: any; }) {
   //   let errorMessage = '';
@@ -47,7 +48,6 @@ export class ApiService {
   //   window.alert(errorMessage);
   //   return throwError(errorMessage);
   // }
-
 
   // Client
 
@@ -132,19 +132,18 @@ export class ApiService {
       .get<any>(`https://lightup-auto-care.herokuapp.com/staffs/${ID}`)
       .pipe(
         map((res: any) => {
-          console.log(res)
+          console.log(res);
           return res;
-          
         })
       );
   }
 
-  updateStaff(data: any, id: number | undefined) {
+  updateStaff(data: any, id: number) {
     return this.http
       .put<any>('https://lightup-auto-care.herokuapp.com/staffs/' + id, data)
       .pipe(
         map((res: any) => {
-          console.log("LOG: "+res);
+          console.log('LOG: ' + res);
           return res;
         })
       );
@@ -152,12 +151,13 @@ export class ApiService {
 
   deleteStaff(id: number) {
     return this.http
-      .delete<staffDetails>('https://lightup-auto-care.herokuapp.com/staffs/' + id)
+      .delete<staffDetails>(
+        'https://lightup-auto-care.herokuapp.com/staffs/' + id
+      )
       .pipe(
         map((res: any) => {
           return res;
         })
-        
       );
   }
 
@@ -182,7 +182,9 @@ export class ApiService {
 
   getClientVehicles(clientId: any) {
     return this.http
-      .get<any>(`https://lightup-auto-care.herokuapp.com/vehicles?clientId=${clientId}`)
+      .get<any>(
+        `https://lightup-auto-care.herokuapp.com/vehicles?clientId=${clientId}`
+      )
       .pipe(
         map((res: any) => {
           return res;
@@ -260,47 +262,64 @@ export class ApiService {
       );
   }
 
+  //Quote-Pages Services
 
- //Quote-Pages Services
-
-  getQuotes():Observable<quote>{
+  getQuotes(): Observable<quote> {
     const headers = new HttpHeaders({
       'content-type': 'application/json',
     });
-    const params = new HttpParams()
+    const params = new HttpParams();
 
-    return this.http.get<quote>('https://lightup-auto-care.herokuapp.com/quotes', { headers:headers });
-    
+    return this.http.get<quote>(
+      'https://lightup-auto-care.herokuapp.com/quotes',
+      { headers: headers }
+    );
   }
-
 
   //post Quote request
-  postQuote(data: any){
+  postQuote(data: any) {
     const customHeaders = new HttpHeaders({
-      'autheticationKey': 'testing2323'
+      autheticationKey: 'testing2323',
     });
-   return this.http.post('https://lightup-auto-care.herokuapp.com/quotes', data, { headers:customHeaders})
-
+    return this.http.post(
+      'https://lightup-auto-care.herokuapp.com/quotes',
+      data,
+      { headers: customHeaders }
+    );
   }
 
+  // updateQuote(): Observable<quote> {
+  //   const putHeaders = new HttpHeaders({
+  //     'content-type': 'application/json',
+  //     authenticationToken:
+  //       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoic3VwZXIgYWRtaW4iLCJpYXQiOjE2MzA5MzgzNjMsImV4cCI6MTYzMTAyNDc2M30.cS8eVVLPIKMlzoHVfKftBHkvKp1cU-8_XnWBPbrf5ls',
+  //   });
+  // }
+  updateQuote(data: any, id: number): Observable<quote> {
+    const putHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      Authorization:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImVtYWlsIjoic3VwZXJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoiU3VwZXIgQWRtaW4iLCJpYXQiOjE2MzI4MjMyMDIsImV4cCI6MTYzMjkwOTYwMn0.vySlgLfJ4BOuDZTDmCWQP4DIUn9T9Njvf8NNFMzLWu4',
+    });
 
-updateQuote(data: any, id: number | undefined): Observable<quote>{
-  const putHeaders = new HttpHeaders({
-    'content-type': 'application/json',
-  });
-  return this.http.put<quote>('https://lightup-auto-care.herokuapp.com/quotes/' + id, data);
+    return this.http.put<quote>(
+      'https://lightup-auto-care.herokuapp.com/quotes/' + id,
+      data,
+      { headers: putHeaders }
+    );
+  }
 
-}
+  deleteQuote(id: number): Observable<quote> {
+    return this.http.delete<quote>(
+      'https://lightup-auto-care.herokuapp.com/quotes/' + id
+    );
+  }
 
+  //  const deleteParams = new HttpParams().set('userRole', 'admin');
 
-deleteQuote(id: number): Observable<quote>{
-  return this.http.delete<quote>('https://lightup-auto-care.herokuapp.com/quotes/' + id);
-}
-
-
-
-getClientAndVehicle(){
- return this.http.get('https://lightup-auto-care.herokuapp.com/vehicles?clientId=1')
-}
- 
+  getClientAndVehicle() {
+    return this.http.get(
+      'https://lightup-auto-care.herokuapp.com/vehicles?clientId=1'
+    );
+  }
 }

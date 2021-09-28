@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StaffModalComponent } from './staff-modal.component';
+import { ViewQuoteComponent } from './view-quote.component';
 
-describe('StaffModalComponent', () => {
-  let component: StaffModalComponent;
-  let fixture: ComponentFixture<StaffModalComponent>;
+describe('ViewQuoteComponent', () => {
+  let component: ViewQuoteComponent;
+  let fixture: ComponentFixture<ViewQuoteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StaffModalComponent ]
+      declarations: [ ViewQuoteComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StaffModalComponent);
+    fixture = TestBed.createComponent(ViewQuoteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,7 +2,7 @@
   <!-- ============================================================== -->
   <!-- navbar -->
   <!-- ============================================================== -->
-   <app-header></app-header> 
+  <app-header></app-header>
   <!-- ============================================================== -->
   <!-- end navbar -->
   <!-- ============================================================== -->
@@ -10,7 +10,7 @@
   <!-- ============================================================== -->
   <!-- left sidebar -->
   <!-- ============================================================== -->
-  <app-side-menu></app-side-menu> 
+  <app-side-menu></app-side-menu>
   <!-- ============================================================== -->
   <!-- end left sidebar -->
   <!-- ============================================================== -->
@@ -20,23 +20,96 @@
   <div class="dashboard-wrapper">
     <div class="dashboard-ecommerce">
       <div class="container-fluid dashboard-content">
+        <!-- <main class="main">
+          <div class="row">
+            <div class="col-md-12 col-md-12">
+              <h4 class="mb-3">Client Invoice</h4>
+              <form class="invoice-form">
+                <div class="d-flex">
+                  <div class="col-sm-6">
+                    <label for="clientName" class="clientName"
+                      >Client Name</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="clientName"
+                      placeholder="clientName"
+                    />
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="clientName" class="clientName"
+                      >Vehicle Name</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="clientName"
+                      placeholder="clientName"
+                    />
+                  </div>
+                </div>
+                <div formArrayName="skills" class="mb-4" class="style">
+                  <div>
+                    <div class="mt-3 d-flex">
+                      <div class="service">
+                        <label for="service"> Service :</label>
+                        <input type="text" formControlName="skill" />
+                      </div>
+                      <div class="unit">
+                        <label for="unit">Unit:</label>
+                        <input type="text" formControlName="exp" />
+                      </div>
+                      <div class="rate">
+                        <label for="rate">Rate:</label>
+                        <input type="text" formControlName="exp" />
+                      </div>
+                      <div class="amount">
+                        <label for="amount">Amount:</label>
+                        <input type="text" formControlName="exp" />
+                      </div>
+                      <div class="delete-btn">
+                        
+                        <span><i class="fas fa-trash-alt"></i></span>
+                      </div>
+                    </div>
+                    <button type="button" class="mt-4 btn add-btn">
+                      Send to Client
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="col-lg-4 col-sm-6">
+              <div class="col-lg-4 col-sm-5 ml-auto">
+                <table class="table table-clear">
+                  <tbody>
+                    <tr>
+                      <td class="left">
+                        <strong class="text-dark">Total:</strong>
+                      </td>
+                      <td class="right">
+                        <strong class="text-dark">$20,744,00</strong>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </main> -->
+
         <!-- ============================================================== -->
         <!-- pageheader  -->
         <!-- ============================================================== -->
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-              <h2 class="pageheader-title">E-commerce Product Invoice</h2>
-              <p class="pageheader-text">
-                Nulla euismod urna eros, sit amet scelerisque torton lectus vel
-                mauris facilisis faucibus at enim quis massa lobortis rutrum.
-              </p>
+              <h2 class="pageheader-title">Invoice</h2>
               <div class="page-breadcrumb">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                      <a href="#" class="breadcrumb-link">E-coommerce</a>
-                    </li>
                     <li class="breadcrumb-item active" aria-current="page">
                       E-Commerce Product Invoice
                     </li>
@@ -45,11 +118,11 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- ============================================================== -->
         <!-- end pageheader  -->
         <!-- ============================================================== -->
-        <div class="row">
+        <!-- <div class="row">
           <div
             class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12"
           >
@@ -60,27 +133,23 @@
                   Date: 02 Sept, 2021
                 </div>
               </div>
-              <div class="card-body">
-                <div class="row mb-4">
+               <div class="card-body">
+                <div class="row mb-4 d-flex">
                   <div class="col-sm-6">
                     <h5 class="mb-3">From:</h5>
-                    <h3 class="text-dark mb-1">Gerald A. Garcia</h3>
-
-                    <div>2546 Penn Street</div>
-                    <div>Sikeston, MO 63801</div>
-                    <div>Email: info@gerald.com.pl</div>
-                    <div>Phone: +573-282-9117</div>
+                    <h3 class="text-dark mb-1">Light Up Auto Care</h3>
                   </div>
                   <div class="col-sm-6">
                     <h5 class="mb-3">To:</h5>
-                    <h3 class="text-dark mb-1">Anthony K. Friel</h3>
-                    <div>478 Collins Avenue</div>
-                    <div>Canal Winchester, OH 43110</div>
-                    <div>Email: info@anthonyk.com</div>
-                    <div>Phone: +614-837-8483</div>
+                    <h3 class="text-dark mb-1">Name:</h3>
+                    <div>RepName:</div>
+                    <div>Address:</div>
+                    <div>Email:</div>
+                    <div>Telephone:</div>
                   </div>
-                </div>
-                <div class="table-responsive-sm">
+                </div> -->
+
+        <!-- <div class="table-responsive-sm">
                   <table class="table table-striped">
                     <thead>
                       <tr>
@@ -134,30 +203,12 @@
                       </tr>
                     </tbody>
                   </table>
-                </div>
-                <div class="row">
+                </div> -->
+        <!-- <div class="row">
                   <div class="col-lg-4 col-sm-5"></div>
                   <div class="col-lg-4 col-sm-5 ml-auto">
                     <table class="table table-clear">
                       <tbody>
-                        <tr>
-                          <td class="left">
-                            <strong class="text-dark">Subtotal</strong>
-                          </td>
-                          <td class="right">$28,809,00</td>
-                        </tr>
-                        <tr>
-                          <td class="left">
-                            <strong class="text-dark">Discount (20%)</strong>
-                          </td>
-                          <td class="right">$5,761,00</td>
-                        </tr>
-                        <tr>
-                          <td class="left">
-                            <strong class="text-dark">VAT (10%)</strong>
-                          </td>
-                          <td class="right">$2,304,00</td>
-                        </tr>
                         <tr>
                           <td class="left">
                             <strong class="text-dark">Total</strong>
@@ -172,13 +223,65 @@
                 </div>
               </div>
               <div class="card-footer bg-white">
-                <p class="mb-0">2983 Glenview Drive Corpus Christi, TX 78476</p>
+                <p class="mb-0">Light Up Auto Care...</p>
               </div>
             </div>
           </div>
         </div>
+      </div> -->
+        <!-- ============================================================== -->
+        <!-- </div> -->
+        <!-- </div> -->
+
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex">
+              <div class="header logo">FROM: Light Up Auto Care</div>
+              <div class="receiver">
+                <h4>TO:</h4>
+                <p>{{ history.state.data.clientName }}</p>
+                <p>Address: {{ history.state.data.billingAddress.address }}</p>
+                <p>City: {{ history.state.data.billingAddress.city }}</p>
+                <p>
+                  PostalCode: {{ history.state.data.billingAddress.postalCode }}
+                </p>
+              </div>
+            </div>
+            <!-- <h4 class="details">Invoice Details</h4> -->
+            <div class="invoice-info">
+              <table class="table">
+                <thead>
+                  <th scope="col">Rep Name:</th>
+                  <th scope="col">Vehicle Name:</th>
+                  <th scope="col">Service:</th>
+                  <th scope="col">Unit:</th>
+                  <th scope="col">Rate:</th>
+                  <th scope="col">Amount</th>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>
+                      {{ history.state.data.billingAddress.name }}
+                    </td>
+                    <td>{{ history.state.data.vehicleName }}</td>
+                    <td>{{ history.state.data.items[0].item }}</td>
+                    <td>{{ history.state.data.items[0].unit }}</td>
+                    <td>{{ history.state.data.items[0].rate }}</td>
+                    <td>{{ history.state.data.items[0].amount }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
-      <!-- ============================================================== -->
+      <button (click)="sendInvoice($event)" class="btn add-btn">
+        Send To Client
+      </button>
     </div>
   </div>
 </div>

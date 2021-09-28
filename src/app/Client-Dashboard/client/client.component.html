@@ -146,6 +146,18 @@
                       aria-describedby="nameHelp"
                       formControlName="name"
                     />
+
+                    <div
+                      *ngIf="m.name.touched && m.telephone.invalid"
+                      class="alert alert-danger"
+                    >
+                      <div *ngIf="m.name.errors?.required">
+                        Please enter client's name
+                      </div>
+                      <div *ngIf="m.name.errors?.pattern">
+                        Name must be more than two letters
+                      </div>
+                    </div>
                   </div>
 
                   <div class="form-group">
@@ -157,6 +169,16 @@
                       aria-describedby="emailHelp"
                       formControlName="email"
                     />
+
+                    <div
+                      *ngIf="m.email.touched && m.email.invalid"
+                      class="alert alert-danger"
+                    >
+                      <div *ngIf="m.email.errors?.required">
+                        Please enter client's email
+                      </div>
+                      <div *ngIf="m.email.errors?.pattern">Invalid email</div>
+                    </div>
                   </div>
                   <div class="form-group">
                     <label for="phone">Telephone</label>
@@ -166,28 +188,42 @@
                       id="telephone"
                       formControlName="telephone"
                     />
-                  </div>
 
-                  <!-- <div class="form-group">
-                    <label for="name">Contact Person</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="name"
-                      formControlName="name"
-                    />
-                  </div> -->
+                    <div
+                      *ngIf="m.telephone.touched && m.telephone.invalid"
+                      class="alert alert-danger"
+                    >
+                      <div *ngIf="m.telephone.errors?.required">
+                        Please enter mobile number
+                      </div>
+                      <div *ngIf="m.telephone.errors?.pattern">
+                        Incomplete phone number
+                      </div>
+                    </div>
+                  </div>
 
                   <legend class="text-center">Billing Address</legend>
                   <div class="billingInput">
                     <div class="form-group">
-                      <label for="address">Name</label>
+                      <label for="address">RepName</label>
                       <input
                         type="text"
                         class="form-control"
                         id="repName"
                         formControlName="repName"
                       />
+
+                      <div
+                        *ngIf="m.name.touched && m.repName.invalid"
+                        class="alert alert-danger"
+                      >
+                        <div *ngIf="m.repName.errors?.required">
+                          A Rep is required!
+                        </div>
+                        <div *ngIf="m.repName.errors?.pattern">
+                          Name must be more than two letters
+                        </div>
+                      </div>
                     </div>
                     <div class="form-group">
                       <label for="address">Address</label>
@@ -197,6 +233,18 @@
                         id="address"
                         formControlName="address"
                       />
+
+                      <div
+                        *ngIf="m.address.touched && m.address.invalid"
+                        class="alert alert-danger"
+                      >
+                        <div *ngIf="m.address.errors?.required">
+                          Please enter client's address
+                        </div>
+                        <div *ngIf="m.address.errors?.pattern">
+                          Valid address is required!
+                        </div>
+                      </div>
                     </div>
                     <div class="form-group">
                       <label for="city">City</label>
@@ -206,6 +254,18 @@
                         id="city"
                         formControlName="city"
                       />
+
+                      <div
+                        *ngIf="m.city.touched && m.city.invalid"
+                        class="alert alert-danger"
+                      >
+                        <div *ngIf="m.city.errors?.required">
+                          Please enter client's City
+                        </div>
+                        <div *ngIf="m.city.errors?.pattern">
+                          Name must be more than two letters
+                        </div>
+                      </div>
                     </div>
                     <div class="form-group">
                       <label for="postalCode">Postal Code</label>
@@ -215,6 +275,18 @@
                         id="postalCode"
                         formControlName="postalCode"
                       />
+
+                      <div
+                        *ngIf="m.postalCode.touched && m.postalCode.invalid"
+                        class="alert alert-danger"
+                      >
+                        <div *ngIf="m.postalCode.errors?.required">
+                          Please enter client's postalCode!
+                        </div>
+                        <div *ngIf="m.postalCode.errors?.pattern">
+                          Invalid PostalCode!
+                        </div>
+                      </div>
                     </div>
                     <div class="form-group">
                       <label for="state">State</label>
@@ -224,6 +296,16 @@
                         id="state"
                         formControlName="state"
                       />
+
+                      <div
+                        *ngIf="m.state.touched && m.state.invalid"
+                        class="alert alert-danger"
+                      >
+                        <div *ngIf="m.state.errors?.required">
+                          Please enter client's State!
+                        </div>
+                        <div *ngIf="m.state.errors?.pattern">Invalid City!</div>
+                      </div>
                     </div>
                   </div>
                 </form>
