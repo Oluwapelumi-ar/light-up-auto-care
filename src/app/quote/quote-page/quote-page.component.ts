@@ -18,6 +18,7 @@ import {
 
 import { QuoteModel } from './quoteModel';
 import { getLocaleTimeFormat } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-quote-page',
@@ -40,7 +41,7 @@ export class QuotePageComponent implements OnInit {
   vehicle: any;
   clientVehicles: any;
   isQuoteCreated: boolean = false;
-  quoteData!: any;
+  quoteData: any;
   row: any;
   quoteModelObj: QuoteModel = new QuoteModel();
   addQuoteTypeForm!: FormGroup;
@@ -49,11 +50,15 @@ export class QuotePageComponent implements OnInit {
   api: any;
   showAdd!: boolean;
   showUpdate!: boolean;
+  hidden: boolean = false;
+  isPending: any;
+  quoteHistory: [] | undefined;
 
   constructor(
     private fb: FormBuilder,
     private apiServices: ApiService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     //    gotoDynamic() {
     //   //this.router.navigateByUrl('/dynamic', { state: { id:1 , name:'Angular' } });
@@ -86,11 +91,19 @@ export class QuotePageComponent implements OnInit {
       // console.log(data);
     });
 
-    this.quoteData = 'Invoice Info';
+    this.quoteData = [];
   }
 
-  goToInvoice() {
-    this.router.navigate(['/invoice'], { state: { data: this.quoteData } });
+  goToInvoice(row: any) {
+    this.router.navigate(['/invoice'], {
+      state: { data: row },
+    });
+  }
+
+  viewQuote(row: any) {
+    this.router.navigate(['/view-quote'], {
+      state: { data: row },
+    });
   }
 
   onUnitChange(event: any) {
@@ -205,7 +218,11 @@ export class QuotePageComponent implements OnInit {
     const payload: QuoteModel = {
       ...this.addQuoteTypeForm.value,
     };
+    console.log(payload);
+
     this.apiServices.updateQuote(payload, this.editID).subscribe((res: any) => {
+      console.log(res);
+
       alert('Updated Successfully');
       let ref = document.getElementById('cancel');
       ref?.click();
@@ -251,16 +268,46 @@ export class QuotePageComponent implements OnInit {
     ref?.click();
   }
 
-  // updateQuoteType(){
-  //   const payload = {
-  //     ...this.addQuoteTypeForm.value,
-  //   }
-  //   this.api.updateQuote(this.quoteModelObj, this.editID)
-  //   .subscribe((res: any) =>{
-  //     alert("Updated Successfully");
-  //     let ref = document.getElementById('cancel')
-  //     ref?.click()
-  //     this.addQuoteTypeForm.reset();
-  //   })
-  // }
+  confirmBox(row: any) {
+    // this.quoteModelObj.id = row.id;
+    // this.quoteModelObj.clientId = row.clientId;
+    // this.quoteModelObj.isApproved = true;
+    // this.quoteModelObj.isPending = false;
+    // this.quoteModelObj.vehicleId = row.vehicleId;
+
+    Swal.fire({
+      title: 'Are you sure want to Approve this quote?',
+      text: 'You will not be able to undo this action!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, approve it!',
+      cancelButtonText: 'No, Cancel it',
+    }).then((result: any) => {
+      if (result.value) {
+        console.log('BEFORE');
+        console.log(row);
+        console.log('AFTER');
+        row.isApproved = true;
+        row.isPending = false;
+        row.quoteHistory = null;
+        console.log(row);
+
+        this.apiServices.updateQuote(row, row.id).subscribe((res: any) => {
+          console.log('RESPONSE');
+          console.log(res);
+          if (res.status == 200) {
+            this.hidden = true;
+            Swal.fire('Approved!', 'This quote has been approved.', 'success');
+          } else {
+            Swal.fire('Error!', res.error, 'error');
+          }
+          let ref = document.getElementById('cancel');
+          ref?.click();
+          this.addQuoteTypeForm.reset();
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', 'Your quote file is safe :)', 'error');
+      }
+    });
+  }
 }

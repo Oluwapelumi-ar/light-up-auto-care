@@ -25,6 +25,7 @@ import { VehicleDashboardComponent } from './Vehicle/vehicle-dashboard/vehicle-d
 import { ServiceDashboardComponent } from './Type-of-Services/service-dashboard/service-dashboard.component';
 import { ClientComponent } from './Client-Dashboard/client/client.component';
 import { QuotePageComponent } from './quote/quote-page/quote-page.component';
+import { ViewQuoteComponent } from './view-quote/view-quote.component';
 
 @NgModule({
   declarations: [
@@ -37,10 +38,11 @@ import { QuotePageComponent } from './quote/quote-page/quote-page.component';
     InvoiceComponent,
     StaffComponent,
     CapitalizePipe,
-    QuotePageComponent ,
+    QuotePageComponent,
     VehicleDashboardComponent,
     ServiceDashboardComponent,
     QuotePageComponent,
+    ViewQuoteComponent,
   ],
 
   imports: [

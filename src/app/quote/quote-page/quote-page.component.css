@@ -27,17 +27,17 @@ input {
 /* .d-flex {
   justify-content: flex-start;
 } */
-
+.create,
 .btn-add,
 .btn-edit {
   background-color: rgb(14, 8, 90);
   color: #fff;
 }
 
-.btn-invoice {
+/* .btn-invoice {
   background-color: rgb(40, 32, 157);
   color: #fff;
-}
+} */
 .all-Forms {
   width: 400px;
   height: 450px;
@@ -68,4 +68,10 @@ input {
   height: 30px;
   border-radius: 5px;
   outline: none;
+}
+
+.create-btn {
+  background-color: rgb(40, 32, 157);
+  color: #fff;
+  margin-left: 8em;
 }

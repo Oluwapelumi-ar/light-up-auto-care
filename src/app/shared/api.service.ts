@@ -298,11 +298,14 @@ export class ApiService {
   updateQuote(data: any, id: number): Observable<quote> {
     const putHeaders = new HttpHeaders({
       'content-type': 'application/json',
+      Authorization:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImVtYWlsIjoic3VwZXJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoiU3VwZXIgQWRtaW4iLCJpYXQiOjE2MzI4MjMyMDIsImV4cCI6MTYzMjkwOTYwMn0.vySlgLfJ4BOuDZTDmCWQP4DIUn9T9Njvf8NNFMzLWu4',
     });
 
     return this.http.put<quote>(
       'https://lightup-auto-care.herokuapp.com/quotes/' + id,
-      data
+      data,
+      { headers: putHeaders }
     );
   }
 

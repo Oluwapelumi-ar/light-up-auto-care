@@ -232,7 +232,56 @@
         <!-- ============================================================== -->
         <!-- </div> -->
         <!-- </div> -->
+
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex">
+              <div class="header logo">FROM: Light Up Auto Care</div>
+              <div class="receiver">
+                <h4>TO:</h4>
+                <p>{{ history.state.data.clientName }}</p>
+                <p>Address: {{ history.state.data.billingAddress.address }}</p>
+                <p>City: {{ history.state.data.billingAddress.city }}</p>
+                <p>
+                  PostalCode: {{ history.state.data.billingAddress.postalCode }}
+                </p>
+              </div>
+            </div>
+            <!-- <h4 class="details">Invoice Details</h4> -->
+            <div class="invoice-info">
+              <table class="table">
+                <thead>
+                  <th scope="col">Rep Name:</th>
+                  <th scope="col">Vehicle Name:</th>
+                  <th scope="col">Service:</th>
+                  <th scope="col">Unit:</th>
+                  <th scope="col">Rate:</th>
+                  <th scope="col">Amount</th>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>
+                      {{ history.state.data.billingAddress.name }}
+                    </td>
+                    <td>{{ history.state.data.vehicleName }}</td>
+                    <td>{{ history.state.data.items[0].item }}</td>
+                    <td>{{ history.state.data.items[0].unit }}</td>
+                    <td>{{ history.state.data.items[0].rate }}</td>
+                    <td>{{ history.state.data.items[0].amount }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
+      <button (click)="sendInvoice($event)" class="btn add-btn">
+        Send To Client
+      </button>
     </div>
   </div>
 </div>

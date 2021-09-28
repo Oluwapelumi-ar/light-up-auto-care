@@ -16,6 +16,7 @@ input {
 .add-btn {
   background-color: rgb(14, 8, 90);
   color: #fff;
+  margin: 3em;
 }
 
 .delete-btn {
@@ -23,3 +24,24 @@ input {
   padding: 0 0.1em;
   color: rgb(134, 31, 31);
 }
+
+.logo {
+  margin-right: 26em;
+  color: rgb(38, 130, 158);
+  padding: 0.5em;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.details {
+  text-align: center;
+}
+
+.invoice-info {
+  margin-top: 5em;
+}
+
+/* .d-flex {
+  flex-direction: row;
+  justify-content: space-between;
+} */

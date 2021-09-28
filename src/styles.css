@@ -3,6 +3,9 @@
 
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
+/* 
+import Swal from 'sweetalert2/dist/sweetalert2.js'; */
+
 * {
   box-sizing: border-box;
   padding: 0;
