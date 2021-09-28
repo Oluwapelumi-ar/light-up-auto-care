@@ -179,6 +179,18 @@
                       aria-describedby="nameHelp"
                       formControlName="vehicleName"
                     />
+
+                    <!-- <div
+                      *ngIf="m.vehicleName.touched && m.vehicleName.invalid"
+                      class="alert alert-danger"
+                    >
+                      <div *ngIf="m.vehicleName.errors?.required">
+                        Please enter vehicle name!
+                      </div>
+                      <div *ngIf="m.vehicleName.errors?.pattern">
+                        Invalid VehicleName!
+                      </div>
+                    </div> -->
                   </div>
                   <div class="form-group">
                     <label for="chasis">Chasis</label>
@@ -189,6 +201,18 @@
                       aria-describedby="nameHelp"
                       formControlName="chassis"
                     />
+
+                    <!-- <div
+                      *ngIf="m.chassis.touched && m.chassis.invalid"
+                      class="alert alert-danger"
+                    >
+                      <div *ngIf="m.chassis.errors?.required">
+                        Please enter vehicle Chassis No!
+                      </div>
+                      <div *ngIf="m.chassis.errors?.pattern">
+                        Invalid Chassis No!
+                      </div>
+                    </div> -->
                   </div>
                   <div class="form-group">
                     <label for="model">Model</label>
@@ -199,10 +223,20 @@
                       aria-describedby="nameHelp"
                       formControlName="model"
                     />
+
+                    <!-- <div
+                      *ngIf="m.model.touched && m.model.invalid"
+                      class="alert alert-danger"
+                    >
+                      <div *ngIf="m.model.errors?.required">
+                        Please enter vehicle Model!
+                      </div>
+                      <div *ngIf="m.model.errors?.pattern">Invalid Model!</div>
+                    </div> -->
                   </div>
                   <div class="form-group">
                     <label for="name">Client Name</label>
-                    <select
+                    <!-- <select
                       id="name"
                       aria-describedby="nameHelp"
                       formControlName="name"
@@ -214,7 +248,14 @@
                       >
                         {{ client.name }}
                       </option>
-                    </select>
+                    </select> -->
+
+                    <ng-select
+                      [items]="clientData"
+                      bindLabel="name"
+                      bindValue="id"
+                      formControlName="name"
+                    ></ng-select>
                   </div>
                 </form>
               </div>

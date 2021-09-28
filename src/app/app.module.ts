@@ -2,10 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
-import {
-  HttpClientModule,
-  HTTP_INTERCEPTORS,
-} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -28,6 +25,7 @@ import { VehicleDashboardComponent } from './Vehicle/vehicle-dashboard/vehicle-d
 import { ServiceDashboardComponent } from './Type-of-Services/service-dashboard/service-dashboard.component';
 import { ClientComponent } from './Client-Dashboard/client/client.component';
 import { QuotePageComponent } from './quote/quote-page/quote-page.component';
+import { ViewQuoteComponent } from './view-quote/view-quote.component';
 
 @NgModule({
   declarations: [
@@ -40,9 +38,11 @@ import { QuotePageComponent } from './quote/quote-page/quote-page.component';
     InvoiceComponent,
     StaffComponent,
     CapitalizePipe,
+    QuotePageComponent,
     VehicleDashboardComponent,
     ServiceDashboardComponent,
-    QuotePageComponent
+    QuotePageComponent,
+    ViewQuoteComponent,
   ],
 
   imports: [

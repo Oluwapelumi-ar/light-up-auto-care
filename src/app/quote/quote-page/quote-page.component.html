@@ -1,154 +1,413 @@
 <div class="dashboard-main-wrapper">
+  <!-- ============================================================== -->
+  <!-- navbar -->
+  <!-- ============================================================== -->
+  <app-header></app-header>
+  <!-- ============================================================== -->
+  <!-- end navbar -->
+  <!-- ============================================================== -->
 
-    <!-- ============================================================== -->
-    <!-- navbar -->
-    <!-- ============================================================== -->
-    <app-header></app-header>
-    <!-- ============================================================== -->
-    <!-- end navbar -->
-    <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- left sidebar -->
+  <!-- ============================================================== -->
+  <app-side-menu></app-side-menu>
+  <!-- ============================================================== -->
+  <!-- end left sidebar -->
+  <!-- ============================================================== -->
 
-    <!-- ============================================================== -->
-    <!-- left sidebar -->
-    <!-- ============================================================== -->
-    <app-side-menu></app-side-menu>
-    <!-- ============================================================== -->
-    <!-- end left sidebar -->
-    <!-- ============================================================== -->
+  <div class="dashboard-wrapper">
+    <div class="dashboard-finance">
+      <div class="container-fluid dashboard-content">
+        <nav class="navbar navbar-light bg-light">
+          <div class="container d-flex">
+            <h2>Quote Page</h2>
+            <button
+              type="button"
+              data-toggle="modal"
+              data-target="#exampleModal"
+              class="btn create"
+            >
+              Add New Quote
+            </button>
+          </div>
+        </nav>
 
-    <div class="dashboard-wrapper">
-        <div class="dashboard-finance">
-            <div class="container-fluid dashboard-content">
-                <nav class="navbar navbar-light bg-light">
-                    <div class="container d-flex">
-                        <h2>Quote Page</h2> 
-                        <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-success">Add New Quote</button>
-                    </div>
-                </nav>  
+        <table class="table table-bordered mt-3">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Client Name</th>
+              <th scope="col">Vehicle Name</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Actions</th>
+              <!-- <th scope="col">Status</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of quoteData; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ row.clientName }}</td>
+              <td>{{ row.vehicleName }}</td>
+              <td>{{ row.items[0].amount }}</td>
 
-                
-                
-                <table class="table table-bordered mt-3">
-                    <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                            <th scope="col">Quote Id</th>
-                            <th scope="col">Client Name</th>
-                            <th scope="col">Vehicle Name</th>
-                            <th scope="col">Services</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Actions</th>   
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Quote101</td>
-                            <td>Shukurah Bakare</td>
-                            <td>Toyota Camry</td>
-                            <td>Alignment</td>
-                            <td>#20,000</td>
-                            <td>
-                                <button class="btn btn-secondary mx-3">View</button>
-                                <button class="btn btn-info">Edit</button>
-                                <button class="btn btn-danger mx-3">Delete</button>
-                            </td>
-                        </tr>
-                         
-                    </tbody>
+              <td>
+                <!-- <button+
 
-            </table>
+                  class="btn btn-secondary mx-3"
+                  data-toggle="modal"
+                  data-target="#ViewsModal"
+                  type="button"
+                  (click)="onViewClick(row)"
+                >
+                  View
+                </button+>
 
+                <button
+                  class="btn btn-info"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                  type="button"
+                  (click)="onEdit(row)"
+                >
+                  Edit
+                </button>
 
-            <!-- Button trigger modal -->
+                <button class="btn btn-danger mx-3" (click)="deleteQuote(row)">
+                  Delete
+                </button> -->
 
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title mx-5 my-3" id="exampleModalLabel">Quote Details</h4>
-          <button class="close bg-danger btn btn-danger mx-5 my-1" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+                <div class="dropdown d-flex">
+                  <button
+                    class="btn btn-add dropdown-toggle"
+                    type="button"
+                    id="dropdownMenu2"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  ></button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <button
+                      (click)="onViewClick(row)"
+                      class="dropdown-item"
+                      type="button"
+                      (click)="viewQuote(row)"
+                    >
+                      View
+                    </button>
+                    <button
+                      data-toggle="modal"
+                      data-target="#exampleModal"
+                      (click)="onEdit(row)"
+                      class="dropdown-item"
+                      type="button"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      (click)="deleteQuote(row)"
+                      class="dropdown-item"
+                      type="button"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      (click)="confirmBox(row)"
+                      class="dropdown-item"
+                      type="button"
+                    >
+                      Approve
+                    </button>
+                  </div>
+                  <button
+                    (click)="goToInvoice(row)"
+                    type="button"
+                    class="btn create-btn"
+                    *ngIf="hidden"
+                  >
+                    Create Invoice
+                  </button>
+                </div>
+              </td>
+              <!-- <td>
+                <div class="dropdown d-flex">
+                  <button
+                    class="btn btn-add dropdown-toggle"
+                    type="button"
+                    id="dropdownMenu2"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  ></button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <button class="dropdown-item" type="button">Approve</button>
+                  </div>
+                </div>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+
+        <div
+          class="modal fade"
+          id="ViewsModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">View Quote</h5>
+                <button
+                  type="button"
+                  class="close bg-danger btn btn-danger mx-5 my-1"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <!-- <pre>{{viewQte?.clientName}}</pre>  don't uncomment-->
+                <div class="form-group">
+                  <label> Client Name </label><br />
+                  <pre>{{ viewQte?.clientName }}</pre>
+                  <!-- <input formControlName="clientId" readonly/>   don't uncomment-->
+                  <!--   don't uncomment <ng-select [items]="clients"  bindLabel="name"  bindValue="id" formControlName="clientId" (change)="trackClientId($event)"></ng-select> -->
+                </div>
+
+                <div class="form-group">
+                  <label> Vehicle Name </label><br />
+                  <pre>{{ viewQte?.vehicleName }}</pre>
+
+                  <!-- <input formControlName="vehicleId" readonly/>  don't uncomment -->
+                  <!--   don't uncomment <ng-select [items]="vehicle" bindLabel="vehicleName" bindValue="id" formControlName="vehicleId"></ng-select> -->
+                </div>
+
+                <div *ngFor="let item of viewQte?.items">
+                  <div class="form-group" *ngFor="let item of viewQte?.items">
+                    <label> Services </label><br />
+                    <pre>{{ item.item }}</pre>
+
+                    <!--   don't uncomment <input formControlName="item" readonly/> -->
+                  </div>
+
+                  <div class="form-group">
+                    <label> Unit </label><br />
+                    <pre>{{ item.unit }}</pre>
+
+                    <!--  don't uncomment <input formControlName="unit" readonly/> -->
+                  </div>
+
+                  <div class="form-group">
+                    <label> Rate </label><br />
+                    <pre>{{ item.rate }}</pre>
+
+                    <!--   don't uncomment  <input formControlName="rate" readonly/> -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button class="btn btn-danger">Close</button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="modal-body">
-            <div *ngIf="isQuoteCreated" class="bg-success">Quote Added Successfully</div> 
-            <form #addQuoteForm="ngForm" class="all-Forms" (submit)="addQuoteType" [formGroup]="addQuoteTypeForm">
 
-                <div class="form-group">
-                    <label>
-                    Client Name
-                    </label>
-                    <ng-select  [items]="clients"  bindLabel="name"  bindValue="id" formControlName="clientId" (keyup)="trackClientId()"></ng-select>
-                    <div class="text-danger" *ngIf="addQuoteTypeForm.get('clientId')?.hasError('required') && addQuoteTypeForm.get('clientId')?.touched">Client Id is required</div>
-                    <div class="text-danger" *ngIf="addQuoteTypeForm.get('clientId')?.hasError('minlength') && addQuoteTypeForm.get('clientId')?.touched">Client Id should be a minimum length of 10 characters</div>
-                    <div class="text-danger" *ngIf="addQuoteTypeForm.get('clientId')?.hasError('maxlength') && addQuoteTypeForm.get('clientId')?.touched">Client Id should have a maximum length of 20 characters</div>
-                       
-
+        <!-- Modal -->
+        <div class="container">
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title mx-5 my-3" id="exampleModalLabel">
+                    Quote Details
+                  </h4>
+                  <button
+                    class="close bg-danger btn btn-danger mx-5 my-1"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
+                <div class="modal-body">
+                  <form class="all-Forms" [formGroup]="addQuoteTypeForm">
+                    <div class="form-group">
+                      <label> Client Name </label>
+                      <ng-select
+                        [items]="clients"
+                        bindLabel="name"
+                        style="text-transform: capitalize"
+                        bindValue="id"
+                        formControlName="clientId"
+                        (change)="trackClientId($event)"
+                      ></ng-select>
+                      <div
+                        class="text-danger"
+                        *ngIf="
+                          addQuoteTypeForm
+                            .get('clientId')
+                            ?.hasError('required') &&
+                          addQuoteTypeForm.get('clientId')?.touched
+                        "
+                      >
+                        Client Id is required
+                      </div>
+                      <div
+                        class="text-danger"
+                        *ngIf="
+                          addQuoteTypeForm
+                            .get('clientId')
+                            ?.hasError('minlength') &&
+                          addQuoteTypeForm.get('clientId')?.touched
+                        "
+                      >
+                        Client Id should be a minimum length of 10 characters
+                      </div>
+                      <div
+                        class="text-danger"
+                        *ngIf="
+                          addQuoteTypeForm
+                            .get('clientId')
+                            ?.hasError('maxlength') &&
+                          addQuoteTypeForm.get('clientId')?.touched
+                        "
+                      >
+                        Client Id should have a maximum length of 20 characters
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                    <label>
-                    Vehicle Name
-                    </label>
-                    <ng-select [items]="vehicle" bindLabel="vehicleName" bindValue="id" formControlName="vehicleId"></ng-select>
-                    <div class="text-danger" *ngIf="vehicleIDControl?.hasError('required') && vehicleIDControl?.touched">Vehicle Id is required</div>
-                    <div class="text-danger" *ngIf="vehicleIDControl?.hasError('maxlength') && vehicleIDControl?.touched">Vehicle Id should be a maximum length of 10 characters</div>
-                    <div class="text-danger" *ngIf="vehicleIDControl?.hasError('minlength') && vehicleIDControl?.touched">Vehicle Id should be a minimum length of 5characters</div>
+                    <div class="form-group">
+                      <label> Vehicle Name </label>
+                      <ng-select
+                        [items]="vehicle"
+                        bindLabel="vehicleName"
+                        style="text-transform: capitalize"
+                        bindValue="id"
+                        formControlName="vehicleId"
+                      ></ng-select>
+                      <div
+                        class="text-danger"
+                        *ngIf="
+                          vehicleIDControl?.hasError('required') &&
+                          vehicleIDControl?.touched
+                        "
+                      >
+                        Vehicle Id is required
+                      </div>
+                      <div
+                        class="text-danger"
+                        *ngIf="
+                          vehicleIDControl?.hasError('maxlength') &&
+                          vehicleIDControl?.touched
+                        "
+                      >
+                        Vehicle Id should be a maximum length of 10 characters
+                      </div>
+                      <div
+                        class="text-danger"
+                        *ngIf="
+                          vehicleIDControl?.hasError('minlength') &&
+                          vehicleIDControl?.touched
+                        "
+                      >
+                        Vehicle Id should be a minimum length of 5characters
+                      </div>
+                    </div>
 
-                </div>
+                    <div class="form-group" formArrayName="items">
+                      <label>Services</label>
 
-                <div class="form-group" formArrayName="items">
-                    <label>Services</label>
-                    
-                    <div *ngFor="let creds of itemsFormArray.controls; let i = index;" >
+                      <div
+                        *ngFor="
+                          let creds of itemsFormArray.controls;
+                          let i = index
+                        "
+                      >
                         <ng-container [formGroupName]="i">
+                          <div class="form-group">
+                            <ng-select
+                              [items]="item"
+                              bindLabel="name"
+                              style="text-transform: capitalize"
+                              bindValue="name"
+                              formControlName="item"
+                            ></ng-select>
+                            <div (click)="removeItems(i)">
+                              <i class="fas fa-trash"></i>
+                            </div>
+                            <div (click)="addItems()">
+                              <i class="fas fa-plus"></i>
+                            </div>
+                          </div>
+
+                          <div class="marginalized">
                             <div class="form-group">
-                                
-                            <ng-select [items]="item" bindLabel="name" bindValue="name" formControlName="item"></ng-select>
-                                <div (click)="removeItems(i)"><i class="fas fa-trash"></i></div>
-                                <div (click)="addItems()"><i class="fas fa-plus"></i> </div>
-                               
+                              <input
+                                type="number"
+                                formControlName="unit"
+                                class="form-control my-4"
+                                (change)="onUnitChange($event)"
+                                placeholder="Unit"
+                              />
                             </div>
 
-                        <div class="marginalized">
-                            <div class="form-group">    
-                            <input type="number" formControlName="unit" class="form-control my-4" placeholder="Unit"> 
-                                                          
-                            </div>
-
                             <div class="form-group">
-                            <input type="number" formControlName="rate" class="form-control my-4" placeholder="Rate">
+                              <input
+                                type="number"
+                                formControlName="rate"
+                                class="form-control my-4"
+                                placeholder="Rate"
+                              />
                             </div>
-
-                            <div class="form-group">
-                             <input type="number" formControlName="amount" class="form-control my-4" placeholder="Amount">
-                            </div>
-                        </div>
-                             </ng-container>
+                          </div>
+                        </ng-container>
+                      </div>
                     </div>
-
+                  </form>
                 </div>
-                <!-- <button (click)="updateQuote">Update Quote</button>
-                <button (click)="deleteQuote">Delete Quote</button> -->
-                <!-- <p> {{ quotes | json}}</p> -->
-
-                <!-- <ul *ngFor="let quote of quotes">
-                    <li>{{ quote }}</li>
-                </ul> -->
-            </form> 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button (click)="addQuoteType()" [disabled]="!addQuoteTypeForm.valid" type="button" class="btn btn-primary">Add</button>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="cancel"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    (click)="addQuoteType()"
+                    *ngIf="!test"
+                    [disabled]="!addQuoteTypeForm.valid"
+                    type="button"
+                    class="btn btn-primary"
+                  >
+                    Add
+                  </button>
+                  <button
+                    (click)="updateQuote()"
+                    *ngIf="test"
+                    type="button"
+                    class="btn btn-primary"
+                  >
+                    Update
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-            <!-- <button (click)="enableEditMethod(row)" *ngIf="!enableEdit" 
-                        type="button" data-toggle="modal" data-target="#exampleModalLong" class="btn edit-btn ">Edit</button>
-                        <button (click)="deleteQuote(row)" class="btn btn-danger mx-3">Delete</button> -->
-            </div>
-            
+</div>

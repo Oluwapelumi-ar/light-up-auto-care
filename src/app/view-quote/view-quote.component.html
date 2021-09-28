@@ -1,0 +1,86 @@
+<div class="dashboard-main-wrapper">
+  <!-- ============================================================== -->
+  <!-- navbar -->
+  <!-- ============================================================== -->
+  <app-header></app-header>
+  <!-- ============================================================== -->
+  <!-- end navbar -->
+  <!-- ============================================================== -->
+
+  <!-- ============================================================== -->
+  <!-- left sidebar -->
+  <!-- ============================================================== -->
+  <app-side-menu></app-side-menu>
+  <!-- ============================================================== -->
+  <!-- end left sidebar -->
+  <!-- ============================================================== -->
+
+  <!-- wrapper  -->
+  <!-- ============================================================== -->
+  <div class="dashboard-wrapper">
+    <div class="dashboard-ecommerce">
+      <div class="container-fluid dashboard-content">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex">
+              <div class="header logo">FROM: Light Up Auto Care</div>
+              <div class="receiver">
+                <h4>TO:</h4>
+                <p>{{ history.state.data.clientName }}</p>
+                <p>Address: {{ history.state.data.billingAddress.address }}</p>
+                <p>City: {{ history.state.data.billingAddress.city }}</p>
+                <p>
+                  PostalCode: {{ history.state.data.billingAddress.postalCode }}
+                </p>
+              </div>
+            </div>
+
+            <div class="invoice-info">
+              <table class="table">
+                <thead>
+                  <th scope="col">Rep Name:</th>
+                  <th scope="col">Vehicle Name:</th>
+                  <th scope="col">Service:</th>
+                  <th scope="col">Unit:</th>
+                  <th scope="col">Rate:</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Created By:</th>
+                  <th scope="col">UpdatedOn:</th>
+                  <th scope="col">Date:</th>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>
+                      {{ history.state.data.billingAddress.name }}
+                    </td>
+                    <td>{{ history.state.data.vehicleName }}</td>
+                    <td>{{ history.state.data.items[0].item }}</td>
+                    <td>{{ history.state.data.items[0].unit }}</td>
+                    <td>{{ history.state.data.items[0].rate }}</td>
+                    <td>{{ history.state.data.items[0].amount }}</td>
+                    <td>{{ history.state.data.createdByName }}</td>
+                    <td>
+                      {{
+                        history.state.data.updatedOn | date: "yyyy-MM-dd HH:mm"
+                      }}
+                    </td>
+                    <td>
+                      {{ history.state.data.createdOn | date: "yyyy-MM-dd" }}
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <button (click)="sendInvoice($event)" class="btn add-btn">
+        Send To Client
+      </button> -->
+    </div>
+  </div>
+</div>

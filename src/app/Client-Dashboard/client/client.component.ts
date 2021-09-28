@@ -26,13 +26,30 @@ export class ClientComponent implements OnInit {
 
   ngOnInit(): void {
     this.formValue = this.formbuilder.group({
-      name: [''],
-      email: [''],
-      telephone: [''],
-      address: [''],
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
+        ],
+      ],
+      telephone: [
+        '',
+        [Validators.required, Validators.pattern('0+[0-9 ]{10}')],
+      ],
+      address: ['', Validators.pattern('')],
+      repName: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+      postalCode: [0, [Validators.required, Validators.pattern('^\\d{6}$')]],
     });
 
     this.getAllClient();
+  }
+
+  get m() {
+    return this.formValue.controls;
   }
 
   clickAddClient() {
@@ -45,7 +62,12 @@ export class ClientComponent implements OnInit {
     this.clientModelObj.name = this.formValue.value.name;
     this.clientModelObj.email = this.formValue.value.email;
     this.clientModelObj.telephone = this.formValue.value.telephone;
-    // this.clientModelObj.address = this.formValue.value.address;
+    this.clientModelObj.billingAddress.repName = this.formValue.value.repName;
+    this.clientModelObj.billingAddress.address = this.formValue.value.address;
+    this.clientModelObj.billingAddress.city = this.formValue.value.city;
+    this.clientModelObj.billingAddress.state = this.formValue.value.state;
+    this.clientModelObj.billingAddress.postalCode =
+      this.formValue.value.postalCode;
 
     this.api.postClient(this.clientModelObj).subscribe(
       (res) => {
@@ -64,7 +86,12 @@ export class ClientComponent implements OnInit {
   getAllClient() {
     this.api.getAllClients().subscribe((res: any) => {
       this.clientData = res.payload;
-      console.log(this.clientData, 'ew');
+      let allClients = this.clientData.sort((a: any, b: any) => {
+        b.id - a.id;
+      });
+      console.log(allClients);
+
+      return allClients;
     });
   }
 
@@ -87,7 +114,10 @@ export class ClientComponent implements OnInit {
     this.formValue.controls['name'].setValue(row.name);
     this.formValue.controls['email'].setValue(row.email);
     this.formValue.controls['telephone'].setValue(row.telephone);
-    this.formValue.controls['address'].setValue(row.address);
+
+    // this.formValue.patchValue({
+    //   billingAddress: { ...row.billingAddress },
+    // });
   }
 
   updateClientDetails() {
@@ -95,10 +125,12 @@ export class ClientComponent implements OnInit {
     this.clientModelObj.email = this.formValue.value.email;
     this.clientModelObj.telephone = this.formValue.value.telephone;
     this.clientModelObj.name = this.formValue.value.name;
-    // this.clientModelObj.billingAddress = this.formValue.value.address;
-    // this.clientModelObj.city = this.formValue.value.city;
-    // this.clientModelObj.postalCode = this.formValue.value.postalCode;
-    // this.clientModelObj.state = this.formValue.value.state;
+    this.clientModelObj.billingAddress.repName = this.formValue.value.repName;
+    this.clientModelObj.billingAddress.address = this.formValue.value.address;
+    this.clientModelObj.billingAddress.city = this.formValue.value.city;
+    this.clientModelObj.billingAddress.postalCode =
+      this.formValue.value.postalCode;
+    this.clientModelObj.billingAddress.state = this.formValue.value.state;
 
     this.api
       .updateClient(this.clientModelObj, this.clientModelObj.id)

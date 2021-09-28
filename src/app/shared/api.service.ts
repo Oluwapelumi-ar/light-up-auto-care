@@ -7,14 +7,14 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 
 interface staffDetails {
-  id?:string;
+  id?: string;
   name: string;
   email: string;
   role: string;
   password: string;
 }
 
-interface quote{
+interface quote {
   id?: number;
   clientId: number;
   vehicleId: number;
@@ -24,16 +24,17 @@ interface quote{
     unit: number;
     rate: number;
     amount: number;
-}[];
+  }[];
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-
+  // deleteQuote(id: any) {
+  //   throw new Error('Method not implemented.');
+  // }
   constructor(private http: HttpClient) {}
-
 
   // handleError(error: { error: { message: any; }; status: any; message: any; }) {
   //   let errorMessage = '';
@@ -48,13 +49,12 @@ export class ApiService {
   //   return throwError(errorMessage);
   // }
 
-
   // Client
 
   postClient(data: any) {
     console.log(data);
     return this.http
-      .post<any>('https://rocky-spire-51361.herokuapp.com/client', data)
+      .post<any>('https://lightup-auto-care.herokuapp.com/clients', data)
       .pipe(
         map((res: any) => {
           return res;
@@ -64,7 +64,7 @@ export class ApiService {
 
   getAllClients() {
     return this.http
-      .get<any>('https://rocky-spire-51361.herokuapp.com/client')
+      .get<any>('https://lightup-auto-care.herokuapp.com/clients')
       .pipe(
         map((res: any) => {
           return res;
@@ -74,7 +74,7 @@ export class ApiService {
 
   getClientByID(ID: number) {
     return this.http
-      .get<any>(`https://rocky-spire-51361.herokuapp.com/client/${ID}`)
+      .get<any>(`https://lightup-auto-care.herokuapp.com/clients/${ID}`)
       .pipe(
         map((res: any) => {
           return res;
@@ -84,7 +84,7 @@ export class ApiService {
 
   updateClient(data: any, id: number) {
     return this.http
-      .put<any>('https://rocky-spire-51361.herokuapp.com/client/' + id, data)
+      .put<any>('https://lightup-auto-care.herokuapp.com/clients/' + id, data)
       .pipe(
         map((res: any) => {
           return res;
@@ -94,7 +94,7 @@ export class ApiService {
 
   deleteClient(id: number) {
     return this.http
-      .delete<any>('https://rocky-spire-51361.herokuapp.com/client/' + id)
+      .delete<any>('https://lightup-auto-care.herokuapp.com/clients/' + id)
       .pipe(
         map((res: any) => {
           return res;
@@ -119,7 +119,7 @@ export class ApiService {
 
   getAllStaffs() {
     return this.http
-      .get<any>('https://lightup-auto-care.herokuapp.com/staffs/')
+      .get<any>('https://lightup-auto-care.herokuapp.com/staffs')
       .pipe(
         map((res: any) => {
           return res;
@@ -132,19 +132,18 @@ export class ApiService {
       .get<any>(`https://lightup-auto-care.herokuapp.com/staffs/${ID}`)
       .pipe(
         map((res: any) => {
-          console.log(res)
+          console.log(res);
           return res;
-          
         })
       );
   }
 
-  updateStaff(data: any, id: number ) {
+  updateStaff(data: any, id: number) {
     return this.http
       .put<any>('https://lightup-auto-care.herokuapp.com/staffs/' + id, data)
       .pipe(
         map((res: any) => {
-          console.log("LOG: "+res);
+          console.log('LOG: ' + res);
           return res;
         })
       );
@@ -152,12 +151,13 @@ export class ApiService {
 
   deleteStaff(id: number) {
     return this.http
-      .delete<staffDetails>('https://lightup-auto-care.herokuapp.com/staffs/' + id)
+      .delete<staffDetails>(
+        'https://lightup-auto-care.herokuapp.com/staffs/' + id
+      )
       .pipe(
         map((res: any) => {
           return res;
         })
-        
       );
   }
 
@@ -165,14 +165,26 @@ export class ApiService {
 
   postVehicle(data: any) {
     return this.http.post<any>(
-      'https://rocky-spire-51361.herokuapp.com/vehicle',
+      'https://lightup-auto-care.herokuapp.com/vehicles',
       data
     );
   }
 
   getVehicle() {
     return this.http
-      .get<any>('https://rocky-spire-51361.herokuapp.com/vehicle')
+      .get<any>('https://lightup-auto-care.herokuapp.com/vehicles')
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  getClientVehicles(clientId: any) {
+    return this.http
+      .get<any>(
+        `https://lightup-auto-care.herokuapp.com/vehicles?clientId=${clientId}`
+      )
       .pipe(
         map((res: any) => {
           return res;
@@ -182,7 +194,7 @@ export class ApiService {
 
   updateVehicle(data: any, id: number) {
     return this.http
-      .put<any>('https://rocky-spire-51361.herokuapp.com/vehicle' + id, data)
+      .put<any>('https://lightup-auto-care.herokuapp.com/vehicles' + id, data)
       .pipe(
         map((res: any) => {
           return res;
@@ -192,7 +204,7 @@ export class ApiService {
 
   deleteVehicle(id: number) {
     return this.http
-      .delete<any>('https://rocky-spire-51361.herokuapp.com/vehicle/' + id)
+      .delete<any>('https://lightup-auto-care.herokuapp.com/vehicles/' + id)
       .pipe(
         map((res: any) => {
           return res;
@@ -205,7 +217,7 @@ export class ApiService {
   postService(data: any) {
     return this.http
       .post<any>(
-        'https://rocky-spire-51361.herokuapp.com/personalisedService',
+        'https://lightup-auto-care.herokuapp.com/personalisedServices',
         data
       )
       .pipe(
@@ -217,7 +229,7 @@ export class ApiService {
 
   getAllService() {
     return this.http
-      .get<any>('https://rocky-spire-51361.herokuapp.com/personalisedService')
+      .get<any>('https://lightup-auto-care.herokuapp.com/personalisedServices')
       .pipe(
         map((res: any) => {
           return res;
@@ -228,7 +240,7 @@ export class ApiService {
   updateService(data: any, id: number) {
     return this.http
       .put<any>(
-        'https://rocky-spire-51361.herokuapp.com/personalisedService/' + id,
+        'https://lightup-auto-care.herokuapp.com/personalisedServices/' + id,
         data
       )
       .pipe(
@@ -241,7 +253,7 @@ export class ApiService {
   deleteService(id: number) {
     return this.http
       .delete<any>(
-        'https://rocky-spire-51361.herokuapp.com/personalisedService/' + id
+        'https://lightup-auto-care.herokuapp.com/personalisedServices/' + id
       )
       .pipe(
         map((res: any) => {
@@ -250,60 +262,64 @@ export class ApiService {
       );
   }
 
+  //Quote-Pages Services
 
- //Quote-Pages Services
-
-  getQuotes():Observable<quote>{
+  getQuotes(): Observable<quote> {
     const headers = new HttpHeaders({
       'content-type': 'application/json',
-      'authenticationToken': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoic3VwZXIgYWRtaW4iLCJpYXQiOjE2MzA5MzgzNjMsImV4cCI6MTYzMTAyNDc2M30.cS8eVVLPIKMlzoHVfKftBHkvKp1cU-8_XnWBPbrf5ls',
     });
-    const params = new HttpParams()
-    .set('pageSize', '10')
-    .set('pageOptions', '100');
+    const params = new HttpParams();
 
-    return this.http.get<quote>('https://rocky-spire-51361.herokuapp.com/quote', { headers:headers, params : params });
-    
+    return this.http.get<quote>(
+      'https://lightup-auto-care.herokuapp.com/quotes',
+      { headers: headers }
+    );
   }
-
 
   //post Quote request
-  postQuote(body: any){
+  postQuote(data: any) {
     const customHeaders = new HttpHeaders({
-      'autheticationKey': 'testing2323'
+      autheticationKey: 'testing2323',
     });
-   return this.http.post('https://rocky-spire-51361.herokuapp.com/quote', body, { headers:customHeaders})
-
+    return this.http.post(
+      'https://lightup-auto-care.herokuapp.com/quotes',
+      data,
+      { headers: customHeaders }
+    );
   }
 
+  // updateQuote(): Observable<quote> {
+  //   const putHeaders = new HttpHeaders({
+  //     'content-type': 'application/json',
+  //     authenticationToken:
+  //       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoic3VwZXIgYWRtaW4iLCJpYXQiOjE2MzA5MzgzNjMsImV4cCI6MTYzMTAyNDc2M30.cS8eVVLPIKMlzoHVfKftBHkvKp1cU-8_XnWBPbrf5ls',
+  //   });
+  // }
+  updateQuote(data: any, id: number): Observable<quote> {
+    const putHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      Authorization:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImVtYWlsIjoic3VwZXJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoiU3VwZXIgQWRtaW4iLCJpYXQiOjE2MzI4MjMyMDIsImV4cCI6MTYzMjkwOTYwMn0.vySlgLfJ4BOuDZTDmCWQP4DIUn9T9Njvf8NNFMzLWu4',
+    });
 
-updateQuote(): Observable<quote>{
-  const putHeaders = new HttpHeaders({
-    'content-type': 'application/json',
-    'authenticationToken': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoic3VwZXIgYWRtaW4iLCJpYXQiOjE2MzA5MzgzNjMsImV4cCI6MTYzMTAyNDc2M30.cS8eVVLPIKMlzoHVfKftBHkvKp1cU-8_XnWBPbrf5ls',
-  });
+    return this.http.put<quote>(
+      'https://lightup-auto-care.herokuapp.com/quotes/' + id,
+      data,
+      { headers: putHeaders }
+    );
+  }
 
-  const putParams = new HttpParams()
-  .set('source', 'googleAnalytics');
+  deleteQuote(id: number): Observable<quote> {
+    return this.http.delete<quote>(
+      'https://lightup-auto-care.herokuapp.com/quotes/' + id
+    );
+  }
 
-  return this.http.put<quote>('https://rocky-spire-51361.herokuapp.com/quote', { headers:Headers, params : putParams });
+  //  const deleteParams = new HttpParams().set('userRole', 'admin');
 
-}
-
-
-deleteQuote(id: number): Observable<quote>{
-
-  const deleteHeaders = new HttpHeaders({
-    'expiryToken': '15',
-    'authenticationToken': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoic3VwZXIgYWRtaW4iLCJpYXQiOjE2MzA5MzgzNjMsImV4cCI6MTYzMTAyNDc2M30.cS8eVVLPIKMlzoHVfKftBHkvKp1cU-8_XnWBPbrf5ls',
-  });
-
-  const deleteParams = new HttpParams()
-  .set('userRole', 'admin');
-
-  return this.http.delete<quote>('https://rocky-spire-51361.herokuapp.com/quote' + id, { headers:deleteHeaders, params : deleteParams });
-
-
-}
- 
+  getClientAndVehicle() {
+    return this.http.get(
+      'https://lightup-auto-care.herokuapp.com/vehicles?clientId=1'
+    );
+  }
 }
