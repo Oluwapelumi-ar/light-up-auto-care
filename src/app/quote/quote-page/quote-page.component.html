@@ -37,7 +37,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let row of quoteData; let i = index">
+                        <tr *ngFor="let row of quoteData; let i = index ">
                             <td>{{ i+1 }}</td>
                             <td>{{ row.clientName}}</td>
                             <td>{{row.vehicleName}}</td>
@@ -54,10 +54,8 @@
 
                                 <button class="btn btn-danger mx-3" (click)="deleteQuote(row)">Delete</button>
                             </td>
-                        </tr>
-                         
+                        </tr>    
                     </tbody>
-
             </table>
 
 
