@@ -57,8 +57,8 @@
                     <td>{{ history.state.data.vehicleName }}</td>
                     <td>{{ history.state.data.items[0].item }}</td>
                     <td>{{ history.state.data.items[0].unit }}</td>
-                    <td>{{ history.state.data.items[0].rate }}</td>
-                    <td>{{ history.state.data.items[0].amount }}</td>
+                    <td>{{ history.state.data.items[0].rate | currency: 'NGN' }}</td>
+                    <td>{{ history.state.data.items[0].amount | currency: 'NGN' }}</td>
                     <td>{{ history.state.data.createdByName }}</td>
                     <td>
                       {{
