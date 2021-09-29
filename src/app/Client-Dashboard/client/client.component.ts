@@ -4,6 +4,7 @@ import {
   FormGroup,
   FormControl,
   Validators,
+  MinLengthValidator,
 } from '@angular/forms';
 
 import { ApiService } from 'src/app/shared/api.service';
@@ -22,11 +23,19 @@ export class ClientComponent implements OnInit {
   showUpdate!: boolean;
 
   clientModelObj: ClientModel = new ClientModel();
+  order: any;
   constructor(private formbuilder: FormBuilder, private api: ApiService) {}
 
   ngOnInit(): void {
     this.formValue = this.formbuilder.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.pattern('[a-zA-Z]+'),
+        ],
+      ],
       email: [
         '',
         [
@@ -39,7 +48,14 @@ export class ClientComponent implements OnInit {
         [Validators.required, Validators.pattern('0+[0-9 ]{10}')],
       ],
       address: ['', Validators.pattern('')],
-      repName: ['', [Validators.required]],
+      repName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.pattern('[a-zA-Z]+'),
+        ],
+      ],
       city: ['', [Validators.required]],
       state: ['', [Validators.required]],
       postalCode: [0, [Validators.required, Validators.pattern('^\\d{6}$')]],
@@ -84,15 +100,22 @@ export class ClientComponent implements OnInit {
   }
 
   getAllClient() {
-    this.api.getAllClients().subscribe((res: any) => {
-      this.clientData = res.payload;
-      let allClients = this.clientData.sort((a: any, b: any) => {
-        b.id - a.id;
-      });
-      console.log(allClients);
-
-      return allClients;
+    this.api.getAllClients().subscribe((data: any) => {
+      let response = data.payload;
+      response = response.sort((a: any, b: any) => b.id - a.id);
+      this.clientData = response;
     });
+  }
+
+  sortData() {
+    if (this.order) {
+      let newArr = this.clientData.sort((a: any, b: any) => a.id - b.id);
+      this.clientData = newArr;
+    } else {
+      let newArr = this.clientData.sort((a: any, b: any) => b.id - a.id);
+      this.clientData = newArr;
+    }
+    this.order = !this.order;
   }
 
   deleteClients(row: any) {

@@ -77,7 +77,7 @@
           <thead>
             <tr>
               <th scope="col">S/N</th>
-              <th scope="col">Name</th>
+              <th class="client" (click)="sortData()" scope="col">Name</th>
               <th scope="col">Email</th>
               <th scope="col">Telephone</th>
               <!-- <th scope="col">Address</th> -->
@@ -148,14 +148,17 @@
                     />
 
                     <div
-                      *ngIf="m.name.touched && m.telephone.invalid"
+                      *ngIf="m.name.touched && m.name.invalid"
                       class="alert alert-danger"
                     >
                       <div *ngIf="m.name.errors?.required">
                         Please enter client's name
                       </div>
                       <div *ngIf="m.name.errors?.pattern">
-                        Name must be more than two letters
+                        Please enter a valid name!
+                      </div>
+                      <div *ngIf="m.name.errors?.minlength">
+                        Name must be at least 4 letters long.
                       </div>
                     </div>
                   </div>
@@ -214,14 +217,17 @@
                       />
 
                       <div
-                        *ngIf="m.name.touched && m.repName.invalid"
+                        *ngIf="m.repName.touched && m.repName.invalid"
                         class="alert alert-danger"
                       >
                         <div *ngIf="m.repName.errors?.required">
-                          A Rep is required!
+                          Please enter client's name
                         </div>
                         <div *ngIf="m.repName.errors?.pattern">
-                          Name must be more than two letters
+                          Please enter a valid name!
+                        </div>
+                        <div *ngIf="m.repName.errors?.minlength">
+                          Name must be at least 4 letters long.
                         </div>
                       </div>
                     </div>

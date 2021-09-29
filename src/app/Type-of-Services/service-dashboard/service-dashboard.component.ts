@@ -20,6 +20,7 @@ export class ServiceDashboardComponent implements OnInit {
   showUpdate!: boolean;
   serviceModelObj: ServiceModel = new ServiceModel();
   alertInstance: string = '';
+  order: any;
 
   constructor(private formbuilder: FormBuilder, private api: ApiService) {}
 
@@ -54,10 +55,29 @@ export class ServiceDashboardComponent implements OnInit {
     );
   }
 
+  // getAllServices() {
+  //   this.api.getAllService().subscribe((res: any) => {
+  //     this.serviceData = res.payload;
+  //     console.log(this.serviceData, 'ew');
+  //   });
+  // }
+
+  sortData() {
+    if (this.order) {
+      let newArr = this.serviceData.sort((a: any, b: any) => a.id - b.id);
+      this.serviceData = newArr;
+    } else {
+      let newArr = this.serviceData.sort((a: any, b: any) => b.id - a.id);
+      this.serviceData = newArr;
+    }
+    this.order = !this.order;
+  }
+
   getAllServices() {
-    this.api.getAllService().subscribe((res: any) => {
-      this.serviceData = res.payload;
-      console.log(this.serviceData, 'ew');
+    this.api.getAllService().subscribe((data: any) => {
+      let response = data.payload;
+      response = response.sort((a: any, b: any) => b.id - a.id);
+      this.serviceData = response;
     });
   }
 
