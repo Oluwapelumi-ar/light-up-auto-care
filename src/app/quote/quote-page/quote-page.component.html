@@ -24,7 +24,7 @@
             <button
               type="button"
               data-toggle="modal"
-              data-target="#exampleModal"
+              data-target="#exampleModalLong"
               class="btn create"
             >
               Add New Quote
@@ -48,7 +48,7 @@
               <td>{{ i + 1 }}</td>
               <td>{{ row.clientName }}</td>
               <td>{{ row.vehicleName }}</td>
-              <td>{{ row.items[0].amount }}</td>
+              <td>{{ row.items[0].amount | currency: 'NGN' }}</td>
 
               <td>
                 <!-- <button+
@@ -147,89 +147,22 @@
           </tbody>
         </table>
 
-        <div
-          class="modal fade"
-          id="ViewsModal"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">View Quote</h5>
-                <button
-                  type="button"
-                  class="close bg-danger btn btn-danger mx-5 my-1"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <!-- <pre>{{viewQte?.clientName}}</pre>  don't uncomment-->
-                <div class="form-group">
-                  <label> Client Name </label><br />
-                  <pre>{{ viewQte?.clientName }}</pre>
-                  <!-- <input formControlName="clientId" readonly/>   don't uncomment-->
-                  <!--   don't uncomment <ng-select [items]="clients"  bindLabel="name"  bindValue="id" formControlName="clientId" (change)="trackClientId($event)"></ng-select> -->
-                </div>
+        
 
-                <div class="form-group">
-                  <label> Vehicle Name </label><br />
-                  <pre>{{ viewQte?.vehicleName }}</pre>
-
-                  <!-- <input formControlName="vehicleId" readonly/>  don't uncomment -->
-                  <!--   don't uncomment <ng-select [items]="vehicle" bindLabel="vehicleName" bindValue="id" formControlName="vehicleId"></ng-select> -->
-                </div>
-
-                <div *ngFor="let item of viewQte?.items">
-                  <div class="form-group" *ngFor="let item of viewQte?.items">
-                    <label> Services </label><br />
-                    <pre>{{ item.item }}</pre>
-
-                    <!--   don't uncomment <input formControlName="item" readonly/> -->
-                  </div>
-
-                  <div class="form-group">
-                    <label> Unit </label><br />
-                    <pre>{{ item.unit }}</pre>
-
-                    <!--  don't uncomment <input formControlName="unit" readonly/> -->
-                  </div>
-
-                  <div class="form-group">
-                    <label> Rate </label><br />
-                    <pre>{{ item.rate }}</pre>
-
-                    <!--   don't uncomment  <input formControlName="rate" readonly/> -->
-                  </div>
-                </div>
-              </div>
-
-              <div class="modal-footer">
-                <button class="btn btn-danger">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Modal -->
+        <!--Quote Modal -->
         <div class="container">
           <div
-            class="modal fade"
-            id="exampleModal"
+          class="modal fade bd-example-modal-lg"
+            id="exampleModalLong"
             tabindex="-1"
             role="dialog"
-            aria-labelledby="exampleModalLabel"
+            aria-labelledby="exampleModalLongTitle"
             aria-hidden="true"
           >
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title mx-5 my-3" id="exampleModalLabel">
+                  <h4 class="modal-title mx-5 my-3" id="exampleModalLong">
                     Quote Details
                   </h4>
                   <button
@@ -326,7 +259,7 @@
                     </div>
 
                     <div class="form-group" formArrayName="items">
-                      <label>Services</label>
+                      
 
                       <div
                         *ngFor="
@@ -334,8 +267,17 @@
                           let i = index
                         "
                       >
+                      
                         <ng-container [formGroupName]="i">
                           <div class="form-group">
+                           
+                            <div class="d-flex mt-5" >
+                              <div class="service-title mx-4"><label>Services</label></div>
+                              <div class="btn-delete mb-2">
+                                <button (click)="removeItems(i)" type="button" class="btn btn-outline-danger">Delete service</button>
+                              </div>
+                            </div>
+                           
                             <ng-select
                               [items]="item"
                               bindLabel="name"
@@ -343,37 +285,58 @@
                               bindValue="name"
                               formControlName="item"
                             ></ng-select>
-                            <div (click)="removeItems(i)">
-                              <i class="fas fa-trash"></i>
-                            </div>
-                            <div (click)="addItems()">
-                              <i class="fas fa-plus"></i>
-                            </div>
+
+                
                           </div>
 
-                          <div class="marginalized">
-                            <div class="form-group">
-                              <input
-                                type="number"
-                                formControlName="unit"
-                                class="form-control my-4"
-                                (change)="onUnitChange($event)"
-                                placeholder="Unit"
-                              />
-                            </div>
+                          <div class="form-group">
+                            <label for="unit">Unit</label>
+                            <input
+                              type="number"
+                              formControlName="unit"
+                              class="form-control unit"
+                              (change)="onUnitChange($event)"
+                              placeholder="Enter unit"
+                            />
+                          </div> 
 
-                            <div class="form-group">
-                              <input
-                                type="number"
-                                formControlName="rate"
-                                class="form-control my-4"
-                                placeholder="Rate"
-                              />
-                            </div>
+                          <div class="form-group">
+                            <label for="rate">Rate</label>
+                            <input
+                              type=""
+                              formControlName="rate"
+                              class="form-control rate"
+                              placeholder="Enter rate"
+                            />
+                          </div> 
+
+                          <div class="form-group">
+                            <label for="rate">Amount</label>
+                            <input
+                              type="number"
+                              formControlName="amount"
+                              class="form-control"
+                              placeholder="Enter rate"
+                            />
                           </div>
+
                         </ng-container>
+                        
                       </div>
                     </div>
+
+                    <div class="btn-box">
+                      <button 
+                        (click)="addItems()" 
+                        type="button" 
+                        class="btn btn-primary">{{buttonText}}</button>
+                    </div>
+
+                    <div class="quote-total mb-4">
+                      <h4>Total Amount:</h4>
+                      <p>#20,000.00</p>
+                    </div>
+
                   </form>
                 </div>
                 <div class="modal-footer">

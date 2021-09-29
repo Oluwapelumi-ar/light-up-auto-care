@@ -1,32 +1,38 @@
-.all-Forms {
+/* .all-Forms {
   width: 300px;
   height: 450px;
   float: left;
-}
+} */
 
-input {
+
+/* input {
   width: 300px;
   height: auto;
   border-radius: 5px;
   margin-top: 0px;
-}
+} */
 .fa-trash {
-  position: relative;
-  left: 310px;
-  bottom: 30px;
+  color: red;
+  font-size: 1rem;
 }
-.fa-plus {
+/* .fa-plus {
   position: relative;
   left: 340px;
   bottom: 54px;
-}
-.marginalized {
+} */
+/* .marginalized {
   margin-top: -50px;
+} */
+
+/* .icons {
+  justify-content: flex-start;
+  flex-direction: row;
+} */
+
+.btn-delete {
+  margin-left: 1em;
 }
 
-/* .d-flex {
-  justify-content: flex-start;
-} */
 .create,
 .btn-add,
 .btn-edit {
@@ -40,38 +46,48 @@ input {
 } */
 .all-Forms {
   width: 400px;
-  height: 450px;
-  float: left;
-  overflow: auto;
-  position: relative;
 }
 input {
   width: 300px;
   height: auto;
   border-radius: 5px;
 }
-.fa-trash {
-  position: relative;
+/* .fa-trash {
+  position: relative; 
   left: 370px;
   top: 2px;
+} */
+
+.icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width:50%;
 }
-.fa-plus {
-  position: relative;
-  left: 350px;
-  bottom: 23px;
-}
-.marginalized {
-  margin-top: -50px;
-}
-#ViewsModal input {
+/* #ViewsModal input {
   width: 250px;
   height: 30px;
   border-radius: 5px;
   outline: none;
-}
+} */
 
+
+.quote-total {
+  color: rgb(40, 32, 157);
+  float: right;
+  margin-left: 15em ;
+}
 .create-btn {
   background-color: rgb(40, 32, 157);
   color: #fff;
   margin-left: 8em;
 }
+
+.btn-delete {
+  margin-left: 10em;
+}
+
+/* .header {
+  flex-direction: row;
+  justify-content: flex-start;
+} */

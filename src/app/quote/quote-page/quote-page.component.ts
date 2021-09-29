@@ -53,6 +53,7 @@ export class QuotePageComponent implements OnInit {
   hidden: boolean = false;
   isPending: any;
   quoteHistory: [] | undefined;
+  buttonText: String = 'Add service';
 
   constructor(
     private fb: FormBuilder,
@@ -92,6 +93,7 @@ export class QuotePageComponent implements OnInit {
     });
 
     this.quoteData = [];
+    this.checkAddButton();
   }
 
   goToInvoice(row: any) {
@@ -160,6 +162,15 @@ export class QuotePageComponent implements OnInit {
     );
   }
 
+  // items: this.fb.array([
+  // newItemsFormArray(): FormGroup {
+  //   return this.fb.group({
+  //     item: '',
+  //     rate: '',
+  //     unit: ''
+  //   })
+  // }
+
   //getting values from Items Array
   get itemsFormArray(): FormArray {
     return this.addQuoteTypeForm.get('items') as FormArray;
@@ -199,6 +210,7 @@ export class QuotePageComponent implements OnInit {
   }
 
   addItems() {
+    
     this.itemsFormArray.push(
       this.fb.group({
         item: '',
@@ -207,11 +219,25 @@ export class QuotePageComponent implements OnInit {
         amount: '',
       })
     );
+    this.checkAddButton();
   }
+
+  checkAddButton(){
+    if(this.itemsFormArray.controls.length > 0){
+      this.buttonText = 'Add more Services';
+    }else{
+      this.buttonText = 'Add Service';
+    }
+  }
+
+  // addItems(){
+  //   this.itemsFormArray.push(this.newItemsFormArray())
+  // }
 
   removeItems(i: any) {
     let arr = this.addQuoteTypeForm.get('items') as FormArray;
     arr.removeAt(i);
+    this.checkAddButton();
   }
 
   updateQuote() {
