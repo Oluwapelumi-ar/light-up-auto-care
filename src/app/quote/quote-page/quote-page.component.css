@@ -4,7 +4,6 @@
   float: left;
 } */
 
-
 /* input {
   width: 300px;
   height: auto;
@@ -62,7 +61,7 @@ input {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  width:50%;
+  width: 50%;
 }
 /* #ViewsModal input {
   width: 250px;
@@ -71,11 +70,10 @@ input {
   outline: none;
 } */
 
-
 .quote-total {
   color: rgb(40, 32, 157);
   float: right;
-  margin-left: 15em ;
+  margin-left: 15em;
 }
 .create-btn {
   background-color: rgb(40, 32, 157);
@@ -91,3 +89,15 @@ input {
   flex-direction: row;
   justify-content: flex-start;
 } */
+
+.totalamt {
+  color: rgb(40, 32, 157);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.total {
+  color: rgb(40, 32, 157);
+  font-size: 0.9rem;
+  font-weight: 600;
+}

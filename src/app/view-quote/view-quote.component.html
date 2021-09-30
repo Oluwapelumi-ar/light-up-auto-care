@@ -38,27 +38,31 @@
             <div class="invoice-info">
               <table class="table">
                 <thead>
-                  <th scope="col">Rep Name:</th>
-                  <th scope="col">Vehicle Name:</th>
-                  <th scope="col">Service:</th>
-                  <th scope="col">Unit:</th>
-                  <th scope="col">Rate:</th>
-                  <th scope="col">Amount</th>
-                  <th scope="col">Created By:</th>
-                  <th scope="col">UpdatedOn:</th>
-                  <th scope="col">Date:</th>
+                  <th scope="col">Rep Name</th>
+                  <th scope="col">Vehicle Name</th>
+                  <!-- <th scope="col">Service:</th> -->
+                  <!-- <th scope="col">Unit:</th>
+                  <th scope="col">Rate:</th> -->
+                  <th scope="col">Total Amount</th>
+                  <th scope="col">Created By</th>
+                  <th scope="col">UpdatedOn</th>
+                  <th scope="col">Date</th>
                 </thead>
 
                 <tbody>
                   <tr>
                     <td>
-                      {{ history.state.data.billingAddress.name }}
+                      {{ history.state.data.billingAddress.repName }}
                     </td>
                     <td>{{ history.state.data.vehicleName }}</td>
-                    <td>{{ history.state.data.items[0].item }}</td>
-                    <td>{{ history.state.data.items[0].unit }}</td>
-                    <td>{{ history.state.data.items[0].rate | currency: 'NGN' }}</td>
-                    <td>{{ history.state.data.items[0].amount | currency: 'NGN' }}</td>
+                    <!-- <td>{{ history.state.data.items[0].item }}</td>
+                    <td>{{ history.state.data.items[0].unit }}</td> -->
+                    <!-- <td>
+                      {{ history.state.data.items[0].rate | currency: "NGN" }}
+                    </td> -->
+                    <td>
+                      {{ history.state.data.totalAmount | currency: "NGN" }}
+                    </td>
                     <td>{{ history.state.data.createdByName }}</td>
                     <td>
                       {{

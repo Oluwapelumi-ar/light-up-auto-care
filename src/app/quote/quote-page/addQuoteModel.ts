@@ -1,5 +1,4 @@
-export class QuoteModel {
-  id!: number;
+export class addQuoteModel {
   clientId: string = '';
   vehicleId: string = '';
   items: any = [
@@ -11,6 +10,4 @@ export class QuoteModel {
     },
   ];
   totalAmount: number = 0;
-  //   isApproved: Boolean = false;
-  //   isPending: Boolean = false;
 }

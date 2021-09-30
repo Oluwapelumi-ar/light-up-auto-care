@@ -38,7 +38,7 @@
               <th scope="col">#</th>
               <th scope="col">Client Name</th>
               <th scope="col">Vehicle Name</th>
-              <th scope="col">Amount</th>
+              <th scope="col">Total Amount</th>
               <th scope="col">Actions</th>
               <!-- <th scope="col">Status</th> -->
             </tr>
@@ -48,7 +48,7 @@
               <td>{{ i + 1 }}</td>
               <td>{{ row.clientName }}</td>
               <td>{{ row.vehicleName }}</td>
-              <td>{{ row.items[0].amount | currency: "NGN" }}</td>
+              <td>{{ row.totalAmount | currency: "NGN" }}</td>
 
               <td>
                 <!-- <button+
@@ -96,7 +96,7 @@
                     </button>
                     <button
                       data-toggle="modal"
-                      data-target="#exampleModal"
+                      data-target="#exampleModalLong"
                       (click)="onEdit(row)"
                       class="dropdown-item"
                       type="button"
@@ -226,6 +226,7 @@
                         style="text-transform: capitalize"
                         bindValue="id"
                         formControlName="vehicleId"
+                        (change)="trackVehicle($event)"
                       ></ng-select>
                       <div
                         class="text-danger"
@@ -290,25 +291,18 @@
                           </div>
 
                           <!-- <div class="marginalized"> -->
+
                           <div class="form-group">
+                            <label for="unit">Unit</label>
                             <input
                               type="number"
                               min="1"
                               max="100"
                               formControlName="unit"
-                              class="form-control my-4"
-                              (change)="onUnitChange($event)"
-                              placeholder="Unit"
-                            />
-                          </div>
-                          <div class="form-group">
-                            <label for="unit">Unit</label>
-                            <input
-                              type="number"
-                              formControlName="unit"
                               class="form-control unit"
                               (change)="onUnitChange($event)"
                               placeholder="Enter unit"
+                              (ngModelChange)="processCalculation(i)"
                             />
                           </div>
 
@@ -319,10 +313,11 @@
                               formControlName="rate"
                               class="form-control rate"
                               placeholder="Enter rate"
+                              (ngModelChange)="processCalculation(i)"
                             />
                           </div>
 
-                          <div class="form-group">
+                          <!-- <div class="form-group">
                             <label for="rate">Amount</label>
                             <input
                               type="number"
@@ -330,6 +325,14 @@
                               class="form-control"
                               placeholder="Enter rate"
                             />
+                          </div> -->
+                          <div class="col-md-6">
+                            <label class="total">Total:</label>
+                            <span>{{
+                              this.addQuoteTypeForm.value.items[i].rate *
+                                this.addQuoteTypeForm.value.items[i].unit
+                                | currency: "NGN"
+                            }}</span>
                           </div>
                         </ng-container>
                       </div>
@@ -346,8 +349,14 @@
                     </div>
 
                     <div class="quote-total mb-4">
-                      <h4>Total Amount:</h4>
-                      <p>#20,000.00</p>
+                      <!-- <h4>Total Amount:</h4>
+                      <p>#20,000.00</p> -->
+                      <div class="form-group">
+                        <label class="totalamt" for="TAmount"
+                          >Total Amount:
+                        </label>
+                        <span>{{ totalAmount | currency: "NGN" }}</span>
+                      </div>
                     </div>
                   </form>
                 </div>
@@ -369,6 +378,7 @@
                   >
                     Add
                   </button>
+
                   <button
                     (click)="updateQuote()"
                     *ngIf="test"
