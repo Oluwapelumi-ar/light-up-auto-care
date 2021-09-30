@@ -178,13 +178,12 @@ export class QuotePageComponent implements OnInit {
 
   //tracking client ID
   trackClientId(event: any) {
-    console.log(event);
+    console.log(222,event.id);
     this.selectedClient = event;
     this.getAllVehiclesAttachedToClient(event.id);
   }
 
   trackVehicle(event: any) {
-    console.log(event);
     this.selectedVehicle = event;
   }
 
@@ -202,6 +201,7 @@ export class QuotePageComponent implements OnInit {
 
   getAllVehiclesAttachedToClient(id: any) {
     this.apiServices.getClientVehicles(id).subscribe((res: any) => {
+      console.log('.....', res.payload)
       this.clientVehicles = res.payload;
     });
   }
@@ -290,6 +290,7 @@ export class QuotePageComponent implements OnInit {
     this.apiServices.deleteQuote(row.id).subscribe(
       (res: any) => {
         alert('Quote deleted successfully');
+        this.getQuote();
       },
       (err: any) => {
         console.log('Unable to delete the Quote' + err);
@@ -303,8 +304,8 @@ export class QuotePageComponent implements OnInit {
     // this.quoteModelObj.id = row.id;
     this.addQuoteTypeForm.controls['clientId'].setValue(row.clientId);
     this.addQuoteTypeForm.controls['vehicleId'].setValue(row.vehicleId);
-    // this.addQuoteTypeForm.controls['totalAmount'].setValue(row.totalAmount);
-    console.log(this.itemsFormArray, 'controls');
+    this.addQuoteTypeForm.controls['totalAmount'].setValue(row.totalAmount);
+    // console.log(this.itemsFormArray, 'controls');
     this.addQuoteTypeForm.patchValue({
       clientId: row.clientId,
       totalAmount: row.totalAmount,
@@ -321,7 +322,6 @@ export class QuotePageComponent implements OnInit {
   onViewClick(row: any) {
     console.log({ row });
     this.viewQte = row;
-
     let ref = document.getElementById('cancel');
     ref?.click();
   }

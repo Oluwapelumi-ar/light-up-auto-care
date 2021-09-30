@@ -317,9 +317,9 @@ export class ApiService {
 
   //  const deleteParams = new HttpParams().set('userRole', 'admin');
 
-  getClientAndVehicle() {
+  getClientAndVehicle(id:any) {
     return this.http.get(
-      'https://lightup-auto-care.herokuapp.com/vehicles?clientId=1'
+      `https://lightup-auto-care.herokuapp.com/vehicles?clientId=${id}`
     );
   }
 }
