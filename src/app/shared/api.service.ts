@@ -288,13 +288,6 @@ export class ApiService {
     );
   }
 
-  // updateQuote(): Observable<quote> {
-  //   const putHeaders = new HttpHeaders({
-  //     'content-type': 'application/json',
-  //     authenticationToken:
-  //       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoic3VwZXIgYWRtaW4iLCJpYXQiOjE2MzA5MzgzNjMsImV4cCI6MTYzMTAyNDc2M30.cS8eVVLPIKMlzoHVfKftBHkvKp1cU-8_XnWBPbrf5ls',
-  //   });
-  // }
   updateQuote(data: any, id: number): Observable<quote> {
     const putHeaders = new HttpHeaders({
       'content-type': 'application/json',

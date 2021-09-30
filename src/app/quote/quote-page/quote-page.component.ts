@@ -50,6 +50,7 @@ export class QuotePageComponent implements OnInit {
   showUpdate!: boolean;
   hidden: boolean = false;
   isPending: any;
+  isApproved: any;
   quoteHistory: [] | undefined;
   buttonText: String = 'Add service';
   totalAmount: number = 0;
@@ -126,12 +127,12 @@ export class QuotePageComponent implements OnInit {
     );
   }
 
-  getAllQuote() {
-    this.apiServices.getQuotes().subscribe((res) => {
-      this.quoteData = res;
-      console.log({ res });
-    });
-  }
+  // getAllQuote() {
+  //   this.apiServices.getQuotes().subscribe((res) => {
+  //     this.quoteData = res;
+  //     console.log({ res });
+  //   });
+  // }
 
   addQuoteType() {
     //console.log(this.addQuoteTypeForm.value.items);
@@ -236,23 +237,18 @@ export class QuotePageComponent implements OnInit {
   //   this.itemsFormArray.push(this.newItemsFormArray())
   // }
 
-  subAmount() {
-    this.totalAmount -
-      this.addQuoteTypeForm.value.items.rate *
-        this.addQuoteTypeForm.value.items.unit;
-  }
-
   removeItems(index: number) {
     let arr = this.addQuoteTypeForm.get('items') as FormArray;
     arr.removeAt(index);
-    this.subAmount();
-    // this.processCalculation(index)
+
     this.checkAddButton();
+    this.calculateTotalAmount();
   }
 
   updateQuote() {
     const payload: QuoteModel = {
       ...this.addQuoteTypeForm.value,
+      totalAmount: this.totalAmount,
     };
     console.log(payload);
 
@@ -263,6 +259,7 @@ export class QuotePageComponent implements OnInit {
       let ref = document.getElementById('cancel');
       ref?.click();
       this.addQuoteTypeForm.reset();
+      this.getQuote();
     });
   }
 
@@ -275,6 +272,10 @@ export class QuotePageComponent implements OnInit {
 
     this.addQuoteTypeForm.value.items[index].amount = totalAmount;
 
+    this.calculateTotalAmount();
+  }
+
+  calculateTotalAmount() {
     let amount = 0;
     this.addQuoteTypeForm.value.items.forEach((data: any, i: any) => {
       amount +=
@@ -290,6 +291,7 @@ export class QuotePageComponent implements OnInit {
     this.apiServices.deleteQuote(row.id).subscribe(
       (res: any) => {
         alert('Quote deleted successfully');
+        this.getQuote();
       },
       (err: any) => {
         console.log('Unable to delete the Quote' + err);
@@ -301,21 +303,24 @@ export class QuotePageComponent implements OnInit {
   onEdit(row: any) {
     this.test = row.id;
     this.quoteModelObj.id = row.id;
-    this.addQuoteTypeForm.controls['clientId'].setValue(row.clientId);
-    this.addQuoteTypeForm.controls['vehicleId'].setValue(row.vehicleId);
+    // this.addQuoteTypeForm.controls['clientId'].setValue(row.clientId);
+    // this.addQuoteTypeForm.controls['vehicleId'].setValue(row.vehicleId);
     // this.addQuoteTypeForm.controls['totalAmount'].setValue(row.totalAmount);
-    console.log(this.itemsFormArray, 'controls');
+    // console.log(this.itemsFormArray, 'controls');
     this.addQuoteTypeForm.patchValue({
       clientId: row.clientId,
       totalAmount: row.totalAmount,
       vehicleId: row.vehicleId,
-      items: [...row.items],
+      // items: row.items,
     });
+    this.addQuoteTypeForm.get('items')?.setValue(row.items);
     let ref = document.getElementById('cancel');
     ref?.click();
     this.editID = true;
     this.showAdd = false;
     this.showUpdate = true;
+    console.log(row);
+    console.log(this.addQuoteTypeForm.value);
   }
 
   onViewClick(row: any) {
@@ -327,12 +332,6 @@ export class QuotePageComponent implements OnInit {
   }
 
   confirmBox(row: any) {
-    // this.quoteModelObj.id = row.id;
-    // this.quoteModelObj.clientId = row.clientId;
-    // this.quoteModelObj.isApproved = true;
-    // this.quoteModelObj.isPending = false;
-    // this.quoteModelObj.vehicleId = row.vehicleId;
-
     Swal.fire({
       title: 'Are you sure want to Approve this quote?',
       text: 'You will not be able to undo this action!',
@@ -343,14 +342,31 @@ export class QuotePageComponent implements OnInit {
     }).then((result: any) => {
       if (result.value) {
         console.log('BEFORE');
-        console.log(row);
-        console.log('AFTER');
         row.isApproved = true;
         row.isPending = false;
-        row.quoteHistory = null;
+        console.log(row);
+        delete row.isActive;
+        delete row.isDeleted;
+        delete row._id;
+        delete row.createdByName;
+        delete row.createdById;
+        delete row.createdOn;
+        delete row.__v;
+        delete row.timeStamp;
+        delete row.updatedOn;
+        delete row.quoteId;
+        delete row.quoteHistory;
+        delete row.vehicleName;
+        delete row.clientName;
+        let idd = row.id;
+        delete row.id;
+        delete row.billingAddress;
+
+        console.log('AFTER');
+
         console.log(row);
 
-        this.apiServices.updateQuote(row, row.id).subscribe((res: any) => {
+        this.apiServices.updateQuote(row, idd).subscribe((res: any) => {
           console.log('RESPONSE');
           console.log(res);
           if (res.status == 200) {
