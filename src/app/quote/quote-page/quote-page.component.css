@@ -76,8 +76,8 @@ input {
   margin-left: 15em;
 }
 .create-btn {
-  background-color: rgb(40, 32, 157);
-  color: #fff;
+  /* background-color: rgb(40, 32, 157); */
+  color: rgb(40, 32, 157);
   margin-left: 8em;
 }
 

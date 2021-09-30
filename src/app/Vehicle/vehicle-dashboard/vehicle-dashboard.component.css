@@ -4,13 +4,24 @@
   font-weight: 600;
 }
 
-.add-btn,
+/* .add-btn,
 .edit-btn {
   background-color: rgb(14, 8, 90);
 
   color: #fff;
-}
+} */
 
 .vehicle {
   cursor: pointer;
+}
+
+.add-btn {
+  background-color: rgb(14, 8, 90);
+  color: #fff;
+}
+
+.edit-btn {
+  color: rgb(14, 8, 90);
+
+  /* color: #fff; */
 }

@@ -10,7 +10,7 @@
 
 .logo {
   margin-right: 26em;
-  color: rgb(38, 130, 158);
+  color: #035efc;
   padding: 0.5em;
   font-size: 1.5rem;
   font-weight: 700;
@@ -19,9 +19,29 @@
 .title-02 {
   color: rgb(14, 8, 90);
   font-size: 1.2rem;
+  margin-right: 2em;
+  margin-top: 2em;
+  padding-right: 2em;
+  padding-top: 2em;
 }
 
 .title-03 {
   color: rgb(14, 8, 90);
   font-size: 1rem;
+}
+.title-04 {
+  color: rgb(14, 8, 90);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.title-01 {
+  color: rgb(14, 8, 90);
+  font-size: 1.2rem;
+  line-height: 20px;
+}
+
+.add-btn {
+  background-color: rgb(14, 8, 90);
+  color: #fff;
+  margin-left: 10em;
 }
