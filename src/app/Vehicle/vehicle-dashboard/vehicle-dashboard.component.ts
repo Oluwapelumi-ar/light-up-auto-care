@@ -27,6 +27,7 @@ export class VehicleDashboardComponent implements OnInit {
   showAdd!: boolean;
   showUpdate!: boolean;
   alertInstance = '';
+  order: any;
 
   // getClient() {
   //   this.api.getAllClients().subscribe((res: any) => {
@@ -95,11 +96,30 @@ export class VehicleDashboardComponent implements OnInit {
     });
   }
 
+  // getVehicles() {
+  //   console.log('get v');
+  //   this.api.getVehicle().subscribe((res: any) => {
+  //     this.vehicleData = res.payload;
+  //     console.log(this.vehicleData);
+  //   });
+  // }
+
+  sortData() {
+    if (this.order) {
+      let newArr = this.vehicleData.sort((a: any, b: any) => a.id - b.id);
+      this.vehicleData = newArr;
+    } else {
+      let newArr = this.vehicleData.sort((a: any, b: any) => b.id - a.id);
+      this.vehicleData = newArr;
+    }
+    this.order = !this.order;
+  }
+
   getVehicles() {
-    console.log('get v');
-    this.api.getVehicle().subscribe((res: any) => {
-      this.vehicleData = res.payload;
-      console.log(this.vehicleData);
+    this.api.getVehicle().subscribe((data: any) => {
+      let response = data.payload;
+      response = response.sort((a: any, b: any) => b.id - a.id);
+      this.vehicleData = response;
     });
   }
 

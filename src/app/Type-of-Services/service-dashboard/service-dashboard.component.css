@@ -9,3 +9,7 @@
   background-color: rgb(14, 8, 90);
   color: #fff;
 }
+
+.service {
+  cursor: pointer;
+}

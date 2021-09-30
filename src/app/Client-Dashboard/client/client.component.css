@@ -14,3 +14,7 @@
 /* .billingInput {
   margin-right: 0.2em;
 } */
+
+.client {
+  cursor: pointer;
+}

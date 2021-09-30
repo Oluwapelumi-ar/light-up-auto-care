@@ -42,7 +42,7 @@
             class="alert alert-success alert-dismissible fade show"
             role="alert"
           >
-            <strong>Hurray!</strong> Client added successfully
+            <strong>Hurray!</strong> Vehicle added successfully
             <button
               (click)="closeAlert()"
               type="button"
@@ -111,7 +111,9 @@
             <tr>
               <th scope="col">S/N</th>
               <th scope="col">Client Name</th>
-              <th scope="col">Vehicle Name</th>
+              <th class="vehicle" (click)="sortData()" scope="col">
+                Vehicle Name
+              </th>
               <th scope="col">Chasis No</th>
               <th scope="col">Model</th>
               <th scope="col">Actions</th>

@@ -145,7 +145,9 @@
           <thead>
             <tr>
               <th scope="col">S/N</th>
-              <th scope="col">Type of Service</th>
+              <th class="service" (click)="sortData()" scope="col">
+                Type of Service
+              </th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
@@ -176,13 +178,13 @@
         <!------------------------------------------- MODAL ------------------------------------>
 
         <div
-          class="modal fade"
+          class="modal fade bd-example-modal-lg"
           id="exampleModal"
           tabindex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog">
+          <div class="modal-dialog modal-lg">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Service</h5>

@@ -19,7 +19,7 @@ import {
 import { QuoteModel } from './quoteModel';
 import { getLocaleTimeFormat } from '@angular/common';
 import Swal from 'sweetalert2';
-
+import { addQuoteModel } from './addQuoteModel';
 @Component({
   selector: 'app-quote-page',
   templateUrl: './quote-page.component.html',
@@ -28,12 +28,10 @@ import Swal from 'sweetalert2';
 export class QuotePageComponent implements OnInit {
   test: any;
   item: any;
-  unit: any;
-  rate: any;
+  unit: number = 0;
+  rate: number = 0;
   amount: any;
   required!: Boolean;
-
-  // private quoteData: string = '';
 
   quotes: any;
   viewQte: any;
@@ -54,18 +52,16 @@ export class QuotePageComponent implements OnInit {
   isPending: any;
   quoteHistory: [] | undefined;
   buttonText: String = 'Add service';
+  totalAmount: number = 0;
+  selectedClient: any;
+  selectedVehicle: any;
 
   constructor(
     private fb: FormBuilder,
     private apiServices: ApiService,
     private router: Router,
     private route: ActivatedRoute
-  ) {
-    //    gotoDynamic() {
-    //   //this.router.navigateByUrl('/dynamic', { state: { id:1 , name:'Angular' } });
-    //   this.router.navigateByUrl('/dynamic', { state: this.quote })
-    // }
-  }
+  ) {}
 
   ngOnInit(): void {
     this.addQuoteTypeForm = this.fb.group({
@@ -82,10 +78,11 @@ export class QuotePageComponent implements OnInit {
       ]),
     });
 
+    this.getQuote();
     this.getAllClients();
     this.getAllVehicles();
     this.getAllServices();
-    this.getQuotes();
+
     // this.getAllQuote();
 
     this.addQuoteTypeForm.statusChanges.subscribe((data: any) => {
@@ -113,12 +110,14 @@ export class QuotePageComponent implements OnInit {
     // console.log(event.target.value)
   }
 
-  getQuotes() {
+  getQuote() {
     this.apiServices.getQuotes().subscribe(
       (data: any) => {
         let response = data.payload;
-        response = response.sort((a: any, b: any) => b.id - a.id);
-        this.quoteData = response;
+        let responses = response.sort((a: any, b: any) => b.id - a.id);
+        this.quoteData = responses;
+        console.log({ response });
+
         // this.addQuoteTypeForm.reset();
       },
       (err: any) => {
@@ -130,30 +129,27 @@ export class QuotePageComponent implements OnInit {
   getAllQuote() {
     this.apiServices.getQuotes().subscribe((res) => {
       this.quoteData = res;
+      console.log({ res });
     });
   }
 
   addQuoteType() {
-    const payload = {
-      ...this.addQuoteTypeForm.value,
-      items: [
-        {
-          ...this.addQuoteTypeForm.value.items[0],
-          amount:
-            this.addQuoteTypeForm.value.items[0].rate *
-            this.addQuoteTypeForm.value.items[0].unit,
-        },
-      ],
+    //console.log(this.addQuoteTypeForm.value.items);
+    let payload: addQuoteModel = {
+      totalAmount: this.totalAmount,
+      clientId: this.selectedClient.id,
+      vehicleId: this.selectedVehicle.id,
+      items: this.addQuoteTypeForm.value.items,
     };
     this.apiServices.postQuote(payload).subscribe(
       (data) => {
-        this.getQuotes();
-        this.getAllQuote();
+        console.log(data);
+        this.getQuote();
+        // this.getAllQuote();
         let ref = document.getElementById('cancel');
         ref?.click();
         this.showAdd = true;
         this.showUpdate = false;
-
         this.addQuoteTypeForm.reset();
       },
       (err) => {
@@ -182,7 +178,14 @@ export class QuotePageComponent implements OnInit {
 
   //tracking client ID
   trackClientId(event: any) {
+    console.log(event);
+    this.selectedClient = event;
     this.getAllVehiclesAttachedToClient(event.id);
+  }
+
+  trackVehicle(event: any) {
+    console.log(event);
+    this.selectedVehicle = event;
   }
 
   getAllClients() {
@@ -210,7 +213,6 @@ export class QuotePageComponent implements OnInit {
   }
 
   addItems() {
-    
     this.itemsFormArray.push(
       this.fb.group({
         item: '',
@@ -222,10 +224,10 @@ export class QuotePageComponent implements OnInit {
     this.checkAddButton();
   }
 
-  checkAddButton(){
-    if(this.itemsFormArray.controls.length > 0){
+  checkAddButton() {
+    if (this.itemsFormArray.controls.length > 0) {
       this.buttonText = 'Add more Services';
-    }else{
+    } else {
       this.buttonText = 'Add Service';
     }
   }
@@ -234,9 +236,17 @@ export class QuotePageComponent implements OnInit {
   //   this.itemsFormArray.push(this.newItemsFormArray())
   // }
 
-  removeItems(i: any) {
+  subAmount() {
+    this.totalAmount -
+      this.addQuoteTypeForm.value.items.rate *
+        this.addQuoteTypeForm.value.items.unit;
+  }
+
+  removeItems(index: number) {
     let arr = this.addQuoteTypeForm.get('items') as FormArray;
-    arr.removeAt(i);
+    arr.removeAt(index);
+    this.subAmount();
+    // this.processCalculation(index)
     this.checkAddButton();
   }
 
@@ -256,10 +266,30 @@ export class QuotePageComponent implements OnInit {
     });
   }
 
+  processCalculation(index: number) {
+    // console.log(index);
+
+    let totalAmount =
+      this.addQuoteTypeForm.value.items[index].rate *
+      this.addQuoteTypeForm.value.items[index].unit;
+
+    this.addQuoteTypeForm.value.items[index].amount = totalAmount;
+
+    let amount = 0;
+    this.addQuoteTypeForm.value.items.forEach((data: any, i: any) => {
+      amount +=
+        this.addQuoteTypeForm.value.items[i].rate *
+        this.addQuoteTypeForm.value.items[i].unit;
+    });
+    this.totalAmount = amount;
+  }
+
+  //for subtracting added services
+
   deleteQuote(row: any) {
     this.apiServices.deleteQuote(row.id).subscribe(
       (res: any) => {
-        alert('User deleted successfully');
+        alert('Quote deleted successfully');
       },
       (err: any) => {
         console.log('Unable to delete the Quote' + err);
@@ -273,9 +303,11 @@ export class QuotePageComponent implements OnInit {
     // this.quoteModelObj.id = row.id;
     this.addQuoteTypeForm.controls['clientId'].setValue(row.clientId);
     this.addQuoteTypeForm.controls['vehicleId'].setValue(row.vehicleId);
+    // this.addQuoteTypeForm.controls['totalAmount'].setValue(row.totalAmount);
     console.log(this.itemsFormArray, 'controls');
     this.addQuoteTypeForm.patchValue({
       clientId: row.clientId,
+      totalAmount: row.totalAmount,
       vehicleId: row.vehicleId,
       items: [...row.items],
     });
