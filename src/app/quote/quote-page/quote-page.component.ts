@@ -241,7 +241,7 @@ export class QuotePageComponent implements OnInit {
   }
 
   updateQuote() {
-    const payload: QuoteModel = {
+    const payload={
       ...this.addQuoteTypeForm.value,
     };
     console.log(payload);
@@ -270,7 +270,7 @@ export class QuotePageComponent implements OnInit {
 
   onEdit(row: any) {
     this.test = row.id;
-    this.quoteModelObj.id = row.id;
+    // this.quoteModelObj.id = row.id;
     this.addQuoteTypeForm.controls['clientId'].setValue(row.clientId);
     this.addQuoteTypeForm.controls['vehicleId'].setValue(row.vehicleId);
     console.log(this.itemsFormArray, 'controls');
