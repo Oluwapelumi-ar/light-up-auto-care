@@ -221,12 +221,12 @@
                     <div class="form-group">
                       <label> Vehicle Name </label>
                       <ng-select
-                        [items]="vehicle"
+                        [items]="clientVehicles"
                         bindLabel="vehicleName"
                         style="text-transform: capitalize"
                         bindValue="id"
                         formControlName="vehicleId"
-                        (change)="trackVehicle($event)"
+                        (click)="trackVehicle($event)"
                       ></ng-select>
                       <div
                         class="text-danger"

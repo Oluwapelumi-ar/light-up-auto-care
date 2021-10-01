@@ -184,7 +184,7 @@ export class QuotePageComponent implements OnInit {
   }
 
   trackVehicle(event: any) {
-    console.log(event);
+    console.log('event');
     this.selectedVehicle = event;
   }
 
@@ -251,18 +251,21 @@ export class QuotePageComponent implements OnInit {
   }
 
   updateQuote() {
-    const payload: QuoteModel = {
-      ...this.addQuoteTypeForm.value,
-    };
-    console.log(payload);
+    this.quoteModelObj.clientId = this.addQuoteTypeForm.value.clientId;
+    this.quoteModelObj.vehicleId = this.addQuoteTypeForm.value.vehicleId;
+    this.quoteModelObj.items[0].item = this.addQuoteTypeForm.value.items[0].item;
+    this.quoteModelObj.items[0].unit = this.addQuoteTypeForm.value.items[0].unit;
+    this.quoteModelObj.items[0].rate = this.addQuoteTypeForm.value.items[0].rate;
+    this.quoteModelObj.items[0].amount = this.addQuoteTypeForm.value.items[0].amount;
 
-    this.apiServices.updateQuote(payload, this.editID).subscribe((res: any) => {
+    this.apiServices.updateQuote(this.quoteModelObj, this.quoteModelObj.id).subscribe((res: any) => {
       console.log(res);
 
       alert('Updated Successfully');
       let ref = document.getElementById('cancel');
       ref?.click();
-      this.addQuoteTypeForm.reset();
+      // this.addQuoteTypeForm.reset();
+      this.getQuote();
     });
   }
 
@@ -303,7 +306,6 @@ export class QuotePageComponent implements OnInit {
     this.quoteModelObj.id = row.id;
     this.addQuoteTypeForm.controls['clientId'].setValue(row.clientId);
     this.addQuoteTypeForm.controls['vehicleId'].setValue(row.vehicleId);
-    // this.addQuoteTypeForm.controls['totalAmount'].setValue(row.totalAmount);
     console.log(this.itemsFormArray, 'controls');
     this.addQuoteTypeForm.patchValue({
       clientId: row.clientId,

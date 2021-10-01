@@ -18,11 +18,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // handleName() {
-
-  //   console.log(this.username);
-  // }
-
   handleLogout() {
     localStorage.clear();
     alert('Logged Out');
