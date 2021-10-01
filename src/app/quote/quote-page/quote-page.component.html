@@ -44,7 +44,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let row of quoteData; let i = index">
+            <tr *ngFor="let row of quoteData| paginate : {
+              itemsPerPage: tableSize,
+              currentPage: page,
+              totalItems: count
+            };  let i = index">
               <td>{{ i + 1 }}</td>
               <td>{{ row.clientName }}</td>
               <td>{{ row.vehicleName }}</td>
@@ -148,6 +152,16 @@
             </tr>
           </tbody>
         </table>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-center pagination">
+              <pagination-controls
+                previousLabel="Prev"
+                nextLabel="Next"
+                (pageChange)="tabSize($event)"
+              >
+              </pagination-controls>
+            </div>
 
         <!--Quote Modal -->
         <div class="container">

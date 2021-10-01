@@ -57,6 +57,9 @@ export class QuotePageComponent implements OnInit {
   totalAmount: number = 0;
   selectedClient: any;
   selectedVehicle: any;
+  page:number = 1;
+  count = 0;
+  tableSize = 10;
 
   constructor(
     private fb: FormBuilder,
@@ -413,5 +416,11 @@ export class QuotePageComponent implements OnInit {
         Swal.fire('Cancelled', 'Your quote file is safe :)', 'error');
       }
     });
+
+  }
+
+  tabSize(index: number) {
+    this.page = index;
+    this.getQuote();
   }
 }
