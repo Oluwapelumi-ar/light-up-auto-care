@@ -20,6 +20,7 @@ import { QuoteModel } from './quoteModel';
 import { getLocaleTimeFormat } from '@angular/common';
 import Swal from 'sweetalert2';
 import { addQuoteModel } from './addQuoteModel';
+import { updateQuoteModel } from './updateQuoteModel';
 @Component({
   selector: 'app-quote-page',
   templateUrl: './quote-page.component.html',
@@ -50,6 +51,7 @@ export class QuotePageComponent implements OnInit {
   showUpdate!: boolean;
   hidden: boolean = false;
   isPending: any;
+  isApproved: any;
   quoteHistory: [] | undefined;
   buttonText: String = 'Add service';
   totalAmount: number = 0;
@@ -126,12 +128,12 @@ export class QuotePageComponent implements OnInit {
     );
   }
 
-  getAllQuote() {
-    this.apiServices.getQuotes().subscribe((res) => {
-      this.quoteData = res;
-      console.log({ res });
-    });
-  }
+  // getAllQuote() {
+  //   this.apiServices.getQuotes().subscribe((res) => {
+  //     this.quoteData = res;
+  //     console.log({ res });
+  //   });
+  // }
 
   addQuoteType() {
     //console.log(this.addQuoteTypeForm.value.items);
@@ -178,13 +180,12 @@ export class QuotePageComponent implements OnInit {
 
   //tracking client ID
   trackClientId(event: any) {
-    console.log(event);
+    console.log(222, event.id);
     this.selectedClient = event;
     this.getAllVehiclesAttachedToClient(event.id);
   }
 
   trackVehicle(event: any) {
-    console.log('event');
     this.selectedVehicle = event;
   }
 
@@ -202,6 +203,7 @@ export class QuotePageComponent implements OnInit {
 
   getAllVehiclesAttachedToClient(id: any) {
     this.apiServices.getClientVehicles(id).subscribe((res: any) => {
+      console.log('.....', res.payload);
       this.clientVehicles = res.payload;
     });
   }
@@ -236,35 +238,28 @@ export class QuotePageComponent implements OnInit {
   //   this.itemsFormArray.push(this.newItemsFormArray())
   // }
 
-  subAmount() {
-    this.totalAmount -
-      this.addQuoteTypeForm.value.items.rate *
-        this.addQuoteTypeForm.value.items.unit;
-  }
-
   removeItems(index: number) {
     let arr = this.addQuoteTypeForm.get('items') as FormArray;
     arr.removeAt(index);
-    this.subAmount();
-    // this.processCalculation(index)
+
     this.checkAddButton();
+    this.calculateTotalAmount();
   }
 
   updateQuote() {
-    this.quoteModelObj.clientId = this.addQuoteTypeForm.value.clientId;
-    this.quoteModelObj.vehicleId = this.addQuoteTypeForm.value.vehicleId;
-    this.quoteModelObj.items[0].item = this.addQuoteTypeForm.value.items[0].item;
-    this.quoteModelObj.items[0].unit = this.addQuoteTypeForm.value.items[0].unit;
-    this.quoteModelObj.items[0].rate = this.addQuoteTypeForm.value.items[0].rate;
-    this.quoteModelObj.items[0].amount = this.addQuoteTypeForm.value.items[0].amount;
+    const payload = {
+      ...this.addQuoteTypeForm.value,
+      totalAmount: this.totalAmount,
+    };
+    console.log(payload);
 
-    this.apiServices.updateQuote(this.quoteModelObj, this.quoteModelObj.id).subscribe((res: any) => {
+    this.apiServices.updateQuote(payload, this.editID).subscribe((res: any) => {
       console.log(res);
 
       alert('Updated Successfully');
       let ref = document.getElementById('cancel');
       ref?.click();
-      // this.addQuoteTypeForm.reset();
+      this.addQuoteTypeForm.reset();
       this.getQuote();
     });
   }
@@ -278,6 +273,10 @@ export class QuotePageComponent implements OnInit {
 
     this.addQuoteTypeForm.value.items[index].amount = totalAmount;
 
+    this.calculateTotalAmount();
+  }
+
+  calculateTotalAmount() {
     let amount = 0;
     this.addQuoteTypeForm.value.items.forEach((data: any, i: any) => {
       amount +=
@@ -293,6 +292,7 @@ export class QuotePageComponent implements OnInit {
     this.apiServices.deleteQuote(row.id).subscribe(
       (res: any) => {
         alert('Quote deleted successfully');
+        this.getQuote();
       },
       (err: any) => {
         console.log('Unable to delete the Quote' + err);
@@ -304,37 +304,38 @@ export class QuotePageComponent implements OnInit {
   onEdit(row: any) {
     this.test = row.id;
     this.quoteModelObj.id = row.id;
-    this.addQuoteTypeForm.controls['clientId'].setValue(row.clientId);
-    this.addQuoteTypeForm.controls['vehicleId'].setValue(row.vehicleId);
-    console.log(this.itemsFormArray, 'controls');
+    // this.addQuoteTypeForm.controls['clientId'].setValue(row.clientId);
+    // this.addQuoteTypeForm.controls['vehicleId'].setValue(row.vehicleId);
+    // this.addQuoteTypeForm.controls['totalAmount'].setValue(row.totalAmount);
+    // this.quoteModelObj.id = row.id;
+    // this.addQuoteTypeForm.controls['clientId'].setValue(row.clientId);
+    // this.addQuoteTypeForm.controls['vehicleId'].setValue(row.vehicleId);
+    // this.addQuoteTypeForm.controls['totalAmount'].setValue(row.totalAmount);
+    // console.log(this.itemsFormArray, 'controls');
     this.addQuoteTypeForm.patchValue({
       clientId: row.clientId,
       totalAmount: row.totalAmount,
       vehicleId: row.vehicleId,
-      items: [...row.items],
+      // items: row.items,
     });
+    this.addQuoteTypeForm.get('items')?.setValue(row.items);
     let ref = document.getElementById('cancel');
     ref?.click();
     this.editID = true;
     this.showAdd = false;
     this.showUpdate = true;
+    console.log(row);
+    console.log(this.addQuoteTypeForm.value);
   }
 
   onViewClick(row: any) {
     console.log({ row });
     this.viewQte = row;
-
     let ref = document.getElementById('cancel');
     ref?.click();
   }
 
   confirmBox(row: any) {
-    // this.quoteModelObj.id = row.id;
-    // this.quoteModelObj.clientId = row.clientId;
-    // this.quoteModelObj.isApproved = true;
-    // this.quoteModelObj.isPending = false;
-    // this.quoteModelObj.vehicleId = row.vehicleId;
-
     Swal.fire({
       title: 'Are you sure want to Approve this quote?',
       text: 'You will not be able to undo this action!',
@@ -345,26 +346,69 @@ export class QuotePageComponent implements OnInit {
     }).then((result: any) => {
       if (result.value) {
         console.log('BEFORE');
-        console.log(row);
-        console.log('AFTER');
         row.isApproved = true;
         row.isPending = false;
-        row.quoteHistory = null;
         console.log(row);
+        /*        
+        delete row.isActive;
+        delete row.isDeleted;
+        delete row._id;
+        delete row.createdByName;
+        delete row.createdById;
+        delete row.createdOn;
+        delete row.__v;
+        delete row.timeStamp;
+        delete row.updatedOn;
+        delete row.quoteId;
+        delete row.quoteHistory;
+        delete row.vehicleName;
+        delete row.clientName;
+        let idd = row.id;
+        delete row.id;
+        delete row.billingAddress;
+*/
 
-        this.apiServices.updateQuote(row, row.id).subscribe((res: any) => {
-          console.log('RESPONSE');
-          console.log(res);
-          if (res.status == 200) {
-            this.hidden = true;
-            Swal.fire('Approved!', 'This quote has been approved.', 'success');
-          } else {
-            Swal.fire('Error!', res.error, 'error');
-          }
-          let ref = document.getElementById('cancel');
-          ref?.click();
-          this.addQuoteTypeForm.reset();
-        });
+        let newPayload: addQuoteModel = {
+          clientId: row.clientId,
+          vehicleId: row.vehicleId,
+          items: row.items,
+          totalAmount: row.totalAmount,
+          //   isApproved: row.isApproved,
+          //   isPending: row.isPending,
+        };
+
+        let updatePayload: updateQuoteModel = {
+          clientId: row.clientId,
+          vehicleId: row.vehicleId,
+          items: row.items,
+          totalAmount: row.totalAmount,
+          isApproved: row.isApproved,
+          isPending: row.isPending,
+        };
+
+        console.log('NEW PAYLOAD');
+
+        console.log(updatePayload);
+
+        this.apiServices
+          .updateQuote(updatePayload, row.id)
+          .subscribe((res: any) => {
+            console.log('RESPONSE');
+            console.log(res);
+            if (res.status == 200) {
+              this.hidden = true;
+              Swal.fire(
+                'Approved!',
+                'This quote has been approved.',
+                'success'
+              );
+            } else {
+              Swal.fire('Error!', res.error, 'error');
+            }
+            let ref = document.getElementById('cancel');
+            ref?.click();
+            this.addQuoteTypeForm.reset();
+          });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire('Cancelled', 'Your quote file is safe :)', 'error');
       }

@@ -32,4 +32,8 @@ export class InvoiceComponent implements OnInit {
       })
       .subscribe(console.log, console.error);
   }
+
+  backToQuote(row: any) {
+    this.router.navigate(['/quote'], {});
+  }
 }

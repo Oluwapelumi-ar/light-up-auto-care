@@ -100,6 +100,7 @@
                       (click)="onEdit(row)"
                       class="dropdown-item"
                       type="button"
+                      *ngIf="!row.isApproved"
                     >
                       Edit
                     </button>
@@ -114,6 +115,7 @@
                       (click)="confirmBox(row)"
                       class="dropdown-item"
                       type="button"
+                      *ngIf="!row.isApproved"
                     >
                       Approve
                     </button>
@@ -121,8 +123,8 @@
                   <button
                     (click)="goToInvoice(row)"
                     type="button"
-                    class="btn create-btn"
-                    *ngIf="hidden"
+                    class="btn btn-outline-primary create-btn"
+                    *ngIf="row.isApproved"
                   >
                     Create Invoice
                   </button>
@@ -327,7 +329,7 @@
                             />
                           </div> -->
                           <div class="col-md-6">
-                            <label class="total">Total:</label>
+                            <label class="total mx-2">Total:</label>
                             <span>{{
                               this.addQuoteTypeForm.value.items[i].rate *
                                 this.addQuoteTypeForm.value.items[i].unit
