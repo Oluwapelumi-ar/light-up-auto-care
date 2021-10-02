@@ -1,28 +1,11 @@
-.center {
-  text-align: center;
+.title {
+  color: rgb(14, 8, 90);
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
-.style {
-  border: 1px solid gray;
-  padding: 10px;
-  width: 100%;
-  margin: 10% auto;
-}
-
-input {
-  width: 250px;
-}
-
-.add-btn {
-  background-color: rgb(14, 8, 90);
-  color: #fff;
-  margin: 3em;
-}
-
-.delete-btn {
-  margin-bottom: 0.2em;
-  padding: 0 0.1em;
-  color: rgb(134, 31, 31);
+.invoice-info {
+  margin-top: 5em;
 }
 
 .logo {
@@ -31,18 +14,6 @@ input {
   padding: 0.5em;
   font-size: 1.5rem;
   font-weight: 700;
-}
-
-.details {
-  text-align: center;
-}
-
-.invoice-text {
-  font-size: 1.4rem;
-}
-
-.invoice-info {
-  margin-top: 5em;
 }
 
 .title-02 {
@@ -74,11 +45,3 @@ input {
   color: #fff;
   margin-left: 10em;
 }
-
-/* .index-row {
-  font-size: 0.2rem;
-  margin-right: 2em;
-  margin-top: 2em;
-  padding-right: 2em;
-  padding-top: 2em;
-} */

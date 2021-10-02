@@ -11,6 +11,7 @@ import { AuthguardGuard } from './auth/authguard.guard';
 import { RoleGuard } from './auth/role.guard';
 import { ServiceDashboardComponent } from './Type-of-Services/service-dashboard/service-dashboard.component';
 import { ViewQuoteComponent } from './view-quote/view-quote.component';
+import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthguardGuard] },
@@ -46,6 +47,11 @@ const routes: Routes = [
   {
     path: 'view-quote',
     component: ViewQuoteComponent,
+    canActivate: [AuthguardGuard],
+  },
+  {
+    path: 'create-invoice',
+    component: CreateInvoiceComponent,
     canActivate: [AuthguardGuard],
   },
   {

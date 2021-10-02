@@ -310,9 +310,39 @@ export class ApiService {
 
   //  const deleteParams = new HttpParams().set('userRole', 'admin');
 
-  getClientAndVehicle(id:any) {
+  getClientAndVehicle(id: any) {
     return this.http.get(
       `https://lightup-auto-care.herokuapp.com/vehicles?clientId=${id}`
     );
+  }
+
+  postInvoice(data: any) {
+    return this.http
+      .post<any>('https://lightup-auto-care.herokuapp.com/invoices', data)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  getInvoice() {
+    return this.http
+      .get<any>('https://lightup-auto-care.herokuapp.com/invoices')
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  deleteInvoice(id: number) {
+    return this.http
+      .delete<any>('https://lightup-auto-care.herokuapp.com/invoices/' + id)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 }

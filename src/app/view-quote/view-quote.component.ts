@@ -19,9 +19,8 @@ export class ViewQuoteComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // console.log(history.state);
     this.history = history;
-    console.log('vt5756767u');
+    // console.log('vt5756767u');
 
     console.log(history.state.data);
   }
