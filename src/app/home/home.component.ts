@@ -13,13 +13,16 @@ export class HomeComponent implements OnInit {
   noOfClients: number = 0;
   noOfVehicles: number = 0;
   noOfStaff: number = 0;
+  page:number = 1;
+  count = 0;
+  tableSize = 10;
+  userDetails = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('userDetails'))));
 
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
     this.getAllClient();
     this.getVehicle();
-    this.getAllStaff();
   }
 
   getAllClient() {
@@ -42,15 +45,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getAllStaff() {
-    this.api.getAllStaffs().subscribe({
-      next: (res) => {
-        this.staffData = res.payload;
-        this.noOfStaff = this.staffData.length;
-      },
-      error: (error) => {
-        alert('An error occurred');
-      },
-    });
+  hideStaffList(){
+    if(this.userDetails.role == 'admin'){
+      return true;
+    }else {
+      return false;
+    }
+  }
+
+  tabSize(index: number) {
+    this.page = index;
   }
 }

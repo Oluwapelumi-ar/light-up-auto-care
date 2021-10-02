@@ -1,9 +1,12 @@
 .notification  {
     justify-self: end;
-    margin-left: 800px;
-    
+    margin-left: 800px;  
 }
-/* .avatar {
-    background-color: blue;
-} */
+.dropdowm-item {
+    cursor: pointer;
+}
+.fas {
+    cursor: pointer;
+}
+
 

@@ -25,14 +25,14 @@ export class RoleGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    // if(this.userDetails.role == 'admin') {
+    if(this.userDetails.role == 'admin'|| this.userDetails.role == 'approver') {
 
-    //   return true;
-    // }else {
-    //   window.alert('Only admins can access this page');
-    //   this.router.navigate(['/home'])
-    //   return false;
-    // }
+      return true;
+    }else {
+      window.alert('Only admins can access this page');
+      this.router.navigate(['/home'])
+      return false;
+    }
     return true;
   }
 }

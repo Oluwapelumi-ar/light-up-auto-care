@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class SideMenuComponent implements OnInit {
   alert!: boolean;
 
-  userDetails = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('userDetails'))))
+  userDetails = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('userDetails'))));
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
@@ -18,11 +18,19 @@ export class SideMenuComponent implements OnInit {
     if(this.userDetails.role == 'admin'){
       return true;
     }else {
+      return false ;
+    }
+  }
+
+  hideInvoiceList(){
+    if(this.userDetails.role == !'clerk'){
+      return true;
+    }else {
       return false;
     }
   }
 
-  handleLogout() {
+  handleLogout() { 
     localStorage.clear();
     this.alert = true;
     this.router.navigate(['/login']);

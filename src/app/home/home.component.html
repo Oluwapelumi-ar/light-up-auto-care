@@ -50,7 +50,7 @@
                 <div id="sparkline-revenue2"></div>
               </div>
             </div>
-            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="hideStaffList()">
               <div class="card">
                 <div class="card-body">
                   <h5 class="text-muted">Total Staff</h5>
@@ -103,8 +103,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let row of clientData; let i = index">
-                <td>{{ i + 1 }}</td>
+              <tr *ngFor="let row of clientData| paginate : {
+                itemsPerPage: tableSize,
+                currentPage: page,
+                totalItems: count
+              };  let i = index">
+                <td>{{((page-1)*tableSize)+(i+1) }}</td>
                 <td>{{ row.name | capitalize }}</td>
                 <td>{{ row.email }}</td>
                 <td>{{ row.telephone }}</td>
@@ -113,6 +117,16 @@
           </table>
         </div>
       </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center">
+      <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        (pageChange)="tabSize($event)"
+      >
+      </pagination-controls>
     </div>
     <div id="sparkline-revenue"></div>
   </div>

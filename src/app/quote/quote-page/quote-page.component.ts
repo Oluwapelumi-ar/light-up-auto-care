@@ -60,6 +60,7 @@ export class QuotePageComponent implements OnInit {
   page:number = 1;
   count = 0;
   tableSize = 10;
+  userDetails = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('userDetails'))))
 
   constructor(
     private fb: FormBuilder,
@@ -422,5 +423,13 @@ export class QuotePageComponent implements OnInit {
   tabSize(index: number) {
     this.page = index;
     this.getQuote();
+  }
+
+  hideInvoiceList(){
+    if(this.userDetails.role == 'admin' || this.userDetails.role == 'approver'){
+      return true;
+    }else {
+      return false;
+    }
   }
 }

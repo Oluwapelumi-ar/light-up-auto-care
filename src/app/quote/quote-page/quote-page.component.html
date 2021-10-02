@@ -18,7 +18,7 @@
   <div class="dashboard-wrapper">
     <div class="dashboard-finance">
       <div class="container-fluid dashboard-content">
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar ">
           <div class="container d-flex">
             <h2>Quote Page</h2>
             <button
@@ -124,7 +124,8 @@
                       Approve
                     </button>
                   </div>
-                  <button
+                  <div class="" *ngIf="hideInvoiceList()">
+                    <button
                     (click)="goToInvoice(row)"
                     type="button"
                     class="btn btn-outline-primary create-btn"
@@ -132,6 +133,8 @@
                   >
                     Create Invoice
                   </button>
+                  </div>
+                  
                 </div>
               </td>
               <!-- <td>
