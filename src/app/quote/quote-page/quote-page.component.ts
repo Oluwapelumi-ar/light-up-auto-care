@@ -100,7 +100,7 @@ export class QuotePageComponent implements OnInit {
   }
 
   goToInvoice(row: any) {
-    this.router.navigate(['/invoice'], {
+    this.router.navigate(['/create-invoice'], {
       state: { data: row },
     });
   }
@@ -289,8 +289,6 @@ export class QuotePageComponent implements OnInit {
     });
     this.totalAmount = amount;
   }
-
-  //for subtracting added services
 
   deleteQuote(row: any) {
     this.apiServices.deleteQuote(row.id).subscribe(

@@ -26,6 +26,7 @@ import { ServiceDashboardComponent } from './Type-of-Services/service-dashboard/
 import { ClientComponent } from './Client-Dashboard/client/client.component';
 import { QuotePageComponent } from './quote/quote-page/quote-page.component';
 import { ViewQuoteComponent } from './view-quote/view-quote.component';
+import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ViewQuoteComponent } from './view-quote/view-quote.component';
     ServiceDashboardComponent,
     QuotePageComponent,
     ViewQuoteComponent,
+    CreateInvoiceComponent,
   ],
 
   imports: [
