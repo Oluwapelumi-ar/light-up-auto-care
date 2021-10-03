@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { AuthServiceService } from '../auth-service.service';
 
 @Component({
@@ -10,6 +11,8 @@ import { AuthServiceService } from '../auth-service.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  alert!: boolean;
+  doesUserExist:any;
 
   constructor(
     private router: Router,
@@ -40,6 +43,8 @@ export class LoginComponent implements OnInit {
       },
       (err) => {
         console.log(err);
+        this.doesUserExist = err.error.error
+        this.alert = true;
         if (!err.status) {
           this.loginForm.setErrors({ noConnection: false });
         } else {
@@ -47,5 +52,9 @@ export class LoginComponent implements OnInit {
         }
       }
     );
+  };
+
+  closeAlert() {
+    this.alert = false;
   }
 }

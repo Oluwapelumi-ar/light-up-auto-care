@@ -45,6 +45,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  getStaff() {
+    this.api.getAllStaffs().subscribe((res: any) => {
+      this.staffData = res.payload;
+      this.noOfStaff = this.staffData.length;
+    });
+  }
+
   hideStaffList(){
     if(this.userDetails.role == 'admin'){
       return true;
@@ -52,6 +59,8 @@ export class HomeComponent implements OnInit {
       return false;
     }
   }
+
+
 
   tabSize(index: number) {
     this.page = index;

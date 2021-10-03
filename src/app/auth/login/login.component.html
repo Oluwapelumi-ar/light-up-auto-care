@@ -1,5 +1,56 @@
 <div class="splash-container">
   <div class="card">
+    <ng-container>
+      <div
+        *ngIf="alert"
+        class="alert alert-danger alert-dismissible fade show"
+        role="alert"
+      >
+      <strong>Whoops!</strong> {{ doesUserExist }}
+      <button
+        (click)="closeAlert()"
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      </div>  
+      <!-- <div
+        *ngIf="createStaffAlert"
+        class="alert alert-success alert-dismissible fade show"
+        role="alert"
+      >
+      <strong>Hurray!</strong> Staff Added successfully
+      <button
+        (click)="closeAlert()"
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      </div>  
+      <div
+        *ngIf="updatedStaffAlert"
+        class="alert alert-success alert-dismissible fade show"
+        role="alert"
+      >
+      <strong>Hurray!</strong> Staff Updated successfully
+      <button
+        (click)="closeAlert()"
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      </div>   -->
+  </ng-container>
+  <!-- End Notification Alert -->
     <div class="card-body">
       <div class="card-header">
         <h2>Login Form</h2>
