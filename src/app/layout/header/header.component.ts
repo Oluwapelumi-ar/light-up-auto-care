@@ -11,16 +11,17 @@ export class HeaderComponent implements OnInit {
     JSON.parse(JSON.stringify(localStorage.getItem('userDetails')))
   );
   username: string = '';
+  role: string = '';
 
   constructor(private router: Router) {
     this.username = this.userDetails.name;
+    this.role = this.userDetails.role;
   }
 
   ngOnInit(): void {}
 
   handleLogout() {
     localStorage.clear();
-    alert('Logged Out');
     this.router.navigate(['/login']);
   }
 }

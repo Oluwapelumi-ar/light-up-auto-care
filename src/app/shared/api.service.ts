@@ -199,7 +199,7 @@ export class ApiService {
 
   updateVehicle(data: any, id: number) {
     return this.http
-      .put<any>(this.baseUrl+'/vehicles' + id, data)
+      .put<any>(this.baseUrl+'/vehicles/' + id, data)
       .pipe(
         map((res: any) => {
           return res;

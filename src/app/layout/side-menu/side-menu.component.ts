@@ -23,10 +23,10 @@ export class SideMenuComponent implements OnInit {
   }
 
   hideInvoiceList(){
-    if(this.userDetails.role == 'admin' || this.userDetails.role == 'approver'){
-      return true;
-    }else {
+    if(this.userDetails.role == 'clerk'){
       return false;
+    }else {
+      return true;
     }
   }
 

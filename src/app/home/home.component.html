@@ -61,12 +61,12 @@
                 <div id="sparkline-revenue4"></div>
               </div>
             </div>
-            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="hideInvoice()">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="text-muted">Pending Quotation</h5>
+                  <h5 class="text-muted">Total Invoices</h5>
                   <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">30</h1>
+                    <h1 class="mb-1">{{ noOfInvoice }}</h1>
                   </div>
                   <div
                     class="
@@ -76,8 +76,28 @@
                       text-primary
                       font-weight-bold
                     "
-                  >
-                    <span>N/A</span>
+                  >   
+                  </div>
+                </div>
+                <div id="sparkline-revenue3"></div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="!hideStaffList()">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="text-muted">Total Quotes</h5>
+                  <div class="metric-value d-inline-block">
+                    <h1 class="mb-1">{{ noOfQuotes }}</h1>
+                  </div>
+                  <div
+                    class="
+                      metric-label
+                      d-inline-block
+                      float-right
+                      text-primary
+                      font-weight-bold
+                    "
+                  >   
                   </div>
                 </div>
                 <div id="sparkline-revenue3"></div>

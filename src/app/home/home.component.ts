@@ -16,13 +16,28 @@ export class HomeComponent implements OnInit {
   page:number = 1;
   count = 0;
   tableSize = 10;
+  noOfInvoice=0;
+  noOfQuotes=0;
   userDetails = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('userDetails'))));
 
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
-    this.getAllClient();
-    this.getVehicle();
+    
+    
+    if(this.hideStaffList()){
+     
+      this.getAllStaff();
+      this.getInvoices();
+    }else if(this.hideInvoice()) {
+      this.getAllClient();
+      this.getVehicle();
+      this.getQuote();
+    }else {
+      this.getAllClient();
+      this.getVehicle();
+      this.getInvoices();
+    }
   }
 
   getAllClient() {
@@ -45,11 +60,39 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getStaff() {
-    this.api.getAllStaffs().subscribe((res: any) => {
-      this.staffData = res.payload;
-      this.noOfStaff = this.staffData.length;
+  getAllStaff() {
+    this.api.getAllStaffs().subscribe({
+      next: (res) => {
+        this.staffData = res.payload;
+        this.noOfStaff = this.staffData.length;
+      },
+      error: (error) => {
+        alert('An error occurred');
+      },
     });
+  }
+
+  getInvoices() {
+    this.api.getInvoice().subscribe(
+      (data: any) => {
+        let response = data.payload;
+        this.noOfInvoice = response.length;
+      },
+      (err: any) => {
+      }
+    );
+  }
+
+  getQuote() {
+    this.api.getQuotes().subscribe(
+      (data: any) => {
+        let response = data.payload;
+        this.noOfQuotes=response.length
+      },
+      (err: any) => {
+
+      }
+    );
   }
 
   hideStaffList(){
@@ -60,7 +103,13 @@ export class HomeComponent implements OnInit {
     }
   }
 
-
+  hideInvoice(){
+    if (this.userDetails.role == 'clerk'){
+      return false;
+    }else {
+      return true;
+    }
+  }
 
   tabSize(index: number) {
     this.page = index;

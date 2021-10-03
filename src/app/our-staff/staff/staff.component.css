@@ -1,7 +1,3 @@
-/* .add-btn {
-    background-color: rgb(14, 8, 90);
-    color: #fff;
-  } */
 
 .hidebtn {
   display: none;
@@ -15,5 +11,5 @@
 .edit-btn {
   color: rgb(14, 8, 90);
 
-  /* color: #fff; */
+
 }

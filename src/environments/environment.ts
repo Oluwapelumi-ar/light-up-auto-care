@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://lightup-auto-care.herokuapp.com',
+  baseUrl: 'https://lightup-autocare.herokuapp.com',
 };
 
 /*
