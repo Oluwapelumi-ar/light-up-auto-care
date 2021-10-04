@@ -121,7 +121,7 @@ export class ClientComponent implements OnInit {
   deleteClients(row: any) {
     this.api.deleteClient(row.id).subscribe(
       (res) => {
-        this.alertInstance = 'Deleted';
+        alert('Deleted Successfully');
         this.getAllClient();
       },
       (reason) => {

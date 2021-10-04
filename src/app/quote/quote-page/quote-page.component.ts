@@ -56,6 +56,10 @@ export class QuotePageComponent implements OnInit {
   totalAmount: number = 0;
   selectedClient: any;
   selectedVehicle: any;
+  alertInstance: string = '';
+  createQuoteAlert!: boolean;
+  updatedQuoteAlert!:boolean;
+  alert!: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -84,10 +88,8 @@ export class QuotePageComponent implements OnInit {
     this.getAllVehicles();
     this.getAllServices();
 
-    // this.getAllQuote();
 
     this.addQuoteTypeForm.statusChanges.subscribe((data: any) => {
-      // console.log(data);
     });
 
     this.quoteData = [];
@@ -108,7 +110,6 @@ export class QuotePageComponent implements OnInit {
 
   onUnitChange(event: any) {
     this.sum = event.target.value;
-    // console.log(event.target.value)
   }
 
   getQuote() {
@@ -117,25 +118,17 @@ export class QuotePageComponent implements OnInit {
         let response = data.payload;
         let responses = response.sort((a: any, b: any) => b.id - a.id);
         this.quoteData = responses;
-        console.log({ response });
+        // console.log({ response });
 
-        // this.addQuoteTypeForm.reset();
       },
       (err: any) => {
-        // console.log('Unable to get data from URL + err');
       }
     );
   }
 
-  // getAllQuote() {
-  //   this.apiServices.getQuotes().subscribe((res) => {
-  //     this.quoteData = res;
-  //     console.log({ res });
-  //   });
-  // }
+
 
   addQuoteType() {
-    //console.log(this.addQuoteTypeForm.value.items);
     let payload: addQuoteModel = {
       totalAmount: this.totalAmount,
       clientId: this.selectedClient.id,
@@ -144,9 +137,9 @@ export class QuotePageComponent implements OnInit {
     };
     this.apiServices.postQuote(payload).subscribe(
       (data) => {
-        console.log(data);
+        
+        this.createQuoteAlert = true;
         this.getQuote();
-        // this.getAllQuote();
         let ref = document.getElementById('cancel');
         ref?.click();
         this.showAdd = true;
@@ -154,19 +147,11 @@ export class QuotePageComponent implements OnInit {
         this.addQuoteTypeForm.reset();
       },
       (err) => {
-        console.log('Unable to add Quote + err');
+        // console.log('Unable to add Quote + err');
       }
     );
   }
 
-  // items: this.fb.array([
-  // newItemsFormArray(): FormGroup {
-  //   return this.fb.group({
-  //     item: '',
-  //     rate: '',
-  //     unit: ''
-  //   })
-  // }
 
   //getting values from Items Array
   get itemsFormArray(): FormArray {
@@ -179,7 +164,6 @@ export class QuotePageComponent implements OnInit {
 
   //tracking client ID
   trackClientId(event: any) {
-    console.log(222, event.id);
     this.selectedClient = event;
     this.getAllVehiclesAttachedToClient(event.id);
   }
@@ -202,7 +186,6 @@ export class QuotePageComponent implements OnInit {
 
   getAllVehiclesAttachedToClient(id: any) {
     this.apiServices.getClientVehicles(id).subscribe((res: any) => {
-      console.log('.....', res.payload);
       this.clientVehicles = res.payload;
     });
   }
@@ -233,14 +216,10 @@ export class QuotePageComponent implements OnInit {
     }
   }
 
-  // addItems(){
-  //   this.itemsFormArray.push(this.newItemsFormArray())
-  // }
 
   removeItems(index: number) {
     let arr = this.addQuoteTypeForm.get('items') as FormArray;
     arr.removeAt(index);
-
     this.checkAddButton();
     this.calculateTotalAmount();
   }
@@ -250,12 +229,9 @@ export class QuotePageComponent implements OnInit {
       ...this.addQuoteTypeForm.value,
       totalAmount: this.totalAmount,
     };
-    console.log(payload);
 
     this.apiServices.updateQuote(payload, this.editID).subscribe((res: any) => {
-      console.log(res);
-
-      alert('Updated Successfully');
+      this.updatedQuoteAlert= true;
       let ref = document.getElementById('cancel');
       ref?.click();
       this.addQuoteTypeForm.reset();
@@ -264,7 +240,6 @@ export class QuotePageComponent implements OnInit {
   }
 
   processCalculation(index: number) {
-    // console.log(index);
 
     let totalAmount =
       this.addQuoteTypeForm.value.items[index].rate *
@@ -273,6 +248,11 @@ export class QuotePageComponent implements OnInit {
     this.addQuoteTypeForm.value.items[index].amount = totalAmount;
 
     this.calculateTotalAmount();
+  }
+
+  closeAlert(){
+    this.alert = false;
+
   }
 
   calculateTotalAmount() {
@@ -290,7 +270,7 @@ export class QuotePageComponent implements OnInit {
   deleteQuote(row: any) {
     this.apiServices.deleteQuote(row.id).subscribe(
       (res: any) => {
-        alert('Quote deleted successfully');
+        this.alert = true;
         this.getQuote();
       },
       (err: any) => {
@@ -333,6 +313,7 @@ export class QuotePageComponent implements OnInit {
     let ref = document.getElementById('cancel');
     ref?.click();
   }
+  
 
   confirmBox(row: any) {
     Swal.fire({
@@ -387,4 +368,5 @@ export class QuotePageComponent implements OnInit {
       }
     });
   }
+  
 }

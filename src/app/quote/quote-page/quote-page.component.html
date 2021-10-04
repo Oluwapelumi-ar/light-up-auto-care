@@ -32,6 +32,57 @@
           </div>
         </nav>
 
+        <ng-container>
+                    <div
+                      *ngIf="alert"
+                      class="alert alert-success alert-dismissible fade show"
+                      role="alert"
+                    >
+                    <strong>Hurray!</strong> Quote Deleted successfully
+                    <button
+                      (click)="closeAlert()"
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>  
+                    <div
+                      *ngIf="createQuoteAlert"
+                      class="alert alert-success alert-dismissible fade show"
+                      role="alert"
+                    >
+                    <strong>Hurray!</strong> Quote Created successfully
+                    <button
+                      (click)="closeAlert()"
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>  
+                    <div
+                      *ngIf="updatedQuoteAlert"
+                      class="alert alert-success alert-dismissible fade show"
+                      role="alert"
+                    >
+                    <strong>Hurray!</strong> Quote Updated Successfully
+                    <button
+                      (click)="closeAlert()"
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>  
+                </ng-container>
+                <!-- End Notification Alert -->
         <table class="table table-bordered mt-3">
           <thead>
             <tr>
@@ -125,6 +176,14 @@
                     *ngIf="row.isApproved === true"
                   >
                     Create Invoice
+                  </button>
+                  <button
+                  (click)="confirmBox(row)"
+                    type="button"
+                    class="btn create-btn"
+                    *ngIf="row.isApproved === false"
+                  >
+                    Pending
                   </button>
                 </div>
               </td>

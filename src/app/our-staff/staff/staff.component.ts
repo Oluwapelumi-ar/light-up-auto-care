@@ -128,7 +128,6 @@ export class StaffComponent implements OnInit {
       next: (res) => {
         this.alert = true;
         this.getAllStaff();
-        console.log(this.staffData);
       },
     });
   }
