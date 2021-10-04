@@ -18,7 +18,7 @@
   <div class="dashboard-wrapper">
     <div class="dashboard-finance">
       <div class="container-fluid dashboard-content">
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar ">
           <div class="container d-flex">
             <h2>Quote Page</h2>
             <button
@@ -44,7 +44,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let row of quoteData; let i = index">
+            <tr *ngFor="let row of quoteData| paginate : {
+              itemsPerPage: tableSize,
+              currentPage: page,
+              totalItems: count
+            };  let i = index">
               <td>{{ i + 1 }}</td>
               <td>{{ row.clientName }}</td>
               <td>{{ row.vehicleName }}</td>
@@ -120,7 +124,8 @@
                       Approve
                     </button>
                   </div>
-                  <button
+                  <div class="" *ngIf="hideInvoiceList()">
+                    <button
                     (click)="goToInvoice(row)"
                     type="button"
                     class="btn btn-outline-primary create-btn"
@@ -128,11 +133,23 @@
                   >
                     Create Invoice
                   </button>
+                  </div>
+                  
                 </div>
               </td>
             </tr>
           </tbody>
         </table>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-center pagination">
+              <pagination-controls
+                previousLabel="Prev"
+                nextLabel="Next"
+                (pageChange)="tabSize($event)"
+              >
+              </pagination-controls>
+            </div>
 
         <!--Quote Modal -->
         <div class="container">
@@ -213,7 +230,7 @@
                         style="text-transform: capitalize"
                         bindValue="id"
                         formControlName="vehicleId"
-                        (change)="trackVehicle($event)"
+                        (click)="trackVehicle($event)"
                       ></ng-select>
                       <div
                         class="text-danger"

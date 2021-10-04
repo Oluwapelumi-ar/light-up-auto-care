@@ -39,6 +39,10 @@
   color: #fff;
 }
 
+.pagination {
+  color:rgb(14, 8, 90);
+}
+
 /* .btn-invoice {
   background-color: rgb(40, 32, 157);
   color: #fff;

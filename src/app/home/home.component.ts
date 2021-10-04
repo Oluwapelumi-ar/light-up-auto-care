@@ -13,13 +13,31 @@ export class HomeComponent implements OnInit {
   noOfClients: number = 0;
   noOfVehicles: number = 0;
   noOfStaff: number = 0;
+  page:number = 1;
+  count = 0;
+  tableSize = 10;
+  noOfInvoice=0;
+  noOfQuotes=0;
+  userDetails = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('userDetails'))));
 
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
-    this.getAllClient();
-    this.getVehicle();
-    this.getAllStaff();
+    
+    
+    if(this.hideStaffList()){
+     
+      this.getAllStaff();
+      this.getInvoices();
+    }else if(this.hideInvoice()) {
+      this.getAllClient();
+      this.getVehicle();
+      this.getQuote();
+    }else {
+      this.getAllClient();
+      this.getVehicle();
+      this.getInvoices();
+    }
   }
 
   getAllClient() {
@@ -52,5 +70,48 @@ export class HomeComponent implements OnInit {
         alert('An error occurred');
       },
     });
+  }
+
+  getInvoices() {
+    this.api.getInvoice().subscribe(
+      (data: any) => {
+        let response = data.payload;
+        this.noOfInvoice = response.length;
+      },
+      (err: any) => {
+      }
+    );
+  }
+
+  getQuote() {
+    this.api.getQuotes().subscribe(
+      (data: any) => {
+        let response = data.payload;
+        this.noOfQuotes=response.length
+      },
+      (err: any) => {
+
+      }
+    );
+  }
+
+  hideStaffList(){
+    if(this.userDetails.role == 'admin'){
+      return true;
+    }else {
+      return false;
+    }
+  }
+
+  hideInvoice(){
+    if (this.userDetails.role == 'clerk'){
+      return false;
+    }else {
+      return true;
+    }
+  }
+
+  tabSize(index: number) {
+    this.page = index;
   }
 }

@@ -128,7 +128,6 @@ export class StaffComponent implements OnInit {
       next: (res) => {
         this.alert = true;
         this.getAllStaff();
-        console.log(this.staffData);
       },
     });
   }
@@ -146,7 +145,7 @@ export class StaffComponent implements OnInit {
   closeAlert() {
     this.alert = false;
   }
-
+ 
   tabSize(index: number) {
     this.page = index;
     this.getAllStaff();

@@ -21,6 +21,9 @@ export class ClientComponent implements OnInit {
   clientData: any = [];
   showAdd!: boolean;
   showUpdate!: boolean;
+  page:number = 1;
+  count = 0;
+  tableSize = 10;
 
   clientModelObj: ClientModel = new ClientModel();
   order: any;
@@ -178,6 +181,10 @@ export class ClientComponent implements OnInit {
         this.formValue.reset();
         this.getAllClient();
       });
+  }
+
+  tabSize(index: number) {
+    this.page = index;
   }
 
   closeAlert() {}

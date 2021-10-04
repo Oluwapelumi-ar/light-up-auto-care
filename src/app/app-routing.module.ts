@@ -23,9 +23,9 @@ const routes: Routes = [
   {
     path: 'invoice',
     component: InvoiceComponent,
-    canActivate: [AuthguardGuard],
+    canActivate: [RoleGuard,AuthguardGuard],
   },
-  { path: 'staff', component: StaffComponent, canActivate: [AuthguardGuard] },
+  { path: 'staff', component: StaffComponent, canActivate: [RoleGuard, AuthguardGuard]},
   { path: 'home', component: HomeComponent, canActivate: [AuthguardGuard] },
   { path: 'client', component: ClientComponent, canActivate: [AuthguardGuard] },
   {

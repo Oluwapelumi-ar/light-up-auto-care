@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { NgForm } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 interface staffDetails {
   id?: string;
@@ -35,6 +36,10 @@ export class ApiService {
   //   throw new Error('Method not implemented.');
   // }
   constructor(private http: HttpClient) {}
+  private get baseUrl() {
+    const url = environment.baseUrl;
+    return url;
+  }
 
   // handleError(error: { error: { message: any; }; status: any; message: any; }) {
   //   let errorMessage = '';
@@ -53,63 +58,50 @@ export class ApiService {
 
   postClient(data: any) {
     console.log(data);
-    return this.http
-      .post<any>('https://lightup-autocare.herokuapp.com/clients', data)
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this.http.post<any>(this.baseUrl + '/clients', data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   getAllClients() {
-    return this.http
-      .get<any>('https://lightup-autocare.herokuapp.com/clients')
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this.http.get<any>(this.baseUrl + '/clients').pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   getClientByID(ID: number) {
-    return this.http
-      .get<any>(`https://lightup-autocare.herokuapp.com/${ID}`)
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this.http.get<any>(this.baseUrl + `/clients/${ID}`).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   updateClient(data: any, id: number) {
-    return this.http
-      .put<any>('https://lightup-autocare.herokuapp.com/' + id, data)
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this.http.put<any>(this.baseUrl + '/clients/' + id, data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   deleteClient(id: number) {
-    return this.http
-      .delete<any>('https://lightup-autocare.herokuapp.com/clients/' + id)
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this.http.delete<any>(this.baseUrl + '/clients/' + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   // Staff
   postStaff(data: staffDetails) {
     console.log(data);
     return this.http
-      .post<staffDetails>(
-        'https://lightup-autocare.herokuapp.com/staffs/signup',
-        data
-      )
+      .post<staffDetails>(this.baseUrl + '/staffs/signup', data)
       .pipe(
         map((res: any) => {
           return res;
@@ -118,73 +110,56 @@ export class ApiService {
   }
 
   getAllStaffs() {
-    return this.http
-      .get<any>('https://lightup-autocare.herokuapp.com/staffs')
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this.http.get<any>(this.baseUrl + '/staffs').pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   getStaffByID(ID: number) {
-    return this.http
-      .get<any>(`https://lightup-autocare.herokuapp.com/staffs/${ID}`)
-      .pipe(
-        map((res: any) => {
-          console.log(res);
-          return res;
-        })
-      );
+    return this.http.get<any>(this.baseUrl + `/staffs/${ID}`).pipe(
+      map((res: any) => {
+        console.log(res);
+        return res;
+      })
+    );
   }
 
   updateStaff(data: any, id: number) {
-    return this.http
-      .put<any>('https://lightup-autocare.herokuapp.com/staffs/' + id, data)
-      .pipe(
-        map((res: any) => {
-          console.log('LOG: ' + res);
-          return res;
-        })
-      );
+    return this.http.put<any>(this.baseUrl + '/staffs/' + id, data).pipe(
+      map((res: any) => {
+        console.log('LOG: ' + res);
+        return res;
+      })
+    );
   }
 
   deleteStaff(id: number) {
-    return this.http
-      .delete<staffDetails>(
-        'https://lightup-autocare.herokuapp.com/staffs/' + id
-      )
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this.http.delete<staffDetails>(this.baseUrl + '/staffs/' + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   //Vehicle
 
   postVehicle(data: any) {
-    return this.http.post<any>(
-      'https://lightup-autocare.herokuapp.com/vehicles',
-      data
-    );
+    return this.http.post<any>(this.baseUrl + '/vehicles', data);
   }
 
   getVehicle() {
-    return this.http
-      .get<any>('https://lightup-autocare.herokuapp.com/vehicles')
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this.http.get<any>(this.baseUrl + '/vehicles').pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   getClientVehicles(clientId: any) {
     return this.http
-      .get<any>(
-        `https://lightup-autocare.herokuapp.com/vehicles?clientId=${clientId}`
-      )
+      .get<any>(this.baseUrl + `/vehicles?clientId=${clientId}`)
       .pipe(
         map((res: any) => {
           return res;
@@ -193,33 +168,26 @@ export class ApiService {
   }
 
   updateVehicle(data: any, id: number) {
-    return this.http
-      .put<any>('https://lightup-autocare.herokuapp.com/vehicles' + id, data)
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this.http.put<any>(this.baseUrl + '/vehicles/' + id, data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   deleteVehicle(id: number) {
-    return this.http
-      .delete<any>('https://lightup-autocare.herokuapp.com/vehicles/' + id)
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this.http.delete<any>(this.baseUrl + '/vehicles/' + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   //Service
 
   postService(data: any) {
     return this.http
-      .post<any>(
-        'https://lightup-autocare.herokuapp.com/personalisedServices',
-        data
-      )
+      .post<any>(this.baseUrl + '/personalisedServices', data)
       .pipe(
         map((res: any) => {
           return res;
@@ -228,21 +196,16 @@ export class ApiService {
   }
 
   getAllService() {
-    return this.http
-      .get<any>('https://lightup-autocare.herokuapp.com/personalisedServices')
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this.http.get<any>(this.baseUrl + '/personalisedServices').pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   updateService(data: any, id: number) {
     return this.http
-      .put<any>(
-        'https://lightup-autocare.herokuapp.com/personalisedServices/' + id,
-        data
-      )
+      .put<any>(this.baseUrl + '/personalisedServices/' + id, data)
       .pipe(
         map((res: any) => {
           return res;
@@ -252,9 +215,7 @@ export class ApiService {
 
   deleteService(id: number) {
     return this.http
-      .delete<any>(
-        'https://lightup-autocare.herokuapp.com/personalisedServices/' + id
-      )
+      .delete<any>(this.baseUrl + '/personalisedServices/' + id)
       .pipe(
         map((res: any) => {
           return res;
@@ -270,10 +231,7 @@ export class ApiService {
     });
     const params = new HttpParams();
 
-    return this.http.get<quote>(
-      'https://lightup-autocare.herokuapp.com/quotes',
-      { headers: headers }
-    );
+    return this.http.get<quote>(this.baseUrl + '/quotes', { headers: headers });
   }
 
   //post Quote request
@@ -281,11 +239,9 @@ export class ApiService {
     const customHeaders = new HttpHeaders({
       autheticationKey: 'testing2323',
     });
-    return this.http.post(
-      'https://lightup-autocare.herokuapp.com/quotes',
-      data,
-      { headers: customHeaders }
-    );
+    return this.http.post(this.baseUrl + '/quotes', data, {
+      headers: customHeaders,
+    });
   }
 
   updateQuote(data: any, id: number): Observable<quote> {
@@ -295,25 +251,19 @@ export class ApiService {
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImVtYWlsIjoic3VwZXJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoiU3VwZXIgQWRtaW4iLCJpYXQiOjE2MzI4MjMyMDIsImV4cCI6MTYzMjkwOTYwMn0.vySlgLfJ4BOuDZTDmCWQP4DIUn9T9Njvf8NNFMzLWu4',
     });
 
-    return this.http.put<quote>(
-      'https://lightup-autocare.herokuapp.com/quotes/' + id,
-      data,
-      { headers: putHeaders }
-    );
+    return this.http.put<quote>(this.baseUrl + '/quotes/' + id, data, {
+      headers: putHeaders,
+    });
   }
 
   deleteQuote(id: number): Observable<quote> {
-    return this.http.delete<quote>(
-      'https://lightup-autocare.herokuapp.com/quotes/' + id
-    );
+    return this.http.delete<quote>(this.baseUrl + '/quotes/' + id);
   }
 
   //  const deleteParams = new HttpParams().set('userRole', 'admin');
 
   getClientAndVehicle(id: any) {
-    return this.http.get(
-      `https://lightup-autocare.herokuapp.com/vehicles?clientId=${id}`
-    );
+    return this.http.get(this.baseUrl + `/vehicles?clientId=${id}`);
   }
 
   postInvoice(data: any) {

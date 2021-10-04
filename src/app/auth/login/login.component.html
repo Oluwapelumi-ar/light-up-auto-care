@@ -1,5 +1,25 @@
 <div class="splash-container">
   <div class="card">
+    <!-- Start Notification Alert -->
+    <ng-container>
+      <div
+        *ngIf="alert"
+        class="alert alert-danger alert-dismissible fade show"
+        role="alert"
+      >
+      <strong>Whoops!</strong> {{ doesUserExist }}
+      <button
+        (click)="closeAlert()"
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      </div>  
+  </ng-container>
+  <!-- End Notification Alert -->
     <div class="card-body">
       <div class="card-header">
         <h2>Login Form</h2>
@@ -47,7 +67,7 @@
         >
           Login
         </button>
-        <!-- <span *ngIf="loginForm.invalid && loginForm.get('password')?.touched && loginForm.get('password')?.touched " class="text-danger">Provide Valid Email and Password to Login</span> -->
+        <span *ngIf="loginForm.invalid && loginForm.get('password')?.touched && loginForm.get('password')?.touched " class="text-danger">Provide Valid Email and Password to Login</span>
         <p class="text-danger" *ngIf="loginForm.errors?.noConnection">
           No network Connection detected,failed to login
         </p>
