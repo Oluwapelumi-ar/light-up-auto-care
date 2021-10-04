@@ -52,7 +52,7 @@ export class ClientComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(4),
+          Validators.minLength(3),
           Validators.pattern('[a-zA-Z]+'),
         ],
       ],
@@ -123,8 +123,12 @@ export class ClientComponent implements OnInit {
       (res) => {
         this.alertInstance = 'Deleted';
         this.getAllClient();
+        let ref = document.getElementById('cancel');
+        ref?.click();
+        this.formValue.reset();
       },
       (reason) => {
+        this.alertInstance = 'Error, Try Again';
         this.getAllClient();
       }
     );
@@ -134,13 +138,23 @@ export class ClientComponent implements OnInit {
     this.showAdd = false;
     this.showUpdate = true;
     this.clientModelObj.id = row.id;
-    this.formValue.controls['name'].setValue(row.name);
+    this.formValue.controls['clientId'].setValue(row.clientId);
     this.formValue.controls['email'].setValue(row.email);
     this.formValue.controls['telephone'].setValue(row.telephone);
 
     // this.formValue.patchValue({
     //   billingAddress: { ...row.billingAddress },
     // });
+
+    this.formValue.patchValue({
+      billingAddress: {
+        repName: row.repName,
+        address: row.address,
+        city: row.city,
+        state: row.state,
+        postalCode: row.postalCode,
+      },
+    });
   }
 
   updateClientDetails() {

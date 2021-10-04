@@ -34,18 +34,27 @@ export class InvoiceComponent implements OnInit {
   }
 
   getInvoices() {
-    this.api.getInvoice().subscribe(
-      (data: any) => {
-        let response = data.payload;
-        let responses = response.sort((a: any, b: any) => b.id - a.id);
-        this.invoiceData = responses;
-        console.log({ response });
-      },
-      (err: any) => {
-        console.log('Unable to get data from URL + err');
-      }
-    );
+    this.api.getInvoice().subscribe((res: any) => {
+      console.log({ res });
+      this.invoiceData = res.payload;
+    });
+
+    (err: any) => {
+      console.log('Unable to get data from URL + err');
+    };
   }
+
+  // this.api.getInvoice().subscribe(
+  //   (data: any) => {
+  //     let response = data.payload;
+  //     let responses = response.sort((a: any, b: any) => b.id - a.id);
+  //     this.invoiceData = responses;
+  //     console.log({ response });
+  //   },
+  //   (err: any) => {
+  //     console.log('Unable to get data from URL + err');
+  //   }
+  // );
 
   deleteInvoices(row: any) {
     this.api.deleteInvoice(row.id).subscribe(

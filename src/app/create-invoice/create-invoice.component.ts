@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, RouterLinkWithHref } from '@angular/router';
 import { ApiService } from '../shared/api.service';
 import { HttpClient } from '@angular/common/http';
 import { invoiceQuoteModel } from '../invoice/invoiceQuoteModel';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-invoice',
@@ -18,6 +19,7 @@ export class CreateInvoiceComponent implements OnInit {
   rate: number = 0;
   amount: number = 0;
   totalAmount: number = 0;
+  alertInstance: string = '';
   // selectedClient: any;
   // selectedVehicle: any;
   invoiceData: any;
@@ -51,11 +53,25 @@ export class CreateInvoiceComponent implements OnInit {
     this.api.postInvoice(invoicePayload).subscribe(
       (data: any) => {
         console.log(data);
-        alert('successful');
+        // this.alertInstance = 'Successful';
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Invoice sent successfully!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
       },
 
       (err: any) => {
-        alert('something went wrong!');
+        // this.alertInstance = 'Error, Try Again';
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Something went wrong!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     );
   }
@@ -68,4 +84,6 @@ export class CreateInvoiceComponent implements OnInit {
   // .then(() => {
   //   window.location.reload();
   // });
+
+  closeAlert() {}
 }
