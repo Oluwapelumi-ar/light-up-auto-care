@@ -23,75 +23,87 @@
         <div class="card">
           <div class="card-body">
             <div class="d-flex">
-              <div class="header logo">FROM: Light Up Auto Care</div>
+              <div class="header logo">From: Light Up Auto Care</div>
               <div class="receiver">
-                <h4>TO:</h4>
-                <p>{{ history.state.data.clientName }}</p>
+                <h4>Bill To:</h4>
+                <p>clientName:{{ history.state.data.clientName }}</p>
                 <p>Address: {{ history.state.data.billingAddress.address }}</p>
                 <p>City: {{ history.state.data.billingAddress.city }}</p>
                 <p>
                   PostalCode: {{ history.state.data.billingAddress.postalCode }}
                 </p>
+                <p>State: {{ history.state.data.billingAddress.state }}</p>
               </div>
             </div>
 
-            <div class="invoice-info">
+            <table class="table invoice-info">
               <div class="card">
-                <!-- <thead>
-                  <th scope="col">Rep Name</th>
-                  <th scope="col">Vehicle Name</th>
-                  <th scope="col">Service:</th>
-                  <th scope="col">Unit:</th>
-                  <th scope="col">Rate:</th>
-                  <th scope="col">Total Amount</th>
-                  <th scope="col">Created By</th>
-                  <th scope="col">UpdatedOn</th>
-                  <th scope="col">Date</th>
-                </thead> -->
-
-                <tbody class="mt-4">
-                  <p class="title-02">
+                <tbody>
+                  <h4 class="title-01 mt-4">
                     Rep Name: {{ history.state.data.billingAddress.repName }}
-                  </p>
-                  <p class="title-02">
+                  </h4>
+                  <h4 class="title-01 mt-4">
                     Vehicle Name: {{ history.state.data.vehicleName }}
-                  </p>
-                  <p class="title-02">
-                    Service: {{ history.state.data.items[0].item }}
-                  </p>
-                  <p class="title-02">
-                    Unit: {{ history.state.data.items[0].unit }}
-                  </p>
-                  <p class="title-02">
-                    Rate:
-                    {{ history.state.data.items[0].rate | currency: "NGN" }}
-                  </p>
-                  <p class="title-02">
-                    Total Amount:
-                    {{ history.state.data.totalAmount | currency: "NGN" }}
-                  </p>
+                  </h4>
 
-                  <h6 class="title-03">History</h6>
-                  <p>Created By: {{ history.state.data.createdByName }}</p>
-                  <p>
-                    UpdatedOn:
-                    {{
-                      history.state.data.updatedOn | date: "yyyy-MM-dd HH:mm"
-                    }}
-                  </p>
-                  <p>
-                    Date:
-                    {{ history.state.data.createdOn | date: "yyyy-MM-dd" }}
-                  </p>
+                  <div
+                    *ngFor="let item of history.state.data.items; let i = index"
+                    class="mt-4"
+                  >
+                    <div class="item">
+                      <span class="title-02">Service: {{ item.item }}</span>
+                    </div>
+
+                    <div class="unit">
+                      <span class="title-02">Unit: {{ item.unit }}</span>
+                    </div>
+                    <div class="rate">
+                      <span class="title-02"
+                        >Rate: {{ item.rate | currency: "NGN" }}</span
+                      >
+                    </div>
+                    <div class="amount">
+                      <span class="title-02">
+                        Amount: {{ item.amount | currency: "NGN" }}</span
+                      >
+                    </div>
+                  </div>
+
+                  <div class="total mt-4">
+                    <span class="title-04">
+                      Total Amount:
+                      {{ history.state.data.totalAmount | currency: "NGN" }}
+                    </span>
+                  </div>
                 </tbody>
+                <tfoot>
+                  <div class="d-flex mt-4">
+                    <h6 class="title-03 mx-4">History:</h6>
+                    <p class="mx-4">
+                      Created By: {{ history.state.data.createdByName }}
+                    </p>
+                    <p class="mx-4">
+                      UpdatedOn:
+                      {{
+                        history.state.data.updatedOn
+                          | date: "MMM d, y, h:mm:ss a"
+                      }}
+                    </p>
+                    <p class="mx-4">
+                      Date:
+                      {{ history.state.data.createdOn | date: "MMM d, y" }}
+                    </p>
+                  </div>
+                </tfoot>
               </div>
-            </div>
+            </table>
           </div>
         </div>
       </div>
-      <!-- <button (click)="sendInvoice($event)" class="btn add-btn">
-        Send To Client
-      </button> -->
+      <button (click)="backToQuote($event)" class="btn add-btn mb-4">
+        <!-- Back -->
+        <span><i class="fas fa-arrow-left mx-2"></i>Back</span>
+      </button>
     </div>
   </div>
 </div>

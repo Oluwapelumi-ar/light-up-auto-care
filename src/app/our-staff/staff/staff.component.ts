@@ -145,7 +145,7 @@ export class StaffComponent implements OnInit {
   closeAlert() {
     this.alert = false;
   }
-
+ 
   tabSize(index: number) {
     this.page = index;
     this.getAllStaff();

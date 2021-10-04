@@ -85,8 +85,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let row of clientData; let i = index">
-              <td>{{ i + 1 }}</td>
+            <tr *ngFor="let row of clientData| paginate : {
+              itemsPerPage: tableSize,
+              currentPage: page,
+              totalItems: count
+            }; let i = index">
+              <td>{{ ((page-1)*tableSize)+(i+1) }}</td>
               <td>{{ row.name }}</td>
               <td>{{ row.email }}</td>
               <!-- <td>{{ row.address }}</td> -->
@@ -96,14 +100,14 @@
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                   (click)="onEdit(row)"
-                  class="btn edit-btn"
+                  class="btn btn-outline-primary edit-btn"
                 >
                   Edit
                 </button>
 
                 <button
                   (click)="deleteClients(row)"
-                  class="btn btn-danger mx-3"
+                  class="btn btn-outline-danger mx-3"
                 >
                   Delete
                 </button>
@@ -111,6 +115,15 @@
             </tr>
           </tbody>
         </table>
+        <!-- Pagination -->
+    <div class="d-flex justify-content-center">
+      <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        (pageChange)="tabSize($event)"
+      >
+      </pagination-controls>
+    </div>
 
         <!-------------------------------------- MODAL -------------------------->
 

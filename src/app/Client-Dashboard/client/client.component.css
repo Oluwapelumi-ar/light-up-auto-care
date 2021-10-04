@@ -4,16 +4,16 @@
   font-weight: 600;
 }
 
-.add-btn,
-.edit-btn {
+.add-btn {
   background-color: rgb(14, 8, 90);
-
   color: #fff;
 }
 
-/* .billingInput {
-  margin-right: 0.2em;
-} */
+.edit-btn {
+  color: rgb(14, 8, 90);
+
+  /* color: #fff; */
+}
 
 .client {
   cursor: pointer;

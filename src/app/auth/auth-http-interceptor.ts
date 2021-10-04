@@ -4,6 +4,7 @@ import {
   HttpInterceptor,
   HttpHandler,
   HttpRequest,
+  HttpResponse
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthServiceService } from './auth-service.service';
@@ -18,7 +19,7 @@ export class AuthHttpInterceptor implements HttpInterceptor {
 
   intercept(
     request: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
 
     let userDetails = JSON.parse(JSON.stringify(localStorage.getItem('userDetails')));
@@ -37,7 +38,6 @@ export class AuthHttpInterceptor implements HttpInterceptor {
         });
       }
     }
-    return next.handle(request);
-
+    return next.handle(request)
   }
 }
