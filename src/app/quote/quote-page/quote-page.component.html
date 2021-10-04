@@ -18,7 +18,7 @@
   <div class="dashboard-wrapper">
     <div class="dashboard-finance">
       <div class="container-fluid dashboard-content">
-        <nav class="navbar ">
+        <nav class="navbar navbar-light bg-light">
           <div class="container d-flex">
             <h2>Quote Page</h2>
             <button
@@ -95,11 +95,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let row of quoteData| paginate : {
-              itemsPerPage: tableSize,
-              currentPage: page,
-              totalItems: count
-            };  let i = index">
+            <tr *ngFor="let row of quoteData; let i = index">
               <td>{{ i + 1 }}</td>
               <td>{{ row.clientName }}</td>
               <td>{{ row.vehicleName }}</td>
@@ -155,7 +151,6 @@
                       (click)="onEdit(row)"
                       class="dropdown-item"
                       type="button"
-                      *ngIf="!row.isApproved"
                     >
                       Edit
                     </button>
@@ -170,22 +165,20 @@
                       (click)="confirmBox(row)"
                       class="dropdown-item"
                       type="button"
-                      *ngIf="!row.isApproved"
                     >
                       Approve
                     </button>
                   </div>
-                  <div class="" *ngIf="hideInvoiceList()">
-                    <button
+                  <button
                     (click)="goToInvoice(row)"
                     type="button"
-                    class="btn btn-outline-primary create-btn"
-                    *ngIf="row.isApproved"
+                    class="btn create-btn"
+                    *ngIf="row.isApproved === true"
                   >
                     Create Invoice
                   </button>
                   <button
-                  (click)="confirmBox(row)"
+                    (click)="confirmBox(row)"
                     type="button"
                     class="btn create-btn"
                     *ngIf="row.isApproved === false"
@@ -193,7 +186,7 @@
                     Pending
                   </button>
                 </div>
-              
+              </td>
               <!-- <td>
                 <div class="dropdown d-flex">
                   <button
@@ -207,22 +200,11 @@
                   <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                     <button class="dropdown-item" type="button">Approve</button>
                   </div>
-                  
                 </div>
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>
-
-            <!-- Pagination -->
-            <div class="d-flex justify-content-center pagination">
-              <pagination-controls
-                previousLabel="Prev"
-                nextLabel="Next"
-                (pageChange)="tabSize($event)"
-              >
-              </pagination-controls>
-            </div>
 
         <!--Quote Modal -->
         <div class="container">
@@ -303,7 +285,7 @@
                         style="text-transform: capitalize"
                         bindValue="id"
                         formControlName="vehicleId"
-                        (click)="trackVehicle($event)"
+                        (change)="trackVehicle($event)"
                       ></ng-select>
                       <div
                         class="text-danger"
@@ -394,8 +376,17 @@
                             />
                           </div>
 
+                          <!-- <div class="form-group">
+                            <label for="rate">Amount</label>
+                            <input
+                              type="number"
+                              formControlName="amount"
+                              class="form-control"
+                              placeholder="Enter rate"
+                            />
+                          </div> -->
                           <div class="col-md-6">
-                            <label class="total mx-2">Total:</label>
+                            <label class="total">Total:</label>
                             <span>{{
                               this.addQuoteTypeForm.value.items[i].rate *
                                 this.addQuoteTypeForm.value.items[i].unit
@@ -461,3 +452,6 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>

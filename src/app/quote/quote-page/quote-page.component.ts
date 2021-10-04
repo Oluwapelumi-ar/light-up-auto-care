@@ -277,7 +277,7 @@ export class QuotePageComponent implements OnInit {
         this.getQuote();
       },
       (err: any) => {
-        console.log('Unable to delete the Quote' + err);
+        // console.log('Unable to delete the Quote' + err);
         this.addQuoteTypeForm.reset();
       }
     );
@@ -306,12 +306,12 @@ export class QuotePageComponent implements OnInit {
     this.editID = true;
     this.showAdd = false;
     this.showUpdate = true;
-    console.log(row);
-    console.log(this.addQuoteTypeForm.value);
+    // console.log(row);
+    // console.log(this.addQuoteTypeForm.value);
   }
 
   onViewClick(row: any) {
-    console.log({ row });
+    // console.log({ row });
     this.viewQte = row;
     let ref = document.getElementById('cancel');
     ref?.click();
@@ -328,10 +328,10 @@ export class QuotePageComponent implements OnInit {
       cancelButtonText: 'No, Cancel it',
     }).then((result: any) => {
       if (result.value) {
-        console.log('BEFORE');
+        // console.log('BEFORE');
         row.isApproved = true;
         row.isPending = false;
-        console.log(row);
+        // console.log(row);
         /*        
         delete row.isActive;
         delete row.isDeleted;
@@ -369,15 +369,15 @@ export class QuotePageComponent implements OnInit {
           isPending: row.isPending,
         };
 
-        console.log('NEW PAYLOAD');
+        // console.log('NEW PAYLOAD');
 
-        console.log(updatePayload);
+        // console.log(updatePayload);
 
         this.apiServices
           .updateQuote(updatePayload, row.id)
           .subscribe((res: any) => {
-            console.log('RESPONSE');
-            console.log(res);
+            // console.log('RESPONSE');
+            // console.log(res);
             if (res.status == 200) {
               this.hidden = true;
               Swal.fire(
