@@ -59,7 +59,7 @@ export class QuotePageComponent implements OnInit {
   selectedVehicle: any;
   alertInstance: string = '';
   createQuoteAlert!: boolean;
-  updatedQuoteAlert!:boolean;
+  updatedQuoteAlert!: boolean;
   alert!: boolean;
   page: number = 1;
   count = 0;
@@ -169,15 +169,6 @@ export class QuotePageComponent implements OnInit {
       }
     );
   }
-
-  // items: this.fb.array([
-  // newItemsFormArray(): FormGroup {
-  //   return this.fb.group({
-  //     item: '',
-  //     rate: '',
-  //     unit: ''
-  //   })
-  // }
 
   //getting values from Items Array
   get itemsFormArray(): FormArray {
@@ -296,7 +287,7 @@ export class QuotePageComponent implements OnInit {
       .subscribe((res: any) => {
         1;
         console.log(res);
-        this.updatedQuoteAlert= true;
+        this.updatedQuoteAlert = true;
         let ref = document.getElementById('cancel');
         ref?.click();
         this.addQuoteTypeForm.reset();
@@ -346,11 +337,9 @@ export class QuotePageComponent implements OnInit {
     ref?.click();
   }
 
-  closeAlert(){
+  closeAlert() {
     this.alert = false;
-
   }
-
 
   confirmBox(row: any) {
     Swal.fire({
