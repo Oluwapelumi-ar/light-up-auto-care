@@ -57,6 +57,10 @@ export class QuotePageComponent implements OnInit {
   totalAmount: number = 0;
   selectedClient: any;
   selectedVehicle: any;
+  alertInstance: string = '';
+  createQuoteAlert!: boolean;
+  updatedQuoteAlert!:boolean;
+  alert!: boolean;
   page: number = 1;
   count = 0;
   tableSize = 10;
@@ -151,7 +155,7 @@ export class QuotePageComponent implements OnInit {
     };
     this.apiServices.postQuote(payload).subscribe(
       (data) => {
-        console.log(data);
+        this.createQuoteAlert = true;
         this.getQuote();
         // this.getAllQuote();
         let ref = document.getElementById('cancel');
@@ -291,8 +295,7 @@ export class QuotePageComponent implements OnInit {
       .updateQuote(payload, this.quoteModelObj.id)
       .subscribe((res: any) => {
         console.log(res);
-
-        alert('Updated Successfully');
+        this.updatedQuoteAlert= true;
         let ref = document.getElementById('cancel');
         ref?.click();
         this.addQuoteTypeForm.reset();
@@ -325,7 +328,7 @@ export class QuotePageComponent implements OnInit {
   deleteQuote(row: any) {
     this.apiServices.deleteQuote(row.id).subscribe(
       (res: any) => {
-        alert('Quote deleted successfully');
+        this.alert = true;
         this.getQuote();
       },
       (err: any) => {
@@ -341,6 +344,12 @@ export class QuotePageComponent implements OnInit {
     let ref = document.getElementById('cancel');
     ref?.click();
   }
+
+  closeAlert(){
+    this.alert = false;
+
+  }
+
 
   confirmBox(row: any) {
     Swal.fire({
