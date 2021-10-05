@@ -23,6 +23,7 @@ export class SideMenuComponent implements OnInit {
   }
 
   hideInvoiceList(){
+    console.log("role",this.userDetails.role)
     if(this.userDetails.role == 'clerk'){
       return false;
     }else {

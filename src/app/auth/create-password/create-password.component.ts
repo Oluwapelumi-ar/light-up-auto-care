@@ -40,7 +40,7 @@ export class CreatePasswordComponent implements OnInit {
     if (this.createPasswordForm.invalid) {
       return;
     }
-    this.authService.createPassword(this.createPasswordForm.value).subscribe(
+    this.authService.createPassword(this.createPasswordForm.value, email).subscribe(
       (response) => {
       this.router.navigate(['/login']);
       console.log(response)
@@ -55,4 +55,8 @@ export class CreatePasswordComponent implements OnInit {
 
 }
 
+
+function email(value: any, email: any) {
+  throw new Error('Function not implemented.');
+}
 

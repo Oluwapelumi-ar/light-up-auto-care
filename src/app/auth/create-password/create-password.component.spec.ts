@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-// import { CreatePassword } from './create-password/create-password'
 import { CreatePasswordComponent } from './create-password.component'
 
 describe('CreatePassword', () => {

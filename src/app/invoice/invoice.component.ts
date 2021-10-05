@@ -37,9 +37,8 @@ export class InvoiceComponent implements OnInit {
     this.api.getInvoice().subscribe(
       (data: any) => {
         let response = data.payload;
-        let responses = response.sort((a: any, b: any) => b.id - a.id);
-        this.invoiceData = responses;
-        console.log({ response });
+        this.invoiceData = response.sort((a: any, b: any) => b.id - a.id);
+        console.log(this.invoiceData);
       },
       (err: any) => {
         console.log('Unable to get data from URL + err');

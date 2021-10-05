@@ -131,7 +131,7 @@ export class ClientComponent implements OnInit {
         this.getAllClient();
       }
     );
-  }
+  } 
 
   onEdit(row: any) {
     this.showAdd = false;

@@ -33,7 +33,7 @@ export class AuthServiceService {
 
   createPassword(data: createPasswordData): Observable<any> {
     return this.http.put<createPasswordData>(
-      'https://lightup-auto-care.herokuapp.com/staffs/password/create?email=newclerk@gmail .com',
+      `https://lightup-auto-care.herokuapp.com/staffs/password/create?`,
       data
     );
   }

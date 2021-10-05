@@ -286,9 +286,8 @@ export class ApiService {
     const customHeaders = new HttpHeaders({
       autheticationKey: 'testing2323',
     });
-    return this.http.post(
-      this.baseUrl+'/quotes',
-      data,
+    return this.http.post<any>(
+      this.baseUrl+'/quotes',data,
       { headers: customHeaders }
     );
   }
@@ -323,7 +322,7 @@ export class ApiService {
 
   postInvoice(data: any) {
     return this.http
-      .post<any>('https://lightup-auto-care.herokuapp.com/invoices', data)
+      .post<any>(this.baseUrl+'/invoices', data)
       .pipe(
         map((res: any) => {
           return res;
@@ -333,7 +332,7 @@ export class ApiService {
 
   getInvoice() {
     return this.http
-      .get<any>('https://lightup-auto-care.herokuapp.com/invoices')
+      .get<any>(this.baseUrl+'/invoices')
       .pipe(
         map((res: any) => {
           return res;
@@ -343,7 +342,7 @@ export class ApiService {
 
   deleteInvoice(id: number) {
     return this.http
-      .delete<any>('https://lightup-auto-care.herokuapp.com/invoices/' + id)
+      .delete<any>(this.baseUrl+'/invoices/' + id)
       .pipe(
         map((res: any) => {
           return res;

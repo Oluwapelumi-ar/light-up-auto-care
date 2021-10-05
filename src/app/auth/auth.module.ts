@@ -8,10 +8,6 @@ import { CreatePasswordComponent } from './create-password/create-password.compo
 import { ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
 
-
-
-
-
 @NgModule({
   declarations: [
     LoginComponent,

@@ -29,7 +29,6 @@ export class RoleGuard implements CanActivate {
 
       return true;
     }else {
-      window.alert('Only admins can access this page');
       this.router.navigate(['/home'])
       return false;
     }

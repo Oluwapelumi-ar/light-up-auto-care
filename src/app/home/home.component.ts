@@ -26,9 +26,9 @@ export class HomeComponent implements OnInit {
     
     
     if(this.hideStaffList()){
-     
+      this.getAllClient();
+      this.getVehicle();
       this.getAllStaff();
-      this.getInvoices();
     }else if(this.hideInvoice()) {
       this.getAllClient();
       this.getVehicle();

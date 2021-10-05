@@ -135,7 +135,7 @@ export class StaffComponent implements OnInit {
   onEdit(row:any){
     this.formValue.controls['name'].setValue(row.name)
     this.formValue.controls['email'].setValue(row.email)
-    this.formValue.controls['role'].setValue(row.role)
+    this.formValue.controls['role'].setValue(row.role) 
     this.staffModelo.id= row.id
     let ref = document.getElementById('cancel');
         ref?.click();

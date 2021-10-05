@@ -20,13 +20,3 @@ export class MatchPassword implements Validators  {
         return null ;
     }
 }
-
-// validate(FormGroup: FormGroup ) {
-//     const { password, confirmPassword} = FormGroup.value;
-
-//     if (password === confirmPassword) {
-//         return null;
-//     } else {
-//         return { passwordsDontMatch: true};
-//     }
-// }
