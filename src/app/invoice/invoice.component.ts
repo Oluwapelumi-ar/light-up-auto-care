@@ -12,7 +12,7 @@ import { invoiceQuoteModel } from './invoiceQuoteModel';
 export class InvoiceComponent implements OnInit {
   quoteData: any = [];
   id!: number;
-  history: any;
+  // history: any;
   clientId: string = '';
   vehicleId: string = '';
   items: any = [];
@@ -23,16 +23,22 @@ export class InvoiceComponent implements OnInit {
   // selectedClient: any;
   // selectedVehicle: any;
   invoiceData: any;
+  selectedInvoice: any = {
+    billingAddress: {},
+  };
 
   constructor(private api: ApiService, private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.history = history;
-    console.log(history.state.data);
-
+    // this.history = history;
+    // this.selectedInvoice = {};
+    // console.log(history.state.data);
     this.getInvoices();
   }
 
+  setInvoice(row: any) {
+    this.selectedInvoice = row;
+  }
   getInvoices() {
     this.api.getInvoice().subscribe((res: any) => {
       console.log({ res });

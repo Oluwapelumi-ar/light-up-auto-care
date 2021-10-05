@@ -26,13 +26,12 @@
               <div class="header logo">From: Light Up Auto Care</div>
               <div class="receiver">
                 <h4>Bill To:</h4>
-                <p>clientName:{{ history.state.data.clientName }}</p>
-                <p>Address: {{ history.state.data.billingAddress.address }}</p>
-                <p>City: {{ history.state.data.billingAddress.city }}</p>
-                <p>
-                  PostalCode: {{ history.state.data.billingAddress.postalCode }}
-                </p>
-                <p>State: {{ history.state.data.billingAddress.state }}</p>
+                <p>Client: {{ quoteData.clientName }}</p>
+
+                <p>Address: {{ quoteData.billingAddress.address }}</p>
+                <p>City: {{ quoteData.billingAddress.city }}</p>
+                <p>PostalCode: {{ quoteData.billingAddress.postalCode }}</p>
+                <p>State: {{ quoteData.billingAddress.state }}</p>
               </div>
             </div>
 
@@ -40,14 +39,14 @@
               <div class="card">
                 <tbody>
                   <h4 class="title-01 mt-4">
-                    Rep Name: {{ history.state.data.billingAddress.repName }}
+                    Rep Name: {{ quoteData.billingAddress.repName }}
                   </h4>
                   <h4 class="title-01 mt-4">
-                    Vehicle Name: {{ history.state.data.vehicleName }}
+                    Vehicle Name: {{ quoteData.vehicleName }}
                   </h4>
 
                   <div
-                    *ngFor="let item of history.state.data.items; let i = index"
+                    *ngFor="let item of quoteData.items; let i = index"
                     class="mt-4"
                   >
                     <div class="item">
@@ -72,7 +71,7 @@
                   <div class="total mt-4">
                     <span class="title-04">
                       Total Amount:
-                      {{ history.state.data.totalAmount | currency: "NGN" }}
+                      {{ quoteData.totalAmount | currency: "NGN" }}
                     </span>
                   </div>
                 </tbody>
@@ -81,18 +80,15 @@
                     <h6 class="title-03 mx-4">Quote History:</h6>
 
                     <p class="mx-4">
-                      Created By: {{ history.state.data.createdByName }}
+                      Created By: {{ quoteData.createdByName }}
                     </p>
                     <p class="mx-4">
                       UpdatedOn:
-                      {{
-                        history.state.data.updatedOn
-                          | date: "MMM d, y, h:mm:ss a"
-                      }}
+                      {{ quoteData.updatedOn | date: "MMM d, y, h:mm:ss a" }}
                     </p>
                     <p class="mx-4">
                       Date:
-                      {{ history.state.data.createdOn | date: "MMM d, y" }}
+                      {{ quoteData.createdOn | date: "MMM d, y" }}
                     </p>
                   </div>
                 </tfoot>

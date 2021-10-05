@@ -57,10 +57,12 @@ export class QuotePageComponent implements OnInit {
   totalAmount: number = 0;
   selectedClient: any;
   selectedVehicle: any;
-  page:number = 1;
+  page: number = 1;
   count = 0;
   tableSize = 10;
-  userDetails = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('userDetails'))))
+  userDetails = JSON.parse(
+    JSON.parse(JSON.stringify(localStorage.getItem('userDetails')))
+  );
 
   constructor(
     private fb: FormBuilder,
@@ -106,7 +108,7 @@ export class QuotePageComponent implements OnInit {
   }
 
   viewQuote(row: any) {
-    this.router.navigate(['/view-quote'], {
+    this.router.navigate([`/view-quote/${row.id}`], {
       state: { data: row },
     });
   }
@@ -190,6 +192,7 @@ export class QuotePageComponent implements OnInit {
   }
 
   trackVehicle(event: any) {
+    console.log(event);
     this.selectedVehicle = event;
   }
 
@@ -250,22 +253,51 @@ export class QuotePageComponent implements OnInit {
     this.calculateTotalAmount();
   }
 
-  updateQuote() {
+  onEdit(row: any) {
+    this.removeItems(0);
+    this.test = row.id;
+    this.quoteModelObj.id = row.id;
+    this.addQuoteTypeForm.controls['clientId'].setValue(row.clientId);
+    this.addQuoteTypeForm.controls['vehicleId'].setValue(row.vehicleId);
+
+    row.items.forEach((element: any) => {
+      this.itemsFormArray.push(
+        this.fb.group({
+          item: element.item,
+          unit: element.unit,
+          rate: element.rate,
+          amount: element.amount,
+        })
+      );
+    });
+
+    let ref = document.getElementById('cancel');
+    ref?.click();
+    this.editID = true;
+    this.showAdd = false;
+    this.showUpdate = true;
+    console.log(row);
+    console.log(this.addQuoteTypeForm.value);
+  }
+
+  updateQuote(id: any) {
     const payload = {
       ...this.addQuoteTypeForm.value,
       totalAmount: this.totalAmount,
     };
-    console.log(payload);
+    console.log('upQ', payload);
 
-    this.apiServices.updateQuote(payload, this.editID).subscribe((res: any) => {
-      console.log(res);
+    this.apiServices
+      .updateQuote(payload, this.quoteModelObj.id)
+      .subscribe((res: any) => {
+        console.log(res);
 
-      alert('Updated Successfully');
-      let ref = document.getElementById('cancel');
-      ref?.click();
-      this.addQuoteTypeForm.reset();
-      this.getQuote();
-    });
+        alert('Updated Successfully');
+        let ref = document.getElementById('cancel');
+        ref?.click();
+        this.addQuoteTypeForm.reset();
+        this.getQuote();
+      });
   }
 
   processCalculation(index: number) {
@@ -301,33 +333,6 @@ export class QuotePageComponent implements OnInit {
         this.addQuoteTypeForm.reset();
       }
     );
-  }
-
-  onEdit(row: any) {
-    this.test = row.id;
-    this.quoteModelObj.id = row.id;
-    // this.addQuoteTypeForm.controls['clientId'].setValue(row.clientId);
-    // this.addQuoteTypeForm.controls['vehicleId'].setValue(row.vehicleId);
-    // this.addQuoteTypeForm.controls['totalAmount'].setValue(row.totalAmount);
-    // this.quoteModelObj.id = row.id;
-    // this.addQuoteTypeForm.controls['clientId'].setValue(row.clientId);
-    // this.addQuoteTypeForm.controls['vehicleId'].setValue(row.vehicleId);
-    // this.addQuoteTypeForm.controls['totalAmount'].setValue(row.totalAmount);
-    // console.log(this.itemsFormArray, 'controls');
-    this.addQuoteTypeForm.patchValue({
-      clientId: row.clientId,
-      totalAmount: row.totalAmount,
-      vehicleId: row.vehicleId,
-      // items: row.items,
-    });
-    this.addQuoteTypeForm.get('items')?.setValue(row.items);
-    let ref = document.getElementById('cancel');
-    ref?.click();
-    this.editID = true;
-    this.showAdd = false;
-    this.showUpdate = true;
-    console.log(row);
-    console.log(this.addQuoteTypeForm.value);
   }
 
   onViewClick(row: any) {
@@ -415,7 +420,6 @@ export class QuotePageComponent implements OnInit {
         Swal.fire('Cancelled', 'Your quote file is safe :)', 'error');
       }
     });
-
   }
 
   tabSize(index: number) {
@@ -423,10 +427,13 @@ export class QuotePageComponent implements OnInit {
     this.getQuote();
   }
 
-  hideInvoiceList(){
-    if(this.userDetails.role == 'admin' || this.userDetails.role == 'approver'){
+  hideInvoiceList() {
+    if (
+      this.userDetails.role == 'admin' ||
+      this.userDetails.role == 'approver'
+    ) {
       return true;
-    }else {
+    } else {
       return false;
     }
   }

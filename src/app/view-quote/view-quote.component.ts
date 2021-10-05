@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from '../shared/api.service';
 
 @Component({
   selector: 'app-view-quote',
@@ -16,16 +17,26 @@ export class ViewQuoteComponent implements OnInit {
     vehicle: 'Benz',
   };
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private api: ApiService
+  ) {}
 
   ngOnInit(): void {
-    this.history = history;
-    // console.log('vt5756767u');
-
-    console.log(history.state.data);
+    const id = this.route.snapshot.params.id;
+    this.getQuoteById(id);
   }
 
   backToQuote(row: any) {
     this.router.navigate(['/quote'], {});
+  }
+
+  getQuoteById(id: number) {
+    console.log('get v');
+    this.api.getQuoteId(id).subscribe((res: any) => {
+      this.quoteData = res.payload;
+      // console.log('hello quoute', this.quoteData);
+    });
   }
 }

@@ -251,6 +251,8 @@ export class ApiService {
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImVtYWlsIjoic3VwZXJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoiU3VwZXIgQWRtaW4iLCJpYXQiOjE2MzI4MjMyMDIsImV4cCI6MTYzMjkwOTYwMn0.vySlgLfJ4BOuDZTDmCWQP4DIUn9T9Njvf8NNFMzLWu4',
     });
 
+    console.log(id);
+
     return this.http.put<quote>(this.baseUrl + '/quotes/' + id, data, {
       headers: putHeaders,
     });
@@ -286,18 +288,6 @@ export class ApiService {
       );
   }
 
-  // getInvoice(): Observable<quote> {
-  //   const headers = new HttpHeaders({
-  //     'content-type': 'application/json',
-  //   });
-  //   const params = new HttpParams();
-
-  //   return this.http.get<quote>(
-  //     'https://lightup-autocare.herokuapp.com/invoices',
-  //     { headers: headers }
-  //   );
-  // }
-
   deleteInvoice(id: number) {
     return this.http
       .delete<any>('https://lightup-autocare.herokuapp.com/invoices/' + id)
@@ -306,5 +296,13 @@ export class ApiService {
           return res;
         })
       );
+  }
+
+  getQuoteId(id: number) {
+    return this.http.get<any>(this.baseUrl + '/quotes/' + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 }

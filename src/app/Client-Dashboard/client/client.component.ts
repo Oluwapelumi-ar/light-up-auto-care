@@ -21,7 +21,7 @@ export class ClientComponent implements OnInit {
   clientData: any = [];
   showAdd!: boolean;
   showUpdate!: boolean;
-  page:number = 1;
+  page: number = 1;
   count = 0;
   tableSize = 10;
 
@@ -36,7 +36,7 @@ export class ClientComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(4),
-          Validators.pattern('[a-zA-Z]+'),
+          Validators.pattern('^[a-zA-Z0-9_ ]*$'),
         ],
       ],
       email: [
@@ -56,7 +56,7 @@ export class ClientComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(3),
-          Validators.pattern('[a-zA-Z]+'),
+          Validators.pattern('^[a-zA-Z0-9_ ]*$'),
         ],
       ],
       city: ['', [Validators.required]],
@@ -141,22 +141,12 @@ export class ClientComponent implements OnInit {
     this.showAdd = false;
     this.showUpdate = true;
     this.clientModelObj.id = row.id;
-    this.formValue.controls['clientId'].setValue(row.clientId);
+    this.formValue.controls['name'].setValue(row.name);
     this.formValue.controls['email'].setValue(row.email);
     this.formValue.controls['telephone'].setValue(row.telephone);
 
-    // this.formValue.patchValue({
-    //   billingAddress: { ...row.billingAddress },
-    // });
-
     this.formValue.patchValue({
-      billingAddress: {
-        repName: row.repName,
-        address: row.address,
-        city: row.city,
-        state: row.state,
-        postalCode: row.postalCode,
-      },
+      billingAddress: { ...row.billingAddress },
     });
   }
 

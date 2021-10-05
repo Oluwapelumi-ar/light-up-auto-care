@@ -20,42 +20,39 @@
   <div class="dashboard-wrapper">
     <div class="dashboard-ecommerce">
       <div class="container-fluid dashboard-content">
-        <!-- alert -->
-        <!-- <ng-container>
-          <div
-            *ngIf="alertInstance === 'Successful'"
-            class="alert alert-success alert-dismissible fade show"
-            role="alert"
+        <div
+          *ngIf="alertInstance === 'Successful'"
+          class="alert alert-success alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>Hurray!</strong> Invoice sent successfully
+          <button
+            (click)="closeAlert()"
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
           >
-            <strong>Hurray!</strong> Invoice sent successfully
-            <button
-              (click)="closeAlert()"
-              type="button"
-              class="close"
-              data-dismiss="alert"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
-          <div
-            *ngIf="alertInstance === 'Error, Try Again'"
-            class="alert alert-02 alert-warning alert-dismissible fade show"
-            role="alert"
+        <div
+          *ngIf="alertInstance === 'Error, Try Again'"
+          class="alert alert-02 alert-warning alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>Ooops!</strong> Something went wrong.
+          <button
+            (click)="closeAlert()"
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
           >
-            <strong>Ooops!</strong> Something went wrong.
-            <button
-              (click)="closeAlert()"
-              type="button"
-              class="close"
-              data-dismiss="alert"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </ng-container> -->
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
         <div class="card">
           <div class="card-body">
@@ -63,7 +60,7 @@
               <div class="header logo">From: Light Up Auto Care</div>
               <div class="receiver">
                 <h4>Bill To:</h4>
-                <p>Client:{{ history.state.data.clientName }}</p>
+                <p>Rep Name:{{ history.state.data.billingAddress.repName }}</p>
                 <p>Address: {{ history.state.data.billingAddress.address }}</p>
                 <p>City: {{ history.state.data.billingAddress.city }}</p>
                 <p>
@@ -71,12 +68,11 @@
                 </p>
                 <p>State: {{ history.state.data.billingAddress.state }}</p>
               </div>
-              <!-- </div> -->
             </div>
 
             <tbody>
               <h4 class="title-01 mt-4">
-                Rep Name: {{ history.state.data.billingAddress.repName }}
+                Client: {{ history.state.data.clientName }}
               </h4>
               <h4 class="title-01 mt-4">
                 Vehicle Name: {{ history.state.data.vehicleName }}
@@ -87,9 +83,6 @@
                 class="mt-4"
               >
                 <div class="d-flex-column">
-                  <!-- <div class="index">
-                    <h1 class="mx-2 .index-row">{{ i + 1 }}</h1>
-                  </div> -->
                   <div class="item">
                     <span class="title-02">Service: {{ item.item }}</span>
                   </div>

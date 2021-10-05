@@ -13,27 +13,28 @@ export class HomeComponent implements OnInit {
   noOfClients: number = 0;
   noOfVehicles: number = 0;
   noOfStaff: number = 0;
-  page:number = 1;
+  page: number = 1;
   count = 0;
   tableSize = 10;
-  noOfInvoice=0;
-  noOfQuotes=0;
-  userDetails = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('userDetails'))));
+  noOfInvoice = 0;
+  noOfQuotes = 0;
+  userDetails = JSON.parse(
+    JSON.parse(JSON.stringify(localStorage.getItem('userDetails')))
+  );
 
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
-    
-    
-    if(this.hideStaffList()){
-     
+    if (this.hideStaffList()) {
+      this.getAllClient();
+      this.getVehicle();
       this.getAllStaff();
       this.getInvoices();
-    }else if(this.hideInvoice()) {
+    } else if (this.hideInvoice()) {
       this.getAllClient();
       this.getVehicle();
       this.getQuote();
-    }else {
+    } else {
       this.getAllClient();
       this.getVehicle();
       this.getInvoices();
@@ -78,8 +79,7 @@ export class HomeComponent implements OnInit {
         let response = data.payload;
         this.noOfInvoice = response.length;
       },
-      (err: any) => {
-      }
+      (err: any) => {}
     );
   }
 
@@ -87,26 +87,24 @@ export class HomeComponent implements OnInit {
     this.api.getQuotes().subscribe(
       (data: any) => {
         let response = data.payload;
-        this.noOfQuotes=response.length
+        this.noOfQuotes = response.length;
       },
-      (err: any) => {
-
-      }
+      (err: any) => {}
     );
   }
 
-  hideStaffList(){
-    if(this.userDetails.role == 'admin'){
+  hideStaffList() {
+    if (this.userDetails.role == 'admin') {
       return true;
-    }else {
+    } else {
       return false;
     }
   }
 
-  hideInvoice(){
-    if (this.userDetails.role == 'clerk'){
+  hideInvoice() {
+    if (this.userDetails.role == 'clerk') {
       return false;
-    }else {
+    } else {
       return true;
     }
   }

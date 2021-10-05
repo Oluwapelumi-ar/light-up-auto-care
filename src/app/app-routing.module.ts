@@ -23,9 +23,13 @@ const routes: Routes = [
   {
     path: 'invoice',
     component: InvoiceComponent,
-    canActivate: [RoleGuard,AuthguardGuard],
+    canActivate: [RoleGuard, AuthguardGuard],
   },
-  { path: 'staff', component: StaffComponent, canActivate: [RoleGuard, AuthguardGuard]},
+  {
+    path: 'staff',
+    component: StaffComponent,
+    canActivate: [RoleGuard, AuthguardGuard],
+  },
   { path: 'home', component: HomeComponent, canActivate: [AuthguardGuard] },
   { path: 'client', component: ClientComponent, canActivate: [AuthguardGuard] },
   {
@@ -45,7 +49,7 @@ const routes: Routes = [
   },
   { path: 'staff', component: StaffComponent, canActivate: [AuthguardGuard] },
   {
-    path: 'view-quote',
+    path: 'view-quote/:id',
     component: ViewQuoteComponent,
     canActivate: [AuthguardGuard],
   },

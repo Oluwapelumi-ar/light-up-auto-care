@@ -53,7 +53,6 @@ export class CreateInvoiceComponent implements OnInit {
     this.api.postInvoice(invoicePayload).subscribe(
       (data: any) => {
         console.log(data);
-        // this.alertInstance = 'Successful';
         Swal.fire({
           position: 'top-end',
           icon: 'success',
