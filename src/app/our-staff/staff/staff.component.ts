@@ -49,7 +49,7 @@ export class StaffComponent implements OnInit {
 
   getAllStaff() {
     this.api.getAllStaffs().subscribe({
-      next: (res) => {
+      next: (res:any) => {
         this.staffData = res.payload;  
       },
       error: (error) => {
@@ -60,7 +60,7 @@ export class StaffComponent implements OnInit {
 
   postStaff() {
     this.api.postStaff(this.formValue.value).subscribe(
-      (res: staffDetails) => {
+      (res: any) => {
         this.createStaffAlert = true;
         let ref = document.getElementById('cancel');
         ref?.click();
@@ -82,7 +82,7 @@ export class StaffComponent implements OnInit {
     this.staffModelo.id
     this.api
       .updateStaff(StaffModelObj, this.staffModelo.id)
-      .subscribe((res) => {
+      .subscribe((res:any) => {
         this.updatedStaffAlert= true;
         let ref = document.getElementById('cancel');
         ref?.click();
