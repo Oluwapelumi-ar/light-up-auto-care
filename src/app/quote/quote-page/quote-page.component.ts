@@ -290,6 +290,7 @@ export class QuotePageComponent implements OnInit {
     this.apiServices
       .updateQuote(payload, this.quoteModelObj.id)
       .subscribe((res: any) => {
+        1;
         console.log(res);
 
         alert('Updated Successfully');
