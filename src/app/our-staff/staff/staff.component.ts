@@ -66,6 +66,7 @@ export class StaffComponent implements OnInit {
         ref?.click();
         this.formValue.reset();
         this.editID = false;
+        this.getAllStaff();
       },
       (err: any) => {
         let ref = document.getElementById('cancel');

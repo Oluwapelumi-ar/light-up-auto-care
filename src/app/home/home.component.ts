@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
       this.getAllClient();
       this.getVehicle();
       this.getInvoices();
+      this.getQuote();
     }
   }
 
