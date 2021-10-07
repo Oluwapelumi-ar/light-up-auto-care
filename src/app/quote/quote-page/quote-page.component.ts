@@ -191,6 +191,12 @@ export class QuotePageComponent implements OnInit {
     this.selectedVehicle = event;
   }
 
+  addNewQuote() {
+    this.addQuoteTypeForm.reset();
+    this.addQuoteTypeForm.controls['clientId'].enable();
+    this.addQuoteTypeForm.controls['vehicleId'].enable();
+  }
+
   getAllClients() {
     this.apiServices.getAllClients().subscribe((res: any) => {
       this.clients = res.payload;
@@ -242,7 +248,11 @@ export class QuotePageComponent implements OnInit {
 
   removeItems(index: number) {
     let arr = this.addQuoteTypeForm.get('items') as FormArray;
-    arr.removeAt(index);
+
+    for (let i = arr.length - 1; i >= 0; i--) {
+      arr.removeAt(i);
+    }
+    //  arr.removeAt(index);
 
     this.checkAddButton();
     this.calculateTotalAmount();
@@ -250,11 +260,23 @@ export class QuotePageComponent implements OnInit {
 
   onEdit(row: any) {
     this.removeItems(0);
+
     this.test = row.id;
     this.quoteModelObj.id = row.id;
     this.addQuoteTypeForm.controls['clientId'].setValue(row.clientId);
-    this.addQuoteTypeForm.controls['vehicleId'].setValue(row.vehicleId);
 
+    this.addQuoteTypeForm.controls['vehicleId'].setValue(row.vehicleId);
+    //this.selectedVehicle
+    // const [vehicle] = this.clientVehicles.filter(
+    //   (value: any) => value.id === row.VehicleId
+    // );
+
+    this.getAllVehiclesAttachedToClient(row.clientId);
+
+    //this.itemsFormArray.reset();
+
+    console.log(this.itemsFormArray);
+    console.log('edit', row);
     row.items.forEach((element: any) => {
       this.itemsFormArray.push(
         this.fb.group({
@@ -266,18 +288,22 @@ export class QuotePageComponent implements OnInit {
       );
     });
 
+    this.calculateTotalAmount();
+
     let ref = document.getElementById('cancel');
     ref?.click();
     this.editID = true;
     this.showAdd = false;
     this.showUpdate = true;
-    console.log(row);
+    this.addQuoteTypeForm.controls['clientId'].disable();
+    this.addQuoteTypeForm.controls['vehicleId'].disable();
+
     console.log(this.addQuoteTypeForm.value);
   }
 
   updateQuote(id: any) {
     const payload = {
-      ...this.addQuoteTypeForm.value,
+      ...this.addQuoteTypeForm.getRawValue(),
       totalAmount: this.totalAmount,
     };
     console.log('upQ', payload);
@@ -436,4 +462,6 @@ export class QuotePageComponent implements OnInit {
       return false;
     }
   }
+
+  closeArt() {}
 }
