@@ -39,12 +39,13 @@ export class HomeComponent implements OnInit {
       this.getAllClient();
       this.getVehicle();
       this.getInvoices();
+      this.getQuote();
     }
   }
 
   getAllClient() {
     this.api.getAllClients().subscribe({
-      next: (res) => {
+      next: (res:any) => {
         this.clientData = res.payload;
         this.noOfClients = this.clientData.length;
       },
@@ -64,7 +65,7 @@ export class HomeComponent implements OnInit {
 
   getAllStaff() {
     this.api.getAllStaffs().subscribe({
-      next: (res) => {
+      next: (res:any) => {
         this.staffData = res.payload;
         this.noOfStaff = this.staffData.length;
       },

@@ -106,12 +106,14 @@
                 let i = index
               "
             >
-              <td>{{ i + 1 }}</td>
+              <td>{{ (page - 1) * tableSize + (i + 1) }}</td>
               <td>{{ row.clientName }}</td>
               <td>{{ row.vehicleName }}</td>
               <td>{{ row.totalAmount | currency: "NGN" }}</td>
 
               <td>
+                <<<<<<< HEAD ======= >>>>>>>
+                b31be4720e60e06c4892df172e48c59d5128fa72
                 <div class="dropdown d-flex">
                   <button
                     class="btn btn-add dropdown-toggle"
@@ -147,14 +149,16 @@
                     >
                       Delete
                     </button>
-                    <button
-                      (click)="confirmBox(row)"
-                      class="dropdown-item"
-                      type="button"
-                      *ngIf="!row.isApproved"
-                    >
-                      Approve
-                    </button>
+                    <div *ngIf="hideInvoiceList()">
+                      <button
+                        (click)="confirmBox(row)"
+                        class="dropdown-item"
+                        type="button"
+                        *ngIf="!row.isApproved"
+                      >
+                        Approve
+                      </button>
+                    </div>
                   </div>
                   <div class="" *ngIf="hideInvoiceList()">
                     <button
