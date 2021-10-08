@@ -192,9 +192,16 @@ export class QuotePageComponent implements OnInit {
   }
 
   addNewQuote() {
+    this.test = undefined;
+    let arr = this.addQuoteTypeForm.controls['items'] as FormArray;
+    arr.clear();
+    this.totalAmount = 0.0;
     this.addQuoteTypeForm.reset();
+    this.showAdd = true;
+    this.showUpdate = false;
     this.addQuoteTypeForm.controls['clientId'].enable();
     this.addQuoteTypeForm.controls['vehicleId'].enable();
+    this.checkAddButton();
   }
 
   getAllClients() {
@@ -249,27 +256,23 @@ export class QuotePageComponent implements OnInit {
   removeItems(index: number) {
     let arr = this.addQuoteTypeForm.get('items') as FormArray;
 
-    for (let i = arr.length - 1; i >= 0; i--) {
-      arr.removeAt(i);
-    }
-    //  arr.removeAt(index);
+    arr.removeAt(index);
 
     this.checkAddButton();
     this.calculateTotalAmount();
   }
 
   onEdit(row: any) {
-    this.removeItems(0);
+    let arr = this.addQuoteTypeForm.controls['items'] as FormArray;
+
+    arr.clear();
 
     this.test = row.id;
+
     this.quoteModelObj.id = row.id;
     this.addQuoteTypeForm.controls['clientId'].setValue(row.clientId);
 
     this.addQuoteTypeForm.controls['vehicleId'].setValue(row.vehicleId);
-    //this.selectedVehicle
-    // const [vehicle] = this.clientVehicles.filter(
-    //   (value: any) => value.id === row.VehicleId
-    // );
 
     this.getAllVehiclesAttachedToClient(row.clientId);
 
@@ -462,6 +465,4 @@ export class QuotePageComponent implements OnInit {
       return false;
     }
   }
-
-  closeArt() {}
 }
