@@ -31,6 +31,8 @@ export class StaffComponent implements OnInit {
   editID: any;
   formStatus: string = '';
   editId!: boolean;
+  errorMessage: string ='';
+  wrongAlert!: boolean;
 
   formValue: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(4)]],
@@ -41,6 +43,7 @@ export class StaffComponent implements OnInit {
     name: '',
     email: '',
   };
+  
 
   constructor(private modalService: NgbModal, private api: ApiService,private formBuilder: FormBuilder,) {}
   ngOnInit(): void {
@@ -69,6 +72,8 @@ export class StaffComponent implements OnInit {
         this.getAllStaff();
       },
       (err: any) => {
+        this.wrongAlert = true;
+        this.errorMessage = err.error.error
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();  
