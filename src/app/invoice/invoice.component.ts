@@ -13,6 +13,7 @@ export class InvoiceComponent implements OnInit {
   quoteData: any = [];
   id!: number;
   // history: any;
+  alertInstance: string = '';
   clientId: string = '';
   vehicleId: string = '';
   items: any = [];
@@ -20,8 +21,7 @@ export class InvoiceComponent implements OnInit {
   rate: number = 0;
   amount: number = 0;
   totalAmount: number = 0;
-  // selectedClient: any;
-  // selectedVehicle: any;
+  alert!: boolean;
   invoiceData: any;
   selectedInvoice: any = {
     billingAddress: {},
@@ -44,7 +44,6 @@ export class InvoiceComponent implements OnInit {
       this.invoiceData = res.payload;
       let responses = this.invoiceData.sort((a: any, b: any) => b.id - a.id);
       console.log({ res });
-
     });
 
     (err: any) => {
@@ -52,23 +51,11 @@ export class InvoiceComponent implements OnInit {
     };
   }
 
-  // this.api.getInvoice().subscribe(
-  //   (data: any) => {
-  //     let response = data.payload;
-  //     let responses = response.sort((a: any, b: any) => b.id - a.id);
-  //     this.invoiceData = responses;
-  //     console.log({ response });
-  //   },
-  //   (err: any) => {
-  //     console.log('Unable to get data from URL + err');
-  //   }
-  // );
-
   deleteInvoices(row: any) {
     this.api.deleteInvoice(row.id).subscribe(
       (res) => {
-        alert('successful!');
-        // this.alertInstance = 'Deleted';
+        this.alert = true;
+
         this.getInvoices();
       },
       (reason) => {
@@ -77,4 +64,6 @@ export class InvoiceComponent implements OnInit {
       }
     );
   }
+
+  closeAlert() {}
 }

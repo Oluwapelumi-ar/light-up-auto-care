@@ -27,6 +27,25 @@
           <div class="box"></div>
         </div>
         <div class="card">
+          <ng-container>
+            <div
+              *ngIf="alert"
+              class="alert alert-success alert-dismissible fade show"
+              role="alert"
+            >
+              <strong>Hurray!</strong> Invoice Deleted successfully
+              <button
+                (click)="closeAlert()"
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </ng-container>
+
           <table class="table table-bordered mt-3">
             <thead>
               <tr>
@@ -161,15 +180,7 @@
               <!-- </div> -->
             </div>
 
-            <div class="modal-footer">
-              <!-- <button
-                type="button"
-                class="btn btn-outline-danger"
-                data-dismiss="modal"
-              >
-                Close
-              </button> -->
-            </div>
+            <div class="modal-footer"></div>
             <!-- <div class="modal-footer">
               <button
                 type="button"
