@@ -37,12 +37,11 @@ export class CreateInvoiceComponent implements OnInit {
   }
 
   sendInvoice(data: any) {
-    console.log('Got Here');
-    console.log('Row Data: ', data);
     const modifiedItems = data.items.map((value: any) => {
       delete value._id;
       return value;
     });
+
     let invoicePayload: invoiceQuoteModel = {
       clientId: data.clientId,
       vehicleId: data.vehicleId,

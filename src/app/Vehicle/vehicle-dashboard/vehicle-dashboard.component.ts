@@ -28,6 +28,7 @@ export class VehicleDashboardComponent implements OnInit {
   showUpdate!: boolean;
   alertInstance = '';
   order: any;
+  getClientVehicles: any;
 
   // getClient() {
   //   this.api.getAllClients().subscribe((res: any) => {
@@ -143,6 +144,7 @@ export class VehicleDashboardComponent implements OnInit {
     this.formValue.controls['vehicleName'].setValue(row.vehicleName);
     this.formValue.controls['model'].setValue(row.model);
     this.formValue.controls['chassis'].setValue(row.chassis);
+    this.getClientVehicles(row.vehicleId);
   }
 
   updateVehicleDetails() {

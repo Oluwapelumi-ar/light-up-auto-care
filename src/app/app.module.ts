@@ -27,6 +27,7 @@ import { ClientComponent } from './Client-Dashboard/client/client.component';
 import { QuotePageComponent } from './quote/quote-page/quote-page.component';
 import { ViewQuoteComponent } from './view-quote/view-quote.component';
 import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
+import sweetalert2 from 'sweetalert2';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { CreateInvoiceComponent } from './create-invoice/create-invoice.componen
     QuotePageComponent,
     ViewQuoteComponent,
     CreateInvoiceComponent,
+    // sweetalert2
   ],
 
   imports: [

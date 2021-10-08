@@ -59,7 +59,7 @@ export class QuotePageComponent implements OnInit {
   selectedVehicle: any;
   alertInstance: string = '';
   createQuoteAlert!: boolean;
-  updatedQuoteAlert!:boolean;
+  updatedQuoteAlert!: boolean;
   alert!: boolean;
   page: number = 1;
   count = 0;
@@ -170,15 +170,6 @@ export class QuotePageComponent implements OnInit {
     );
   }
 
-  // items: this.fb.array([
-  // newItemsFormArray(): FormGroup {
-  //   return this.fb.group({
-  //     item: '',
-  //     rate: '',
-  //     unit: ''
-  //   })
-  // }
-
   //getting values from Items Array
   get itemsFormArray(): FormArray {
     return this.addQuoteTypeForm.get('items') as FormArray;
@@ -198,6 +189,19 @@ export class QuotePageComponent implements OnInit {
   trackVehicle(event: any) {
     console.log(event);
     this.selectedVehicle = event;
+  }
+
+  addNewQuote() {
+    this.test = undefined;
+    let arr = this.addQuoteTypeForm.controls['items'] as FormArray;
+    arr.clear();
+    this.totalAmount = 0.0;
+    this.addQuoteTypeForm.reset();
+    this.showAdd = true;
+    this.showUpdate = false;
+    this.addQuoteTypeForm.controls['clientId'].enable();
+    this.addQuoteTypeForm.controls['vehicleId'].enable();
+    this.checkAddButton();
   }
 
   getAllClients() {
@@ -251,6 +255,7 @@ export class QuotePageComponent implements OnInit {
 
   removeItems(index: number) {
     let arr = this.addQuoteTypeForm.get('items') as FormArray;
+
     arr.removeAt(index);
 
     this.checkAddButton();
@@ -258,12 +263,23 @@ export class QuotePageComponent implements OnInit {
   }
 
   onEdit(row: any) {
-    this.removeItems(0);
+    let arr = this.addQuoteTypeForm.controls['items'] as FormArray;
+
+    arr.clear();
+
     this.test = row.id;
+
     this.quoteModelObj.id = row.id;
     this.addQuoteTypeForm.controls['clientId'].setValue(row.clientId);
+
     this.addQuoteTypeForm.controls['vehicleId'].setValue(row.vehicleId);
 
+    this.getAllVehiclesAttachedToClient(row.clientId);
+
+    //this.itemsFormArray.reset();
+
+    console.log(this.itemsFormArray);
+    console.log('edit', row);
     row.items.forEach((element: any) => {
       this.itemsFormArray.push(
         this.fb.group({
@@ -275,18 +291,22 @@ export class QuotePageComponent implements OnInit {
       );
     });
 
+    this.calculateTotalAmount();
+
     let ref = document.getElementById('cancel');
     ref?.click();
     this.editID = true;
     this.showAdd = false;
     this.showUpdate = true;
-    console.log(row);
+    this.addQuoteTypeForm.controls['clientId'].disable();
+    this.addQuoteTypeForm.controls['vehicleId'].disable();
+
     console.log(this.addQuoteTypeForm.value);
   }
 
   updateQuote(id: any) {
     const payload = {
-      ...this.addQuoteTypeForm.value,
+      ...this.addQuoteTypeForm.getRawValue(),
       totalAmount: this.totalAmount,
     };
     console.log('upQ', payload);
@@ -294,8 +314,9 @@ export class QuotePageComponent implements OnInit {
     this.apiServices
       .updateQuote(payload, this.quoteModelObj.id)
       .subscribe((res: any) => {
+        1;
         console.log(res);
-        this.updatedQuoteAlert= true;
+        this.updatedQuoteAlert = true;
         let ref = document.getElementById('cancel');
         ref?.click();
         this.addQuoteTypeForm.reset();
@@ -345,11 +366,9 @@ export class QuotePageComponent implements OnInit {
     ref?.click();
   }
 
-  closeAlert(){
+  closeAlert() {
     this.alert = false;
-
   }
-
 
   confirmBox(row: any) {
     Swal.fire({

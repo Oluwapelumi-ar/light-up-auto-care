@@ -34,16 +34,18 @@ export class HomeComponent implements OnInit {
       this.getAllClient();
       this.getVehicle();
       this.getQuote();
+      this.getInvoices();
     } else {
       this.getAllClient();
       this.getVehicle();
       this.getInvoices();
+      this.getQuote();
     }
   }
 
   getAllClient() {
     this.api.getAllClients().subscribe({
-      next: (res) => {
+      next: (res:any) => {
         this.clientData = res.payload;
         this.noOfClients = this.clientData.length;
       },
@@ -63,7 +65,7 @@ export class HomeComponent implements OnInit {
 
   getAllStaff() {
     this.api.getAllStaffs().subscribe({
-      next: (res) => {
+      next: (res:any) => {
         this.staffData = res.payload;
         this.noOfStaff = this.staffData.length;
       },
@@ -74,15 +76,17 @@ export class HomeComponent implements OnInit {
   }
 
   getInvoices() {
-    this.api.getInvoice().subscribe(
-      (data: any) => {
-        let response = data.payload;
-        this.noOfInvoice = response.length;
-      },
-      (err: any) => {}
-    );
-  }
+    this.api.getInvoice().subscribe((res: any) => {
+      let invoiceData = res.payload;
+      this.noOfInvoice = invoiceData.length
+      console.log(this.noOfInvoice);
+      
+    });
 
+    (err: any) => {
+      console.log('Unable to get data from URL + err');
+    };
+  }
   getQuote() {
     this.api.getQuotes().subscribe(
       (data: any) => {
