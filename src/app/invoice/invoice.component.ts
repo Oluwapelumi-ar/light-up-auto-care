@@ -41,8 +41,10 @@ export class InvoiceComponent implements OnInit {
   }
   getInvoices() {
     this.api.getInvoice().subscribe((res: any) => {
-      console.log({ res });
       this.invoiceData = res.payload;
+      let responses = this.invoiceData.sort((a: any, b: any) => b.id - a.id);
+      console.log({ res });
+
     });
 
     (err: any) => {
