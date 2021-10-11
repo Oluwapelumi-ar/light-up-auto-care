@@ -133,20 +133,11 @@ export class QuotePageComponent implements OnInit {
         // this.addQuoteTypeForm.reset();
       },
       (err: any) => {
-        // console.log('Unable to get data from URL + err');
       }
     );
   }
 
-  // getAllQuote() {
-  //   this.apiServices.getQuotes().subscribe((res) => {
-  //     this.quoteData = res;
-  //     console.log({ res });
-  //   });
-  // }
-
   addQuoteType() {
-    //console.log(this.addQuoteTypeForm.value.items);
     let payload: addQuoteModel = {
       totalAmount: this.totalAmount,
       clientId: this.selectedClient.id,
@@ -156,6 +147,9 @@ export class QuotePageComponent implements OnInit {
     this.apiServices.postQuote(payload).subscribe(
       (data) => {
         this.createQuoteAlert = true;
+        setTimeout(() => {
+          this.createQuoteAlert = false;
+        }, 3000);
         this.getQuote();
         // this.getAllQuote();
         let ref = document.getElementById('cancel');
@@ -249,10 +243,6 @@ export class QuotePageComponent implements OnInit {
     }
   }
 
-  // addItems(){
-  //   this.itemsFormArray.push(this.newItemsFormArray())
-  // }
-
   removeItems(index: number) {
     let arr = this.addQuoteTypeForm.get('items') as FormArray;
 
@@ -317,6 +307,9 @@ export class QuotePageComponent implements OnInit {
         1;
         console.log(res);
         this.updatedQuoteAlert = true;
+        setTimeout(() => {
+          this.updatedQuoteAlert = false;
+        }, 3000);
         let ref = document.getElementById('cancel');
         ref?.click();
         this.addQuoteTypeForm.reset();
@@ -350,6 +343,9 @@ export class QuotePageComponent implements OnInit {
     this.apiServices.deleteQuote(row.id).subscribe(
       (res: any) => {
         this.alert = true;
+        setTimeout(() => {
+          this.alert = false;
+        }, 3000);
         this.getQuote();
       },
       (err: any) => {
@@ -384,32 +380,11 @@ export class QuotePageComponent implements OnInit {
         row.isApproved = true;
         row.isPending = false;
         console.log(row);
-        /*        
-        delete row.isActive;
-        delete row.isDeleted;
-        delete row._id;
-        delete row.createdByName;
-        delete row.createdById;
-        delete row.createdOn;
-        delete row.__v;
-        delete row.timeStamp;
-        delete row.updatedOn;
-        delete row.quoteId;
-        delete row.quoteHistory;
-        delete row.vehicleName;
-        delete row.clientName;
-        let idd = row.id;
-        delete row.id;
-        delete row.billingAddress;
-*/
-
         let newPayload: addQuoteModel = {
           clientId: row.clientId,
           vehicleId: row.vehicleId,
           items: row.items,
           totalAmount: row.totalAmount,
-          //   isApproved: row.isApproved,
-          //   isPending: row.isPending,
         };
 
         let updatePayload: updateQuoteModel = {

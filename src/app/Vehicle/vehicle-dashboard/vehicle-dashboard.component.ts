@@ -5,13 +5,8 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-
-// import { ClientComponent } from 'src/app/client/client.component';
-
 import { ApiService } from 'src/app/shared/api.service';
 import { VehicleModel } from '../vehicle-dashboard-model';
-// import { NgSelectModule } from '@ng-select/ng-select';
-// import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-vehicle-dashboard',
@@ -29,13 +24,6 @@ export class VehicleDashboardComponent implements OnInit {
   alertInstance = '';
   order: any;
   getClientVehicles: any;
-
-  // getClient() {
-  //   this.api.getAllClients().subscribe((res: any) => {
-  //     console.log({ res });
-  //     this.clientData = res.payload;
-  //   });
-  // }
 
   constructor(private formbuilder: FormBuilder, private api: ApiService) {}
 
@@ -79,6 +67,9 @@ export class VehicleDashboardComponent implements OnInit {
     this.api.postVehicle(this.vehicleModelObj).subscribe(
       (res: any) => {
         this.alertInstance = 'Successful';
+        setTimeout(() => {
+          this.alertInstance = 'false';
+        }, 3000);
         this.getVehicles();
         let ref = document.getElementById('cancel');
         ref?.click();
@@ -96,15 +87,6 @@ export class VehicleDashboardComponent implements OnInit {
       console.log(this.clientData, 'ew');
     });
   }
-
-  // getVehicles() {
-  //   console.log('get v');
-  //   this.api.getVehicle().subscribe((res: any) => {
-  //     this.vehicleData = res.payload;
-  //     console.log(this.vehicleData);
-  //   });
-  // }
-
   sortData() {
     if (this.order) {
       let newArr = this.vehicleData.sort((a: any, b: any) => a.id - b.id);
@@ -128,6 +110,9 @@ export class VehicleDashboardComponent implements OnInit {
     this.api.deleteVehicle(row.id).subscribe(
       (res) => {
         this.alertInstance = 'Deleted';
+        setTimeout(() => {
+          this.alertInstance = 'false';
+        }, 3000);
         this.getVehicles();
       },
       (reason) => {
@@ -157,6 +142,9 @@ export class VehicleDashboardComponent implements OnInit {
       .updateVehicle(this.vehicleModelObj, this.vehicleModelObj.id)
       .subscribe((res) => {
         this.alertInstance = 'Updated';
+        setTimeout(() => {
+          this.alertInstance = 'false';
+        }, 3000);
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();

@@ -45,7 +45,9 @@ export class StaffComponent implements OnInit {
   };
   
 
-  constructor(private modalService: NgbModal, private api: ApiService,private formBuilder: FormBuilder,) {}
+  constructor(private modalService: NgbModal, private api: ApiService,private formBuilder: FormBuilder,) {
+    
+  }
   ngOnInit(): void {
     this.getAllStaff();
   }
@@ -65,6 +67,9 @@ export class StaffComponent implements OnInit {
     this.api.postStaff(this.formValue.value).subscribe(
       (res: any) => {
         this.createStaffAlert = true;
+        setTimeout(() => {
+          this.createStaffAlert = false;
+        }, 3000);
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
@@ -90,6 +95,9 @@ export class StaffComponent implements OnInit {
       .updateStaff(StaffModelObj, this.staffModelo.id)
       .subscribe((res:any) => {
         this.updatedStaffAlert= true;
+        setTimeout(() => {
+          this.updatedStaffAlert= false;
+        }, 3000);
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
@@ -133,6 +141,9 @@ export class StaffComponent implements OnInit {
     this.api.deleteStaff(row.id).subscribe({
       next: (res) => {
         this.alert = true;
+        setTimeout(() => {
+          this.alert = false;
+        }, 3000);
         this.getAllStaff();
       },
     });
@@ -148,6 +159,9 @@ export class StaffComponent implements OnInit {
     this.editID = this.staffModelo.id; 
    }
 
+  
+
+   //wait 2 seconds
   closeAlert() {
     this.alert = false;
   }

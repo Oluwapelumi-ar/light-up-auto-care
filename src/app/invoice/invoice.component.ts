@@ -55,7 +55,9 @@ export class InvoiceComponent implements OnInit {
     this.api.deleteInvoice(row.id).subscribe(
       (res) => {
         this.alert = true;
-
+        setTimeout(() => {
+          this.alert = false;
+        }, 3000);
         this.getInvoices();
       },
       (reason) => {

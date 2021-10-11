@@ -91,6 +91,9 @@ export class ClientComponent implements OnInit {
     this.api.postClient(this.clientModelObj).subscribe(
       (res) => {
         this.alertInstance = 'Successful';
+        setTimeout(() => {
+          this.alertInstance = 'false';
+        }, 3000);
         this.getAllClient();
         let ref = document.getElementById('cancel');
         ref?.click();
@@ -125,6 +128,9 @@ export class ClientComponent implements OnInit {
     this.api.deleteClient(row.id).subscribe(
       (res) => {
         this.alertInstance = 'Deleted';
+        setTimeout(() => {
+          this.alertInstance = 'false';
+        }, 3000);
         this.getAllClient();
         let ref = document.getElementById('cancel');
         ref?.click();
@@ -166,6 +172,9 @@ export class ClientComponent implements OnInit {
       .updateClient(this.clientModelObj, this.clientModelObj.id)
       .subscribe((res) => {
         this.alertInstance = 'Updated';
+        setTimeout(() => {
+          this.alertInstance = 'false'; 
+        }, 3000);
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
