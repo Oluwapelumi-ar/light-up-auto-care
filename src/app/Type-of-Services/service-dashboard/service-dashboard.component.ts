@@ -28,11 +28,10 @@ export class ServiceDashboardComponent implements OnInit {
     this.formValue = this.formbuilder.group({
       name: ['', [Validators.required]],
     });
-
     this.getAllServices();
   }
 
-  clickAddService() {
+  clickAddService() { 
     this.formValue.reset();
     this.showAdd = true;
     this.showUpdate = false;
@@ -44,6 +43,9 @@ export class ServiceDashboardComponent implements OnInit {
       (res: any) => {
         console.log(res);
         this.alertInstance = 'Successful';
+        setTimeout(() => {
+          this.alertInstance = 'false';
+        }, 3000);
         this.getAllServices();
         let ref = document.getElementById('cancel');
         ref?.click();
@@ -85,7 +87,9 @@ export class ServiceDashboardComponent implements OnInit {
     this.api.deleteService(row.id).subscribe(
       (res) => {
         this.alertInstance = 'Deleted';
-        // alert(');
+          setTimeout(() => {
+            this.alertInstance = 'false';
+          },3000)
         this.getAllServices();
       },
       (reason) => {
@@ -108,6 +112,9 @@ export class ServiceDashboardComponent implements OnInit {
       .subscribe(
         (res) => {
           this.alertInstance = 'Updated';
+          setTimeout(() => {
+            this.alertInstance = 'false';
+          },3000)
           let ref = document.getElementById('cancel');
           ref?.click();
           this.formValue.reset();
@@ -119,5 +126,9 @@ export class ServiceDashboardComponent implements OnInit {
       );
   }
 
-  closeAlert() {}
+
+ closeAlert() {
+
+ }
 }
+ 
