@@ -290,8 +290,6 @@ export class QuotePageComponent implements OnInit {
     this.showUpdate = true;
     this.addQuoteTypeForm.controls['clientId'].disable();
     this.addQuoteTypeForm.controls['vehicleId'].disable();
-
-    console.log(this.addQuoteTypeForm.value);
   }
 
   updateQuote(id: any) {
