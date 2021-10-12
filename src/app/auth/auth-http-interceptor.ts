@@ -13,7 +13,6 @@ import { AuthServiceService } from './auth-service.service';
 export class AuthHttpInterceptor implements HttpInterceptor {
   [x: string]: any;
   constructor(private auth: AuthServiceService) {
-    console.log(this.userDetails)
   }
 
 

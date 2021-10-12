@@ -30,9 +30,6 @@ export class InvoiceComponent implements OnInit {
   constructor(private api: ApiService, private http: HttpClient) {}
 
   ngOnInit(): void {
-    // this.history = history;
-    // this.selectedInvoice = {};
-    // console.log(history.state.data);
     this.getInvoices();
   }
 
