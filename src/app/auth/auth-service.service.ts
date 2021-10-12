@@ -27,14 +27,14 @@ export class AuthServiceService {
 
   login(data: loginData): Observable<any> {
     return this.http.post<loginResponse>(
-      'https://lightup-auto-care.herokuapp.com/staffs/login',
+      'https://lightup-autocare.herokuapp.com/staffs/login',
       data
     );
   }
 
   createPassword(data: createPasswordData): Observable<any> {
     return this.http.put<createPasswordData>(
-      'https://lightup-auto-care.herokuapp.com/staffs/password/create',
+      'https://lightup-autocare.herokuapp.com/staffs/password/create',
       data
     );
   }
