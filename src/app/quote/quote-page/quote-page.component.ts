@@ -138,13 +138,6 @@ export class QuotePageComponent implements OnInit {
     );
   }
 
-  // getAllQuote() {
-  //   this.apiServices.getQuotes().subscribe((res) => {
-  //     this.quoteData = res;
-  //     console.log({ res });
-  //   });
-  // }
-
   addQuoteType() {
     //console.log(this.addQuoteTypeForm.value.items);
     let payload: addQuoteModel = {
@@ -300,8 +293,6 @@ export class QuotePageComponent implements OnInit {
     this.showUpdate = true;
     this.addQuoteTypeForm.controls['clientId'].disable();
     this.addQuoteTypeForm.controls['vehicleId'].disable();
-
-    console.log(this.addQuoteTypeForm.value);
   }
 
   updateQuote(id: any) {

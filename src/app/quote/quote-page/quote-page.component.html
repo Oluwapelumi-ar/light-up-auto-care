@@ -140,13 +140,15 @@
                     >
                       Edit
                     </button>
-                    <button
-                      (click)="deleteQuote(row)"
-                      class="dropdown-item"
-                      type="button"
-                    >
-                      Delete
-                    </button>
+                    <div *ngIf="!row.isApproved">
+                      <button
+                        (click)="deleteQuote(row)"
+                        class="dropdown-item"
+                        type="button"
+                      >
+                        Delete
+                      </button>
+                    </div>
                     <div *ngIf="hideInvoiceList()">
                       <button
                         (click)="confirmBox(row)"

@@ -51,19 +51,19 @@ export class InvoiceComponent implements OnInit {
     };
   }
 
-  deleteInvoices(row: any) {
-    this.api.deleteInvoice(row.id).subscribe(
-      (res) => {
-        this.alert = true;
+  // deleteInvoices(row: any) {
+  //   this.api.deleteInvoice(row.id).subscribe(
+  //     (res) => {
+  //       this.alert = true;
 
-        this.getInvoices();
-      },
-      (reason) => {
-        alert('Something went wrong!');
-        this.getInvoices();
-      }
-    );
-  }
+  //       this.getInvoices();
+  //     },
+  //     (reason) => {
+  //       alert('Something went wrong!');
+  //       this.getInvoices();
+  //     }
+  //   );
+  // }
 
   closeAlert() {}
 }
